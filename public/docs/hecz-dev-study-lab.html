@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hecz.dev Study Lab</title>
+    <meta
+      name="description"
+      content="A hecz.dev branded study lab for forking a real app and building your own question bank."
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #080810;
+        --fg: #f7f3ee;
+        --muted: rgba(247, 243, 238, 0.72);
+        --soft: rgba(247, 243, 238, 0.45);
+        --line: rgba(255, 255, 255, 0.12);
+        --purple: #8d4dff;
+        --violet: #c076ff;
+        --blue: #77d9ff;
+        --pink: #ff4f93;
+        --cream: #faf8f5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 50% 12%, rgba(141, 77, 255, 0.38), transparent 32rem),
+          radial-gradient(circle at 82% 78%, rgba(192, 118, 255, 0.34), transparent 28rem),
+          radial-gradient(circle at 14% 86%, rgba(119, 217, 255, 0.18), transparent 24rem),
+          linear-gradient(180deg, #11121d 0%, #080810 58%, #050507 100%);
+        color: var(--fg);
+        font-family:
+          Manrope,
+          Space Grotesk,
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.55;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          radial-gradient(circle, rgba(255, 255, 255, 0.76) 0 1px, transparent 1.8px),
+          radial-gradient(circle, rgba(255, 255, 255, 0.34) 0 1px, transparent 1.6px);
+        background-position:
+          0 0,
+          38px 58px;
+        background-size:
+          92px 92px,
+          137px 137px;
+        opacity: 0.34;
+        mask-image: linear-gradient(to bottom, black 0%, black 62%, transparent 100%);
+      }
+
+      main {
+        position: relative;
+        width: min(1120px, calc(100% - 36px));
+        margin: 0 auto;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 78px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+      }
+
+      .logo {
+        color: var(--fg);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+      }
+
+      .logo span {
+        color: var(--violet);
+      }
+
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        margin-left: 22px;
+        font-size: 14px;
+      }
+
+      .hero {
+        min-height: calc(100vh - 78px);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 72px 0 96px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--soft);
+        font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        letter-spacing: 0.42em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before,
+      .eyebrow::after {
+        content: "";
+        width: 36px;
+        height: 1px;
+        background: var(--soft);
+      }
+
+      h1 {
+        max-width: 960px;
+        margin: 34px auto 20px;
+        font-size: clamp(58px, 10vw, 132px);
+        line-height: 0.86;
+        letter-spacing: -0.07em;
+      }
+
+      .tag {
+        max-width: 680px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: clamp(18px, 2vw, 24px);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 38px;
+      }
+
+      .btn {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 0 24px;
+        text-decoration: none;
+        font-weight: 800;
+      }
+
+      .btn.primary {
+        background: var(--cream);
+        color: #090910;
+      }
+
+      .btn.secondary {
+        border: 1px solid var(--line);
+        color: var(--fg);
+      }
+
+      section {
+        padding: 72px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      h2 {
+        max-width: 760px;
+        margin: 0 0 22px;
+        font-size: clamp(36px, 6vw, 72px);
+        line-height: 0.94;
+        letter-spacing: -0.06em;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .panel {
+        min-height: 190px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 24px;
+        background: rgba(255, 255, 255, 0.045);
+        backdrop-filter: blur(18px);
+      }
+
+      .panel strong {
+        display: block;
+        color: var(--fg);
+        font-size: 22px;
+        margin-bottom: 12px;
+      }
+
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      code {
+        color: var(--blue);
+      }
+
+      pre {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(0, 0, 0, 0.34);
+        color: var(--fg);
+        padding: 22px;
+        font-size: 15px;
+      }
+
+      .loop {
+        font-size: clamp(28px, 5vw, 58px);
+        line-height: 1.06;
+        letter-spacing: -0.05em;
+        color: var(--fg);
+      }
+
+      .accent {
+        color: var(--violet);
+      }
+
+      footer {
+        padding: 48px 0 72px;
+        color: var(--soft);
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 760px) {
+        nav {
+          height: auto;
+          padding: 20px 0;
+          align-items: flex-start;
+        }
+
+        nav div:last-child {
+          display: grid;
+          gap: 10px;
+          text-align: right;
+        }
+
+        nav a {
+          margin-left: 0;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+          padding-top: 92px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <div class="logo">hecz<span>.dev</span></div>
+        <div>
+          <a href="https://hecz.dev">Home</a>
+          <a href="/lab">Lab Hub</a>
+          <a href="https://github.com/h3cz/study">Repo</a>
+          <a href="/docs/hecz-dev-study-lab-deck.pptx">Brand Deck</a>
+        </div>
+      </nav>
+
+      <header class="hero">
+        <div>
+          <div class="eyebrow">starter kit</div>
+          <h1>Your study loop deserves its own universe.</h1>
+          <p class="tag">
+            Fork a real app, build your own question bank, import it, and turn
+            notes into a feedback loop you can actually use.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="/lab">Open lab hub</a>
+            <a class="btn secondary" href="/docs/class-pack-template.zip">Download class pack</a>
+            <a class="btn secondary" href="https://github.com/h3cz/study">Fork the repo</a>
+            <a class="btn secondary" href="/docs/hecz-dev-study-lab-deck.pptx">Download deck</a>
+          </div>
+        </div>
+      </header>
+
+      <section>
+        <h2>Start with the app, not a blank page.</h2>
+        <p>
+          The public repo is a stripped starter. It gives you the engine,
+          importer, local progress, review loop, and docs. You bring the bank.
+        </p>
+        <div class="grid">
+          <div class="panel"><strong>Clone</strong><p>Run the app locally and see the tiny starter bank.</p></div>
+          <div class="panel"><strong>Create</strong><p>Write a small original bank from notes and allowed resources.</p></div>
+          <div class="panel"><strong>Import</strong><p>Upload JSON or CSV in local development or an enabled fork, then practice and revise after misses.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>First run.</h2>
+        <pre><code>git clone https://github.com/h3cz/study.git
+cd study
+npm install
+npm run dev</code></pre>
+        <p>Then open the local URL from Next.js, usually <code>http://localhost:3000</code>. Bank import is enabled automatically in local development.</p>
+      </section>
+
+      <section>
+        <h2>Make the first bank tiny.</h2>
+        <p>Minimum useful drop:</p>
+        <div class="grid">
+          <div class="panel"><strong>5 MCQs</strong><p>Scenario-first questions with one clearly best answer.</p></div>
+          <div class="panel"><strong>3 flashcards</strong><p>Vocabulary, ports, commands, or concepts you keep missing.</p></div>
+          <div class="panel"><strong>1 source note</strong><p>Track where the idea came from and whether you can reuse it.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Run the loop.</h2>
+        <p class="loop">
+          notes <span class="accent">-&gt;</span> bank <span class="accent">-&gt;</span>
+          practice <span class="accent">-&gt;</span> misses <span class="accent">-&gt;</span>
+          better explanations
+        </p>
+      </section>
+
+      <section>
+        <h2>Keep the classroom version too.</h2>
+        <p>
+          Need rubrics, timing, and instructor setup? Use the structured lab:
+          <a href="/docs/hecz-class-lab.html">Hecz Study Lab handout</a>.
+          This page is the public-facing hecz.dev version. Deployed forks can enable import with
+          <code>NEXT_PUBLIC_ENABLE_BANK_IMPORT=true</code>; the official production study app keeps it locked.
+        </p>
+      </section>
+
+      <footer>
+        hecz.dev - design, code, ship - study.hecz.dev
+      </footer>
+    </main>
+  </body>
+</html>

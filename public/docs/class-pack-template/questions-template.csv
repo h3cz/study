@@ -1,0 +1,2 @@
+id,certId,objective,stem,a,b,c,d,correctKey,explanation,difficulty,sourceTitle,sourceAuthor,sourceUrl,license
+my-bank-secplus-1-2-001,secplus-sy0-701,1.2,"A file hash is published next to a download. What is the main purpose?","To prove file integrity","To encrypt the file","To compress the file","To hide the file name",A,"A hash lets the downloader compare digests and detect tampering.",1,"My class notes","Your Name","","Original"

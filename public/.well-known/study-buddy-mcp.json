@@ -1,0 +1,108 @@
+{
+  "schema_version": "v1",
+  "name": "SecPlus Quest Study Buddy",
+  "description": "Read your CompTIA study progress and quiz yourself through the Study Buddy REST API. Free — your agent brings compute; we serve questions and mastery data.",
+  "base_url": "https://study.hecz.dev/api/study-buddy",
+  "auth": {
+    "type": "bearer",
+    "header": "Authorization",
+    "prefix": "Bearer",
+    "token_format": "sq_live_<hex32>"
+  },
+  "tools": [
+    {
+      "name": "get_weak_objectives",
+      "description": "Return the user's lowest-mastery objectives, scored by recency-weighted accuracy. Start here to decide what to quiz on.",
+      "method": "GET",
+      "path": "/weak-objectives",
+      "parameters": {
+        "n": {
+          "in": "query",
+          "type": "integer",
+          "description": "Number of weak objectives to return (1-10, default 3)",
+          "default": 3
+        }
+      }
+    },
+    {
+      "name": "get_questions",
+      "description": "Fetch up to 5 randomized questions for one objective. Returns stem + choices only — answer key is NOT included. Use submit_answer to check answers server-side.",
+      "method": "GET",
+      "path": "/questions",
+      "parameters": {
+        "objective": {
+          "in": "query",
+          "type": "string",
+          "description": "Objective code e.g. '4.1', '2.3'",
+          "required": true
+        },
+        "n": {
+          "in": "query",
+          "type": "integer",
+          "description": "Number of questions to return (1-5, default 5). Requests exceeding 5 are rejected.",
+          "default": 5,
+          "maximum": 5
+        }
+      }
+    },
+    {
+      "name": "submit_answer",
+      "description": "Submit the user's picked answer for a question. Returns whether it was correct, the correct key, and the explanation. Also records the result to the user's mastery and spaced-repetition queue.",
+      "method": "POST",
+      "path": "/answer",
+      "body": {
+        "questionId": {
+          "type": "string",
+          "description": "Question ID from get_questions response",
+          "required": true
+        },
+        "picked": {
+          "type": "string",
+          "enum": ["A", "B", "C", "D"],
+          "description": "The answer key the user chose",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "get_recent_misses",
+      "description": "Return questions the user got wrong recently. Includes stem and correct key (these are the user's own past mistakes, not bulk bank data).",
+      "method": "GET",
+      "path": "/recent-misses",
+      "parameters": {
+        "limit": {
+          "in": "query",
+          "type": "integer",
+          "description": "Number of misses to return (1-10, default 10)",
+          "default": 10
+        },
+        "objective": {
+          "in": "query",
+          "type": "string",
+          "description": "Filter to a specific objective code e.g. '4.1'"
+        }
+      }
+    },
+    {
+      "name": "get_mastery_summary",
+      "description": "Return per-domain mastery scores and a predicted CompTIA exam score (100-900 scale).",
+      "method": "GET",
+      "path": "/mastery-summary"
+    },
+    {
+      "name": "get_objectives",
+      "description": "Return the static domain and objective tree with exam weights. No question content.",
+      "method": "GET",
+      "path": "/objectives"
+    }
+  ],
+  "rate_limits": {
+    "per_key_per_day": 200
+  },
+  "security_notes": [
+    "The get_questions endpoint never returns the correct flag or explanation.",
+    "Answers are checked server-side by submit_answer after the user commits a pick.",
+    "get_questions is capped at 5 per request — no bulk export surface.",
+    "All data is scoped to the authenticated user's own history."
+  ]
+}
