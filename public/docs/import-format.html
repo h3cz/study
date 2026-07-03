@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Question Bank Format</title>
+    <style>
+      body { margin: 0; padding: 32px 18px; background: #0b0d0e; color: #e8e6e0; font: 16px/1.6 system-ui, sans-serif; }
+      main { max-width: 760px; margin: 0 auto; }
+      code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+      pre { overflow-x: auto; background: #15181b; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 14px; }
+      a { color: #f5a623; }
+      h1, h2 { line-height: 1.1; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Question Bank Format</h1>
+      <p>Import JSON for full banks or CSV for multiple-choice questions in local development or a lab fork with <code>NEXT_PUBLIC_ENABLE_BANK_IMPORT=true</code>.</p>
+      <h2>CSV columns</h2>
+      <pre>id,certId,objective,stem,a,b,c,d,correctKey,explanation,difficulty,sourceTitle,sourceAuthor,sourceUrl,license</pre>
+      <h2>JSON shape</h2>
+      <pre>{
+  "questions": [],
+  "flashcards": [],
+  "pbqs": [],
+  "acronyms": []
+}</pre>
+      <p>Each question needs a stem, four choices, one correct key, an explanation, and an objective such as <code>1.2</code>.</p>
+      <p><a href="/docs/class-pack-template.zip">Download the class pack</a></p>
+    </main>
+  </body>
+</html>

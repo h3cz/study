@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="32" fill="#0f172a"/>
+  <path d="M96 24 L156 52 L156 100 C156 136 96 168 96 168 C96 168 36 136 36 100 L36 52 Z" fill="#1e40af" stroke="#3b82f6" stroke-width="4"/>
+  <path d="M96 44 L144 66 L144 100 C144 126 96 152 96 152 C96 152 48 126 48 100 L48 66 Z" fill="#1e3a8a"/>
+  <text x="96" y="118" text-anchor="middle" font-family="monospace" font-size="48" font-weight="bold" fill="#60a5fa">S+</text>
+</svg>

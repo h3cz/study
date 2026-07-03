@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC BY 4.0 or original class-created content",
+  "notes": [
+    "This file is an authoring example, not the runtime source of truth.",
+    "For the starter app, copy reviewed items into content/local-bank.ts."
+  ],
+  "questions": [
+    {
+      "id": "my-bank-secplus-1-2-001",
+      "certId": "secplus-sy0-701",
+      "objective": "1.2",
+      "source": {
+        "title": "My class notes: CIA triad lab",
+        "author": "Your Name",
+        "url": "",
+        "license": "Original"
+      },
+      "stem": "A lab report is stored so classmates can read it whenever needed. Which CIA property is being emphasized?",
+      "choices": [
+        { "key": "A", "text": "Confidentiality" },
+        { "key": "B", "text": "Integrity" },
+        { "key": "C", "text": "Availability" },
+        { "key": "D", "text": "Non-repudiation" }
+      ],
+      "correctKey": "C",
+      "explanation": "Availability means authorized users can access information and systems when they need them.",
+      "difficulty": 1,
+      "tags": ["cia-triad", "class-notes"]
+    }
+  ]
+}

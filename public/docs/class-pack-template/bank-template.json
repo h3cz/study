@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "my-bank-secplus-1-2-001",
+      "certId": "secplus-sy0-701",
+      "objective": "1.2",
+      "source": {
+        "title": "My class notes",
+        "author": "Your Name",
+        "url": "",
+        "license": "Original"
+      },
+      "stem": "A file hash is published next to a download. What is the main purpose?",
+      "choices": [
+        { "key": "A", "text": "To prove file integrity" },
+        { "key": "B", "text": "To encrypt the file" },
+        { "key": "C", "text": "To compress the file" },
+        { "key": "D", "text": "To hide the file name" }
+      ],
+      "correctKey": "A",
+      "explanation": "A hash lets the downloader compare digests and detect tampering.",
+      "difficulty": 1,
+      "tags": ["integrity", "hashing"]
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "my-bank-fc-cia",
+      "certId": "secplus-sy0-701",
+      "objective": "1.2",
+      "front": "What does CIA stand for?",
+      "back": "Confidentiality, Integrity, and Availability."
+    }
+  ],
+  "pbqs": [
+    {
+      "id": "my-bank-pbq-controls",
+      "certId": "secplus-sy0-701",
+      "objective": "1.1",
+      "prompt": "Match each example to the control category.",
+      "leftLabel": "Example",
+      "rightLabel": "Category",
+      "pairs": [
+        { "left": "Door lock", "right": "Physical" },
+        { "left": "MFA", "right": "Technical" }
+      ],
+      "explanation": "Physical controls protect spaces; technical controls use systems.",
+      "difficulty": 1
+    }
+  ],
+  "acronyms": [
+    {
+      "id": "my-bank-ac-cia",
+      "certId": "secplus-sy0-701",
+      "acronym": "CIA",
+      "expansion": "Confidentiality, Integrity, Availability",
+      "hint": "The core security triad.",
+      "domainHint": 1
+    }
+  ]
+}
