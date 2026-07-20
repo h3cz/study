@@ -15,33 +15,49 @@ import {
 } from "@/lib/study-buddy/objectives";
 import { SEED_DATA } from "@/content/seed";
 
+const DEFAULT_CERT_ID = "secplus-sy0-701";
+const preferredObjective = SEED_DATA.objectives.find(
+  (objective) =>
+    objective.certId === DEFAULT_CERT_ID &&
+    objective.code === "4.1" &&
+    SEED_DATA.questions.some((question) => question.objectiveId === objective.id)
+);
+const firstSeedQuestion = SEED_DATA.questions.find((question) => question.certId === DEFAULT_CERT_ID);
+if (!preferredObjective && !firstSeedQuestion) {
+  throw new Error("The study bank needs at least one Security+ question.");
+}
+const testObjective =
+  preferredObjective ?? SEED_DATA.objectives.find((objective) => objective.id === firstSeedQuestion?.objectiveId);
+if (!testObjective) throw new Error("The test question needs a matching objective.");
+const TEST_OBJECTIVE_CODE = testObjective.code;
+
 // ─── questionsForObjective ────────────────────────────────────────────────────
 
 describe("questionsForObjective — cap & strip", () => {
   it("returns at most MAX_QUESTIONS_PER_FETCH (5) questions", () => {
-    const qs = questionsForObjective("1.1", 10); // request more than the cap
+    const qs = questionsForObjective(TEST_OBJECTIVE_CODE, 10); // request more than the cap
     expect(qs.length).toBeLessThanOrEqual(MAX_QUESTIONS_PER_FETCH);
   });
 
   it("respects the requested n when n <= MAX_QUESTIONS_PER_FETCH", () => {
-    const qs = questionsForObjective("1.1", 2);
+    const qs = questionsForObjective(TEST_OBJECTIVE_CODE, 2);
     expect(qs.length).toBeLessThanOrEqual(2);
   });
 
   it("never returns a `correct` field on any choice", () => {
-    const qs = questionsForObjective("1.1", MAX_QUESTIONS_PER_FETCH);
+    const qs = questionsForObjective(TEST_OBJECTIVE_CODE, MAX_QUESTIONS_PER_FETCH);
     const serialized = JSON.stringify(qs);
     expect(serialized).not.toContain('"correct"');
   });
 
   it("never returns an `explanation` field", () => {
-    const qs = questionsForObjective("1.1", MAX_QUESTIONS_PER_FETCH);
+    const qs = questionsForObjective(TEST_OBJECTIVE_CODE, MAX_QUESTIONS_PER_FETCH);
     const serialized = JSON.stringify(qs);
     expect(serialized).not.toContain('"explanation"');
   });
 
   it("returns id, objectiveId, stem, and choices with key+text only", () => {
-    const qs = questionsForObjective("4.1", MAX_QUESTIONS_PER_FETCH);
+    const qs = questionsForObjective(TEST_OBJECTIVE_CODE, MAX_QUESTIONS_PER_FETCH);
     expect(qs.length).toBeGreaterThan(0);
     const q = qs[0];
     expect(q).toHaveProperty("id");
@@ -62,8 +78,8 @@ describe("questionsForObjective — cap & strip", () => {
   });
 
   it("questions returned belong to the requested objective", () => {
-    const objId = objectiveIdForCode("4.1")!;
-    const qs = questionsForObjective("4.1", MAX_QUESTIONS_PER_FETCH);
+    const objId = objectiveIdForCode(TEST_OBJECTIVE_CODE)!;
+    const qs = questionsForObjective(TEST_OBJECTIVE_CODE, MAX_QUESTIONS_PER_FETCH);
     for (const q of qs) {
       expect(q.objectiveId).toBe(objId);
     }
@@ -73,7 +89,7 @@ describe("questionsForObjective — cap & strip", () => {
     // Run 5 fetches of 5 questions and verify we don't always get the same
     // first id. This could theoretically fail 1 in pool^5 times but is
     // effectively deterministic for any pool > 5.
-    const objId = objectiveIdForCode("1.1")!;
+    const objId = objectiveIdForCode(TEST_OBJECTIVE_CODE)!;
     const pool = SEED_DATA.questions.filter((q) => q.objectiveId === objId);
     if (pool.length <= 5) {
       // Not enough to test shuffle meaningfully — skip.
@@ -81,7 +97,7 @@ describe("questionsForObjective — cap & strip", () => {
       return;
     }
     const firstIds = new Set(
-      Array.from({ length: 5 }, () => questionsForObjective("1.1", 5)[0].id)
+      Array.from({ length: 5 }, () => questionsForObjective(TEST_OBJECTIVE_CODE, 5)[0].id)
     );
     // With a pool > 5 we expect at least 2 distinct first ids across 5 draws
     expect(firstIds.size).toBeGreaterThan(1);

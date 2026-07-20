@@ -66,12 +66,13 @@ Do not add exam dumps, leaked questions, copied paid-course banks, or private ma
 
 This project is practice in building product loops, not just screens. The hard parts have been deciding what the learner should do next, making offline progress feel trustworthy, keeping competition clear, and separating the reusable engine from private learning content.
 
-Personal notes to fill in later:
+Why I built it: I wanted one place that could tell me what to study next instead of sending me back to another long list of questions.
 
-- Why I built it: `TODO`
-- Hardest tradeoff: `TODO`
-- Favorite implementation detail: `TODO`
-- What I would improve next: `TODO`
+Hardest tradeoff: The public starter needs enough sample material to work, but it cannot include the private question bank.
+
+Favorite detail: You can start studying before you sign in. An account is only needed if you want to carry your progress to another device.
+
+What I would improve next: Make the first setup shorter so someone can add their notes and start a quiz in a few minutes.
 
 <details>
 <summary>Run locally</summary>

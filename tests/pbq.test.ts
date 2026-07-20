@@ -15,7 +15,7 @@ function scorePbq(
 }
 
 describe("PBQ scoring", () => {
-  const q = perfQuestions[0]; // control-type PBQ, 6 pairs
+  const q = perfQuestions[0];
 
   it("perfect match scores all pairs correct", () => {
     const perfect = q.pairs.map((p) => p.right);
@@ -50,8 +50,14 @@ describe("PBQ scoring", () => {
 // ── Seed data integrity ───────────────────────────────────────────────────────
 
 describe("perfQuestions seed data", () => {
-  it("contains exactly 25 PBQs", () => {
-    expect(perfQuestions).toHaveLength(25);
+  const isStarterSnapshot = perfQuestions.some((q) => q.id.startsWith("starter-pbq-"));
+
+  it("contains the expected PBQ set", () => {
+    if (isStarterSnapshot) {
+      expect(perfQuestions.length).toBeGreaterThan(0);
+    } else {
+      expect(perfQuestions).toHaveLength(25);
+    }
   });
 
   it("every PBQ has type drag-match", () => {
@@ -82,9 +88,17 @@ describe("perfQuestions seed data", () => {
     }
   });
 
-  it("IDs follow the pbq ID pattern", () => {
+  it("IDs are unique and use the right pattern for this bank", () => {
+    const ids = new Set<string>();
     for (const q of perfQuestions) {
-      expect(q.id).toMatch(/^secplus-sy0-701:pbq:/);
+      if (isStarterSnapshot) {
+        expect(q.id).toMatch(/^[a-z0-9]+(?:[-:][a-z0-9]+)*$/);
+        expect(q.id).toContain("pbq");
+      } else {
+        expect(q.id).toMatch(/^secplus-sy0-701:pbq:/);
+      }
+      ids.add(q.id);
     }
+    expect(ids.size).toBe(perfQuestions.length);
   });
 });

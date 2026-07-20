@@ -42,6 +42,8 @@ function makeIndex(entries: [string, CachedVideo][]): Map<string, CachedVideo> {
 }
 
 const CERT_ID = "secplus-sy0-701";
+const FALLBACK_CERT =
+  Object.entries(messerVideosByCert).find(([, videos]) => Object.keys(videos).length > 0) ?? null;
 
 // Reset the module-level cache before each test
 beforeEach(() => {
@@ -126,43 +128,58 @@ describe("getRemediation", () => {
     expect(result!.href).toBe("/quiz?objective=1.4");
   });
 
-  it("resolves a new-cert objective to a Messer video via the map fallback", async () => {
-    // Network+ questions carry no videoSource, so the only path to a video is the
-    // messerVideosByCert map applied by applyMesserMapFallback.
-    const NET_CERT = "networkplus-n10-009";
-    const mapped = messerVideosByCert[NET_CERT]["1.1"];
-    expect(mapped).toBeDefined();
+  it("uses a video map when one is present and a study drill when it is not", async () => {
+    if (!FALLBACK_CERT) {
+      const certId = "starter-cert";
+      const index = new Map<string, CachedVideo>();
+      applyMesserMapFallback(certId, index);
+      _setObjectiveVideoIndexForTest(certId, index);
+      const result = await getRemediation(
+        makeQuestion({
+          certId,
+          domainId: `${certId}:domain:1`,
+          objectiveId: `${certId}:obj:1.1`,
+          videoSource: undefined,
+        })
+      );
 
-    // Build the index exactly as getObjectiveVideoIndex does: empty (no question
-    // videoSources) + map fallback, then inject via the test seam.
-    const index = new Map<
-      string,
-      { videoId: string; videoTitle: string; videoUrl: string; timestamp?: number }
-    >();
-    applyMesserMapFallback(NET_CERT, index);
-    _setObjectiveVideoIndexForTest(NET_CERT, index);
+      expect(result).toMatchObject({
+        kind: "objective",
+        label: "Drill more on objective 1.1",
+        href: "/quiz?objective=1.1",
+      });
+      return;
+    }
 
-    const q = makeQuestion({
-      certId: NET_CERT,
-      domainId: `${NET_CERT}:domain:1`,
-      objectiveId: `${NET_CERT}:obj:1.1`,
-      videoSource: undefined,
+    const [certId, videos] = FALLBACK_CERT;
+    const [objectiveCode, mapped] = Object.entries(videos)[0];
+    const index = new Map<string, CachedVideo>();
+    applyMesserMapFallback(certId, index);
+    _setObjectiveVideoIndexForTest(certId, index);
+
+    const result = await getRemediation(
+      makeQuestion({
+        certId,
+        domainId: `${certId}:domain:${objectiveCode.split(".")[0]}`,
+        objectiveId: `${certId}:obj:${objectiveCode}`,
+        videoSource: undefined,
+      })
+    );
+
+    expect(result).toMatchObject({
+      kind: "video",
+      label: `Watch the video for objective ${objectiveCode}`,
+      videoId: mapped.videoId,
+      href: mapped.url,
     });
-
-    const result = await getRemediation(q);
-
-    expect(result).not.toBeNull();
-    expect(result!.kind).toBe("video");
-    expect(result!.label).toBe("Watch the video for objective 1.1");
-    expect(result!.videoId).toBe(mapped.videoId);
-    expect(result!.href).toBe(mapped.url);
   });
 
-  it("map fallback never overwrites an existing (question-sourced) video", () => {
-    const NET_CERT = "networkplus-n10-009";
+  it("map fallback never overwrites an existing video entry", () => {
+    const certId = FALLBACK_CERT?.[0] ?? "starter-cert";
+    const objectiveCode = FALLBACK_CERT ? Object.keys(FALLBACK_CERT[1])[0] : "1.1";
     const index = makeIndex([
       [
-        `${NET_CERT}:obj:1.1`,
+        `${certId}:obj:${objectiveCode}`,
         {
           videoId: "question-sourced",
           videoTitle: "From a question videoSource",
@@ -171,13 +188,14 @@ describe("getRemediation", () => {
       ],
     ]);
 
-    applyMesserMapFallback(NET_CERT, index);
+    applyMesserMapFallback(certId, index);
 
-    // Existing entry preserved; a different objective gets filled from the map.
-    expect(index.get(`${NET_CERT}:obj:1.1`)!.videoId).toBe("question-sourced");
-    expect(index.get(`${NET_CERT}:obj:1.2`)!.videoId).toBe(
-      messerVideosByCert[NET_CERT]["1.2"].videoId
-    );
+    expect(index.get(`${certId}:obj:${objectiveCode}`)!.videoId).toBe("question-sourced");
+    for (const [otherCode, mapped] of Object.entries(FALLBACK_CERT?.[1] ?? {})) {
+      if (otherCode !== objectiveCode) {
+        expect(index.get(`${certId}:obj:${otherCode}`)?.videoId).toBe(mapped.videoId);
+      }
+    }
   });
 
   it("index is reused on second call without re-querying (cache hit)", async () => {
