@@ -28,7 +28,7 @@ function base64Url(value: string): string {
     .replace(/=+$/g, "");
 }
 
-async function mockSignedInSupabase(page: Page) {
+async function mockSignedInSupabase(page: Page, options: { returningUser?: boolean } = {}) {
   const nowSeconds = Math.floor(new Date().getTime() / 1000);
   const user = {
     id: AUTH_USER_ID,
@@ -108,7 +108,19 @@ async function mockSignedInSupabase(page: Page) {
     }
 
     let body = "[]";
-    if (url.includes("/profiles")) {
+    if (url.includes("/user_state") && options.returningUser) {
+      body = JSON.stringify({
+        user_id: AUTH_USER_ID,
+        xp: 840,
+        level: 5,
+        streak: 3,
+        last_study_date: new Date().toISOString().slice(0, 10),
+        total_study_days: 5,
+        predicted_score: 764,
+        updated_at: new Date().toISOString(),
+        daily_goal_questions: 10,
+      });
+    } else if (url.includes("/profiles")) {
       body = JSON.stringify({ user_id: AUTH_USER_ID, display_name: "QA Tester", avatar_url: null, is_publicly_listed: false });
     } else if (url.includes("/public_cert_leaderboard")) {
       body = JSON.stringify([
@@ -188,6 +200,33 @@ test("leaderboard signed-in mobile populated rankings do not overflow", async ({
   await expect(page.getByText("QA Tester")).toBeVisible();
   await attachScreenshot(page, testInfo, "leaderboard-signed-in-mobile-populated");
   await expectNoHorizontalOverflow(page);
+});
+
+test("first-time visitors can sign in from onboarding", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+
+  await expect(page).toHaveURL(/\/onboarding$/);
+  await expect(page.getByText("Already have an account?")).toBeVisible();
+  const signInLink = page.getByRole("link", { name: "Sign in" });
+  await expect(signInLink).toHaveAttribute(
+    "href",
+    "/login?next=%2Fonboarding%3Freturning%3D1"
+  );
+  await expectNoHorizontalOverflow(page);
+
+  await signInLink.click();
+
+  await expect(page).toHaveURL(/\/login\?next=%2Fonboarding%3Freturning%3D1$/);
+  await expect(page.getByRole("heading", { name: "Sign in to hecz / study" })).toBeAttached();
+});
+
+test("returning users recover their account from a fresh home load", async ({ page }) => {
+  await mockSignedInSupabase(page, { returningUser: true });
+  await page.goto("/");
+
+  await expect(page).toHaveURL("http://127.0.0.1:3100/");
+  await expect(page.getByText("Cloud sync active.")).toBeVisible();
 });
 
 test("login defaults to sign-in copy for multiplayer", async ({ page }) => {

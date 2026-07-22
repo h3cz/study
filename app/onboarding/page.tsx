@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { seedDb, db } from "@/lib/db";
 import { getCert, liveCerts, DEFAULT_CERT_ID } from "@/lib/certs";
+import { createClient } from "@/lib/supabase/client";
+import { hydrateFromRemote } from "@/lib/sync/engine";
 
 // Default exam date = 12 weeks from today
 function defaultExamDate(): string {
@@ -114,18 +117,60 @@ export default function OnboardingPage() {
   const [examDate, setExamDate] = useState(defaultExamDate());
   const [sessionMinutes, setSessionMinutes] = useState<SessionLength>(10);
   const [loading, setLoading] = useState(true);
+  const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function check() {
       await seedDb();
-      const state = await db.userState.get(1);
+      let state = await db.userState.get(1);
       if (state?.onboardedAt) {
         router.replace("/");
         return;
       }
-      setLoading(false);
+
+      const supabase = createClient();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (cancelled) return;
+
+      setSignedIn(Boolean(session?.user));
+
+      const isReturning = new URLSearchParams(window.location.search).get("returning") === "1";
+      if (isReturning && session?.user) {
+        const imported = await hydrateFromRemote(session.user.id);
+        if (cancelled) return;
+
+        state = await db.userState.get(1);
+        const quizSessionCount = await db.quizSessions.count();
+        const hasSavedProgress =
+          Boolean(state?.onboardedAt) ||
+          (state?.xp ?? 0) > 0 ||
+          (state?.totalStudyDays ?? 0) > 0 ||
+          imported > 0 ||
+          quizSessionCount > 0;
+
+        if (hasSavedProgress && state) {
+          if (!state.onboardedAt) {
+            await db.userState.put({ ...state, onboardedAt: Date.now() });
+          }
+          router.replace("/");
+          return;
+        }
+      }
+
+      if (!cancelled) setLoading(false);
     }
-    check();
+
+    check().catch(() => {
+      if (!cancelled) setLoading(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [router]);
 
   async function saveAndFinish(goCalibrate: boolean) {
@@ -178,6 +223,42 @@ export default function OnboardingPage() {
         padding: "24px 16px",
       }}
     >
+      {!signedIn && (
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "520px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            gap: "12px",
+            marginBottom: "12px",
+            fontFamily: "var(--font-sans)",
+          }}
+        >
+          <span style={{ color: "var(--fg-muted)", fontSize: "13px" }}>
+            Already have an account?
+          </span>
+          <Link
+            href="/login?next=%2Fonboarding%3Freturning%3D1"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "44px",
+              padding: "0 16px",
+              border: "1px solid var(--border-strong)",
+              borderRadius: "var(--r-sm)",
+              color: "var(--fg)",
+              fontSize: "14px",
+              fontWeight: 600,
+              textDecoration: "none",
+            }}
+          >
+            Sign in
+          </Link>
+        </div>
+      )}
       <div
         style={{
           width: "100%",

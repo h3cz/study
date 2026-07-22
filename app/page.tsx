@@ -925,7 +925,16 @@ export default function Dashboard() {
       if (!state.onboardedAt && state.totalStudyDays === 0) {
         const sessions = await db.quizSessions.count();
         if (sessions === 0) {
-          router.replace("/onboarding");
+          let returningPath = "/onboarding";
+          try {
+            const {
+              data: { session },
+            } = await createClient().auth.getSession();
+            if (session?.user) returningPath = "/onboarding?returning=1";
+          } catch {
+            // Account sync is optional. New users can still finish local setup.
+          }
+          router.replace(returningPath);
           return;
         }
       }
