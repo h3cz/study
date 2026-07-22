@@ -173,7 +173,7 @@ export default function OnboardingPage() {
     };
   }, [router]);
 
-  async function saveAndFinish(goCalibrate: boolean) {
+  async function saveSetup() {
     const state = await db.userState.get(1);
     // Spread the existing state first so onboarding never drops fields the seed
     // or earlier flows set (predictedScore, dailyGoalQuestions, streak-freeze
@@ -191,6 +191,10 @@ export default function OnboardingPage() {
       dailySessionMinutes: sessionMinutes,
       onboardedAt: Date.now(),
     });
+  }
+
+  async function saveAndFinish(goCalibrate: boolean) {
+    await saveSetup();
     // Hard-navigate (not router.push) so the persistent NavBar — and its
     // CertSwitcher, which reads activeCertId once on mount — re-reads the cert
     // just chosen. A soft push keeps the layout mounted, leaving the switcher
@@ -200,6 +204,11 @@ export default function OnboardingPage() {
     } else {
       window.location.assign("/");
     }
+  }
+
+  async function saveAndSignIn() {
+    await saveSetup();
+    window.location.assign("/login?next=%2F&claim=save-progress");
   }
 
   if (loading) {
@@ -223,42 +232,6 @@ export default function OnboardingPage() {
         padding: "24px 16px",
       }}
     >
-      {!signedIn && (
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "520px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            gap: "12px",
-            marginBottom: "12px",
-            fontFamily: "var(--font-sans)",
-          }}
-        >
-          <span style={{ color: "var(--fg-muted)", fontSize: "13px" }}>
-            Already have an account?
-          </span>
-          <Link
-            href="/login?next=%2Fonboarding%3Freturning%3D1"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "44px",
-              padding: "0 16px",
-              border: "1px solid var(--border-strong)",
-              borderRadius: "var(--r-sm)",
-              color: "var(--fg)",
-              fontSize: "14px",
-              fontWeight: 600,
-              textDecoration: "none",
-            }}
-          >
-            Sign in
-          </Link>
-        </div>
-      )}
       <div
         style={{
           width: "100%",
@@ -714,6 +687,86 @@ export default function OnboardingPage() {
             >
               ← Back
             </button>
+          </div>
+        )}
+
+        {!signedIn && (
+          <div
+            style={{
+              borderTop: "1px solid var(--border)",
+              marginTop: "28px",
+              paddingTop: "20px",
+              fontFamily: "var(--font-sans)",
+            }}
+          >
+            {step === 4 ? (
+              <div>
+                <p
+                  style={{
+                    color: "var(--fg)",
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    marginBottom: "5px",
+                  }}
+                >
+                  Save your progress
+                </p>
+                <p
+                  style={{
+                    color: "var(--fg-muted)",
+                    fontSize: "13px",
+                    lineHeight: 1.5,
+                    marginBottom: "12px",
+                  }}
+                >
+                  Sign in on this device to save your setup and progress, then use it on other devices.
+                </p>
+                <button
+                  type="button"
+                  onClick={saveAndSignIn}
+                  style={{
+                    width: "100%",
+                    height: "44px",
+                    background: "transparent",
+                    color: "var(--fg)",
+                    border: "1px solid var(--border-strong)",
+                    borderRadius: "var(--r-sm)",
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    fontFamily: "var(--font-sans)",
+                  }}
+                >
+                  Sign in to save
+                </button>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  flexWrap: "wrap",
+                  fontSize: "13px",
+                }}
+              >
+                <span style={{ color: "var(--fg-muted)" }}>Already have an account?</span>
+                <Link
+                  href="/login?next=%2Fonboarding%3Freturning%3D1"
+                  style={{
+                    minHeight: "44px",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    color: "var(--accent)",
+                    fontWeight: 600,
+                    textDecoration: "none",
+                  }}
+                >
+                  Sign in
+                </Link>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -670,13 +670,13 @@ export default function LeaderboardPage() {
       }}
     >
       <p style={{ marginBottom: "4px", color: "var(--fg)" }}>
-        {mode === "teams" ? "Save your profile to create or join teams." : "Save your profile to enter the leaderboard."}
+        {mode === "teams" ? "Sign in to create or join teams." : "Sign in to join the leaderboard."}
       </p>
       <p style={{ marginBottom: "14px", fontSize: "13px" }}>
         {mode === "teams" ? "Your invite codes, scores, and team rank follow you across devices." : "Your XP, streak, and predicted scores stay synced."}
       </p>
       <Link
-        href="/login?next=%2Fleaderboard&claim=guest-slot"
+        href="/login?next=%2Fleaderboard"
         style={{
           height: "36px",
           padding: "0 16px",
@@ -693,7 +693,7 @@ export default function LeaderboardPage() {
           textDecoration: "none",
         }}
       >
-        Create save slot →
+        Sign in →
       </Link>
     </div>
   );

@@ -183,7 +183,6 @@ export default function PbqPage() {
           </div>
           <div style={{ marginTop: "22px" }}>
             <GuestRunSavePrompt
-              kind="pbq"
               runId={`pbq:${result.total}:${result.correct}:${result.xpEarned}`}
               nextPath="/pbq"
               details={[

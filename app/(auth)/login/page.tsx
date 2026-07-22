@@ -21,7 +21,7 @@ function LoginInner() {
   const authErrorParam = searchParams.get("error");
   const nextPath = safeNextPath(searchParams.get("next"));
   const claim = searchParams.get("claim");
-  const isSaveClaim = claim === "guest-run" || claim === "guest-slot";
+  const isSaveClaim = claim === "save-progress" || claim === "guest-run" || claim === "guest-slot";
   const isMultiplayer = nextPath === "/play" || nextPath.startsWith("/play/");
   const callbackUrl = `/auth/callback?next=${encodeURIComponent(nextPath)}`;
   const [email, setEmail] = useState("");
@@ -110,22 +110,24 @@ function LoginInner() {
             <span style={{ fontFamily: "var(--font-mono)", color: "var(--accent)" }}>{email}</span>.
           </p>
           <p style={{ fontSize: "13px", color: "var(--fg-muted)", fontFamily: "var(--font-sans)", lineHeight: "22px" }}>
-            Click it to sign in — no password needed. Check your spam folder if it doesn&apos;t arrive within a minute.
+            {isSaveClaim
+              ? "Open the link in this browser so we can save the progress already on this device. No password needed."
+              : "Open the link to sign in. No password needed."} Check your spam folder if it doesn&apos;t arrive within a minute.
           </p>
         </div>
       </div>
     );
   }
 
-  const subtitle = isSaveClaim ? "save your progress or sign in" : "sign in to continue";
-  const googleLabel = isSaveClaim ? "Save with Google" : "Continue with Google";
+  const subtitle = isSaveClaim ? "save your progress" : "sign in to continue";
+  const googleLabel = "Continue with Google";
   const intro = isSaveClaim
-    ? "Use the same browser you studied in. One link connects this device to an account and syncs future XP, streaks, scores, reviews, bookmarks, and teams."
+    ? "Use this browser to finish signing in and save the progress already on this device. After that, it can sync to your other devices."
     : isMultiplayer
       ? "Sign in to unlock multiplayer, keep duel results, and return right back to Versus."
-      : "Sign in to sync XP, streaks, scores, reviews, bookmarks, and teams across devices.";
-  const emailPlaceholder = isSaveClaim ? "email for your account" : "email address";
-  const submitLabel = isSaveClaim ? "Email me a save link" : "Email me a sign-in link";
+      : "Sign in to keep your progress and settings across devices.";
+  const emailPlaceholder = "email address";
+  const submitLabel = "Email me a sign-in link";
 
   return (
     <div className="flex items-center justify-center min-h-[60vh]">

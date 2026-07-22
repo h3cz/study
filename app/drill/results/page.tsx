@@ -145,7 +145,6 @@ function DrillResultsInner() {
 
       <div style={{ width: "100%" }}>
         <GuestRunSavePrompt
-          kind="drill"
           runId={`drill:${payload.durationSeconds}:${payload.correct}:${payload.incorrect}:${payload.skipped}:${xpEarned}`}
           nextPath="/drill/results"
           details={[

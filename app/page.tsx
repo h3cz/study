@@ -1042,8 +1042,7 @@ export default function Dashboard() {
 
     const supabase = createClient();
     // getSession() reads from localStorage instantly — no network call.
-    // Avoids the "Sign in to sync" flash + the failure-mode where a slow
-    // mobile network turns a logged-in user into a falsely-signed-out one.
+    // Avoids a false signed-out render while a slow mobile network resolves.
     supabase.auth.getSession().then(({ data: { session } }) => {
       setAuthUser(session?.user ?? null);
     });
@@ -1274,27 +1273,7 @@ export default function Dashboard() {
           ❄️ Streak freeze used — you&apos;re safe
         </div>
       )}
-      {/* Sync banner — render nothing while auth is still resolving */}
-      {authUser === undefined ? null : authUser === null ? (
-        <div
-          className="flex items-center justify-between px-4 py-2 text-sm"
-          style={{
-            borderRadius: "var(--r-md)",
-            border: "1px solid var(--border-strong)",
-            background: "var(--surface)",
-            color: "var(--fg-muted)",
-          }}
-        >
-          <span>Progress is local only.</span>
-          <Link
-            href="/login"
-            style={{ color: "var(--accent)", fontWeight: 500, cursor: "pointer" }}
-            className="hover:underline"
-          >
-            Sign in to sync →
-          </Link>
-        </div>
-      ) : (
+      {authUser ? (
         <div
           className="flex items-center gap-2 px-4 py-2 text-sm"
           style={{
@@ -1307,7 +1286,7 @@ export default function Dashboard() {
           <span style={{ color: "var(--success)" }}>●</span>
           <span>Cloud sync active.</span>
         </div>
-      )}
+      ) : null}
 
       {BANK_IMPORT_ENABLED && bankStats && bankStats.total <= 12 && bankStats.starter >= Math.max(1, bankStats.total - 2) && (
         <section

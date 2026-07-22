@@ -7,7 +7,6 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { InAppBrowserBanner } from "@/components/InAppBrowserBanner";
-import { GuestSaveSlotBar } from "@/components/GuestSaveSlotBar";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -81,7 +80,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <InAppBrowserBanner />
           <NavBar />
-          <GuestSaveSlotBar />
           <CommandPalette />
           <main className="max-w-2xl lg:max-w-4xl mx-auto px-4 py-6 lg:py-8 main-content-pb">{children}</main>
           <MobileBottomNav />

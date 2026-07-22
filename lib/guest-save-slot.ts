@@ -1,7 +1,5 @@
 const GUEST_ID_KEY = "hecz.study.guestId.v1";
-const GUEST_HEARTBEAT_KEY = "hecz.study.guestHeartbeatAt.v1";
 const GUEST_CLAIM_PREFIX = "hecz.study.guestClaimedFor.v1.";
-const HEARTBEAT_INTERVAL_MS = 6 * 60 * 60 * 1000;
 
 type SavePromptEvent = "shown" | "clicked";
 
@@ -34,14 +32,6 @@ function postJson(path: string, body: string): void {
     body,
     keepalive: true,
   }).catch(() => {});
-}
-
-export function maybeSendGuestHeartbeat(path: string): void {
-  const now = new Date().getTime();
-  const lastHeartbeatAt = Number(localStorage.getItem(GUEST_HEARTBEAT_KEY) ?? "0");
-  if (now - lastHeartbeatAt < HEARTBEAT_INTERVAL_MS) return;
-  localStorage.setItem(GUEST_HEARTBEAT_KEY, String(now));
-  postJson("/api/guest/heartbeat", JSON.stringify({ guestId: getGuestId(), path }));
 }
 
 export function recordGuestSavePrompt(event: SavePromptEvent, path: string): void {

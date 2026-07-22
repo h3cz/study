@@ -602,7 +602,6 @@ function QuizInner() {
 
           <div style={{ marginTop: "22px" }}>
             <GuestRunSavePrompt
-              kind="quiz"
               runId={`quiz:${questions.length}:${correct}:${displayXp}:${newStreak}`}
               nextPath="/"
               details={[

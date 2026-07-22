@@ -213,7 +213,6 @@ function ResultsInner() {
       </div>
 
       <GuestRunSavePrompt
-        kind="exam"
         runId={`exam:${examId ?? session.startedAt}:${predictedScore}:${scorePercent}`}
         nextPath={examId ? `/exam/results?id=${encodeURIComponent(examId)}` : "/exam/results"}
         details={[

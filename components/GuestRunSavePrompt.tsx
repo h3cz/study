@@ -14,7 +14,6 @@ export interface RunSaveDetail {
 
 interface GuestRunSavePromptProps {
   runId: string;
-  kind: "quiz" | "exam" | "drill" | "pbq" | "duel";
   details: RunSaveDetail[];
   nextPath?: string;
 }
@@ -28,12 +27,7 @@ function toneColor(tone: RunSaveDetail["tone"]): string {
   return "var(--accent)";
 }
 
-function kindLabel(kind: GuestRunSavePromptProps["kind"]): string {
-  if (kind === "pbq") return "PBQ";
-  return kind;
-}
-
-export function GuestRunSavePrompt({ runId, kind, details, nextPath }: GuestRunSavePromptProps) {
+export function GuestRunSavePrompt({ runId, details, nextPath }: GuestRunSavePromptProps) {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const shownLogged = useRef(false);
@@ -74,38 +68,25 @@ export function GuestRunSavePrompt({ runId, kind, details, nextPath }: GuestRunS
 
   if (!visible) return null;
 
-  const href = `/login?next=${encodeURIComponent(nextPath ?? pathname ?? "/")}&claim=guest-run`;
+  const href = `/login?next=${encodeURIComponent(nextPath ?? pathname ?? "/")}&claim=save-progress`;
 
   return (
     <section
-      aria-label="Save your run"
+      aria-label="Save your progress"
       style={{
-        border: "1px solid rgba(245,166,35,0.45)",
-        background: "rgba(245,166,35,0.08)",
+        border: "1px solid var(--border)",
+        background: "var(--surface)",
         borderRadius: "var(--r-md)",
         padding: "16px",
       }}
     >
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
         <div style={{ minWidth: 0, flex: "1 1 260px" }}>
-          <p
-            className="font-mono"
-            style={{
-              fontSize: 11,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--accent)",
-              marginBottom: 6,
-            }}
-          >
-            Local progress · {kindLabel(kind)} run
-          </p>
           <h2 style={{ fontSize: 18, color: "var(--fg)", fontFamily: "var(--font-sans)", fontWeight: 700, marginBottom: 6 }}>
-            Save your run?
+            Keep your progress
           </h2>
           <p style={{ fontSize: 13, color: "var(--fg-muted)", fontFamily: "var(--font-sans)", lineHeight: 1.55, maxWidth: 560 }}>
-            This run is saved on this browser. Create a profile on this device so future XP, streaks,
-            predicted scores, teams, reviews, and bookmarks can sync when you sign in.
+            Sign in to save your XP, streaks, scores, reviews, and bookmarks across devices.
           </p>
         </div>
 
@@ -134,7 +115,7 @@ export function GuestRunSavePrompt({ runId, kind, details, nextPath }: GuestRunS
               justifyContent: "center",
             }}
           >
-            Save to account
+            Sign in to save
           </Link>
           <button
             type="button"
@@ -155,36 +136,9 @@ export function GuestRunSavePrompt({ runId, kind, details, nextPath }: GuestRunS
               cursor: "pointer",
             }}
           >
-            Keep playing
+            Not now
           </button>
         </div>
-      </div>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-          gap: 10,
-          marginTop: 14,
-        }}
-      >
-        {[
-          ["Now", "Local slot on this device"],
-          ["After save", "Profile tied to this browser"],
-          ["Keeps", "XP, streaks, scores, reviews"],
-        ].map(([label, text]) => (
-          <div key={label} style={{ borderTop: "1px solid rgba(245,166,35,0.28)", paddingTop: 10 }}>
-            <div
-              className="font-mono"
-              style={{ fontSize: 10, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 4 }}
-            >
-              {label}
-            </div>
-            <div style={{ fontSize: 12, color: "var(--fg)", fontFamily: "var(--font-sans)", lineHeight: 1.4 }}>
-              {text}
-            </div>
-          </div>
-        ))}
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(96px, 1fr))", gap: 10, marginTop: 14 }}>

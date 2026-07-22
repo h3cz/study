@@ -162,11 +162,12 @@ test("leaderboard signed-out mobile states stay usable", async ({ page }, testIn
 
   await expect(page.getByRole("heading", { name: "Leaderboard" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Global Rankings" })).toBeVisible();
-  await expect(page.getByText("Save your profile to enter the leaderboard.")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Create save slot →" })).toHaveAttribute(
+  await expect(page.getByText("Sign in to join the leaderboard.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Sign in →" })).toHaveAttribute(
     "href",
-    "/login?next=%2Fleaderboard&claim=guest-slot"
+    "/login?next=%2Fleaderboard"
   );
+  await expect(page.getByText("Local progress", { exact: true })).toHaveCount(0);
 
   await attachScreenshot(page, testInfo, "leaderboard-mobile-public-auth-gate");
   await expectNoHorizontalOverflow(page);
@@ -186,7 +187,7 @@ test("leaderboard signed-in state exposes public opt-in and cert tabs", async ({
   await expect(page.getByRole("heading", { name: "Global Rankings · by XP" })).toBeVisible();
   await page.getByRole("button", { name: "Network+" }).click();
   await expect(page.getByRole("heading", { name: "Network+ Rankings" })).toBeVisible();
-  await expect(page.getByText("Guest Slot 01")).toHaveCount(0);
+  await expect(page.getByText("Sign in to join the leaderboard.")).toHaveCount(0);
   await attachScreenshot(page, testInfo, "leaderboard-signed-in-cert-tabs");
 });
 
@@ -221,6 +222,27 @@ test("first-time visitors can sign in from onboarding", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Sign in to hecz / study" })).toBeAttached();
 });
 
+test("onboarding saves setup before account sign-in", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/onboarding");
+
+  await page.getByRole("button", { name: "Continue →", exact: true }).click();
+  await page.getByRole("button", { name: "Set date →", exact: true }).click();
+  await page.getByRole("button", { name: "Continue →", exact: true }).click();
+
+  await expect(page.getByRole("heading", { name: "You're all set." })).toBeVisible();
+  await expect(page.getByText("Save your progress", { exact: true })).toBeVisible();
+  await expect(page.getByText("Sign in on this device to save your setup and progress, then use it on other devices.")).toBeVisible();
+  await expectNoHorizontalOverflow(page);
+
+  await page.getByRole("button", { name: "Sign in to save" }).click();
+
+  await expect(page).toHaveURL(/\/login\?next=%2F&claim=save-progress$/);
+  await page.goto("/");
+  await expect(page.locator(".hero-grid")).toBeVisible();
+  await expect(page.getByText("Progress is local only.")).toHaveCount(0);
+});
+
 test("returning users recover their account from a fresh home load", async ({ page }) => {
   await mockSignedInSupabase(page, { returningUser: true });
   await page.goto("/");
@@ -247,15 +269,24 @@ test("login defaults to sign-in copy for multiplayer", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Continue with Google" })).toBeVisible();
 });
 
-test("login save claim keeps the account-save path readable", async ({ page }) => {
-  await page.goto("/login?next=%2Fleaderboard&claim=guest-slot");
+test("login save prompt stays plain", async ({ page }) => {
+  await page.route("**/auth/v1/otp**", async (route) => {
+    await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
+  });
+  await page.goto("/login?next=%2F&claim=save-progress");
 
   await expect(page.getByRole("heading", { name: "Sign in to hecz / study" })).toBeAttached();
-  await expect(page.getByText("save your progress or sign in")).toBeVisible();
-  await expect(page.getByText("Use the same browser you studied in.")).toBeVisible();
-  await expect(page.getByPlaceholder("email for your account")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Email me a save link" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Save with Google" })).toBeVisible();
+  await expect(page.getByText("save your progress", { exact: true })).toBeVisible();
+  await expect(page.getByText("Use this browser to finish signing in and save the progress already on this device. After that, it can sync to your other devices.")).toBeVisible();
+  await expect(page.getByPlaceholder("email address")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Email me a sign-in link" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Continue with Google" })).toBeVisible();
+
+  await page.getByPlaceholder("email address").fill("qa@example.test");
+  await page.getByRole("button", { name: "Email me a sign-in link" }).click();
+
+  await expect(page.getByRole("heading", { name: "Check your email" })).toBeAttached();
+  await expect(page.getByText("Open the link in this browser so we can save the progress already on this device. No password needed.")).toBeVisible();
 });
 
 test("quiz completion prompts signed-out users to save their run", async ({ page }) => {
@@ -272,13 +303,12 @@ test("quiz completion prompts signed-out users to save their run", async ({ page
 
   await page.getByRole("button", { name: "See Results" }).click();
   await expect(page.getByText("Quiz Complete")).toBeVisible();
-  const saveRunPrompt = page.getByRole("region", { name: "Save your run" });
+  const saveRunPrompt = page.getByRole("region", { name: "Save your progress" });
   await expect(saveRunPrompt).toBeVisible();
-  await expect(saveRunPrompt.getByText("Save your run?")).toBeVisible();
-  await expect(saveRunPrompt.getByText("This run is saved on this browser.")).toBeVisible();
-  await expect(saveRunPrompt.getByText("Profile tied to this browser")).toBeVisible();
-  await expect(saveRunPrompt.getByText("XP, streaks, scores, reviews")).toBeVisible();
-  await expect(saveRunPrompt.getByRole("link", { name: "Save to account" })).toHaveAttribute("href", "/login?next=%2F&claim=guest-run");
+  await expect(saveRunPrompt.getByText("Keep your progress")).toBeVisible();
+  await expect(saveRunPrompt.getByText("Sign in to save your XP, streaks, scores, reviews, and bookmarks across devices.")).toBeVisible();
+  await expect(saveRunPrompt.getByRole("link", { name: "Sign in to save" })).toHaveAttribute("href", "/login?next=%2F&claim=save-progress");
+  await expect(saveRunPrompt.getByRole("button", { name: "Not now" })).toBeVisible();
 });
 
 test("drill results use the same guest save-run prompt", async ({ page }) => {
@@ -302,12 +332,12 @@ test("drill results use the same guest save-run prompt", async ({ page }) => {
   await page.goto("/drill/results");
 
   await expect(page.getByText("1 wrong · 0 skipped · 3 seen")).toBeVisible();
-  const saveRunPrompt = page.getByRole("region", { name: "Save your run" });
+  const saveRunPrompt = page.getByRole("region", { name: "Save your progress" });
   await expect(saveRunPrompt).toBeVisible();
-  await expect(saveRunPrompt.getByText("Local progress · drill run")).toBeVisible();
-  await expect(saveRunPrompt.getByRole("link", { name: "Save to account" })).toHaveAttribute(
+  await expect(saveRunPrompt.getByText("Keep your progress")).toBeVisible();
+  await expect(saveRunPrompt.getByRole("link", { name: "Sign in to save" })).toHaveAttribute(
     "href",
-    "/login?next=%2Fdrill%2Fresults&claim=guest-run"
+    "/login?next=%2Fdrill%2Fresults&claim=save-progress"
   );
 });
 
