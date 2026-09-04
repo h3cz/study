@@ -4,7 +4,13 @@
 "use client";
 
 import { createClient } from "@/lib/supabase/client";
-import { rowToMatch, rowToAnswer, type DuelMatch, type DuelAnswer } from "./types";
+import {
+  rowToMatch,
+  rowToAnswer,
+  type DuelMatch,
+  type DuelAnswer,
+  type AsyncChallengeView,
+} from "./types";
 
 export type DuelSettings = {
   numRounds: number;
@@ -63,6 +69,42 @@ export async function readyNext(matchId: string, round: number): Promise<DuelMat
 /** Start a rematch vs the same opponent. Returns the new (active) match. */
 export async function requestRematch(matchId: string): Promise<DuelMatch> {
   return (await post<{ match: DuelMatch }>("/api/duel/rematch", { matchId })).match;
+}
+
+// ─── Async challenges ────────────────────────────────────────────────────────
+
+export async function createAsyncChallenge(
+  certId: string,
+  numRounds?: number
+): Promise<DuelMatch> {
+  return (
+    await post<{ match: DuelMatch }>("/api/duel/async/create", { certId, numRounds })
+  ).match;
+}
+
+export async function submitAsyncAnswer(
+  matchId: string,
+  round: number,
+  picked: string
+): Promise<DuelMatch> {
+  return (
+    await post<{ match: DuelMatch }>("/api/duel/async/answer", { matchId, round, picked })
+  ).match;
+}
+
+export async function listAsyncChallenges(): Promise<AsyncChallengeView[]> {
+  const res = await fetch("/api/duel/async/list");
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) return [];
+  return (json?.challenges ?? []) as AsyncChallengeView[];
+}
+
+export async function cancelAsyncChallenge(matchId: string): Promise<void> {
+  await post("/api/duel/async/cancel", { matchId });
+}
+
+export async function rematchAsync(matchId: string): Promise<DuelMatch> {
+  return (await post<{ match: DuelMatch }>("/api/duel/async/rematch", { matchId })).match;
 }
 
 /**

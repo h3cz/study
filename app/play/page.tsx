@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getCert } from "@/lib/certs";
@@ -12,7 +12,14 @@ import {
   quickMatch,
   leaveQueue,
   subscribeQuickMatch,
+  createAsyncChallenge,
+  listAsyncChallenges,
+  cancelAsyncChallenge,
+  rematchAsync,
 } from "@/lib/multiplayer/client";
+import type { AsyncChallengeView } from "@/lib/multiplayer/types";
+import { outcomeFor } from "@/lib/multiplayer/scoring";
+import { reconcileCompletedChallenge } from "@/lib/multiplayer/async-rewards";
 import {
   DUEL_DEFAULTS,
   DUEL_ROUND_OPTIONS,
@@ -35,11 +42,41 @@ function PlayInner() {
   const [searching, setSearching] = useState(false);
   // Deep link: /play?duel=CODE prefills the join field (seeded once at mount).
   const [joinCode, setJoinCode] = useState(() => (params.get("duel") ?? "").toUpperCase().slice(0, 6));
-  const [busy, setBusy] = useState<null | "invite" | "join" | "quick">(null);
+  const [busy, setBusy] = useState<null | "invite" | "join" | "quick" | "async">(null);
   const [err, setErr] = useState<string | null>(null);
   const [numRounds, setNumRounds] = useState<number>(DUEL_DEFAULTS.numRounds);
   const [roundLimitMs, setRoundLimitMs] = useState<number>(DUEL_DEFAULTS.roundLimitMs);
+  const [challenges, setChallenges] = useState<AsyncChallengeView[] | null>(null);
   const unsubRef = useRef<(() => void) | null>(null);
+
+  const refreshChallenges = useCallback(async () => {
+    try {
+      setChallenges(await listAsyncChallenges());
+    } catch {
+      // list stays whatever it was; challenges are never load-bearing
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!me) return;
+    let cancelled = false;
+    listAsyncChallenges()
+      .then(async (rows) => {
+        if (cancelled) return;
+        setChallenges(rows);
+        // Reconcile completed challenges the player never had open (offline at
+        // completion) so local XP mirrors and win streaks catch up.
+        for (const view of rows) {
+          if (view.match.status === "done") {
+            await reconcileCompletedChallenge(view.match, me);
+          }
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [me]);
 
   useEffect(() => () => unsubRef.current?.(), []);
 
@@ -96,14 +133,58 @@ function PlayInner() {
     setBusy("join");
     try {
       const m = await joinByCode(code);
-      router.push(`/play/duel?match=${m.id}`);
+      router.push(m.mode === "async" ? `/play/duel-async?match=${m.id}` : `/play/duel?match=${m.id}`);
     } catch (e) {
       setErr(humanError((e as Error).message));
       setBusy(null);
     }
   }
 
+  async function onAsyncChallenge() {
+    if (!me) return;
+    setErr(null);
+    setBusy("async");
+    try {
+      const m = await createAsyncChallenge(me.certId, numRounds);
+      router.push(`/play/duel-async?match=${m.id}`);
+    } catch (e) {
+      setErr(humanError((e as Error).message));
+      setBusy(null);
+    }
+  }
+
+  async function onContinue(id: string) {
+    router.push(`/play/duel-async?match=${id}`);
+  }
+
+  async function onCancel(id: string) {
+    setBusy("async");
+    try {
+      await cancelAsyncChallenge(id);
+      await refreshChallenges();
+    } catch {
+      // stale list entry; refresh anyway
+      await refreshChallenges();
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function onAsyncRematch(id: string) {
+    setBusy("async");
+    try {
+      const m = await rematchAsync(id);
+      router.push(`/play/duel-async?match=${m.id}`);
+    } catch {
+      setBusy(null);
+    }
+  }
+
   if (signedIn === false) {
+    // Preserve a shared challenge code through the sign-in redirect, so a
+    // recipient lands back on the prefilled join field after authenticating.
+    const duelParam = params.get("duel");
+    const next = duelParam ? `/play?duel=${encodeURIComponent(duelParam)}` : "/play";
     return (
       <Page>
         <Header />
@@ -112,7 +193,7 @@ function PlayInner() {
             Sign in to study with others and race head-to-head.
           </p>
           <Link
-            href="/login?next=%2Fplay"
+            href={`/login?next=${encodeURIComponent(next)}`}
             style={{
               background: "var(--accent)",
               color: "var(--accent-fg)",
@@ -232,6 +313,9 @@ function PlayInner() {
               <button onClick={onInvite} disabled={busy !== null} style={{ ...outlineBtn, flex: 1 }}>
                 {busy === "invite" ? "…" : "Invite a friend"}
               </button>
+              <button onClick={onAsyncChallenge} disabled={busy !== null} style={{ ...outlineBtn, flex: 1 }}>
+                {busy === "async" ? "…" : "Challenge (they play later)"}
+              </button>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               <input
@@ -269,9 +353,127 @@ function PlayInner() {
         )}
       </section>
 
+      {/* Async challenges */}
+      {me && challenges && challenges.length > 0 && (
+        <section
+          style={{
+            border: "1px solid var(--border)",
+            borderRadius: "var(--r-md)",
+            background: "var(--surface)",
+            padding: 20,
+            marginBottom: 16,
+          }}
+        >
+          <h2 style={{ fontFamily: "var(--font-sans)", fontSize: 16, color: "var(--fg)", margin: "0 0 4px" }}>
+            Your challenges
+          </h2>
+          <p style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--fg-muted)", margin: "0 0 14px" }}>
+            Same questions, played whenever each of you has time. Expire after 14 days.
+          </p>
+          <div style={{ display: "grid", gap: 10 }}>
+            {challenges.map((c) => (
+              <ChallengeRow
+                key={c.match.id}
+                view={c}
+                meId={me.userId}
+                busy={busy !== null}
+                onContinue={onContinue}
+                onCancel={onCancel}
+                onRematch={onAsyncRematch}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Co-study room */}
       {me && <CoStudyRoom me={me} />}
     </Page>
+  );
+}
+
+function ChallengeRow({
+  view,
+  meId,
+  busy,
+  onContinue,
+  onCancel,
+  onRematch,
+}: {
+  view: AsyncChallengeView;
+  meId: string;
+  busy: boolean;
+  onContinue: (id: string) => void;
+  onCancel: (id: string) => void;
+  onRematch: (id: string) => void;
+}) {
+  const m = view.match;
+  const iAmHost = m.hostId === meId;
+  const otherName = (iAmHost ? view.guestName : view.hostName) ?? "Opponent";
+  const myReady = (iAmHost ? m.hostReadyRound : m.guestReadyRound) ?? -1;
+  const oppReady = (iAmHost ? m.guestReadyRound : m.hostReadyRound) ?? -1;
+  const myDone = myReady >= m.numRounds - 1;
+  const myScore = iAmHost ? m.hostScore : m.guestScore;
+  const oppScore = iAmHost ? m.guestScore : m.hostScore;
+  const myCorrect = iAmHost ? m.hostCorrect : m.guestCorrect;
+  const oppCorrect = iAmHost ? m.guestCorrect : m.hostCorrect;
+
+  let badge = "";
+  let action: React.ReactNode = null;
+
+  if (m.status === "abandoned") {
+    badge = "Expired";
+  } else if (m.status === "done") {
+    const outcome = outcomeFor(myScore, oppScore, myCorrect, oppCorrect);
+    badge = outcome === "win" ? `Won ${myScore}–${oppScore} vs ${otherName}` : outcome === "loss" ? `Lost ${myScore}–${oppScore} vs ${otherName}` : `Draw ${myScore}–${oppScore} vs ${otherName}`;
+    action = (
+      <button onClick={() => onRematch(m.id)} disabled={busy} style={outlineBtnSmall}>
+        Rematch
+      </button>
+    );
+  } else if (!myDone) {
+    badge = oppReady >= 0 ? `${otherName} already played — your turn` : iAmHost ? m.guestId ? "Your turn" : "Your turn (share the code)" : "Your turn";
+    action = (
+      <button onClick={() => onContinue(m.id)} disabled={busy} style={outlineBtnSmall}>
+        {myReady >= 0 ? "Continue" : "Play now"}
+      </button>
+    );
+  } else {
+    badge = m.status === "waiting" ? `Waiting for someone · code ${m.inviteCode ?? ""}` : `Waiting for ${otherName}`;
+    action = (
+      <span style={{ display: "inline-flex", gap: 8 }}>
+        {m.status === "waiting" && !m.guestId && (
+          <>
+            <button onClick={() => onContinue(m.id)} disabled={busy} style={outlineBtnSmall}>
+              Your run
+            </button>
+            <button onClick={() => onCancel(m.id)} disabled={busy} style={outlineBtnSmall}>
+              Cancel
+            </button>
+          </>
+        )}
+      </span>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 12,
+        border: "1px solid var(--border)",
+        borderRadius: "var(--r-sm)",
+        background: "var(--surface-2)",
+        padding: "10px 12px",
+      }}
+    >
+      <span style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--fg)", minWidth: 0 }}>
+        {badge}
+      </span>
+      {action}
+    </div>
   );
 }
 
@@ -362,10 +564,17 @@ function humanError(code: string): string {
       return "That duel already started or filled up.";
     case "cannot_join_own_match":
       return "You can't join your own invite — share it with a friend.";
+    case "challenge_expired":
+      return "That challenge expired — ask for a fresh one.";
     case "not_enough_questions":
       return "Not enough questions for this cert yet.";
     case "not_authenticated":
       return "Please sign in first.";
+    case "cancel_too_late":
+      return "Too late to cancel — the seat was already claimed.";
+    case "not_async":
+    case "match_not_active":
+      return "That challenge is no longer playable.";
     default:
       return "Something went wrong. Try again.";
   }
@@ -391,5 +600,16 @@ const outlineBtn: React.CSSProperties = {
   fontFamily: "var(--font-sans)",
   fontSize: 14,
   padding: "8px 16px",
+  cursor: "pointer",
+};
+
+const outlineBtnSmall: React.CSSProperties = {
+  background: "transparent",
+  color: "var(--fg)",
+  border: "1px solid var(--border-strong)",
+  borderRadius: "var(--r-sm)",
+  fontFamily: "var(--font-sans)",
+  fontSize: 12,
+  padding: "6px 10px",
   cursor: "pointer",
 };

@@ -1,7 +1,7 @@
 // Shared multiplayer types, used by both server routes and client code.
 
 export type DuelStatus = "waiting" | "active" | "done" | "abandoned";
-export type DuelMode = "invite" | "quick";
+export type DuelMode = "invite" | "quick" | "async";
 
 /** A duel match row, as returned to clients (no answer keys are ever included). */
 export interface DuelMatch {
@@ -40,7 +40,15 @@ export interface DuelAnswer {
   points: number;
 }
 
-/** Map a snake_case DB row into the camelCase client shape. */
+/** A challenge row enriched with participant display names for lists. */
+export interface AsyncChallengeView {
+  match: DuelMatch;
+  /** Null when the caller is that side ("you" is implied by the viewer). */
+  hostName: string | null;
+  guestName: string | null;
+}
+
+// Map a snake_case DB row into the camelCase client shape.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function rowToMatch(r: any): DuelMatch {
   return {

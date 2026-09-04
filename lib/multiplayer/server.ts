@@ -7,7 +7,7 @@
 // layer never trusts a client-supplied user id.
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { rowToMatch, type DuelMatch } from "./types";
+import { rowToMatch, type DuelMatch, type AsyncChallengeView } from "./types";
 import { DUEL_DEFAULTS, normalizeDuelSettings, roundPoints } from "./scoring";
 import {
   pickDuelQuestionIds,
@@ -99,7 +99,15 @@ export async function createInviteMatch(
 /** Join a waiting invite match by code. Returns the now-active match. */
 export async function joinByCode(userId: string, code: string): Promise<DuelMatch> {
   const a = admin();
-  const { data, error } = await a.rpc("mp_join_by_code", {
+  // Route by mode: async challenges claim the guest seat without touching the
+  // live round cursor, live invites use the original RPC.
+  const { data: probe } = await a
+    .from("duel_matches")
+    .select("mode")
+    .eq("invite_code", code.toUpperCase().trim())
+    .maybeSingle();
+  const rpc = probe?.mode === "async" ? "mp_async_join" : "mp_join_by_code";
+  const { data, error } = await a.rpc(rpc, {
     p_user: userId,
     p_code: code.toUpperCase().trim(),
   });
@@ -107,6 +115,7 @@ export async function joinByCode(userId: string, code: string): Promise<DuelMatc
     const msg = error.message || "";
     if (msg.includes("match_not_found")) throw new DuelError("invalid_code", 404);
     if (msg.includes("cannot_join_own_match")) throw new DuelError("cannot_join_own_match", 409);
+    if (msg.includes("challenge_expired")) throw new DuelError("challenge_expired", 410);
     if (msg.includes("match_unavailable")) throw new DuelError("match_unavailable", 409);
     throw new DuelError("join_failed", 500);
   }
@@ -187,6 +196,7 @@ export async function submitAnswer(
     .single();
   if (error || !row) throw new DuelError("match_not_found", 404);
   const match = rowToMatch(row);
+  if (match.mode === "async") throw new DuelError("not_async", 400);
   if (match.hostId !== userId && match.guestId !== userId) {
     throw new DuelError("not_participant", 403);
   }
@@ -228,10 +238,11 @@ export async function readyNextRound(
   const a = admin();
   const { data: row, error } = await a
     .from("duel_matches")
-    .select("host_id, guest_id")
+    .select("host_id, guest_id, mode")
     .eq("id", matchId)
     .single();
   if (error || !row) throw new DuelError("match_not_found", 404);
+  if (row.mode === "async") throw new DuelError("not_async", 400);
   if (row.host_id !== userId && row.guest_id !== userId) {
     throw new DuelError("not_participant", 403);
   }
@@ -254,10 +265,11 @@ export async function rematch(userId: string, matchId: string): Promise<DuelMatc
   const a = admin();
   const { data: row, error } = await a
     .from("duel_matches")
-    .select("cert_id, host_id, guest_id, status")
+    .select("cert_id, host_id, guest_id, status, mode")
     .eq("id", matchId)
     .single();
   if (error || !row) throw new DuelError("match_not_found", 404);
+  if (row.mode === "async") throw new DuelError("not_async", 400);
   if (row.host_id !== userId && row.guest_id !== userId) {
     throw new DuelError("not_participant", 403);
   }
@@ -295,14 +307,237 @@ export async function advanceMatch(userId: string, matchId: string): Promise<Due
   const a = admin();
   const { data: row, error } = await a
     .from("duel_matches")
-    .select("host_id, guest_id")
+    .select("host_id, guest_id, mode")
     .eq("id", matchId)
     .single();
   if (error || !row) throw new DuelError("match_not_found", 404);
+  if (row.mode === "async") throw new DuelError("not_async", 400);
   if (row.host_id !== userId && row.guest_id !== userId) {
     throw new DuelError("not_participant", 403);
   }
   const { data: updated, error: rpcErr } = await a.rpc("mp_advance", { p_match: matchId });
   if (rpcErr || !updated) throw new DuelError("advance_failed", 500);
   return rowToMatch(updated);
+}
+
+// ─── Async duels ─────────────────────────────────────────────────────────────
+//
+// A challenge the opponent plays whenever they like. Host creates + plays
+// immediately; the opponent joins by code (or is pre-seated by a rematch) and
+// plays later. Correct answers score the full base points — no speed decay,
+// because cross-day reaction times are not comparable. XP matches live duels
+// and is awarded exactly once, inside the SQL finalizer.
+
+/** How long an unfinished async challenge stays joinable/playable. */
+export const ASYNC_CHALLENGE_TTL_DAYS = 14;
+
+/** Create an async challenge. The host plays immediately; the code is shared. */
+export async function createAsyncChallenge(
+  userId: string,
+  certId: string,
+  settingsInput: DuelSettingsInput = {}
+): Promise<DuelMatch> {
+  const settings = normalizeDuelSettings(settingsInput);
+  if (!hasEnoughQuestions(certId, settings.numRounds)) {
+    throw new DuelError("not_enough_questions", 422);
+  }
+  const a = admin();
+  // Lazy expiry: abandon own unfinished challenges past the TTL so lists stay honest.
+  await a
+    .from("duel_matches")
+    .update({ status: "abandoned" })
+    .eq("host_id", userId)
+    .eq("mode", "async")
+    .in("status", ["waiting", "active"])
+    .lt("created_at", new Date(Date.now() - ASYNC_CHALLENGE_TTL_DAYS * 86_400_000).toISOString());
+
+  const questionIds = pickDuelQuestionIds(certId, settings.numRounds);
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const code = inviteCode();
+    const { data, error } = await a
+      .from("duel_matches")
+      .insert({
+        cert_id: certId,
+        status: "waiting",
+        mode: "async",
+        invite_code: code,
+        host_id: userId,
+        question_ids: questionIds,
+        num_rounds: settings.numRounds,
+        round_limit_ms: settings.roundLimitMs,
+        base_points: DUEL_DEFAULTS.basePoints,
+      })
+      .select("*")
+      .single();
+    if (!error && data) return rowToMatch(data);
+    if (error && !error.message.includes("duel_matches_invite_idx") && error.code !== "23505") {
+      throw new DuelError("create_failed", 500);
+    }
+  }
+  throw new DuelError("create_failed", 500);
+}
+
+/** How many rounds a player has answered in an async match so far. */
+function asyncProgress(m: DuelMatch, userId: string): number {
+  return (m.hostId === userId ? m.hostReadyRound : m.guestReadyRound) + 1;
+}
+
+/** Submit one async answer. Server computes correctness; points are flat. */
+export async function submitAsyncAnswer(
+  userId: string,
+  matchId: string,
+  round: number,
+  picked: string
+): Promise<DuelMatch> {
+  const a = admin();
+  const { data: row, error } = await a
+    .from("duel_matches")
+    .select("*")
+    .eq("id", matchId)
+    .single();
+  if (error || !row) throw new DuelError("match_not_found", 404);
+  const match = rowToMatch(row);
+  if (match.mode !== "async") throw new DuelError("not_async", 400);
+  if (match.hostId !== userId && match.guestId !== userId) {
+    throw new DuelError("not_participant", 403);
+  }
+  if (match.status !== "waiting" && match.status !== "active") {
+    throw new DuelError("match_not_active", 409);
+  }
+  if (round !== asyncProgress(match, userId)) {
+    // Out of turn — return current truth so the client re-syncs.
+    return match;
+  }
+
+  const questionId = match.questionIds[round] ?? "";
+  const correctKey = correctKeyFor(match.certId, questionId);
+  const isCorrect = correctKey != null && picked === correctKey;
+  const points = isCorrect ? match.basePoints : 0;
+
+  const { data: updated, error: rpcErr } = await a.rpc("mp_async_answer", {
+    p_match: matchId,
+    p_user: userId,
+    p_round: round,
+    p_question: questionId,
+    p_picked: picked,
+    p_correct: isCorrect,
+    p_points: points,
+    p_ms: 0,
+  });
+  if (rpcErr || !updated) throw new DuelError("submit_failed", 500);
+  return rowToMatch(updated);
+}
+
+/**
+ * List the caller's async challenges (most recent first), lazily expiring
+ * stale ones. Server-side only: service-role reads bypass RLS by design and
+ * the route filters strictly to the caller's rows.
+ */
+export async function listAsyncChallenges(userId: string): Promise<AsyncChallengeView[]> {
+  const a = admin();
+  await a
+    .from("duel_matches")
+    .update({ status: "abandoned" })
+    .eq("mode", "async")
+    .or(`host_id.eq.${userId},guest_id.eq.${userId}`)
+    .in("status", ["waiting", "active"])
+    .lt("created_at", new Date(Date.now() - ASYNC_CHALLENGE_TTL_DAYS * 86_400_000).toISOString());
+
+  const { data, error } = await a
+    .from("duel_matches")
+    .select("*")
+    .eq("mode", "async")
+    .or(`host_id.eq.${userId},guest_id.eq.${userId}`)
+    .order("created_at", { ascending: false })
+    .limit(25);
+  if (error || !data) return [];
+
+  const otherIds = [
+    ...new Set(
+      data.map((r) => (r.host_id === userId ? r.guest_id : r.host_id)).filter(Boolean)
+    ),
+  ];
+  const names = new Map<string, string>();
+  if (otherIds.length > 0) {
+    const { data: profs } = await a
+      .from("profiles")
+      .select("user_id, display_name")
+      .in("user_id", otherIds);
+    for (const p of profs ?? []) {
+      if (p.display_name) names.set(p.user_id, p.display_name);
+    }
+  }
+
+  return data.map((r) => {
+    const match = rowToMatch(r);
+    const otherId = match.hostId === userId ? match.guestId : match.hostId;
+    return {
+      match,
+      hostName: match.hostId === userId ? null : names.get(match.hostId) ?? null,
+      guestName: match.guestId === userId ? null : otherId ? names.get(otherId) ?? null : null,
+    };
+  });
+}
+
+/** Host cancels an open challenge before anyone claims the guest seat. */
+export async function cancelAsyncChallenge(userId: string, matchId: string): Promise<void> {
+  const a = admin();
+  // Conditional update: the WHERE predicates make the cancel atomic against a
+  // concurrent mp_async_join claiming the guest seat. Zero rows affected means
+  // the seat was claimed (or the match isn't the caller's open challenge).
+  const { data, error } = await a
+    .from("duel_matches")
+    .update({ status: "abandoned" })
+    .eq("id", matchId)
+    .eq("host_id", userId)
+    .eq("status", "waiting")
+    .is("guest_id", null)
+    .select("id");
+  if (error) throw new DuelError("cancel_failed", 500);
+  if (!data || data.length === 0) {
+    // Distinguish "not yours / not found" from "too late" for the human error.
+    const { data: row } = await a
+      .from("duel_matches")
+      .select("host_id, status, guest_id")
+      .eq("id", matchId)
+      .single();
+    if (!row || row.host_id !== userId) throw new DuelError("match_not_found", 404);
+    throw new DuelError("cancel_too_late", 409);
+  }
+}
+
+/** Rematch an async duel: fresh set, opponent pre-seated, caller plays first. */
+export async function rematchAsync(userId: string, matchId: string): Promise<DuelMatch> {
+  const a = admin();
+  const { data: row, error } = await a
+    .from("duel_matches")
+    .select("cert_id, host_id, guest_id, num_rounds, status, mode")
+    .eq("id", matchId)
+    .single();
+  if (error || !row) throw new DuelError("match_not_found", 404);
+  if (row.host_id !== userId && row.guest_id !== userId) {
+    throw new DuelError("not_participant", 403);
+  }
+  if (row.mode !== "async" || row.status !== "done") {
+    throw new DuelError("rematch_failed", 409);
+  }
+  const numRounds = row.num_rounds ?? DUEL_DEFAULTS.numRounds;
+  if (!hasEnoughQuestions(row.cert_id, numRounds)) {
+    throw new DuelError("not_enough_questions", 422);
+  }
+  const questionIds = pickDuelQuestionIds(row.cert_id, numRounds);
+  const { data: newId, error: rpcErr } = await a.rpc("mp_async_rematch", {
+    p_match: matchId,
+    p_user: userId,
+    p_question_ids: questionIds,
+    p_num_rounds: numRounds,
+  });
+  if (rpcErr || !newId) throw new DuelError("rematch_failed", 500);
+  const { data, error: readErr } = await a
+    .from("duel_matches")
+    .select("*")
+    .eq("id", newId)
+    .single();
+  if (readErr || !data) throw new DuelError("rematch_failed", 500);
+  return rowToMatch(data);
 }

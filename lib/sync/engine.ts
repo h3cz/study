@@ -51,21 +51,37 @@ export async function enqueue(
  * - On other errors: increments retries (capped at MAX_RETRIES).
  * - Returns undefined on success, "signed_out" on auth failure.
  */
-export async function flush(): Promise<string | undefined> {
-  if (typeof navigator !== "undefined" && !navigator.onLine) return;
+export interface FlushResult {
+  signedOut: boolean;
+  attempted: number;
+  failed: number;
+}
+
+/**
+ * Push pending sync items, reporting what happened. `flush()` is the legacy
+ * convenience wrapper; callers that need to know whether everything actually
+ * pushed (e.g. reward reconciliation) should use this.
+ */
+export async function flushDetailed(): Promise<FlushResult> {
+  const result: FlushResult = { signedOut: false, attempted: 0, failed: 0 };
+  if (typeof navigator !== "undefined" && !navigator.onLine) return result;
 
   const supabase = createClient();
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  if (!session) return;
+  if (!session) {
+    result.signedOut = true;
+    return result;
+  }
 
   const items = await getPendingItems();
-  if (items.length === 0) return;
+  if (items.length === 0) return result;
 
   for (const item of items) {
     if (item.retries >= MAX_RETRIES) continue;
 
+    result.attempted++;
     try {
       await sendItem(supabase, session.user.id, item);
       await deleteItem(item.id!);
@@ -76,11 +92,19 @@ export async function flush(): Promise<string | undefined> {
         msg.includes("JWT") ||
         msg.includes("not authenticated")
       ) {
-        return "signed_out";
+        result.signedOut = true;
+        return result;
       }
       await incrementRetries(item.id!, item.retries);
+      result.failed++;
     }
   }
+  return result;
+}
+
+export async function flush(): Promise<string | undefined> {
+  const result = await flushDetailed();
+  return result.signedOut ? "signed_out" : undefined;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -260,7 +284,13 @@ async function sendItem(supabase: any, userId: string, item: SyncQueueItem): Pro
  * On sign-in: fetch remote user_state and overwrite local if remote has more XP.
  * Quiz sessions and flashcard reviews are push-only for MVP.
  */
-export async function pullLatest(userId: string): Promise<void> {
+/**
+ * Pull the authoritative remote user_state down into local Dexie.
+ * Returns what happened: "merged" (remote row read successfully — merged or
+ * already ahead), "empty" (no remote row exists yet), or "error" (the read
+ * failed; local state was not touched). Callers may ignore the result.
+ */
+export async function pullLatest(userId: string): Promise<"merged" | "empty" | "error"> {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("user_state")
@@ -268,7 +298,8 @@ export async function pullLatest(userId: string): Promise<void> {
     .eq("user_id", userId)
     .single();
 
-  if (error || !data) return;
+  if (error) return "error";
+  if (!data) return "empty";
 
   const remote = data as RemoteUserState;
   const local = await db.userState.get(1);
@@ -297,6 +328,7 @@ export async function pullLatest(userId: string): Promise<void> {
         : {}),
     });
   }
+  return "merged";
 }
 
 // ─── Down-sync (cross-device hydration) ──────────────────────────────────────
