@@ -348,6 +348,75 @@ export const CERTS: CertMeta[] = [
       },
     ],
   },
+  {
+    id: "az-104",
+    vendor: "Microsoft",
+    name: "Azure Administrator",
+    fullName: "Microsoft Certified: Azure Administrator Associate",
+    version: "AZ-104",
+    passingScore: 700,
+    scoreMin: 100,
+    scoreMax: 1000,
+    tagline: "Administer Azure identities, storage, compute, networking, and monitoring.",
+    status: "live",
+    domains: [
+      {
+        code: "1",
+        name: "Manage identities and governance in Microsoft Entra ID",
+        weight: 0.2,
+        objectives: [
+          { code: "1.1", name: "Manage Microsoft Entra users, groups, and licenses" },
+          { code: "1.2", name: "Configure Conditional Access policies and multifactor authentication" },
+          { code: "1.3", name: "Manage privileged access with PIM and Microsoft Entra Identity Protection" },
+          { code: "1.4", name: "Implement role-based access control (RBAC)" },
+          { code: "1.5", name: "Configure governance with Azure Policy, resource locks, tags, subscriptions, and management groups" },
+        ],
+      },
+      {
+        code: "2",
+        name: "Implement and manage storage",
+        weight: 0.2,
+        objectives: [
+          { code: "2.1", name: "Configure storage account types, performance tiers, and redundancy options" },
+          { code: "2.2", name: "Configure blob access tiers and lifecycle management" },
+          { code: "2.3", name: "Secure storage with shared access signatures, keys, and network controls" },
+          { code: "2.4", name: "Move data with AzCopy, Azure Storage Explorer, and Azure File Sync" },
+        ],
+      },
+      {
+        code: "3",
+        name: "Deploy and manage Azure compute resources",
+        weight: 0.25,
+        objectives: [
+          { code: "3.1", name: "Deploy and configure Azure virtual machines" },
+          { code: "3.2", name: "Configure availability sets, availability zones, and Virtual Machine Scale Sets" },
+          { code: "3.3", name: "Deploy containers with Azure Container Instances and Azure Container Apps" },
+          { code: "3.4", name: "Configure Azure App Service plans, apps, and deployment slots" },
+        ],
+      },
+      {
+        code: "4",
+        name: "Implement and manage virtual networking",
+        weight: 0.2,
+        objectives: [
+          { code: "4.1", name: "Configure virtual networks, subnets, and IP addressing" },
+          { code: "4.2", name: "Configure VNet peering, VPN Gateway, and ExpressRoute" },
+          { code: "4.3", name: "Secure networks with network security groups, ASGs, and Azure Firewall" },
+          { code: "4.4", name: "Configure load balancing, private DNS zones, and NAT Gateway" },
+        ],
+      },
+      {
+        code: "5",
+        name: "Monitor and maintain Azure resources",
+        weight: 0.15,
+        objectives: [
+          { code: "5.1", name: "Monitor resources with Azure Monitor, Log Analytics, and KQL" },
+          { code: "5.2", name: "Configure alerts, action groups, and Network Watcher" },
+          { code: "5.3", name: "Protect data with Azure Backup and Azure Site Recovery" },
+        ],
+      },
+    ],
+  },
 ];
 
 export const DEFAULT_CERT_ID = "secplus-sy0-701";

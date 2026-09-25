@@ -1,0 +1,549 @@
+import type { Acronym, Flashcard, PerfQuestion, Question } from "@/lib/db";
+
+// AZ-104 Domain 4: Implement and manage virtual networking
+
+export const AZ104_D4_QUESTIONS: Question[] = [
+  // ---------- Objective 4.1: Configure virtual networks, subnets, and IP addressing ----------
+  {
+    id: "az104-4-4.1-001",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.1",
+    stem: "You are planning a virtual network with the address space 10.20.0.0/16. You need subnets for web servers, application servers, databases, and a future DMZ segment. Each subnet must support at least 200 hosts. Which subnet plan satisfies the requirement?",
+    choices: [
+      { key: "A", text: "Four /26 subnets", correct: false },
+      { key: "B", text: "Four /24 subnets", correct: true },
+      { key: "C", text: "One /22 subnet", correct: false },
+      { key: "D", text: "Four /28 subnets", correct: false },
+    ],
+    explanation:
+      "B is correct: a /24 subnet has 256 addresses, minus 5 Azure-reserved addresses leaves 251 usable hosts, which satisfies the 200-host requirement with room to grow. A loses: a /26 has 64 addresses (59 usable), far short of 200. C loses: a single /22 cannot be split into four functional segments without further subnetting, so it fails the segmentation requirement. D loses: a /28 has 16 addresses (11 usable), far short of 200.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-4-4.1-002",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.1",
+    stem: "You create a subnet with the address range 172.16.4.0/27. How many IP addresses in this subnet are available for assignment to virtual machines?",
+    choices: [
+      { key: "A", text: "32", correct: false },
+      { key: "B", text: "31", correct: false },
+      { key: "C", text: "27", correct: true },
+      { key: "D", text: "30", correct: false },
+    ],
+    explanation:
+      "C is correct: a /27 subnet contains 32 addresses total. Azure reserves the first four and the last one of every subnet (network ID, default gateway, DNS mappings, and broadcast), leaving 32 − 5 = 27 usable addresses. A loses: 32 is the total count before reservations. B loses: it subtracts only the network ID, ignoring the other four reserved addresses. D loses: 30 would be correct only if Azure reserved just two addresses, which it does not.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-4-4.1-003",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.1",
+    stem: "You plan to deploy a VPN gateway into an existing virtual network. Which subnet configuration is required for the gateway?",
+    choices: [
+      { key: "A", text: "A subnet named VPN-Subnet with a /28 address range", correct: false },
+      { key: "B", text: "A subnet named GatewaySubnet with a /27 address range", correct: true },
+      { key: "C", text: "A subnet named GatewaySubnet with a /29 address range", correct: false },
+      { key: "D", text: "Any subnet of at least /27, associated with an NSG that allows UDP 500", correct: false },
+    ],
+    explanation:
+      "B is correct: the gateway subnet must be named exactly GatewaySubnet and be at least /27 (a /27 or larger prefix, e.g. /26) so the gateway VMs have enough addresses. A loses: the name must be exactly GatewaySubnet, not an arbitrary name. C loses: /29 (8 addresses) is below the /27 minimum Microsoft requires. D loses: the gateway subnet must not have an NSG associated with it — associating an NSG can block the management traffic the gateway needs.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-4-4.1-004",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.1",
+    stem: "A database VM must always keep the same private IP address across reboots and stop/start cycles so firewall rules on other servers remain valid. How should you configure the VM's private IP?",
+    choices: [
+      { key: "A", text: "Assign the IP manually inside the guest OS", correct: false },
+      { key: "B", text: "Leave the allocation method as Dynamic", correct: false },
+      { key: "C", text: "Set the private IP allocation method to Static in Azure", correct: true },
+      { key: "D", text: "Assign a public IP address to the NIC", correct: false },
+    ],
+    explanation:
+      "C is correct: setting the private IP allocation to Static in Azure guarantees the address persists across stop/start cycles (stopped-deallocated VMs with dynamic IPs can receive a different address on restart). A loses: configuring the IP only inside the guest OS bypasses Azure's IPAM and risks conflicts; Azure still manages the address. B loses: Dynamic allocation can change when the VM is stopped and deallocated. D loses: a public IP does not control or stabilize the private IP address.",
+    difficulty: 1,
+  },
+  {
+    id: "az104-4-4.1-005",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.1",
+    stem: "Your company policy requires that traffic from VMs to an Azure SQL Database must never traverse the public internet, and the database must not have a public endpoint reachable at all. Which solution meets both requirements?",
+    choices: [
+      { key: "A", text: "A service endpoint for Microsoft.Sql on the VM subnet", correct: false },
+      { key: "B", text: "A private endpoint (Azure Private Link) for the SQL server", correct: true },
+      { key: "C", text: "Regional VNet integration on the SQL server", correct: false },
+      { key: "D", text: "An NSG rule denying outbound traffic to Internet on the VM subnet", correct: false },
+    ],
+    explanation:
+      "B is correct: a private endpoint gives the SQL server a private IP in your VNet via Private Link, so traffic stays on the Microsoft backbone and you can disable the server's public network access entirely. A loses: a service endpoint keeps traffic off the internet, but the SQL server's public endpoint remains reachable — it does not remove public access. C loses: VNet integration is a feature of compute services like App Service, not something you enable on an Azure SQL server. D loses: blocking outbound internet at the NSG would also block the SQL connection itself, since SQL's public endpoint is reached over the internet.",
+    difficulty: 4,
+  },
+  {
+    id: "az104-4-4.1-006",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.1",
+    stem: "You enable regional VNet integration for an Azure App Service web app so it can reach a database in a virtual network. Which statement about the integration subnet is true?",
+    choices: [
+      { key: "A", text: "The subnet must be delegated to Microsoft.Web/serverFarms and cannot contain other resource types", correct: true },
+      { key: "B", text: "The subnet can be shared with virtual machines as long as it is at least a /26", correct: false },
+      { key: "C", text: "The subnet must be named GatewaySubnet", correct: false },
+      { key: "D", text: "The subnet requires a service endpoint for Microsoft.Web", correct: false },
+    ],
+    explanation:
+      "A is correct: regional VNet integration requires an empty, dedicated subnet delegated to Microsoft.Web/serverFarms; no other resources (VMs, etc.) may live in it. B loses: the subnet must be dedicated to the App Service integration — sharing it with VMs is not supported. C loses: GatewaySubnet is reserved for VPN/ExpressRoute gateways, not VNet integration. D loses: no service endpoint is needed; the integration uses delegated subnet injection, not service endpoints.",
+    difficulty: 3,
+  },
+  // ---------- Objective 4.2: Configure VNet peering, VPN Gateway, and ExpressRoute ----------
+  {
+    id: "az104-4-4.2-001",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    stem: "You peer VNet-A with VNet-B, and VNet-B with VNet-C. A VM in VNet-A needs to communicate with a VM in VNet-C. What must you do?",
+    choices: [
+      { key: "A", text: "Nothing; routing between A and C is automatic through B", correct: false },
+      { key: "B", text: "Enable 'Allow forwarded traffic' on the A-B peering only", correct: false },
+      { key: "C", text: "Create a direct peering between VNet-A and VNet-C", correct: true },
+      { key: "D", text: "Add a user-defined route in VNet-A pointing to the VPN gateway in VNet-B", correct: false },
+    ],
+    explanation:
+      "C is correct: VNet peering is non-transitive, so peered VNets do not automatically route through each other. A must be peered directly with C (or traffic must flow through a hub with a gateway/NVA and gateway transit). A loses: peering does not transit — B will not forward A's traffic to C by default. B loses: allowing forwarded traffic does not make B route between two peerings. D loses: without a hub gateway and gateway-transit configuration, a UDR to B's gateway will not establish transit.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-4-4.2-002",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    stem: "You have a hub-and-spoke topology. The hub VNet has a VPN gateway connected to on-premises. You want spoke VNets to use the hub's gateway for on-premises connectivity without deploying a gateway in each spoke. What must you configure on the peering?",
+    choices: [
+      { key: "A", text: "Enable 'Use remote gateways' on the hub-to-spoke peering", correct: false },
+      { key: "B", text: "Enable 'Allow gateway transit' on the hub-side peering and 'Use remote gateways' on the spoke-side peering", correct: true },
+      { key: "C", text: "Enable 'Allow gateway transit' on both sides of the peering", correct: false },
+      { key: "D", text: "Deploy a second VPN gateway in the spoke VNet", correct: false },
+    ],
+    explanation:
+      "B is correct: gateway transit is a two-sided setting — the hub peering must allow gateway transit, and the spoke peering must opt in with 'use remote gateways'. A loses: 'use remote gateways' is set on the spoke side (the VNet without the gateway), and the hub side still needs 'allow gateway transit'. C loses: 'allow gateway transit' on the spoke side does nothing since the spoke has no gateway to share. D loses: the whole point of gateway transit is to avoid deploying a gateway per spoke.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-4-4.2-003",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    stem: "You attempt to peer VNet-Prod (10.1.0.0/16) with VNet-Test (10.1.0.0/16). The peering creation fails. What is the most likely cause?",
+    choices: [
+      { key: "A", text: "The VNets are in different Azure regions", correct: false },
+      { key: "B", text: "The VNets have overlapping address spaces", correct: true },
+      { key: "C", text: "Peering requires a VPN gateway in each VNet", correct: false },
+      { key: "D", text: "The VNets must be in the same resource group", correct: false },
+    ],
+    explanation:
+      "B is correct: peered VNets must have non-overlapping address spaces — Azure cannot route between two VNets that both claim 10.1.0.0/16. A loses: global VNet peering supports peering across regions. C loses: peering works without any gateway. D loses: peered VNets can live in different resource groups, subscriptions, and tenants.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-4-4.2-004",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    stem: "You need a VPN gateway that supports up to 10 Gbps of throughput, active-active mode, and zone-redundant deployment. Which gateway SKU and generation should you choose?",
+    choices: [
+      { key: "A", text: "VpnGw1, Generation 1", correct: false },
+      { key: "B", text: "VpnGw2, Generation 1", correct: false },
+      { key: "C", text: "VpnGw4, Generation 2", correct: true },
+      { key: "D", text: "Basic SKU", correct: false },
+    ],
+    explanation:
+      "C is correct: Generation 2 gateways (VpnGw2AZ through VpnGw5AZ) support higher throughput and zone redundancy; VpnGw4 Gen2 reaches up to 10 Gbps, and active-active is supported on VpnGw1 and above (Generation 2 supports active-active with zone-redundant SKUs). A loses: VpnGw1 Gen1 tops out around 650 Mbps and is not zone-redundant. B loses: VpnGw2 Gen1 reaches about 1 Gbps — far below 10 Gbps. D loses: the Basic SKU is limited to ~100 Mbps and lacks features like active-active and RADIUS/IKEv2 options.",
+    difficulty: 4,
+  },
+  {
+    id: "az104-4-4.2-005",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    stem: "Match each connectivity need to the correct VPN connection type: (1) branch office to Azure over IPsec, (2) a remote laptop to Azure, (3) encrypted traffic between two Azure VNets.",
+    choices: [
+      { key: "A", text: "(1) Point-to-Site, (2) Site-to-Site, (3) VNet-to-VNet", correct: false },
+      { key: "B", text: "(1) Site-to-Site, (2) Point-to-Site, (3) VNet-to-VNet", correct: true },
+      { key: "C", text: "(1) VNet-to-VNet, (2) Site-to-Site, (3) Point-to-Site", correct: false },
+      { key: "D", text: "(1) ExpressRoute, (2) VNet-to-VNet, (3) Site-to-Site", correct: false },
+    ],
+    explanation:
+      "B is correct: Site-to-Site connects an on-premises network (branch office VPN device) to Azure over IPsec/IKE; Point-to-Site connects individual clients (laptops) via VPN client; VNet-to-VNet connects two Azure VNets through their gateways. A loses: it swaps the first two — a branch office uses Site-to-Site, not Point-to-Site. C loses: every mapping is wrong. D loses: ExpressRoute is a private circuit, not a VPN connection type, and VNet-to-VNet is for VNet pairs, not laptops.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-4-4.2-006",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    stem: "Your company has two ExpressRoute circuits in different regions and needs the two on-premises sites behind them to communicate with each other through Microsoft's network, without traffic going over the public internet. Which feature do you enable?",
+    choices: [
+      { key: "A", text: "Microsoft peering on both circuits", correct: false },
+      { key: "B", text: "ExpressRoute Global Reach", correct: true },
+      { key: "C", text: "Private peering with gateway transit", correct: false },
+      { key: "D", text: "A Site-to-Site VPN between the two circuits", correct: false },
+    ],
+    explanation:
+      "B is correct: ExpressRoute Global Reach links two ExpressRoute circuits so on-premises networks behind each circuit can talk to each other across Microsoft's backbone. A loses: Microsoft peering provides access to Microsoft 365/Dynamics public services, not site-to-site connectivity between circuits. C loses: private peering connects one on-premises site to its Azure VNets; it does not bridge two circuits. D loses: VPN connection types apply to VPN gateways, not to joining ExpressRoute circuits.",
+    difficulty: 4,
+  },
+  // ---------- Objective 4.3: Secure networks with network security groups, ASGs, and Azure Firewall ----------
+  {
+    id: "az104-4-4.3-001",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.3",
+    stem: "An NSG has two inbound rules: Rule1 (priority 100) allows TCP 443 from 10.0.0.0/24, and Rule2 (priority 200) denies TCP 443 from 10.0.1.5. A packet arrives for TCP 443 from 10.0.1.5. What happens?",
+    choices: [
+      { key: "A", text: "The packet is allowed because 10.0.1.5 is inside 10.0.0.0/24", correct: false },
+      { key: "B", text: "The packet is denied because the deny rule has a higher priority number", correct: false },
+      { key: "C", text: "The packet is allowed because priority 100 is evaluated first and matches", correct: true },
+      { key: "D", text: "The packet is denied because deny rules always override allow rules", correct: false },
+    ],
+    explanation:
+      "C is correct: NSG rules are processed in priority order — lowest number first — and the first matching rule wins. Rule1 (priority 100) matches the source and port, so the packet is allowed and Rule2 is never evaluated. A loses: while the subnet math is true, the reason given ignores priority processing, which is what actually decides it. B loses: a higher priority number means LOWER precedence — 200 is evaluated after 100. D loses: there is no deny-always-wins behavior in NSGs; order decides.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-4-4.3-002",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.3",
+    stem: "You associate a brand-new NSG with no custom rules to a subnet. Which traffic is permitted by default?",
+    choices: [
+      { key: "A", text: "All inbound and all outbound traffic", correct: false },
+      { key: "B", text: "Inbound traffic from the virtual network and the Azure load balancer; all outbound traffic", correct: true },
+      { key: "C", text: "No traffic in either direction", correct: false },
+      { key: "D", text: "Only inbound traffic from the internet on port 443", correct: false },
+    ],
+    explanation:
+      "B is correct: default NSG rules allow inbound from VirtualNetwork and AzureLoadBalancer (for health probes), allow all outbound to internet, and deny all other inbound. A loses: inbound internet traffic is denied by the default DenyAllInBound rule. C loses: the defaults permit VNet/load-balancer inbound and all outbound — it is not a total block. D loses: no default rule allows inbound internet traffic; internet inbound is denied by default.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-4-4.3-003",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.3",
+    stem: "A subnet has an NSG that allows inbound TCP 3389 from the corporate office range. A VM's NIC in that subnet has an NSG that denies inbound TCP 3389 from everywhere. Can an admin RDP to the VM from the corporate office?",
+    choices: [
+      { key: "A", text: "Yes, because the subnet NSG takes precedence over the NIC NSG", correct: false },
+      { key: "B", text: "Yes, because an allow at either level permits the traffic", correct: false },
+      { key: "C", text: "No, because effective security rules are the union of both NSGs and a deny at either level blocks the traffic", correct: true },
+      { key: "D", text: "No, because NIC-level NSGs override subnet-level NSGs entirely", correct: false },
+    ],
+    explanation:
+      "C is correct: when NSGs are associated at both subnet and NIC, the effective rules are evaluated together — a deny in either NSG blocks the traffic, since inbound processing checks both. A loses: there is no precedence of subnet over NIC; both apply. B loses: it works the opposite way — a single deny anywhere blocks, an allow must survive both levels. D loses: NIC NSGs do not override subnet NSGs; they combine.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-4-4.3-004",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.3",
+    stem: "You manage 40 web servers and 25 database servers in the same VNet. You want NSG rules that apply to 'all web servers' and 'all database servers' without updating rules every time a VM is added or removed. What should you use?",
+    choices: [
+      { key: "A", text: "A separate subnet for every server", correct: false },
+      { key: "B", text: "Application security groups (ASGs), referenced as the source/destination in NSG rules", correct: true },
+      { key: "C", text: "Service tags named Web and Database", correct: false },
+      { key: "D", text: "Azure Firewall application rules with FQDNs", correct: false },
+    ],
+    explanation:
+      "B is correct: ASGs let you group VM NICs logically (e.g., 'web-servers', 'db-servers') and reference the group in NSG rules, so membership changes don't require rule edits. A loses: one subnet per server is unmanageable and wastes address space. C loses: service tags represent Azure service IP ranges (like Internet or Storage), not your own custom server roles. D loses: firewall FQDN rules filter outbound web traffic; they don't group VMs for NSG rules.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-4-4.3-005",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.3",
+    stem: "An Azure Firewall must port-forward inbound RDP traffic to a specific VM, allow outbound traffic to 10.5.0.0/16 on port 1433, and allow outbound HTTPS only to *.contoso.com. Which rule types, in processing order, do you configure?",
+    choices: [
+      { key: "A", text: "Application rule, then network rule, then DNAT rule", correct: false },
+      { key: "B", text: "DNAT rule, then network rule, then application rule", correct: true },
+      { key: "C", text: "Network rule, then DNAT rule, then application rule", correct: false },
+      { key: "D", text: "All three in a single network rule collection", correct: false },
+    ],
+    explanation:
+      "B is correct: Azure Firewall processes DNAT rules first (inbound port forwarding), then network rules (IP/protocol/port filtering like the 1433 rule), then application rules (FQDN-based filtering like *.contoso.com). A loses: the order is reversed — application rules are evaluated last, not first. C loses: DNAT is evaluated before network rules, not after. D loses: DNAT, network, and application rules are separate rule types and cannot be merged into one network rule.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-4-4.3-006",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.3",
+    stem: "Your security team forbids exposing RDP and SSH ports on any VM's public IP, but admins still need graphical and SSH console access to VMs over TLS through the Azure portal. Which service meets this requirement?",
+    choices: [
+      { key: "A", text: "Azure Bastion", correct: true },
+      { key: "B", text: "A Site-to-Site VPN gateway", correct: false },
+      { key: "C", text: "Azure Firewall DNAT rules for ports 3389 and 22", correct: false },
+      { key: "D", text: "An NSG allowing 3389/22 from the admin's home IP", correct: false },
+    ],
+    explanation:
+      "A is correct: Azure Bastion provides RDP/SSH access to VMs directly in the portal over TLS/HTTPS with no public IP needed on the VMs. B loses: a VPN gives network connectivity but still requires RDP/SSH clients and network paths — it doesn't provide portal-based TLS console access. C loses: DNAT rules would publish RDP/SSH to the internet, exactly what the policy forbids. D loses: this still exposes the ports publicly (even if IP-restricted) and requires the VM to have a public IP.",
+    difficulty: 2,
+  },
+  // ---------- Objective 4.4: Configure load balancing, private DNS zones, and NAT Gateway ----------
+  {
+    id: "az104-4-4.4-001",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    stem: "You need a load balancer that is zone-redundant, supports outbound rules for SNAT control, and can use HA ports. Which SKU do you deploy?",
+    choices: [
+      { key: "A", text: "Basic", correct: false },
+      { key: "B", text: "Standard", correct: true },
+      { key: "C", text: "Gateway", correct: false },
+      { key: "D", text: "Standard with a Basic public IP", correct: false },
+    ],
+    explanation:
+      "B is correct: the Standard SKU supports availability zones, outbound rules, and HA ports (all protocols/ports in one rule). A loses: Basic has no zone redundancy, no outbound rules, and no HA ports. C loses: the Gateway SKU is for chaining network virtual appliances, not general load balancing with these features. D loses: a Standard load balancer requires a Standard public IP — a Basic public IP cannot be attached to it.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-4-4.4-002",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    stem: "You deploy an internal load balancer in front of application servers that must only be reachable from other VNets peered with the application VNet. Which frontend configuration is required, and is a health probe needed?",
+    choices: [
+      { key: "A", text: "A public IP frontend; no health probe is needed for internal traffic", correct: false },
+      { key: "B", text: "A private IP frontend in the VNet; a health probe is required", correct: true },
+      { key: "C", text: "A private IP frontend in the VNet; health probes are optional for internal load balancers", correct: false },
+      { key: "D", text: "A public IP frontend with an NSG blocking internet traffic; a health probe is required", correct: false },
+    ],
+    explanation:
+      "B is correct: an internal load balancer uses a private IP frontend (not a public IP), and every load-balancing rule requires a health probe to determine backend health. A loses: a public IP frontend makes it a public load balancer, and health probes are always required. C loses: health probes are mandatory for load-balancing rules, internal or public. D loses: putting a public IP in front and NSG-blocking the internet is a hack — the correct design is an internal load balancer with a private frontend.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-4-4.4-003",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    stem: "On an Azure Load Balancer you need to (1) distribute inbound port-443 traffic across three web VMs and (2) let an admin RDP directly to web VM #2 through the load balancer's public IP. Which configuration achieves this?",
+    choices: [
+      { key: "A", text: "Two load-balancing rules: one for port 443 and one for port 3389", correct: false },
+      { key: "B", text: "A load-balancing rule for port 443 and an inbound NAT rule mapping a frontend port to VM #2's port 3389", correct: true },
+      { key: "C", text: "An inbound NAT rule for port 443 and a load-balancing rule for port 3389", correct: false },
+      { key: "D", text: "A single HA ports rule covering both scenarios", correct: false },
+    ],
+    explanation:
+      "B is correct: load-balancing rules distribute traffic across the backend pool (the three web VMs), while inbound NAT rules forward a specific frontend port to one specific backend VM (admin RDP to VM #2). A loses: a load-balancing rule for 3389 would spray RDP across all three VMs instead of targeting VM #2. C loses: it reverses the two — 443 needs distribution, 3389 needs targeting. D loses: an HA ports rule distributes all traffic across the pool; it cannot pin traffic to a single VM.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-4-4.4-004",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    stem: "A VM in a subnet without a public IP makes thousands of short-lived outbound HTTPS connections and intermittently fails with connection timeouts. Monitoring shows SNAT port exhaustion on the default outbound path. Which is the best remediation?",
+    choices: [
+      { key: "A", text: "Assign a public IP to the VM's NIC", correct: false },
+      { key: "B", text: "Add a user-defined route forcing traffic through a VPN gateway", correct: false },
+      { key: "C", text: "Associate a NAT gateway with the subnet", correct: true },
+      { key: "D", text: "Increase the VM size to get more SNAT ports", correct: false },
+    ],
+    explanation:
+      "C is correct: a NAT gateway provides up to 64,000 SNAT ports per public IP (and scales with additional IPs), eliminating the small, shared default-outbound SNAT pool that causes exhaustion. A loses: a public IP gives the VM its own SNAT ports but consumes a public IP per VM and exposes the VM directly — NAT gateway is the designed solution for many private VMs. B loses: routing through a VPN gateway does not add SNAT ports for internet-bound traffic. D loses: VM size does not change the SNAT port allocation of the default outbound path.",
+    difficulty: 4,
+  },
+  {
+    id: "az104-4-4.4-005",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    stem: "Your web application needs URL-path-based routing (/api/* to one backend pool, /images/* to another), TLS termination, and a web application firewall. Which Azure service should you choose, and why not Azure Load Balancer?",
+    choices: [
+      { key: "A", text: "Application Gateway, because Load Balancer operates at Layer 4 and cannot do URL-based routing or WAF", correct: true },
+      { key: "B", text: "Azure Load Balancer, because it supports Layer 7 path rules in the Standard SKU", correct: false },
+      { key: "C", text: "Traffic Manager, because it terminates TLS at the edge", correct: false },
+      { key: "D", text: "Azure Front Door only; Application Gateway cannot terminate TLS", correct: false },
+    ],
+    explanation:
+      "A is correct: Application Gateway is a Layer 7 load balancer with path-based routing, TLS termination, and an integrated WAF SKU; Azure Load Balancer is Layer 4 (TCP/UDP) and cannot inspect HTTP paths. B loses: Load Balancer never operates at Layer 7 regardless of SKU. C loses: Traffic Manager is DNS-based global routing, not a TLS-terminating reverse proxy. D loses: Application Gateway absolutely can terminate TLS; Front Door is an alternative global option, but the claim about App Gateway is false.",
+    difficulty: 4,
+  },
+  {
+    id: "az104-4-4.4-006",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    stem: "You create a private DNS zone named corp.internal and link it to VNet-A with auto-registration enabled. VNet-B is peered with VNet-A but is NOT linked to the zone. A VM in VNet-B queries web01.corp.internal. What happens?",
+    choices: [
+      { key: "A", text: "The name resolves, because peering automatically shares linked private DNS zones", correct: false },
+      { key: "B", text: "The name resolves only if VNet-B is also linked to the private DNS zone", correct: true },
+      { key: "C", text: "The name resolves because auto-registration covers all peered VNets", correct: false },
+      { key: "D", text: "The name resolves via Azure's default public DNS", correct: false },
+    ],
+    explanation:
+      "B is correct: private DNS resolution requires each VNet to be linked to the zone — peering alone does not grant DNS resolution. (Auto-registration only registers records for VMs in the VNet where it is enabled, i.e., VNet-A.) A loses: zone linkage is per-VNet; peering does not inherit it. C loses: auto-registration affects which VM records get created, not which VNets can resolve the zone. D loses: corp.internal is not a public zone, so public DNS cannot resolve it.",
+    difficulty: 3,
+  },
+];
+
+export const AZ104_D4_FLASHCARDS: Flashcard[] = [
+  {
+    id: "az104-fc-4-001",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.1",
+    front: "How many IP addresses does Azure reserve in every subnet, and which ones?",
+    back: "Five: the first four addresses (network ID, default gateway, and two DNS-mapped addresses) and the last address (broadcast). A /24 subnet therefore offers 251 usable addresses.",
+  },
+  {
+    id: "az104-fc-4-002",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.1",
+    front: "What are the naming and sizing requirements for a gateway subnet, and what must you NOT attach to it?",
+    back: "It must be named exactly GatewaySubnet and be at least a /27. Do not associate an NSG with it — an NSG can break gateway management traffic.",
+  },
+  {
+    id: "az104-fc-4-003",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.1",
+    front: "Service endpoint vs. private endpoint: what is the key difference?",
+    back: "A service endpoint extends the VNet identity to a PaaS service over the Microsoft backbone, but the service keeps its public endpoint. A private endpoint (Private Link) assigns the PaaS resource a private IP in your VNet, so its public endpoint can be disabled entirely.",
+  },
+  {
+    id: "az104-fc-4-004",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    front: "Is VNet peering transitive? What does that imply for a hub-and-spoke design?",
+    back: "No — peering is non-transitive. Spoke VNets cannot reach each other through the hub by peering alone; you need a hub gateway/NVA with gateway transit (or direct spoke-to-spoke peerings).",
+  },
+  {
+    id: "az104-fc-4-005",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    front: "What two peering settings enable spoke VNets to use a hub VNet's VPN/ExpressRoute gateway?",
+    back: "On the hub-side peering: 'Allow gateway transit'. On the spoke-side peering: 'Use remote gateways'. The spoke VNet must not have its own gateway.",
+  },
+  {
+    id: "az104-fc-4-006",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    front: "What are the two ExpressRoute peering types for, and what does Global Reach do?",
+    back: "Private peering connects on-premises to Azure VNets; Microsoft peering reaches Microsoft 365/Dynamics public services. Global Reach connects two ExpressRoute circuits so their on-premises sites communicate over Microsoft's network.",
+  },
+  {
+    id: "az104-fc-4-007",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.3",
+    front: "How are NSG rules evaluated, and what are the default rules?",
+    back: "Rules are evaluated by priority, lowest number first; the first match wins (5-tuple: source, source port, destination, destination port, protocol). Defaults: allow inbound from VirtualNetwork and AzureLoadBalancer, allow all outbound, deny all other inbound.",
+  },
+  {
+    id: "az104-fc-4-008",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.3",
+    front: "When NSGs are attached to both a subnet and a NIC, how are the effective rules determined?",
+    back: "The effective security rules combine both NSGs: a deny in either NSG blocks the traffic. Inbound traffic is checked against both; an allow must survive both levels.",
+  },
+  {
+    id: "az104-fc-4-009",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.3",
+    front: "In what order does Azure Firewall process its three rule types?",
+    back: "DNAT rules first (inbound port forwarding), then network rules (IP/protocol/port), then application rules (FQDN-based).",
+  },
+  {
+    id: "az104-fc-4-010",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    front: "Standard vs. Basic Azure Load Balancer: name three Standard-only capabilities.",
+    back: "Availability-zone redundancy, outbound rules (explicit SNAT control), and HA ports. Standard also requires a Standard public IP and is secure-by-default (no inbound allowed unless an NSG permits it).",
+  },
+  {
+    id: "az104-fc-4-011",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    front: "Load-balancing rule vs. inbound NAT rule — when do you use each?",
+    back: "A load-balancing rule distributes traffic across the backend pool (with a required health probe). An inbound NAT rule forwards a specific frontend port to one specific backend VM (e.g., RDP to a single server).",
+  },
+  {
+    id: "az104-fc-4-012",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    front: "What is NAT Gateway for, and what must you link to a private DNS zone for each VNet to resolve it?",
+    back: "NAT Gateway gives a subnet highly scalable outbound internet connectivity (up to 64k SNAT ports per public IP), fixing SNAT port exhaustion. Each VNet that must resolve a private DNS zone needs its own virtual network link to the zone — peering alone is not enough.",
+  },
+];
+
+export const AZ104_D4_PERF_QUESTIONS: PerfQuestion[] = [
+  {
+    id: "az104-pbq-4-001",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.4",
+    type: "drag-match",
+    prompt: "Match each networking requirement to the Azure service that best satisfies it.",
+    leftLabel: "Requirement",
+    rightLabel: "Azure service",
+    pairs: [
+      { left: "URL-path-based routing with TLS termination and WAF", right: "Application Gateway" },
+      { left: "Distribute raw TCP/UDP traffic across VMs in a region", right: "Azure Load Balancer" },
+      { left: "DNS-based global routing with priority and weighted methods", right: "Traffic Manager" },
+      { left: "Global HTTP/S entry point with instant failover and edge caching", right: "Azure Front Door" },
+      { left: "Stateful filtering of VNet traffic with DNAT, network, and application rules", right: "Azure Firewall" },
+      { left: "Scalable outbound-only internet access for a subnet", right: "NAT Gateway" },
+    ],
+    explanation:
+      "Application Gateway is the regional Layer 7 reverse proxy (path routing, TLS, WAF). Azure Load Balancer is the regional Layer 4 distributor. Traffic Manager routes globally at the DNS layer with methods like priority, weighted, and geographic. Azure Front Door is the global Layer 7 entry point with anycast and fast failover. Azure Firewall is the managed stateful network firewall. NAT Gateway provides scalable outbound SNAT for subnets.",
+    difficulty: 4,
+  },
+  {
+    id: "az104-pbq-4-002",
+    certId: "az-104",
+    domainId: "az-104:domain:4",
+    objectiveId: "az-104:obj:4.2",
+    type: "drag-match",
+    prompt: "Match each hybrid-connectivity concept to its correct description.",
+    leftLabel: "Concept",
+    rightLabel: "Description",
+    pairs: [
+      { left: "Site-to-Site VPN", right: "IPsec/IKE tunnel from an on-premises VPN device to Azure" },
+      { left: "Point-to-Site VPN", right: "VPN client connection from an individual device to Azure" },
+      { left: "VNet-to-VNet connection", right: "Encrypted tunnel between two Azure VNets via their gateways" },
+      { left: "ExpressRoute private peering", right: "Private circuit path from on-premises to Azure VNets" },
+      { left: "ExpressRoute Microsoft peering", right: "Private circuit path to Microsoft 365 and Dynamics 365 public services" },
+      { left: "Active-active gateway mode", right: "Two active VPN gateway instances with separate public IPs for resiliency" },
+    ],
+    explanation:
+      "Site-to-Site links a whole on-premises network via a VPN device; Point-to-Site links single clients; VNet-to-VNet links two Azure VNets through gateways. ExpressRoute private peering reaches your VNets while Microsoft peering reaches Microsoft SaaS endpoints. Active-active runs two gateway instances simultaneously so one failure does not drop the tunnel.",
+    difficulty: 3,
+  },
+];
+
+export const AZ104_D4_ACRONYMS: Acronym[] = [
+  { id: "az104-ac-025", certId: "az-104", acronym: "NSG", expansion: "Network Security Group", hint: "Filters traffic with priority-ordered allow/deny rules on subnets or NICs", domainHint: 4 },
+  { id: "az104-ac-026", certId: "az-104", acronym: "ASG", expansion: "Application Security Group", hint: "Groups VM NICs by role so NSG rules reference the group, not IPs", domainHint: 4 },
+  { id: "az104-ac-027", certId: "az-104", acronym: "VNet", expansion: "Virtual Network", hint: "Your isolated private network in Azure, divided into subnets", domainHint: 4 },
+  { id: "az104-ac-028", certId: "az-104", acronym: "CIDR", expansion: "Classless Inter-Domain Routing", hint: "The slash notation (e.g. 10.0.0.0/16) used to define address ranges", domainHint: 4 },
+  { id: "az104-ac-029", certId: "az-104", acronym: "VPN", expansion: "Virtual Private Network", hint: "Encrypted tunnel; Azure gateway types include Site-to-Site and Point-to-Site", domainHint: 4 },
+  { id: "az104-ac-030", certId: "az-104", acronym: "ER", expansion: "ExpressRoute", hint: "Private dedicated circuit to Azure; peerings: private and Microsoft", domainHint: 4 },
+  { id: "az104-ac-031", certId: "az-104", acronym: "NAT", expansion: "Network Address Translation", hint: "NAT Gateway gives subnets scalable outbound SNAT without per-VM public IPs", domainHint: 4 },
+  { id: "az104-ac-032", certId: "az-104", acronym: "WAF", expansion: "Web Application Firewall", hint: "Layer 7 protection against web attacks; built into Application Gateway and Front Door", domainHint: 4 },
+];

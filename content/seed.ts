@@ -12,6 +12,11 @@ import {
   LOCAL_PERF_QUESTIONS,
   LOCAL_QUESTIONS,
 } from "./local-bank";
+import {
+  AZ104_FLASHCARDS,
+  AZ104_PERF_QUESTIONS,
+  AZ104_QUESTIONS,
+} from "./az-104-bank";
 
 export const CONTENT_VERSION = 1;
 
@@ -59,8 +64,11 @@ export const SEED_DATA: {
   certifications,
   domains,
   objectives,
-  questions: dedupeById(LOCAL_QUESTIONS),
-  flashcards: dedupeById(LOCAL_FLASHCARDS),
+  questions: dedupeById([...LOCAL_QUESTIONS, ...AZ104_QUESTIONS]),
+  flashcards: dedupeById([...LOCAL_FLASHCARDS, ...AZ104_FLASHCARDS]),
 };
 
-export const perfQuestions: PerfQuestion[] = dedupeById(LOCAL_PERF_QUESTIONS);
+export const perfQuestions: PerfQuestion[] = dedupeById([
+  ...LOCAL_PERF_QUESTIONS,
+  ...AZ104_PERF_QUESTIONS,
+]);

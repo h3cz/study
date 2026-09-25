@@ -1,0 +1,550 @@
+import type { Acronym, Flashcard, PerfQuestion, Question } from "@/lib/db";
+
+/**
+ * AZ-104 Domain 2 — Implement and manage storage.
+ * All scenarios are original and written for this study app; they are not
+ * Microsoft exam questions and are not drawn from any exam bank.
+ */
+
+export const AZ104_D2_QUESTIONS: Question[] = [
+  // ── Objective 2.1: account types, performance tiers, redundancy ──────────
+  {
+    id: "az104-2-2.1-001",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.1",
+    stem: "You need a storage account that can host blob containers, Azure file shares, queues, and tables in a single account, with the lowest standard cost for general-purpose data. Which storage account kind should you choose?",
+    choices: [
+      { key: "A", text: "StorageV2 (general purpose v2)", correct: true },
+      { key: "B", text: "Premium block blobs", correct: false },
+      { key: "C", text: "Premium file shares", correct: false },
+      { key: "D", text: "Premium page blobs", correct: false },
+    ],
+    explanation:
+      "StorageV2 (general purpose v2) supports all storage services — blobs (including the data lake hierarchy), files, queues, tables, and disks — and is the default, lowest-cost general-purpose option. Premium block blobs only store block blobs and append blobs, Premium file shares only store Azure Files (SMB), and Premium page blobs only store unmanaged page blobs/VHDs; none supports queues or tables.",
+    difficulty: 1,
+  },
+  {
+    id: "az104-2-2.1-002",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.1",
+    stem: "A media company needs very low-latency storage for large video files streamed to users, and it also needs the Azure Data Lake Storage hierarchical namespace. Which account configuration meets these requirements?",
+    choices: [
+      { key: "A", text: "Standard StorageV2 with Hot access tier", correct: false },
+      { key: "B", text: "Premium block blobs account with hierarchical namespace enabled", correct: true },
+      { key: "C", text: "Premium file shares account", correct: false },
+      { key: "D", text: "Premium page blobs account", correct: false },
+    ],
+    explanation:
+      "Premium block blobs is the account kind designed for high-transaction-rate, low-latency blob workloads, and it supports the hierarchical namespace required for Data Lake Storage Gen2. Standard StorageV2 is cheaper but cannot match premium latency. Premium file shares is for Azure Files only, and Premium page blobs only stores page blobs/VHDs, not block blobs or a data lake namespace.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-2-2.1-003",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.1",
+    stem: "Your finance department requires that stored data survive the complete loss of a single Azure region. Which redundancy option should you select for the storage account?",
+    choices: [
+      { key: "A", text: "LRS", correct: false },
+      { key: "B", text: "ZRS", correct: false },
+      { key: "C", text: "GRS", correct: true },
+      { key: "D", text: "Standard performance with Cool tier", correct: false },
+    ],
+    explanation:
+      "GRS (geo-redundant storage) replicates data synchronously three times within the primary region and then asynchronously to a secondary region hundreds of miles away, so a full regional loss leaves a surviving copy. LRS replicates only within one datacenter; ZRS replicates across availability zones within one region, so neither survives a region-wide loss. The access tier (Hot/Cool) is unrelated to durability.",
+    difficulty: 1,
+  },
+  {
+    id: "az104-2-2.1-004",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.1",
+    stem: "An application must keep reading blob data even during a regional outage of the primary region, without waiting for Microsoft to declare failover. Which redundancy configuration enables this?",
+    choices: [
+      { key: "A", text: "LRS with blob versioning", correct: false },
+      { key: "B", text: "ZRS", correct: false },
+      { key: "C", text: "GRS", correct: false },
+      { key: "D", text: "RA-GRS", correct: true },
+    ],
+    explanation:
+      "RA-GRS (read-access geo-redundant storage) adds read access to the secondary-region replica, so apps can keep reading during a primary outage. Plain GRS also replicates to a secondary region, but that copy is unreadable until failover occurs. LRS and ZRS never leave the primary region, so they offer no regional-outage protection.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-2-2.1-005",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.1",
+    stem: "You created a Premium page blobs storage account with ZRS last year. New compliance rules require six copies of the data with cross-regional durability. Which change can you make to the account's redundancy?",
+    choices: [
+      { key: "A", text: "Convert ZRS to GZRS directly on the existing account", correct: false },
+      { key: "B", text: "Convert ZRS to RA-GZRS directly on the existing account", correct: false },
+      { key: "C", text: "Downgrade ZRS to LRS, then upgrade to GZRS", correct: false },
+      { key: "D", text: "None of these; Premium page blobs accounts support only LRS and ZRS", correct: true },
+    ],
+    explanation:
+      "Premium storage account kinds — including Premium page blobs — support only LRS and ZRS; geo-replication options (GRS, GZRS and their RA variants) are unavailable, and that set cannot be changed after creation. To get cross-regional durability you must create a new account of a compatible kind and migrate the data. The convert options in A–C are all invalid for this account kind.",
+    difficulty: 4,
+  },
+  {
+    id: "az104-2-2.1-006",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.1",
+    stem: "A startup wants maximum durability (six copies across two regions, with zone redundancy in both regions) and read access to the secondary copy. Which redundancy option provides this?",
+    choices: [
+      { key: "A", text: "RA-GRS", correct: false },
+      { key: "B", text: "RA-GZRS", correct: true },
+      { key: "C", text: "ZRS", correct: false },
+      { key: "D", text: "LRS", correct: false },
+    ],
+    explanation:
+      "RA-GZRS combines zone-redundant replication in the primary region with geo-replication that is also zone-redundant in the secondary region — six copies total — plus read access to the secondary. RA-GRS is similar but the primary-region copies are only datacenter-redundant (LRS style), so durability is lower. ZRS and LRS never replicate to a second region.",
+    difficulty: 3,
+  },
+
+  // ── Objective 2.2: blob access tiers and lifecycle management ────────────
+  {
+    id: "az104-2-2.2-001",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.2",
+    stem: "You store 40 TB of compliance logs that are written once and rarely read, but auditors may need them within a few hours. Which blob access tier gives the lowest storage cost while meeting the access requirement?",
+    choices: [
+      { key: "A", text: "Hot", correct: false },
+      { key: "B", text: "Cool", correct: false },
+      { key: "C", text: "Cold", correct: true },
+      { key: "D", text: "Archive", correct: false },
+    ],
+    explanation:
+      "Cold is designed for rarely accessed data that must remain online with hours-scale retrieval SLAs, at a lower storage price than Cool. Hot and Cool are priced for frequently or occasionally accessed data and would cost more. Archive has the cheapest storage but retrieval takes hours (rehydration) and incurs early-deletion penalties, making Cold the better fit for 'a few hours' access.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-2-2.2-002",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.2",
+    stem: "A blob in the Archive tier is needed for a quarterly report. Which statement about rehydrating it is correct?",
+    choices: [
+      { key: "A", text: "Rehydration is instant because the blob metadata is cached", correct: false },
+      { key: "B", text: "You copy the archived blob to a new blob in the Hot tier; the copy may take hours depending on the priority chosen", correct: true },
+      { key: "C", text: "You change the blob's access tier property to Hot and read it immediately", correct: false },
+      { key: "D", text: "Archived blobs cannot be rehydrated; you must restore from backup", correct: false },
+    ],
+    explanation:
+      "An archived blob is offline and must be rehydrated by copying it to a new blob in an online tier (Hot, Cool, or Cold); the operation takes hours, and you can choose a standard or high priority that trades speed against cost. You cannot read an Archive-tier blob directly, and simply flipping a tier property on the archived blob itself does not rehydrate it.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-2-2.2-003",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.2",
+    stem: "You configure a lifecycle management policy: tierToCool when a blob is older than 30 days, tierToArchive when older than 90 days, and delete when older than 365 days. What does Azure use as the default 'age' reference for a blob?",
+    choices: [
+      { key: "A", text: "The blob's creation time", correct: false },
+      { key: "B", text: "The blob's last modified time", correct: true },
+      { key: "C", text: "The time the lifecycle policy was created", correct: false },
+      { key: "D", text: "The last time the blob was read", correct: false },
+    ],
+    explanation:
+      "Lifecycle management conditions evaluate age from the blob's last modified time by default (last-access-time tracking is a separate opt-in feature). Any write resets the clock. Creation time is not used directly, the policy's own creation time is irrelevant, and reads do not reset the default age counter.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-2-2.2-004",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.2",
+    stem: "You want a lifecycle policy that moves only blobs under the container 'invoices' with names starting with '2024/' to the Archive tier after 180 days, leaving everything else untouched. How should you scope the rule?",
+    choices: [
+      { key: "A", text: "Apply the policy to the storage account and exclude the other containers one by one", correct: false },
+      { key: "B", text: "Use a prefix filter of 'invoices/2024/' on the rule", correct: true },
+      { key: "C", text: "Create a separate storage account for the invoices container", correct: false },
+      { key: "D", text: "Tag each blob manually and rely on the default account-wide rule", correct: false },
+    ],
+    explanation:
+      "Lifecycle rules support prefix filters that match on blob paths, so 'invoices/2024/' targets exactly the blobs under that container prefix. Policies are defined at the account level but rules scope via these filters, making A and C unnecessary. Option D describes tag-based filtering, which requires tags to exist on every blob and is more work than the direct prefix filter.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-2-2.2-005",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.2",
+    stem: "A developer accidentally overwrites a blob that other systems still reference. Which feature lets you restore the previous content without restoring the whole account?",
+    choices: [
+      { key: "A", text: "Container soft delete", correct: false },
+      { key: "B", text: "Blob versioning", correct: true },
+      { key: "C", text: "Changing the blob access tier", correct: false },
+      { key: "D", text: "A lifecycle management delete rule", correct: false },
+    ],
+    explanation:
+      "Blob versioning automatically keeps prior versions whenever a blob is overwritten or deleted, so you can promote the previous version to current. Container soft delete protects against deleted containers, not overwritten blob content. Access tiers and lifecycle rules manage cost and retention, not point-in-time recovery of blob content.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-2-2.2-006",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.2",
+    stem: "A container holding nightly reports is deleted by a faulty cleanup script. The container is gone, but you need the blobs back. Which feature, if enabled beforehand, lets you recover the container and its blobs?",
+    choices: [
+      { key: "A", text: "Blob versioning", correct: false },
+      { key: "B", text: "Blob soft delete", correct: false },
+      { key: "C", text: "Container soft delete", correct: true },
+      { key: "D", text: "Archive tier", correct: false },
+    ],
+    explanation:
+      "Container soft delete retains a deleted container and all its blobs for a configured retention period, allowing full recovery. Blob versioning and blob soft delete protect individual blobs but do not restore the deleted container itself — and blob soft delete requires the blob, not the container, to be the deleted object. The Archive tier is a cost tier, not a recovery mechanism.",
+    difficulty: 3,
+  },
+
+  // ── Objective 2.3: secure storage (SAS, keys, network controls) ──────────
+  {
+    id: "az104-2-2.3-001",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    stem: "A partner company needs read-only access to blobs in one container for the next 48 hours, and you must be able to revoke that access instantly if the partnership ends early. Which approach best meets both needs?",
+    choices: [
+      { key: "A", text: "Share the storage account's key1 with the partner", correct: false },
+      { key: "B", text: "Create a service SAS tied to a stored access policy on the container", correct: true },
+      { key: "C", text: "Enable anonymous blob access at the container level", correct: false },
+      { key: "D", text: "Give the partner the secondary connection string", correct: false },
+    ],
+    explanation:
+      "A service SAS scoped to one container with read-only permission and a 48-hour expiry gives least-privilege, time-bound access, and associating it with a stored access policy lets you revoke it instantly by deleting or changing the policy. Sharing account keys (A, D) grants full account access and revocation requires rotating keys, which disrupts other workloads. Anonymous access (C) cannot be time-limited or revoked per partner.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-2-2.3-002",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    stem: "You need delegated blob access where the SAS is signed with an Entra ID identity rather than the storage account key, so that revoking the user's Entra access automatically invalidates the token. Which SAS type should you use?",
+    choices: [
+      { key: "A", text: "Account SAS", correct: false },
+      { key: "B", text: "Service SAS", correct: false },
+      { key: "C", text: "User delegation SAS", correct: true },
+      { key: "D", text: "Stored access policy", correct: false },
+    ],
+    explanation:
+      "A user delegation SAS is secured with Entra ID credentials (via a user delegation key) instead of the storage account key, so it inherits Entra identity lifecycle — disable the user and the SAS stops working. Account and service SAS tokens are signed with the storage account key and are unaffected by Entra changes. A stored access policy is a revocation mechanism for service SAS, not an Entra-bound SAS type itself.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-2-2.3-003",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    stem: "Your security team requires that storage account keys be rotated without any application downtime. The account has two keys, key1 and key2, and apps currently use key1. What is the correct rotation sequence?",
+    choices: [
+      { key: "A", text: "Regenerate key1, then update the apps to the new key1", correct: false },
+      { key: "B", text: "Update the apps to use key2, then regenerate key1", correct: true },
+      { key: "C", text: "Regenerate both keys at once, then update the apps", correct: false },
+      { key: "D", text: "Delete key1, wait 24 hours, then regenerate it", correct: false },
+    ],
+    explanation:
+      "The zero-downtime pattern is: point clients at the standby key (key2), then regenerate the exposed key (key1). Regenerating key1 first (A) or both keys (C) immediately invalidates what apps are using, causing outages. There is no delete-then-wait workflow (D) — keys are regenerated, and only one regeneration is needed once clients have moved.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-2-2.3-004",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    stem: "You must ensure that traffic from an Azure VM to a storage account never traverses the public internet, and you want the storage account to have a private IP address inside your virtual network. Which should you configure?",
+    choices: [
+      { key: "A", text: "A VNet service endpoint for Microsoft.Storage", correct: false },
+      { key: "B", text: "A firewall rule allowing the VM's public IP", correct: false },
+      { key: "C", text: "A private endpoint for the storage account", correct: true },
+      { key: "D", text: "Anonymous blob access restricted to the VNet", correct: false },
+    ],
+    explanation:
+      "A private endpoint assigns the storage account a private IP in your VNet, so traffic stays on the Microsoft backbone/VNet and never crosses the public internet. A service endpoint (A) keeps traffic on Azure's network but the storage account still uses its public endpoint address — it is not a private IP in your VNet. A firewall rule (B) still involves the public endpoint. Anonymous access levels (D) control public read access, not private connectivity.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-2-2.3-005",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    stem: "The storage account firewall is set to deny all networks by default. Resources in a specific VNet must still reach the blobs. Which configuration allows this without opening the account to the internet?",
+    choices: [
+      { key: "A", text: "Enable a service endpoint for Microsoft.Storage on the VNet subnet and add the VNet to the firewall allowlist", correct: true },
+      { key: "B", text: "Set the default action to Allow and rely on SAS tokens", correct: false },
+      { key: "C", text: "Enable anonymous container access", correct: false },
+      { key: "D", text: "Rotate the account keys", correct: false },
+    ],
+    explanation:
+      "With default-deny, you enable the Microsoft.Storage service endpoint on the subnet so Azure recognizes the traffic's VNet origin, then add that VNet/subnet to the storage firewall allowlist — no public exposure. Setting the default action to Allow (B) opens the account to the whole internet. Anonymous access (C) and key rotation (D) do not grant VNet-scoped network access.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-2-2.3-006",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    stem: "You want users to sign in with their Entra ID identities to access blobs, with permissions managed through Azure RBAC roles like Storage Blob Data Reader, instead of distributing shared keys. Which statement is true?",
+    choices: [
+      { key: "A", text: "Entra ID authorization for storage requires disabling shared key access first", correct: false },
+      { key: "B", text: "Entra ID authorization lets you grant data-plane access with RBAC roles and audit per-user access, without sharing account keys", correct: true },
+      { key: "C", text: "Entra ID can only authorize management-plane operations, not blob data access", correct: false },
+      { key: "D", text: "RBAC roles for storage data apply automatically to SAS tokens", correct: false },
+    ],
+    explanation:
+      "Authorizing with Entra ID gives per-user identity, RBAC-based data-plane permissions (Storage Blob Data Reader/Contributor/Owner), and audit trails — eliminating shared-key distribution. Shared key access can coexist; disabling it is a hardening option, not a prerequisite (A). Entra ID fully supports data-plane authorization (C is false). SAS tokens carry their own permissions and are not governed by RBAC role assignments (D).",
+    difficulty: 2,
+  },
+
+  // ── Objective 2.4: AzCopy, Storage Explorer, File Sync ────────────────────
+  {
+    id: "az104-2-2.4-001",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.4",
+    stem: "You need to upload an entire local folder, including all subfolders, to a blob container. Which AzCopy command does this?",
+    choices: [
+      { key: "A", text: "azcopy copy 'C:\\data' 'https://acct.blob.core.windows.net/container' --recursive", correct: true },
+      { key: "B", text: "azcopy sync 'C:\\data' 'https://acct.blob.core.windows.net/container'", correct: false },
+      { key: "C", text: "azcopy copy 'C:\\data' 'https://acct.blob.core.windows.net/container'", correct: false },
+      { key: "D", text: "azcopy list 'https://acct.blob.core.windows.net/container' --recursive", correct: false },
+    ],
+    explanation:
+      "azcopy copy with --recursive uploads a directory tree including subfolders; without --recursive only the top-level files are copied (C). azcopy sync (B) mirrors source to destination by also deleting destination files not in the source — not a plain upload. azcopy list (D) only enumerates blobs.",
+    difficulty: 1,
+  },
+  {
+    id: "az104-2-2.4-002",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.4",
+    stem: "You run a nightly job that mirrors an on-premises folder to a blob container, and files deleted locally should also be removed from the container. Which AzCopy command best fits?",
+    choices: [
+      { key: "A", text: "azcopy copy with --recursive", correct: false },
+      { key: "B", text: "azcopy sync with --delete-destination=true", correct: true },
+      { key: "C", text: "azcopy copy with --overwrite=false", correct: false },
+      { key: "D", text: "azcopy list with --recursive", correct: false },
+    ],
+    explanation:
+      "azcopy sync replicates source to destination, and --delete-destination=true removes destination blobs that no longer exist at the source — a true mirror. azcopy copy (A) only adds/updates and never deletes at the destination. --overwrite=false (C) prevents overwrites but doesn't delete. azcopy list (D) doesn't transfer data.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-2-2.4-003",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.4",
+    stem: "You must run AzCopy on a locked-down server that cannot open a browser for interactive login. Which authentication approach works for AzCopy in this situation?",
+    choices: [
+      { key: "A", text: "Interactive Entra ID login only; AzCopy always requires a browser", correct: false },
+      { key: "B", text: "Append a SAS token to the destination URL, or log in with a service principal / managed identity", correct: true },
+      { key: "C", text: "Use anonymous blob access for all AzCopy operations", correct: false },
+      { key: "D", text: "Embed the storage account key in the URL path", correct: false },
+    ],
+    explanation:
+      "AzCopy supports non-interactive auth: a SAS token appended to the URL, or Entra ID via service principal / managed identity (e.g., azcopy login --identity). Interactive login is only one option (A is false). Anonymous access (C) only permits reads of public blobs, not uploads. Account keys are never embedded in the URL path (D) — AzCopy uses SAS, Entra, or keys via environment/config, not URL paths.",
+    difficulty: 3,
+  },
+  {
+    id: "az104-2-2.4-004",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.4",
+    stem: "A support technician needs a graphical tool to browse containers, upload blobs, and manage access tiers without writing commands, on a workstation where Azure CLI is not installed. Which tool should they use?",
+    choices: [
+      { key: "A", text: "Azure Storage Explorer", correct: true },
+      { key: "B", text: "AzCopy", correct: false },
+      { key: "C", text: "Azure File Sync agent", correct: false },
+      { key: "D", text: "The Azure portal's Cloud Shell only", correct: false },
+    ],
+    explanation:
+      "Azure Storage Explorer is the free cross-platform GUI for browsing and managing storage accounts — containers, blobs, file shares, tiers — with no CLI required. AzCopy is command-line only. The Azure File Sync agent syncs on-premises file servers and has no general browsing UI. Cloud Shell (D) is also command-line based.",
+    difficulty: 1,
+  },
+  {
+    id: "az104-2-2.4-005",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.4",
+    stem: "A branch office file server is running out of disk space. You want infrequently used files to remain visible locally but have their contents stored only in Azure, downloading on demand when opened. Which Azure File Sync feature provides this?",
+    choices: [
+      { key: "A", text: "Sync groups", correct: false },
+      { key: "B", text: "Cloud tiering", correct: true },
+      { key: "C", text: "Snapshot management", correct: false },
+      { key: "D", text: "Stored access policies", correct: false },
+    ],
+    explanation:
+      "Cloud tiering replaces cold files with reparse-point stubs that look like normal files locally; content is recalled from the Azure file share on access, freeing local disk. Sync groups (A) define which servers and shares replicate together but don't free space. Snapshots (C) are point-in-time share backups. Stored access policies (D) relate to SAS revocation, not file sync.",
+    difficulty: 2,
+  },
+  {
+    id: "az104-2-2.4-006",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.4",
+    stem: "You deploy Azure File Sync across three branch file servers so they all share one namespace backed by a single Azure file share. Users at any branch must see the same files. Which object defines this replication topology?",
+    choices: [
+      { key: "A", text: "A lifecycle management policy", correct: false },
+      { key: "B", text: "A sync group containing the cloud endpoint and the three server endpoints", correct: true },
+      { key: "C", text: "A private endpoint on the storage account", correct: false },
+      { key: "D", text: "An AzCopy sync job scheduled on each server", correct: false },
+    ],
+    explanation:
+      "A sync group binds one cloud endpoint (the Azure file share) to multiple server endpoints (registered servers' folders), replicating changes across all of them into a single namespace. Lifecycle policies (A) manage blob tiers, not file sync. Private endpoints (C) provide network connectivity, not replication topology. AzCopy jobs (D) are one-off transfers, not continuous multi-server sync.",
+    difficulty: 3,
+  },
+];
+
+export const AZ104_D2_FLASHCARDS: Flashcard[] = [
+  {
+    id: "az104-fc-2-001",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.1",
+    front: "Which storage account kinds exist, and which services does each support?",
+    back: "StorageV2 (GPv2): blobs, files, queues, tables, disks — default general purpose. Premium block blobs: block/append blobs + data lake, low latency. Premium file shares: Azure Files only. Premium page blobs: page blobs/VHDs only. Premium kinds support only LRS/ZRS.",
+  },
+  {
+    id: "az104-fc-2-002",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.1",
+    front: "Compare LRS, ZRS, GRS, and GZRS: how many copies, where, and do they survive a regional outage?",
+    back: "LRS: 3 copies, one datacenter — no. ZRS: 3 copies across availability zones in one region — survives datacenter loss, not regional. GRS: LRS + 3 async copies in a secondary region — survives regional outage. GZRS: ZRS + 3 zone-redundant copies in secondary region — highest durability. RA- prefix adds read access to the secondary.",
+  },
+  {
+    id: "az104-fc-2-003",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.1",
+    front: "What does read access to the secondary (RA-) give you, and which options offer it?",
+    back: "RA-GRS and RA-GZRS let applications read the secondary-region replica any time, so reads continue during a primary-region outage. Plain GRS/GZRS secondary copies are unreadable until Microsoft fails over.",
+  },
+  {
+    id: "az104-fc-2-004",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.2",
+    front: "Order the blob access tiers by storage cost and state when each fits.",
+    back: "Hot (highest storage cost, frequent access) → Cool (infrequent, 30+ days) → Cold (rare, online, hours-scale retrieval) → Archive (cheapest, offline; rehydrate by copying to an online tier, takes hours, early-deletion charges). Retrieval/transaction costs rise as storage cost falls.",
+  },
+  {
+    id: "az104-fc-2-005",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.2",
+    front: "How does a lifecycle management policy decide which blobs to act on, and what actions can it take?",
+    back: "Rules filter by blob type and prefix match (e.g. 'invoices/2024/') or index tags, and trigger on age measured from last modified (or last access if enabled). Actions: tierToCool, tierToCold, tierToArchive, and delete — for base blobs, and separately for versions/snapshots.",
+  },
+  {
+    id: "az104-fc-2-006",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.2",
+    front: "What's the difference between blob soft delete, container soft delete, and blob versioning?",
+    back: "Blob soft delete: recovers individually deleted/overwritten blobs within a retention window. Container soft delete: recovers a whole deleted container plus its blobs. Blob versioning: automatically keeps prior versions on every write, so you can restore earlier content of an overwritten blob.",
+  },
+  {
+    id: "az104-fc-2-007",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    front: "Name the three SAS types and when to use each.",
+    back: "User delegation SAS: signed with Entra ID (user delegation key); best practice — follows identity lifecycle. Service SAS: signed with account key, scoped to one service (blob/file/queue/table); pair with a stored access policy for revocation. Account SAS: signed with account key, spans services; broadest — avoid when a narrower SAS works.",
+  },
+  {
+    id: "az104-fc-2-008",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    front: "How do you rotate storage account keys with zero downtime?",
+    back: "Accounts have key1 and key2. Point all clients at the standby key, verify, then regenerate the previously active key. Never regenerate the key clients are currently using first.",
+  },
+  {
+    id: "az104-fc-2-009",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    front: "Compare firewall rules + service endpoints vs private endpoints for locking down a storage account.",
+    back: "Firewall (default deny) + Microsoft.Storage service endpoint on the subnet: allows only chosen VNets/IPs, but the account keeps its public endpoint. Private endpoint: gives the account a private IP inside your VNet — traffic never touches the public internet. Both can be combined with disabling public access.",
+  },
+  {
+    id: "az104-fc-2-010",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    front: "What are the anonymous blob access levels, and what is the safest default?",
+    back: "Container (full public read of container + blobs), Blob (public read of individual blobs only), Off/Private (no anonymous access — the default and safest). Set at container or account level; private by default.",
+  },
+  {
+    id: "az104-fc-2-011",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.4",
+    front: "AzCopy copy vs AzCopy sync — when is each right, and how do you copy subfolders?",
+    back: "copy: one-way transfer, never deletes at destination; add --recursive to include subfolders. sync: mirrors source to destination (with --delete-destination it removes destination files missing at source). Authenticate with a SAS on the URL or Entra ID (interactive login, service principal, or managed identity).",
+  },
+  {
+    id: "az104-fc-2-012",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.4",
+    front: "What is Azure File Sync cloud tiering, and what is a sync group?",
+    back: "Cloud tiering: cold files become local stubs with content in Azure, recalled on access — saves on-premises disk. A sync group links one cloud endpoint (Azure file share) with server endpoints (registered servers), replicating one namespace across sites.",
+  },
+];
+
+export const AZ104_D2_PERF_QUESTIONS: PerfQuestion[] = [
+  {
+    id: "az104-pbq-2-001",
+    certId: "az-104",
+    domainId: "az-104:domain:2",
+    objectiveId: "az-104:obj:2.3",
+    type: "drag-match",
+    prompt:
+      "A company is tightening storage security. Match each security requirement on the left with the Azure Storage control on the right that best satisfies it.",
+    leftLabel: "Requirement",
+    rightLabel: "Storage control",
+    pairs: [
+      {
+        left: "Give a vendor 24-hour read access to one container, revocable at any time",
+        right: "Service SAS bound to a stored access policy",
+      },
+      {
+        left: "Let users access blobs with their corporate identities and RBAC roles",
+        right: "Entra ID authorization for data plane",
+      },
+      {
+        left: "Keep storage traffic off the public internet with a private IP in the VNet",
+        right: "Private endpoint",
+      },
+      {
+        left: "Allow only specific VNets to reach the account while denying everything else",
+        right: "Firewall rules with VNet service endpoint",
+      },
+      {
+        left: "Rotate credentials without breaking running applications",
+        right: "Dual keys (key1/key2) regenerated one at a time",
+      },
+    ],
+    explanation:
+      "A service SAS with a stored access policy gives scoped, time-bound, instantly revocable access. Entra ID authorization replaces shared keys with identity-based RBAC. A private endpoint puts a private IP in your VNet so traffic never crosses the public internet. Firewall rules plus the Microsoft.Storage service endpoint restrict network access to chosen VNets under default-deny. Dual account keys allow zero-downtime rotation by moving clients to the standby key before regenerating the active one.",
+    difficulty: 3,
+  },
+];
+
+export const AZ104_D2_ACRONYMS: Acronym[] = [
+  { id: "az104-ac-009", certId: "az-104", acronym: "LRS", expansion: "Locally Redundant Storage", hint: "Three copies in a single datacenter; cheapest, no zonal or regional protection", domainHint: 2 },
+  { id: "az104-ac-010", certId: "az-104", acronym: "ZRS", expansion: "Zone-Redundant Storage", hint: "Three copies across availability zones in one region; survives datacenter loss", domainHint: 2 },
+  { id: "az104-ac-011", certId: "az-104", acronym: "GRS", expansion: "Geo-Redundant Storage", hint: "LRS plus async copies in a paired secondary region; survives regional outage", domainHint: 2 },
+  { id: "az104-ac-012", certId: "az-104", acronym: "RA-GRS", expansion: "Read-Access Geo-Redundant Storage", hint: "GRS plus read access to the secondary replica during a primary outage", domainHint: 2 },
+  { id: "az104-ac-013", certId: "az-104", acronym: "GZRS", expansion: "Geo-Zone-Redundant Storage", hint: "Zone-redundant copies in both primary and secondary regions; highest durability", domainHint: 2 },
+  { id: "az104-ac-014", certId: "az-104", acronym: "SAS", expansion: "Shared Access Signature", hint: "Time- and permission-scoped token; types: user delegation, service, account", domainHint: 2 },
+  { id: "az104-ac-015", certId: "az-104", acronym: "SMB", expansion: "Server Message Block", hint: "File-sharing protocol used by Azure Files for Windows mounts", domainHint: 2 },
+  { id: "az104-ac-016", certId: "az-104", acronym: "NFS", expansion: "Network File System", hint: "File-sharing protocol supported by Azure Files for Linux clients", domainHint: 2 },
+];
