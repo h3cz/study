@@ -348,6 +348,81 @@ export const CERTS: CertMeta[] = [
       },
     ],
   },
+  {
+    id: "az-104",
+    vendor: "Microsoft",
+    name: "Azure Administrator",
+    fullName: "Microsoft Certified: Azure Administrator Associate",
+    version: "AZ-104",
+    passingScore: 700,
+    scoreMin: 1,
+    scoreMax: 1000,
+    tagline: "Administer Azure identities, storage, compute, networking, and monitoring.",
+    status: "live",
+    // April 17, 2026 outline. Point weights are app sampling targets within
+    // Microsoft's published ranges, not exact exam percentages. Objective
+    // codes are stable app subdivisions, not Microsoft-assigned identifiers.
+    // https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    domains: [
+      {
+        code: "1",
+        name: "Manage Azure identities and governance",
+        weight: 0.25,
+        objectives: [
+          { code: "1.1", name: "Manage Microsoft Entra users, groups, licenses, external users, and SSPR" },
+          { code: "1.2", name: "Supplemental identity practice: Conditional Access and MFA" },
+          { code: "1.3", name: "Supplemental identity practice: PIM, access reviews, and Identity Protection" },
+          { code: "1.4", name: "Implement role-based access control (RBAC)" },
+          { code: "1.5", name: "Manage Policy, locks, tags, resource groups, subscriptions, costs, and management groups" },
+        ],
+      },
+      {
+        code: "2",
+        name: "Implement and manage storage",
+        weight: 0.2,
+        objectives: [
+          { code: "2.1", name: "Configure storage accounts, redundancy, encryption, and object replication" },
+          { code: "2.2", name: "Configure blob access tiers and lifecycle management" },
+          { code: "2.3", name: "Secure storage with shared access signatures, keys, and network controls" },
+          { code: "2.4", name: "Move data with AzCopy, Azure Storage Explorer, and Azure File Sync" },
+          { code: "2.5", name: "Configure Azure Files, identity-based access, snapshots, and soft delete" },
+        ],
+      },
+      {
+        code: "3",
+        name: "Deploy and manage Azure compute resources",
+        weight: 0.25,
+        objectives: [
+          { code: "3.1", name: "Deploy and configure Azure virtual machines" },
+          { code: "3.2", name: "Configure availability sets, availability zones, and Virtual Machine Scale Sets" },
+          { code: "3.3", name: "Deploy containers with Azure Container Instances and Azure Container Apps" },
+          { code: "3.4", name: "Configure Azure App Service plans, apps, and deployment slots" },
+          { code: "3.5", name: "Interpret, modify, deploy, and convert ARM templates and Bicep files" },
+        ],
+      },
+      {
+        code: "4",
+        name: "Implement and manage virtual networking",
+        weight: 0.2,
+        objectives: [
+          { code: "4.1", name: "Configure virtual networks, subnets, public and private IPs, and user-defined routes" },
+          { code: "4.2", name: "Configure VNet peering, VPN Gateway, and ExpressRoute" },
+          { code: "4.3", name: "Configure NSGs, ASGs, Bastion, service/private endpoints, and supplemental Azure Firewall practice" },
+          { code: "4.4", name: "Configure Azure DNS, load balancing, and NAT Gateway" },
+        ],
+      },
+      {
+        code: "5",
+        name: "Monitor and maintain Azure resources",
+        weight: 0.1,
+        objectives: [
+          { code: "5.1", name: "Monitor resources with Azure Monitor, Log Analytics, and KQL" },
+          { code: "5.2", name: "Configure alerts, action groups, and Network Watcher" },
+          { code: "5.3", name: "Protect data with Azure Backup and Azure Site Recovery" },
+        ],
+      },
+    ],
+  },
 ];
 
 export const DEFAULT_CERT_ID = "secplus-sy0-701";

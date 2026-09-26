@@ -26,14 +26,15 @@ describe("getCert", () => {
 });
 
 describe("liveCerts", () => {
-  it("returns Security+, Network+, A+ Core 1, and A+ Core 2", () => {
+  it("returns Security+, Network+, both A+ cores, and Azure Administrator", () => {
     const live = liveCerts();
     const ids = live.map((c) => c.id);
     expect(ids).toContain("secplus-sy0-701");
     expect(ids).toContain("networkplus-n10-009");
     expect(ids).toContain("aplus-220-1101");
     expect(ids).toContain("aplus-220-1102");
-    expect(live).toHaveLength(4);
+    expect(ids).toContain("az-104");
+    expect(live).toHaveLength(5);
   });
 
   it("both A+ exams are present in the registry and live", () => {

@@ -1,0 +1,1789 @@
+{
+  "issues": [
+    {
+      "id": "az104-1-1.1-001",
+      "issue": "Guest authentication and UserType are independent; distinguish invited external guests and Teams standard channels from shared channels."
+    },
+    {
+      "id": "az104-1-1.1-002",
+      "issue": "Invented Conditional Access bulk-upload and subscription CSV distractors are implausible; bulk creation is an asynchronous job, not atomic provisioning."
+    },
+    {
+      "id": "az104-1-1.1-003",
+      "issue": "Mail-enabled security groups exist in Exchange Online; a Microsoft 365 group does not automatically create a Team, and its group mailbox is not a standalone shared mailbox."
+    },
+    {
+      "id": "az104-1-1.1-004",
+      "issue": "Rule example uses noncanonical single-quoted values and does not state Member status or attribute population; evaluation is asynchronous."
+    },
+    {
+      "id": "az104-1-1.1-005",
+      "issue": "Group name does not define its rule; department versus city is inconsistent, and another assignment could preserve the same license."
+    },
+    {
+      "id": "az104-1-1.2-006",
+      "issue": "Access controls also include session controls; original definition omits them."
+    },
+    {
+      "id": "az104-1-1.2-007",
+      "issue": "IMAP/POP are not inherently legacy authentication: OAuth clients exist; target resources and enabled policy state were unstated."
+    },
+    {
+      "id": "az104-1-1.2-008",
+      "issue": "An exclusion from one policy does not guarantee no MFA prompt; other policies and existing MFA claims matter."
+    },
+    {
+      "id": "az104-1-1.2-009",
+      "issue": "An app password is an obvious nonfactor distractor; avoid the undefined superlative strongest."
+    },
+    {
+      "id": "az104-1-1.2-010",
+      "issue": "Enforced per-user MFA does not prompt on every sign-in; remembered sessions and valid MFA claims exist."
+    },
+    {
+      "id": "az104-1-1.3-011",
+      "issue": "Eligible assignment does not erase permissions from other roles; active does not mean permanent."
+    },
+    {
+      "id": "az104-1-1.3-012",
+      "issue": "Maximum activation duration does not establish the duration actually requested."
+    },
+    {
+      "id": "az104-1-1.3-013",
+      "issue": "Reviewing guests does not automatically remove every route to a resource group; nonresponses need an explicit fallback decision."
+    },
+    {
+      "id": "az104-1-1.3-014",
+      "issue": "Legacy ID Protection policies retire October 1, 2026; original explanation incorrectly says policies can never be tenant-wide."
+    },
+    {
+      "id": "az104-1-1.3-015",
+      "issue": "Password remediation requires MFA/SSPR readiness and supported account configuration; overlaps with 014, so make this test prerequisites rather than repeat risk mapping."
+    },
+    {
+      "id": "az104-1-1.4-016",
+      "issue": "Contributor does not exclude all Microsoft.Authorization operations."
+    },
+    {
+      "id": "az104-1-1.4-017",
+      "issue": "Union of grants is accurate, but cannot imply bypassing denies, policies or locks."
+    },
+    {
+      "id": "az104-1-1.4-018",
+      "issue": "Deny assignments may exclude principals; Owner can sometimes change the protecting stack, though the current delete is denied."
+    },
+    {
+      "id": "az104-1-1.4-020",
+      "issue": "Unrestricted User Access Administrator can grant itself Owner; original requirement incorrectly implies a security boundary against escalation."
+    },
+    {
+      "id": "az104-1-1.5-021",
+      "issue": "Append can deny conflicting requests; DeployIfNotExists is not automatic remediation of all existing resources."
+    },
+    {
+      "id": "az104-1-1.5-022",
+      "issue": "ReadOnly locks affect the control plane, not all writes inside the VM; options B and C were duplicates."
+    },
+    {
+      "id": "az104-1-1.5-023",
+      "issue": "Any scope wrongly includes management groups; prefer Modify for tag inheritance."
+    },
+    {
+      "id": "az104-1-1.5-024",
+      "issue": "Tenant root management group is also defensible unless unrelated subscriptions are explicitly excluded."
+    },
+    {
+      "id": "az104-fc-1-001",
+      "issue": "UserType does not determine where credentials are managed."
+    },
+    {
+      "id": "az104-fc-1-003",
+      "issue": "Microsoft 365 group mailbox/Team and role-assignable group distinctions."
+    },
+    {
+      "id": "az104-fc-1-004",
+      "issue": "Use supported expression syntax and asynchronous evaluation."
+    },
+    {
+      "id": "az104-fc-1-005",
+      "issue": "Session controls omitted."
+    },
+    {
+      "id": "az104-fc-1-006",
+      "issue": "Protocols can use OAuth; legacy authentication is not equivalent to IMAP/POP/SMTP."
+    },
+    {
+      "id": "az104-fc-1-007",
+      "issue": "Active assignments need not be permanent."
+    },
+    {
+      "id": "az104-fc-1-008",
+      "issue": "Use risk-based Conditional Access terminology."
+    },
+    {
+      "id": "az104-fc-1-010",
+      "issue": "Remediation prerequisites omitted."
+    },
+    {
+      "id": "az104-fc-1-011",
+      "issue": "Locks do not protect the data plane."
+    },
+    {
+      "id": "az104-fc-1-012",
+      "issue": "Management-group locks do not exist."
+    },
+    {
+      "id": "az104-pbq-1-001",
+      "issue": "Named locations need not be trusted or IP-only; risk response uses Conditional Access."
+    },
+    {
+      "id": "az104-pbq-1-002",
+      "issue": "Append and DeployIfNotExists explanation overpromises remediation."
+    },
+    {
+      "id": "az104-ac-008",
+      "issue": "Azure AD B2C is a distinct legacy offering, not simply renamed into External ID."
+    },
+    {
+      "id": "az104-2-2.1-001",
+      "issue": "Premium Files supports NFS too; avoid unmanaged-disk recommendations and an unsupported universally lowest-cost claim."
+    },
+    {
+      "id": "az104-2-2.1-002",
+      "issue": "Very low latency is vague; anchor the selection to the specified premium block-blob workload and HNS capability."
+    },
+    {
+      "id": "az104-2-2.1-003",
+      "issue": "Geo-replication is asynchronous and cannot guarantee zero loss; access tier is a weak redundancy distractor."
+    },
+    {
+      "id": "az104-2-2.1-004",
+      "issue": "Applications must use the secondary endpoint; failover is not solely Microsoft initiated."
+    },
+    {
+      "id": "az104-2-2.1-005",
+      "issue": "Impossible starting configuration: premium page blob accounts support LRS, not ZRS; premium redundancy options are not identical."
+    },
+    {
+      "id": "az104-2-2.1-006",
+      "issue": "RA-GZRS uses LRS in the secondary, not ZRS in both regions; GRS and GZRS have the same published durability target."
+    },
+    {
+      "id": "az104-2-2.2-001",
+      "issue": "Cold is online with fast access, not hours-scale retrieval; original few-hours deadline made Archive ambiguous."
+    },
+    {
+      "id": "az104-2-2.2-002",
+      "issue": "Set Blob Tier also rehydrates archive data; copying is not mandatory."
+    },
+    {
+      "id": "az104-2-2.2-003",
+      "issue": "Lifecycle age is selected explicitly by condition; creation time can be used and there is no universal default."
+    },
+    {
+      "id": "az104-2-2.2-004",
+      "issue": "Tag-based filtering is defensible if configured; use actual prefix mistakes instead of an unnecessary alternate workflow."
+    },
+    {
+      "id": "az104-2-2.2-005",
+      "issue": "Versioning must be enabled before the overwrite and supported for the account."
+    },
+    {
+      "id": "az104-2-2.3-001",
+      "issue": "Stored access-policy changes can take up to 30 seconds; instant revocation promise is false."
+    },
+    {
+      "id": "az104-2-2.3-002",
+      "issue": "Disabling an Entra user is not a reliable immediate invalidation mechanism for an issued bearer SAS."
+    },
+    {
+      "id": "az104-2-2.3-003",
+      "issue": "Zero downtime requires client verification; deletion/wait distractor is nonsensical."
+    },
+    {
+      "id": "az104-2-2.3-004",
+      "issue": "Private endpoints are per storage service and do not automatically disable the public endpoint."
+    },
+    {
+      "id": "az104-2-2.3-005",
+      "issue": "Service endpoints require public network access enabled for selected networks; not a private endpoint."
+    },
+    {
+      "id": "az104-2-2.3-006",
+      "issue": "User delegation SAS is constrained by issuer RBAC/ACL permissions; logging must be configured rather than assumed."
+    },
+    {
+      "id": "az104-2-2.4-001",
+      "issue": "AzCopy sync can also upload recursively and does not delete by default; original A and B both defensible."
+    },
+    {
+      "id": "az104-2-2.4-003",
+      "issue": "Device-code login may use another machine; account keys are not a generic AzCopy blob-auth method."
+    },
+    {
+      "id": "az104-2-2.4-004",
+      "issue": "Portal Cloud Shell is an artificially weak distractor; specify standalone desktop app."
+    },
+    {
+      "id": "az104-2-2.4-006",
+      "issue": "Sync is asynchronous, not instantaneous global consistency."
+    },
+    {
+      "id": "az104-fc-2-001",
+      "issue": "Premium page blob LRS-only and Files protocol support corrected."
+    },
+    {
+      "id": "az104-fc-2-002",
+      "issue": "GZRS secondary is LRS; geo copies may lag."
+    },
+    {
+      "id": "az104-fc-2-003",
+      "issue": "Customer-managed failover exists and clients must use the secondary URL."
+    },
+    {
+      "id": "az104-fc-2-004",
+      "issue": "Cold latency and archive rehydration corrected."
+    },
+    {
+      "id": "az104-fc-2-005",
+      "issue": "Lifecycle clocks are explicit."
+    },
+    {
+      "id": "az104-fc-2-007",
+      "issue": "SAS does not simply follow user disablement."
+    },
+    {
+      "id": "az104-fc-2-009",
+      "issue": "Disabling public access blocks service-endpoint access too."
+    },
+    {
+      "id": "az104-fc-2-010",
+      "issue": "Account setting permits/prohibits anonymous access, but access level is container-specific."
+    },
+    {
+      "id": "az104-pbq-2-001",
+      "issue": "Instant SAS revocation is false."
+    },
+    {
+      "id": "az104-ac-013",
+      "issue": "Secondary region is not zone-redundant."
+    },
+    {
+      "id": "az104-3-3.1-003",
+      "issue": "Availability sets can require deallocating every member; scope question to standalone VM."
+    },
+    {
+      "id": "az104-3-3.1-004",
+      "issue": "Temporary disk loss is possible, not an exhaustive guaranteed event list; Linux device names vary."
+    },
+    {
+      "id": "az104-3-3.1-005",
+      "issue": "Ultra limit is outdated; Premium SSD v2 also offers independently adjustable performance and submillisecond latency."
+    },
+    {
+      "id": "az104-3-3.1-006",
+      "issue": "Custom Script does not rerun on unchanged deployments; reboot/domain-join scripts require care, and non-extension distractors are weak."
+    },
+    {
+      "id": "az104-3-3.2-001",
+      "issue": "Never simultaneous is too broad outside planned maintenance."
+    },
+    {
+      "id": "az104-3-3.2-002",
+      "issue": "Zone-spread VMs do not automatically make the application healthy or implement failover."
+    },
+    {
+      "id": "az104-3-3.2-003",
+      "issue": "Uniform instances can be addressed/managed individually too; use the standard VM resource/API distinction."
+    },
+    {
+      "id": "az104-3-3.2-005",
+      "issue": "Default removes highest instance ID after balancing, not strictly newest creation time."
+    },
+    {
+      "id": "az104-3-3.2-006",
+      "issue": "Rollback concerns the failing instance OS disk and configured behavior; manual OS trigger differs from all manual rolling updates."
+    },
+    {
+      "id": "az104-3-3.2-007",
+      "issue": "Explanation confuses availability-set 99.95%, multi-zone 99.99%, and disk-dependent single-VM SLAs."
+    },
+    {
+      "id": "az104-3-3.3-001",
+      "issue": "Never means no automatic restart after exit, not exactly-once execution semantics."
+    },
+    {
+      "id": "az104-3-3.3-002",
+      "issue": "Multiple containers in a group require Linux; volumes must actually be configured for sharing."
+    },
+    {
+      "id": "az104-3-3.3-005",
+      "issue": "Free SKU distractor is fabricated and content-trust aside is unnecessary; replace with plausible configuration error."
+    },
+    {
+      "id": "az104-3-3.3-007",
+      "issue": "Requests are not exact usage caps; App Service also runs containers, so explanation was wrong."
+    },
+    {
+      "id": "az104-3-3.4-002",
+      "issue": "Basic allows manual scale-out, not Azure Monitor autoscale."
+    },
+    {
+      "id": "az104-3-3.4-003",
+      "issue": "Instant rollback and unconditional zero downtime overpromise database/session behavior."
+    },
+    {
+      "id": "az104-3-3.4-006",
+      "issue": "Basic now supports automatic and custom backups; Standard minimum answer is outdated."
+    },
+    {
+      "id": "az104-3-3.4-007",
+      "issue": "Basic/Standard/Premium already use dedicated workers; ASE additionally isolates the environment/frontend."
+    },
+    {
+      "id": "az104-fc-3-003",
+      "issue": "Premium SSD v2 also satisfies original low-latency independent tuning description."
+    },
+    {
+      "id": "az104-fc-3-004",
+      "issue": "Temporary storage durability overstated and resize not invariably destructive."
+    },
+    {
+      "id": "az104-fc-3-008",
+      "issue": "Swap is not instant rollback of database effects."
+    },
+    {
+      "id": "az104-fc-3-010",
+      "issue": "Notice is at least 30 seconds when Azure schedules eviction; restart depends on capacity."
+    },
+    {
+      "id": "az104-fc-3-011",
+      "issue": "Zone-spread application architecture does not itself supply platform failover for every resource."
+    },
+    {
+      "id": "az104-pbq-3-002",
+      "issue": "VMSS need not be identical; slot swaps are not an unconditional zero-downtime promise."
+    },
+    {
+      "id": "az104-ac-017",
+      "issue": "VMSS fleets need not be identical and load balancing is not automatic."
+    },
+    {
+      "id": "az104-4-4.1-003",
+      "issue": "Gateway /27 statement needs a non-Basic SKU; old Basic /29 support makes the generic minimum ambiguous."
+    },
+    {
+      "id": "az104-4-4.1-004",
+      "issue": "ARM dynamic private IPs persist through deallocation; original reason for choosing Static is false."
+    },
+    {
+      "id": "az104-4-4.1-005",
+      "issue": "A private endpoint does not disable public network access automatically; Azure service-endpoint traffic is not ordinary public-internet traffic."
+    },
+    {
+      "id": "az104-4-4.1-006",
+      "issue": "App Service subnet sharing with supported plans is possible; distinguish other resource types from additional app plans."
+    },
+    {
+      "id": "az104-4-4.2-001",
+      "issue": "Direct peering is one solution, not the only possible design; specify no transit infrastructure."
+    },
+    {
+      "id": "az104-4-4.2-004",
+      "issue": "VpnGw4 Gen2 is 5 Gbps and non-AZ; original marked answer satisfies neither stated requirement."
+    },
+    {
+      "id": "az104-4-4.3-001",
+      "issue": "Wrong subnet arithmetic: 10.0.1.5 is not in 10.0.0.0/24; the original has no correctly reasoned answer."
+    },
+    {
+      "id": "az104-4-4.3-002",
+      "issue": "Default outbound rules allow VirtualNetwork and Internet, then deny the rest; NSG permission does not create routing/SNAT."
+    },
+    {
+      "id": "az104-4-4.3-003",
+      "issue": "Union is the wrong permissions model; independent NSG evaluation must both allow."
+    },
+    {
+      "id": "az104-4-4.3-004",
+      "issue": "One subnet per VM distractor is implausible."
+    },
+    {
+      "id": "az104-4-4.4-001",
+      "issue": "Basic Load Balancer is retired; HA ports is an internal Standard LB feature, not a public LB outbound-rule combination."
+    },
+    {
+      "id": "az104-4-4.4-002",
+      "issue": "Private frontend alone does not restrict which private networks can reach it; health-probe absolute is unnecessarily broad."
+    },
+    {
+      "id": "az104-4-4.4-004",
+      "issue": "Per-VM public IP is also a defensible SNAT fix without a no-public-IP constraint; 64,000 should be 64,512 and no guarantee of eliminating exhaustion."
+    },
+    {
+      "id": "az104-4-4.4-005",
+      "issue": "Front Door is also defensible unless the wrong claim is part of the answer; make the regional service requirement explicit."
+    },
+    {
+      "id": "az104-4-4.4-006",
+      "issue": "Custom resolvers/forwarders can resolve without a local zone link; state Azure-provided DNS and no forwarding."
+    },
+    {
+      "id": "az104-fc-4-002",
+      "issue": "Gateway subnet minimum varies with Basic versus non-Basic."
+    },
+    {
+      "id": "az104-fc-4-003",
+      "issue": "Private endpoint alone does not disable public access."
+    },
+    {
+      "id": "az104-fc-4-007",
+      "issue": "All outbound is overbroad."
+    },
+    {
+      "id": "az104-fc-4-008",
+      "issue": "Clarify independent evaluation and new flows."
+    },
+    {
+      "id": "az104-fc-4-010",
+      "issue": "Do not teach retired Basic as a new deployment choice; HA ports internal-only."
+    },
+    {
+      "id": "az104-fc-4-011",
+      "issue": "Avoid universal probe claim; separate balancing from targeted NAT."
+    },
+    {
+      "id": "az104-fc-4-012",
+      "issue": "Correct port count and private DNS forwarding exception."
+    },
+    {
+      "id": "az104-pbq-4-001",
+      "issue": "Front Door failover is not instantaneous."
+    },
+    {
+      "id": "az104-pbq-4-002",
+      "issue": "Active-active does not keep a failed instance tunnel up; Microsoft peering also reaches Azure public services."
+    },
+    {
+      "id": "az104-5-5.1-001",
+      "issue": "Logs can also contain numerical CPU data; specify native platform metric rather than dismissing logs as unsuitable."
+    },
+    {
+      "id": "az104-5-5.1-002",
+      "issue": "Classic Application Insights is retired; workspace-based Application Insights also uses Log Analytics."
+    },
+    {
+      "id": "az104-5-5.1-003",
+      "issue": "Only/most-complete distractors cue the answer; not all metrics export and partner destinations also exist."
+    },
+    {
+      "id": "az104-5-5.1-004",
+      "issue": "take/arg_max do not generally return first chronological event."
+    },
+    {
+      "id": "az104-5-5.1-005",
+      "issue": "Original query averages all VMs and processor instances; identify the target and total CPU counter."
+    },
+    {
+      "id": "az104-5-5.1-006",
+      "issue": "Long-term retention is the current name, needs total-retention duration, and old data is retrieved through search jobs rather than ordinary interactive queries."
+    },
+    {
+      "id": "az104-5-5.1-007",
+      "issue": "project can also compute columns; make preservation of all existing columns the distinguishing requirement."
+    },
+    {
+      "id": "az104-5-5.1-008",
+      "issue": "UserId and EmployeeId do not necessarily share semantics; union supports different schemas."
+    },
+    {
+      "id": "az104-5-5.2-001",
+      "issue": "A log alert is valid too; specify the native signal without guest ingestion."
+    },
+    {
+      "id": "az104-5-5.2-002",
+      "issue": "Mute actions is not a universal alert type setting; changing frequency could also reduce notifications unless evaluation must remain fixed."
+    },
+    {
+      "id": "az104-5-5.2-003",
+      "issue": "Choose direct action types, not interchangeable integration chains."
+    },
+    {
+      "id": "az104-5-5.2-005",
+      "issue": "New NSG flow logs cannot be created; packet capture cannot decrypt arbitrary encrypted payloads."
+    },
+    {
+      "id": "az104-5-5.2-006",
+      "issue": "Modern log alerts do not embed raw results or arbitrary custom JSON in common schema; dimensions supply context."
+    },
+    {
+      "id": "az104-5-5.3-001",
+      "issue": "Invented Site Recovery vault distractor misses the important real Backup vault distinction."
+    },
+    {
+      "id": "az104-5-5.3-003",
+      "issue": "Soft-delete duration is configurable from 14 to 180 days, not universally 14."
+    },
+    {
+      "id": "az104-5-5.3-004",
+      "issue": "Log Analytics agent is retired; use current Azure Monitor Agent."
+    },
+    {
+      "id": "az104-5-5.3-005",
+      "issue": "Main outline targets Azure-resource Site Recovery; align scenario to Azure VMs and remove an obvious AzCopy distractor."
+    },
+    {
+      "id": "az104-5-5.3-006",
+      "issue": "Original mixed VMware/Azure and post-failover chronology; make protected direction explicit."
+    },
+    {
+      "id": "az104-fc-5-002",
+      "issue": "Three-only destination framing is incomplete."
+    },
+    {
+      "id": "az104-fc-5-006",
+      "issue": "Mute not universal; action groups optional."
+    },
+    {
+      "id": "az104-fc-5-007",
+      "issue": "ITSM retirement-sensitive aside unnecessary."
+    },
+    {
+      "id": "az104-fc-5-011",
+      "issue": "Azure-to-Azure uses Failover; planned/unplanned labels vary by source scenario."
+    },
+    {
+      "id": "az104-ac-039",
+      "issue": "SLO is not necessarily stricter than an SLA."
+    },
+    {
+      "id": "az104-1-1.1-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.1-102",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.1-103",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.1-104",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.1-105",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.4-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.4-102",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.5-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.5-102",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.5-103",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.5-104",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.5-105",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.5-106",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.5-107",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-1-1.5-108",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-2-2.5-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-2-2.5-102",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-2-2.5-103",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-2-2.1-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-2-2.1-102",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-2-2.5-104",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.5-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.5-102",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.5-103",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.5-104",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.5-105",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.1-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.1-102",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.1-103",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.4-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-4-4.1-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-4-4.1-102",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-4-4.1-103",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-4-4.4-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-4-4.4-102",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-4-4.4-103",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-5-5.1-101",
+      "issue": "Coverage gap: added an original scenario for an objective that was absent or thin."
+    },
+    {
+      "id": "az104-3-3.4-005",
+      "issue": "Standard is not the entry tier for backups anymore; Basic supports automatic and custom backups."
+    },
+    {
+      "id": "az104-1-1.4-101",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.5-104",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.5-105",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.1-101",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.1-102",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.1-103",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.1-105",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.5-106",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.5-107",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.5-108",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-2-2.5-101",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-2-2.5-102",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-2-2.5-103",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-2-2.1-101",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-2-2.1-102",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-2-2.5-104",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-3-3.5-104",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-3-3.1-101",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-3-3.1-103",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-4-4.1-102",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-4-4.4-103",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-5-5.1-101",
+      "issue": "Editorial pass: replace unrelated distractors with plausible administrative mistakes."
+    },
+    {
+      "id": "az104-1-1.1-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.1-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.1-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.1-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.2-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.2-007",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.2-009",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.2-010",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.3-012",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.3-013",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.3-014",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.4-018",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.4-019",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-021",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-024",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.1-101",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.1-102",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.1-103",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.1-104",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.1-105",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.4-101",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-101",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-102",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-103",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-104",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-105",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-106",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-107",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-1-1.5-108",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.1-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.1-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.1-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.2-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.2-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.2-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.3-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.3-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.3-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.3-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.4-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.4-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.4-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.4-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.5-101",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.5-102",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.5-103",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.1-101",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-2-2.5-104",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-007",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-008",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.2-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.2-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.2-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.2-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.2-007",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.3-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.3-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.3-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.3-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.3-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.3-007",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.4-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.4-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.4-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.4-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.4-007",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.5-101",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.5-102",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.5-103",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.5-104",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.5-105",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-101",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-102",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.1-103",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-3-3.4-101",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.1-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.1-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.1-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.1-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.1-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.2-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.2-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.2-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.2-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.3-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.3-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.3-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.3-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.3-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.4-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.4-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.4-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.4-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.4-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.4-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.1-102",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.1-103",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.4-101",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.4-102",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-4-4.4-103",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.1-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.1-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.1-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.1-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.1-007",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.2-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.2-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.2-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.2-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.2-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.2-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.3-001",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.3-002",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.3-003",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.3-004",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.3-005",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.3-006",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.1-008",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    },
+    {
+      "id": "az104-5-5.3-007",
+      "issue": "Answer-position bias: redistributed the correct choice and updated explanation letters (D1 originally answered A for all 24 items)."
+    }
+  ],
+  "references": {
+    "az104-1-1.1-001": [
+      "https://learn.microsoft.com/en-us/entra/external-id/user-properties"
+    ],
+    "az104-1-1.1-002": [
+      "https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add"
+    ],
+    "az104-1-1.1-003": [
+      "https://learn.microsoft.com/en-us/microsoft-365/admin/create-groups/compare-groups?view=o365-worldwide"
+    ],
+    "az104-1-1.1-004": [
+      "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership"
+    ],
+    "az104-1-1.1-005": [
+      "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-group-licenses?view=o365-worldwide"
+    ],
+    "az104-1-1.2-006": [
+      "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies"
+    ],
+    "az104-1-1.2-008": [
+      "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies"
+    ],
+    "az104-1-1.2-007": [
+      "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication"
+    ],
+    "az104-1-1.2-009": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths"
+    ],
+    "az104-1-1.2-010": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-userstates"
+    ],
+    "az104-1-1.3-011": [
+      "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-configure-role-settings"
+    ],
+    "az104-1-1.3-012": [
+      "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-configure-role-settings"
+    ],
+    "az104-1-1.3-013": [
+      "https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview"
+    ],
+    "az104-1-1.3-014": [
+      "https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies"
+    ],
+    "az104-1-1.3-015": [
+      "https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies"
+    ],
+    "az104-1-1.4-016": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/privileged"
+    ],
+    "az104-1-1.4-017": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview"
+    ],
+    "az104-1-1.4-019": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations#microsoftcompute"
+    ],
+    "az104-1-1.4-020": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/privileged"
+    ],
+    "az104-1-1.4-018": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/deny-assignments"
+    ],
+    "az104-1-1.5-021": [
+      "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-append"
+    ],
+    "az104-1-1.5-022": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources"
+    ],
+    "az104-1-1.5-023": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources"
+    ],
+    "az104-1-1.5-024": [
+      "https://learn.microsoft.com/en-us/azure/governance/management-groups/overview"
+    ],
+    "az104-2-2.1-001": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview"
+    ],
+    "az104-2-2.1-002": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview"
+    ],
+    "az104-2-2.1-005": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview"
+    ],
+    "az104-2-2.1-003": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy"
+    ],
+    "az104-2-2.1-004": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy"
+    ],
+    "az104-2-2.1-006": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy"
+    ],
+    "az104-2-2.2-001": [
+      "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview"
+    ],
+    "az104-2-2.2-002": [
+      "https://learn.microsoft.com/en-us/azure/storage/blobs/archive-rehydrate-overview"
+    ],
+    "az104-2-2.2-003": [
+      "https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-policy-structure"
+    ],
+    "az104-2-2.2-004": [
+      "https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-policy-structure"
+    ],
+    "az104-2-2.2-005": [
+      "https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview"
+    ],
+    "az104-2-2.2-006": [
+      "https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-container-overview"
+    ],
+    "az104-2-2.3-001": [
+      "https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy"
+    ],
+    "az104-2-2.3-002": [
+      "https://learn.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas"
+    ],
+    "az104-2-2.3-006": [
+      "https://learn.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas"
+    ],
+    "az104-2-2.3-003": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage"
+    ],
+    "az104-2-2.3-004": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints"
+    ],
+    "az104-2-2.3-005": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security"
+    ],
+    "az104-2-2.4-001": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-upload"
+    ],
+    "az104-2-2.4-002": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-synchronize"
+    ],
+    "az104-2-2.4-003": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-authorize-service-principal"
+    ],
+    "az104-2-2.4-004": [
+      "https://learn.microsoft.com/en-us/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer"
+    ],
+    "az104-2-2.4-005": [
+      "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-cloud-tiering-overview"
+    ],
+    "az104-2-2.4-006": [
+      "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-planning"
+    ],
+    "az104-3-3.1-001": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview"
+    ],
+    "az104-3-3.1-002": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/b-series-cpu-credit-model"
+    ],
+    "az104-3-3.1-003": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/tutorial-manage-vm"
+    ],
+    "az104-3-3.1-004": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview"
+    ],
+    "az104-3-3.1-005": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types"
+    ],
+    "az104-3-3.1-006": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows"
+    ],
+    "az104-3-3.1-007": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/spot-vms"
+    ],
+    "az104-3-3.1-008": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts"
+    ],
+    "az104-3-3.2-001": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview"
+    ],
+    "az104-3-3.2-007": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview"
+    ],
+    "az104-3-3.2-002": [
+      "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview"
+    ],
+    "az104-3-3.2-008": [
+      "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview"
+    ],
+    "az104-3-3.2-003": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-orchestration-modes"
+    ],
+    "az104-3-3.2-004": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-overview"
+    ],
+    "az104-3-3.2-005": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy"
+    ],
+    "az104-3-3.2-006": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade"
+    ],
+    "az104-3-3.3-001": [
+      "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-restart-policy"
+    ],
+    "az104-3-3.3-002": [
+      "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups"
+    ],
+    "az104-3-3.3-007": [
+      "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups"
+    ],
+    "az104-3-3.3-003": [
+      "https://learn.microsoft.com/en-us/azure/container-apps/traffic-splitting"
+    ],
+    "az104-3-3.3-004": [
+      "https://learn.microsoft.com/en-us/azure/container-apps/scale-app"
+    ],
+    "az104-3-3.3-005": [
+      "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-skus"
+    ],
+    "az104-3-3.3-006": [
+      "https://learn.microsoft.com/en-us/azure/container-apps/environment"
+    ],
+    "az104-3-3.4-001": [
+      "https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans"
+    ],
+    "az104-3-3.4-002": [
+      "https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans",
+      "https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling"
+    ],
+    "az104-3-3.4-005": [
+      "https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans",
+      "https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings"
+    ],
+    "az104-3-3.4-003": [
+      "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+    ],
+    "az104-3-3.4-004": [
+      "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+    ],
+    "az104-3-3.4-006": [
+      "https://learn.microsoft.com/en-us/azure/app-service/manage-backup"
+    ],
+    "az104-3-3.4-007": [
+      "https://learn.microsoft.com/en-us/azure/app-service/environment/overview"
+    ],
+    "az104-4-4.1-001": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq"
+    ],
+    "az104-4-4.1-002": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq"
+    ],
+    "az104-4-4.1-003": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings"
+    ],
+    "az104-4-4.1-004": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/private-ip-addresses"
+    ],
+    "az104-4-4.1-005": [
+      "https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview"
+    ],
+    "az104-4-4.1-006": [
+      "https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration"
+    ],
+    "az104-4-4.2-001": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview"
+    ],
+    "az104-4-4.2-003": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview"
+    ],
+    "az104-4-4.2-002": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit"
+    ],
+    "az104-4-4.2-004": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/about-gateway-skus"
+    ],
+    "az104-4-4.2-005": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/design"
+    ],
+    "az104-4-4.2-006": [
+      "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-global-reach"
+    ],
+    "az104-4-4.3-001": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview"
+    ],
+    "az104-4-4.3-002": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview"
+    ],
+    "az104-4-4.3-003": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-group-how-it-works"
+    ],
+    "az104-4-4.3-004": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups"
+    ],
+    "az104-4-4.3-005": [
+      "https://learn.microsoft.com/en-us/azure/firewall/rule-processing"
+    ],
+    "az104-4-4.3-006": [
+      "https://learn.microsoft.com/en-us/azure/bastion/bastion-overview"
+    ],
+    "az104-4-4.4-001": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview"
+    ],
+    "az104-4-4.4-002": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview"
+    ],
+    "az104-4-4.4-003": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/inbound-nat-rules"
+    ],
+    "az104-4-4.4-004": [
+      "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-gateway-resource"
+    ],
+    "az104-4-4.4-005": [
+      "https://learn.microsoft.com/en-us/azure/application-gateway/overview"
+    ],
+    "az104-4-4.4-006": [
+      "https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links"
+    ],
+    "az104-5-5.1-001": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/data-platform"
+    ],
+    "az104-5-5.1-002": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview"
+    ],
+    "az104-5-5.1-003": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/diagnostic-settings"
+    ],
+    "az104-5-5.1-004": [
+      "https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4625"
+    ],
+    "az104-5-5.1-005": [
+      "https://learn.microsoft.com/en-us/kusto/query/summarize-operator?view=microsoft-fabric"
+    ],
+    "az104-5-5.1-006": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-retention-configure"
+    ],
+    "az104-5-5.1-007": [
+      "https://learn.microsoft.com/en-us/kusto/query/extend-operator?view=microsoft-fabric"
+    ],
+    "az104-5-5.1-008": [
+      "https://learn.microsoft.com/en-us/kusto/query/join-operator?view=microsoft-fabric",
+      "https://learn.microsoft.com/en-us/kusto/query/union-operator?view=microsoft-fabric"
+    ],
+    "az104-5-5.2-001": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types"
+    ],
+    "az104-5-5.2-002": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-log-alert-rule"
+    ],
+    "az104-5-5.2-003": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups"
+    ],
+    "az104-5-5.2-004": [
+      "https://learn.microsoft.com/en-us/azure/network-watcher/ip-flow-verify-overview"
+    ],
+    "az104-5-5.2-005": [
+      "https://learn.microsoft.com/en-us/azure/network-watcher/packet-capture-overview"
+    ],
+    "az104-5-5.2-006": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-common-schema",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-log-alert-rule"
+    ],
+    "az104-5-5.3-001": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-azure-recovery-services-vault-overview"
+    ],
+    "az104-5-5.3-002": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-azure-recovery-services-vault-overview"
+    ],
+    "az104-5-5.3-003": [
+      "https://learn.microsoft.com/en-us/azure/backup/secure-by-default"
+    ],
+    "az104-5-5.3-004": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-architecture"
+    ],
+    "az104-5-5.3-005": [
+      "https://learn.microsoft.com/en-us/azure/site-recovery/recovery-plan-overview"
+    ],
+    "az104-5-5.3-006": [
+      "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-test-failover-to-azure"
+    ],
+    "az104-5-5.3-007": [
+      "https://learn.microsoft.com/en-us/azure/well-architected/reliability/disaster-recovery"
+    ],
+    "az104-1-1.1-101": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr"
+    ],
+    "az104-1-1.1-102": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sspr-writeback"
+    ],
+    "az104-1-1.1-103": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr"
+    ],
+    "az104-1-1.1-104": [
+      "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users?view=o365-worldwide"
+    ],
+    "az104-1-1.1-105": [
+      "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-group-licenses?view=o365-worldwide"
+    ],
+    "az104-1-1.4-101": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview"
+    ],
+    "az104-1-1.4-102": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles"
+    ],
+    "az104-1-1.5-101": [
+      "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources"
+    ],
+    "az104-1-1.5-102": [
+      "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure"
+    ],
+    "az104-1-1.5-103": [
+      "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets"
+    ],
+    "az104-1-1.5-104": [
+      "https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations"
+    ],
+    "az104-1-1.5-105": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription"
+    ],
+    "az104-1-1.5-106": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription"
+    ],
+    "az104-1-1.5-107": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/transfer-subscription"
+    ],
+    "az104-1-1.5-108": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources"
+    ],
+    "az104-2-2.5-101": [
+      "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-assign-share-level-permissions"
+    ],
+    "az104-2-2.5-102": [
+      "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview"
+    ],
+    "az104-2-2.5-103": [
+      "https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files"
+    ],
+    "az104-2-2.1-101": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption"
+    ],
+    "az104-2-2.1-102": [
+      "https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview"
+    ],
+    "az104-2-2.5-104": [
+      "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion"
+    ],
+    "az104-3-3.5-101": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters"
+    ],
+    "az104-3-3.5-102": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli"
+    ],
+    "az104-3-3.5-103": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if"
+    ],
+    "az104-3-3.5-104": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile"
+    ],
+    "az104-3-3.5-105": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies"
+    ],
+    "az104-3-3.1-101": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-portal"
+    ],
+    "az104-3-3.1-102": [
+      "https://learn.microsoft.com/en-us/azure/resource-mover/tutorial-move-region-virtual-machines"
+    ],
+    "az104-3-3.1-103": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk"
+    ],
+    "az104-3-3.4-101": [
+      "https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain"
+    ],
+    "az104-4-4.1-101": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview"
+    ],
+    "az104-4-4.1-102": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview"
+    ],
+    "az104-4-4.1-103": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses"
+    ],
+    "az104-4-4.4-101": [
+      "https://learn.microsoft.com/en-us/azure/dns/dns-delegate-domain-azure-dns"
+    ],
+    "az104-4-4.4-102": [
+      "https://learn.microsoft.com/en-us/azure/dns/dns-zones-records"
+    ],
+    "az104-4-4.4-103": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview"
+    ],
+    "az104-5-5.1-101": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-overview"
+    ]
+  }
+}

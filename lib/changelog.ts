@@ -4,6 +4,7 @@ export type ChangeItem = {
 };
 
 export type ChangeEntry = {
+  id?: string;
   date: string;
   label: string;
   title: string;
@@ -12,6 +13,19 @@ export type ChangeEntry = {
 };
 
 export const changelogEntries: ChangeEntry[] = [
+  {
+    id: "az-104",
+    date: "2026-09-25",
+    label: "Azure Administrator",
+    title: "AZ-104 practice joins the study desk",
+    summary: "Practice Azure administration with 160 original questions, 60 flashcards, 8 matching drills and 40 acronym and term drills. Choose AZ-104 from the certification switcher to begin.",
+    items: [
+      { title: "Learn from every choice", body: "Reviewed explanations cover why the answer fits and why each alternative fails, including corrections for current storage, identity, compute and networking behavior." },
+      { title: "More hands-on topics", body: "New scenarios cover ARM and Bicep, self-service password reset, Azure Files, encryption, object replication, routing and guest-log collection." },
+      { title: "Know what the bank covers", body: "The five domains follow the April 2026 exam outline. Supplemental identity topics are labeled. Matching drills are learning exercises, not replicas of Microsoft exam labs, and practice scores are not official exam predictions." },
+      { title: "Keep your study history", body: "The content update adds Azure practice while preserving existing progress and flashcard scheduling." },
+    ],
+  },
   {
     date: "2026-07-03",
     label: "Class share pass",

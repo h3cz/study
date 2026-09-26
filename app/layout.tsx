@@ -26,8 +26,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://study.hecz.dev"),
-  title: "hecz / study — free CompTIA exam trainer",
-  description: "Free CompTIA Security+, Network+ & A+ practice — daily questions + spaced-repetition flashcards. Built by Hecz.",
+  title: "hecz / study — certification practice",
+  description: "Free Microsoft Azure AZ-104 and CompTIA Security+, Network+ & A+ practice — questions and spaced-repetition flashcards. Built by Hecz.",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [

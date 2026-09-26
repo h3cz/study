@@ -5,6 +5,7 @@ function EntryCard({ entry, index }: { entry: ChangeEntry; index: number }) {
   return (
     <article
       className="changelog-entry"
+      id={entry.id}
       style={{
         borderTop: index === 0 ? "1px solid var(--border-strong)" : "1px solid var(--border)",
       }}

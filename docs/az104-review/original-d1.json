@@ -1,0 +1,986 @@
+{
+  "AZ104_D1_QUESTIONS": [
+    {
+      "id": "az104-1-1.1-001",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.1",
+      "stem": "Your company hires a consulting firm whose engineers need access to a Teams channel and a SharePoint site. You invite their work email addresses through Microsoft Entra B2B collaboration. Which statement about these guest users is correct?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "They sign in with credentials managed by their own organization (or a one-time passcode); your company does not manage their passwords.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "They must be synchronized from your on-premises Active Directory before they can accept the invitation.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "They cannot be added to Microsoft Entra security groups.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Accepting the invitation automatically converts their account to a member user.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: B2B guests federate with their home identity provider or use an emailed one-time passcode, so password lifecycle stays with their organization. B is wrong because guests are cloud-only accounts created by the invitation process; no AD sync is required. C is wrong because guests can be added to security groups and Microsoft 365 groups. D is wrong because userType remains Guest unless an administrator explicitly converts the account.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-1-1.1-002",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.1",
+      "stem": "You must create 200 intern accounts in Microsoft Entra ID before Monday. Which method completes this in a single operation?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Upload a CSV file built from the bulk-create template in the Microsoft Entra admin center.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Run a single New-AzADUser command with a wildcard for the user principal name.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Import the CSV through the Subscriptions blade in the Azure portal.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Use the Conditional Access bulk-upload feature to provision the accounts.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: the Entra admin center's bulk create accepts a CSV (required columns: Name, User name/UPN, Initial password, Block sign in) and provisions all accounts at once. B is wrong because one cmdlet call creates one user; you would need a loop over the CSV. C is wrong because subscriptions manage billing and resources, not identities. D is wrong because Conditional Access evaluates sign-ins and has no user-provisioning function.",
+      "difficulty": 1
+    },
+    {
+      "id": "az104-1-1.1-003",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.1",
+      "stem": "Your team needs a group that gives its members a shared mailbox, a calendar, a SharePoint site, and a Teams team for project collaboration. Which group type should you create?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Microsoft 365 group",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Security group",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mail-enabled security group",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Dynamic device group",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: Microsoft 365 groups bundle collaboration workloads — mailbox, calendar, SharePoint, Teams, Planner. B is wrong because security groups only manage access to resources and can be assigned to Entra roles; they include no mailbox or site. C is wrong because mail-enabled security groups cannot be created in Microsoft Entra ID (they are an Exchange on-premises concept). D is wrong because device groups contain device objects evaluated by device attributes, not users, and provide no collaboration workloads.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-1-1.1-004",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.1",
+      "stem": "You create a dynamic security group with the membership rule (user.department -eq 'Sales') and (user.userType -eq 'Member'). A new employee joins the Sales department next week. What happens?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "The employee is added automatically when the rule is re-evaluated; no manual action is needed.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "The employee must be added manually because rules only run once at group creation.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "The employee is added only if an administrator approves the pending membership.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "The rule fails because department is not a supported attribute for dynamic membership.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: dynamic rules are evaluated continuously, so attribute changes add or remove members automatically. B is wrong because evaluation is ongoing, not one-time. C is wrong because dynamic groups have no approval step — membership is purely rule-driven. D is wrong because department is a standard supported user attribute, along with jobTitle, city, country, and others.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.1-005",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.1",
+      "stem": "You assign Microsoft 365 E5 licenses to the dynamic group 'All-Seattle-Staff'. Maria works in Seattle, then transfers to the Portland office and her department attribute changes to 'Portland'. What happens to her E5 license?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Microsoft Entra ID removes the license because she no longer matches the group membership rule.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "She keeps the license permanently because group-assigned licenses are sticky.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "The license automatically converts to a direct user assignment.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Nothing changes until an administrator manually removes her from the group.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: group-based licensing follows group membership, and the dynamic rule re-evaluation removes Maria from the group, so the license is reclaimed for reuse. B is wrong because group licenses are never sticky; they exist only while membership holds. C is wrong because Entra ID never converts assignment types on its own. D is wrong because dynamic groups remove members automatically — no manual step exists for rule-driven exits.",
+      "difficulty": 4
+    },
+    {
+      "id": "az104-1-1.2-006",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.2",
+      "stem": "Every Conditional Access policy is built from two main building blocks. What are they?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Assignments (who, what, and where the policy applies to) and access controls (the grant or block requirements).",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Signals and named locations.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Users and applications.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Conditions and session controls only.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: assignments define the scope (users/groups, target resources, network, client apps, device state) and access controls define the enforcement (require MFA, require compliant device, block). B is wrong because signals (risk, location, device) feed into conditions — they are inputs, not the two blocks. C is wrong because users and applications are only a subset of the assignments block. D is wrong because it omits the grant/block access controls, which are what actually enforce the policy.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-1-1.2-007",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.2",
+      "stem": "Security alerts show password-spray attacks against mail clients using IMAP and POP3. You create a Conditional Access policy scoped to All users, with client apps set to 'Exchange ActiveSync clients' and 'Other clients', and the grant control set to Block. What is the effect?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "It blocks legacy authentication protocols while modern-authentication apps keep working.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "It blocks all user sign-ins, including Outlook on the web.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "It forces multifactor authentication on IMAP and POP3 clients.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "It applies only to users signing in from outside the corporate network.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: 'Other clients' plus Exchange ActiveSync covers legacy auth (IMAP, POP3, older Office clients), and Block stops those protocols while modern-auth apps like Outlook on the web are untouched. B is wrong because the client-apps condition limits the policy to legacy clients. C is wrong because legacy protocols cannot complete an MFA challenge — that is exactly why you block them instead. D is wrong because no network condition was configured; the policy applies everywhere.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.2-008",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.2",
+      "stem": "You define a named location for your headquarters' public IP range and mark it as trusted. In a Conditional Access policy that requires MFA for all cloud apps, you exclude the trusted location in the network condition. What happens when users sign in?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Users signing in from headquarters skip the MFA prompt; users elsewhere are still prompted.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Sign-ins from headquarters are blocked.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "The named location is automatically applied to every existing Conditional Access policy.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "The exclusion only works if headquarters uses IPv6 addresses.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: a trusted named location can be excluded from a policy's network condition, so the grant control no longer applies to sign-ins from those IPs. B is wrong because nothing in the configuration blocks access — exclusion removes a requirement. C is wrong because named locations must be referenced explicitly in each policy. D is wrong because named locations accept both IPv4 and IPv6 ranges.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.2-009",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.2",
+      "stem": "You are hardening multifactor authentication for administrators. Which authentication method is phishing-resistant and the strongest choice?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "FIDO2 security key or passkey",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "SMS text message codes",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Voice call verification",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "App passwords",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: FIDO2 uses origin-bound public-key cryptography, so the credential cannot be phished or replayed on a fake site. B is wrong because SMS codes are vulnerable to SIM swapping and interception. C is wrong because voice calls can be intercepted or socially engineered. D is wrong because app passwords are static, per-app secrets created to bypass MFA for legacy apps — they weaken, not strengthen, authentication.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-1-1.2-010",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.2",
+      "stem": "An administrator previously set a user's per-user MFA status to Enforced. You later create a Conditional Access policy that requires MFA for all cloud apps, and you add that user to the policy's exclusion list. When the user signs in to Outlook on the web, what happens?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "The user is still prompted for MFA because the per-user Enforced status applies outside Conditional Access.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "The Conditional Access exclusion overrides per-user MFA, so no MFA prompt appears.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "The user is blocked from signing in entirely.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Per-user MFA is automatically set back to Disabled when any Conditional Access policy exists.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: per-user MFA and Conditional Access are separate enforcement paths, and an Enforced per-user status triggers MFA on every sign-in regardless of CA exclusions. B is wrong because a CA exclusion only removes that one policy — it cannot cancel per-user enforcement. C is wrong because nothing in the configuration blocks access. D is wrong because no automatic migration occurs; Microsoft recommends manually setting per-user MFA to Disabled after moving enforcement to Conditional Access to avoid exactly this confusion.",
+      "difficulty": 4
+    },
+    {
+      "id": "az104-1-1.3-011",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.3",
+      "stem": "In Microsoft Entra Privileged Identity Management (PIM), a contractor holds an eligible assignment for the Contributor role on a subscription. What can the contractor do right now?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Nothing privileged — the contractor must activate the role before using its permissions.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Use Contributor permissions immediately, since eligibility includes access.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Approve other users' activation requests for the same role.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Activate the role permanently without justification or approval.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: eligible means the user may request just-in-time activation; until activation completes, no privileged permissions are granted. B describes an active (permanent) assignment, which is the opposite of what PIM's eligible model is for. C is wrong because approving requests requires being designated an approver in the role settings, which eligibility alone does not grant. D is wrong because activation follows the role's configured requirements (justification, MFA, approval) and is always time-limited.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-1-1.3-012",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.3",
+      "stem": "Your PIM role settings for Virtual Machine Contributor require justification, MFA, and approval from the infrastructure team, with a maximum activation duration of 4 hours. A developer's activation request is approved and the role activates at 9:00 AM. Which statement is true?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "At 1:00 PM the role is automatically deactivated and must be requested again for further work.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "The role stays active until the developer manually deactivates it.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Approval is only required for the first activation each week.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Providing a justification replaces the MFA requirement.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: PIM activations are time-boxed, and at the end of the maximum duration the assignment expires automatically — a new request is needed. B is wrong because PIM never leaves an eligible activation on indefinitely; that would defeat just-in-time access. C is wrong because approval is evaluated on every activation request per the role settings. D is wrong because justification, MFA, and approval are independent requirements that stack — one does not waive another.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.3-013",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.3",
+      "stem": "Every quarter, project managers must confirm that external guests still need access to their resource groups, and access for unconfirmed guests should be removed automatically. Which Microsoft Entra feature automates these recurring attestation campaigns?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Access reviews",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "PIM role activation",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Identity Protection risk policies",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Conditional Access session controls",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: access reviews create recurring campaigns where designated reviewers attest to continued need, with auto-apply options to remove denied access. B is wrong because PIM activation grants temporary privileged roles — it does not review existing access. C is wrong because risk policies respond to compromise signals, not to periodic attestation. D is wrong because session controls limit what happens within a session (e.g., app-enforced restrictions), not whether access should continue to exist.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.3-014",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.3",
+      "stem": "Identity Protection flags two detections for an administrator: (1) a sign-in from an unfamiliar location is assessed as medium sign-in risk; (2) the administrator's credentials appear in a public breach, assessed as high user risk. Which response matches each detection?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "A sign-in risk policy can require MFA or block that specific sign-in; a user risk policy can require a secure password change to remediate the compromised account.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Both detections are handled by the sign-in risk policy; user risk is report-only.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "User risk policies evaluate every individual sign-in attempt in real time.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Sign-in risk policies force a password change for every user in the tenant.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: sign-in risk evaluates each authentication attempt (anonymous IP, unfamiliar location, malware-linked IP) and can step up or block that sign-in, while user risk evaluates the probability the account itself is compromised (leaked credentials) and remediates via password change. B is wrong because user risk policies are enforceable, not report-only. C is wrong because per-sign-in evaluation is the definition of sign-in risk. D is wrong because policies scope to the users assigned to them and never force tenant-wide password changes.",
+      "difficulty": 4
+    },
+    {
+      "id": "az104-1-1.3-015",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.3",
+      "stem": "A finance employee's credentials are leaked, producing high user risk in Identity Protection. You want the employee to remediate their own account by changing their password at the next sign-in, rather than being locked out entirely. Which configuration achieves this?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "User risk policy targeting the employee, with the grant control 'Require password change'.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Sign-in risk policy with the grant control 'Block access'.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "User risk policy with the grant control 'Block access'.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Conditional Access policy requiring a compliant device.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: 'Require password change' on a user risk policy forces self-remediation — the user sets a new password and regains access without an administrator reset. B is wrong because it evaluates the wrong risk type and blocks instead of remediating. C is wrong because Block access locks the employee out with no self-service path, the opposite of the goal. D is wrong because device compliance does nothing about leaked credentials on any device.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.4-016",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.4",
+      "stem": "A developer must create and manage virtual machines and their disks, but must NOT be able to grant other people access to the subscription. Which built-in RBAC role fits these requirements?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Contributor",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Owner",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Reader",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "User Access Administrator",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: Contributor grants full management of resources but excludes access management (Microsoft.Authorization/*), exactly matching the requirement. B is wrong because Owner is Contributor plus the ability to assign roles — it would let the developer grant access. C is wrong because Reader is view-only and cannot create VMs. D is wrong because User Access Administrator manages role assignments but cannot manage resources like VMs.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-1-1.4-017",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.4",
+      "stem": "Priya is assigned Reader at the subscription scope and Contributor on the 'web-apps' resource group. What can she do to a virtual machine inside the 'web-apps' resource group?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Manage it fully (start, stop, resize, reconfigure) because role assignments are additive and the most permissive grant applies.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Only view it, because the subscription-level Reader assignment overrides lower scopes.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Nothing — conflicting assignments at different scopes cancel each other out.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Only view it, because the Reader assignment was created first.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: RBAC permissions are additive across scopes, and assignments inherit downward, so the effective permission is the union — Contributor on the resource group wins for that VM. B is wrong because higher scopes do not override lower ones; there is no 'most restrictive wins' rule for allow assignments. C is wrong because conflicts do not cancel; they combine. D is wrong because assignment order is irrelevant to effective permissions.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.4-018",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.4",
+      "stem": "A deployment-stack deny assignment blocks Microsoft.Storage/storageAccounts/delete on a storage account. Sam is Owner of the subscription. Sam attempts to delete the storage account. What happens?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "The delete is blocked — deny assignments take precedence over any allow assignment, including Owner.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "The delete succeeds because the Owner role overrides deny assignments.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "The delete succeeds after a mandatory 24-hour waiting period.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "The deny assignment only applies to Contributor and lower roles.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: the one exception to RBAC's additive model is the deny assignment — an explicit deny always wins over any allow, no matter how privileged the principal. B is wrong because no role, not even Owner, can bypass a deny. C is wrong because deny assignments impose no waiting period; they simply block. D is wrong because deny assignments apply to everyone in scope, including Owners and administrators.",
+      "difficulty": 4
+    },
+    {
+      "id": "az104-1-1.4-019",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.4",
+      "stem": "You need a custom RBAC role that lets help-desk staff restart virtual machines but NOT create, delete, or resize them. Which entry belongs in the role definition's Actions array?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Microsoft.Compute/virtualMachines/restart/action",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Microsoft.Compute/virtualMachines/*",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Microsoft.Compute/virtualMachines/write",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Place the restart permission under DataActions instead of Actions.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: the restart operation is a control-plane action with its own operation string, and granting exactly that string gives least privilege. B is wrong because the wildcard grants every VM operation — create, delete, resize, and more. C is wrong because the write operation permits creating and updating VMs. D is wrong because DataActions cover data-plane operations (like reading blob data); restart is a control-plane action and belongs in Actions.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.4-020",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.4",
+      "stem": "An auditor must assign RBAC roles to other users during a quarterly review but must not be able to create or delete any Azure resources. Which built-in role fits?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "User Access Administrator",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Owner",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Contributor",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Security Reader",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: User Access Administrator grants Microsoft.Authorization/* (manage role assignments and definitions) without any resource-management permissions. B is wrong because Owner adds full resource management on top of access management. C is wrong because Contributor manages resources but cannot assign roles to others. D is wrong because Security Reader is view-only for security posture — it cannot create role assignments.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-1-1.5-021",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.5",
+      "stem": "You must prevent anyone from creating virtual machines with a SKU outside an approved list. Which Azure Policy effect enforces this at creation time?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Deny",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Audit",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Append",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "DeployIfNotExists",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: Deny evaluates the request before the resource provider acts and rejects non-compliant creations. B is wrong because Audit only logs non-compliance to the compliance dashboard — the VM is still created. C is wrong because Append adds fields (such as tags) to a resource during creation; it cannot reject anything. D is wrong because DeployIfNotExists triggers a remediation deployment when a related resource is missing; it does not block the original request.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-1-1.5-022",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.5",
+      "stem": "You apply a ReadOnly resource lock to a resource group containing a running virtual machine. An operator tries to restart the VM from the portal. What happens?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "The restart fails — ReadOnly blocks all write operations, and start, stop, and restart are writes.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "The restart succeeds because power operations are not configuration changes.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "The restart succeeds, but the VM's configuration can no longer be edited.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Only CanNotDelete locks block restarts; ReadOnly does not.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: ReadOnly permits only GET operations, and power-state changes are POST (write) calls, so they are denied. B is wrong because Azure classifies start/stop/restart as write operations regardless of whether settings change. C is wrong because the restart itself is blocked, not just configuration edits. D is wrong because CanNotDelete allows restarts (only deletion is blocked) — it is ReadOnly that blocks them.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.5-023",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.5",
+      "stem": "You add a 'CostCenter' tag to a resource group. New storage accounts deployed into the group afterward do not carry the tag. Why?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tags do not inherit from resource groups automatically; use an Azure Policy with a Modify or Append effect to enforce inheritance.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Tags can only be applied at the subscription scope.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Resource group tags are limited to five tags per group.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Tags propagate to child resources only after 24 hours.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: tagging a resource group tags only the group object itself; inheritance requires a policy (the built-in 'Inherit a tag from the resource group' policy uses Modify). B is wrong because tags can be applied at any scope — resource, resource group, or subscription. C is wrong because the limit is 50 tags per resource or group, not five. D is wrong because there is no delayed propagation; tags simply never inherit without a policy.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-1-1.5-024",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.5",
+      "stem": "You manage dev, test, and prod subscriptions and must enforce an 'allowed locations' policy across all three with a single assignment. What is the correct approach?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Place the three subscriptions under one management group and assign the policy at the management group scope; it inherits downward.",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Assign the policy separately at each subscription, because policy cannot cross subscription boundaries.",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Assign the policy at the tenant root scope so all subscriptions inherit it.",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Management groups can only contain resource groups, not subscriptions.",
+          "correct": false
+        }
+      ],
+      "explanation": "A is correct: management groups sit above subscriptions in the hierarchy, and policy (like RBAC) assigned at a management group inherits to every child subscription, resource group, and resource. B is wrong because crossing subscriptions is exactly what management groups are for. C is wrong because assigning at the tenant root would apply the policy to the entire tenant, not just the three subscriptions — a dedicated management group is the scoped solution. D is wrong because management groups contain subscriptions (which in turn contain resource groups).",
+      "difficulty": 4
+    }
+  ],
+  "AZ104_D1_FLASHCARDS": [
+    {
+      "id": "az104-fc-1-001",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.1",
+      "front": "What is the difference between a member user and a guest user in Microsoft Entra ID?",
+      "back": "Member users belong to your organization (userType Member). Guest users are external B2B invitees (userType Guest) who authenticate with their own organization's credentials or an emailed one-time passcode — you never manage their passwords."
+    },
+    {
+      "id": "az104-fc-1-002",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.1",
+      "front": "Which CSV columns are required to bulk-create users in Microsoft Entra ID?",
+      "back": "Name, User name (UPN), Initial password, and Block sign in (Yes/No). Optional columns include first name, last name, job title, and department."
+    },
+    {
+      "id": "az104-fc-1-003",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.1",
+      "front": "Security group vs Microsoft 365 group — when do you use each?",
+      "back": "Security groups manage access to resources and can be assigned to Microsoft Entra roles. Microsoft 365 groups provide collaboration workloads: shared mailbox, calendar, SharePoint site, Teams team, and Planner."
+    },
+    {
+      "id": "az104-fc-1-004",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.1",
+      "front": "What is a dynamic membership rule, and what happens when a user's attributes change?",
+      "back": "A rule such as (user.department -eq 'Sales') that is evaluated continuously. Users are added or removed automatically as their attributes change — no manual membership edits."
+    },
+    {
+      "id": "az104-fc-1-005",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.2",
+      "front": "What are the two building blocks of every Conditional Access policy?",
+      "back": "Assignments — the conditions defining who, what, and where the policy applies to (users, target resources, network, client apps, device state). Access controls — the grant requirements (require MFA, require compliant device) or Block."
+    },
+    {
+      "id": "az104-fc-1-006",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.2",
+      "front": "What is legacy authentication, and why block it with Conditional Access?",
+      "back": "Older protocols (IMAP, POP3, SMTP AUTH, older Office clients) that cannot enforce MFA — prime targets for password spray. A CA policy targeting 'Other clients' and Exchange ActiveSync with a Block grant stops them while modern-auth apps keep working."
+    },
+    {
+      "id": "az104-fc-1-007",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.3",
+      "front": "What is the difference between an eligible and an active PIM assignment?",
+      "back": "Eligible: the user may activate the role on demand (with justification, MFA, approval) for a limited time — just-in-time access. Active: the role is permanently assigned and usable without activation."
+    },
+    {
+      "id": "az104-fc-1-008",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.3",
+      "front": "Sign-in risk vs user risk in Microsoft Entra Identity Protection?",
+      "back": "Sign-in risk evaluates each sign-in attempt (unfamiliar location, anonymous IP) and can require MFA or block that sign-in. User risk evaluates the likelihood the account itself is compromised (leaked credentials) and remediates via a secure password change."
+    },
+    {
+      "id": "az104-fc-1-009",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.4",
+      "front": "What three elements make up an RBAC role assignment?",
+      "back": "Security principal (user, group, service principal, or managed identity) + role definition (the permissions) + scope (management group, subscription, resource group, or resource)."
+    },
+    {
+      "id": "az104-fc-1-010",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.5",
+      "front": "What do the Azure Policy effects Audit, Deny, and DeployIfNotExists do?",
+      "back": "Audit logs non-compliance without blocking. Deny blocks creation or update of non-compliant resources. DeployIfNotExists deploys a related resource (e.g., an agent or extension) when the target lacks it — used for remediation."
+    },
+    {
+      "id": "az104-fc-1-011",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.5",
+      "front": "ReadOnly vs CanNotDelete resource locks?",
+      "back": "CanNotDelete: resources can be read and modified but not deleted. ReadOnly: no changes at all — start/stop/restart fail because they are write operations. Both inherit to child resources."
+    },
+    {
+      "id": "az104-fc-1-012",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.5",
+      "front": "How do management groups help organize governance?",
+      "back": "Management groups sit above subscriptions in the hierarchy. Policies, RBAC assignments, and locks assigned at a management group inherit downward to all child subscriptions, resource groups, and resources — one assignment governs many subscriptions."
+    }
+  ],
+  "AZ104_D1_PERF_QUESTIONS": [
+    {
+      "id": "az104-pbq-1-001",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.3",
+      "type": "drag-match",
+      "prompt": "Match each Microsoft Entra identity feature to the capability it provides.",
+      "leftLabel": "Feature",
+      "rightLabel": "Capability",
+      "pairs": [
+        {
+          "left": "Conditional Access",
+          "right": "Enforces access requirements such as MFA or compliant devices based on sign-in signals"
+        },
+        {
+          "left": "Privileged Identity Management (PIM)",
+          "right": "Provides just-in-time, time-limited activation of privileged roles"
+        },
+        {
+          "left": "Access reviews",
+          "right": "Runs recurring campaigns where reviewers attest that users still need their access"
+        },
+        {
+          "left": "Identity Protection",
+          "right": "Detects sign-in risk and user risk and automates remediation such as password changes"
+        },
+        {
+          "left": "Self-service password reset (SSPR)",
+          "right": "Lets users reset their own passwords without calling the help desk"
+        },
+        {
+          "left": "Named locations",
+          "right": "Defines trusted IP ranges referenced by Conditional Access network conditions"
+        }
+      ],
+      "explanation": "Conditional Access is the if-then policy engine; PIM is just-in-time privileged access (eligible vs active); access reviews are periodic attestations; Identity Protection is risk detection and automated response; SSPR is user self-service for passwords; named locations label IP ranges as trusted or not for use in CA policies.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-pbq-1-002",
+      "certId": "az-104",
+      "domainId": "az-104:domain:1",
+      "objectiveId": "az-104:obj:1.5",
+      "type": "drag-match",
+      "prompt": "Match each Azure Policy effect to the behavior it produces when a resource is evaluated.",
+      "leftLabel": "Policy effect",
+      "rightLabel": "Behavior",
+      "pairs": [
+        {
+          "left": "Audit",
+          "right": "Records non-compliant resources in the compliance dashboard without blocking them"
+        },
+        {
+          "left": "Deny",
+          "right": "Blocks the creation or update of non-compliant resources"
+        },
+        {
+          "left": "Append",
+          "right": "Adds fields, such as tags, to a resource when it is created or updated"
+        },
+        {
+          "left": "DeployIfNotExists",
+          "right": "Deploys a related resource, like an extension, when the target does not have it"
+        },
+        {
+          "left": "Disabled",
+          "right": "The policy definition is not evaluated at all"
+        }
+      ],
+      "explanation": "Audit observes, Deny enforces by blocking, Append mutates the request to add data (used for tag inheritance), DeployIfNotExists remediates by deploying missing related resources, and Disabled turns evaluation off entirely. Initiatives group multiple policy definitions into one assignable set.",
+      "difficulty": 3
+    }
+  ],
+  "AZ104_D1_ACRONYMS": [
+    {
+      "id": "az104-ac-001",
+      "certId": "az-104",
+      "acronym": "Entra ID",
+      "expansion": "Microsoft Entra ID",
+      "hint": "Cloud identity service, formerly Azure Active Directory — manages users, groups, and sign-in",
+      "domainHint": 1
+    },
+    {
+      "id": "az104-ac-002",
+      "certId": "az-104",
+      "acronym": "MFA",
+      "expansion": "Multifactor authentication",
+      "hint": "Prove identity with two or more factors: something you know plus something you have or are",
+      "domainHint": 1
+    },
+    {
+      "id": "az104-ac-003",
+      "certId": "az-104",
+      "acronym": "PIM",
+      "expansion": "Privileged Identity Management",
+      "hint": "Just-in-time, time-limited activation of privileged roles with approval and audit",
+      "domainHint": 1
+    },
+    {
+      "id": "az104-ac-004",
+      "certId": "az-104",
+      "acronym": "RBAC",
+      "expansion": "Role-based access control",
+      "hint": "Who can do what, where: security principal plus role definition plus scope",
+      "domainHint": 1
+    },
+    {
+      "id": "az104-ac-005",
+      "certId": "az-104",
+      "acronym": "SSPR",
+      "expansion": "Self-service password reset",
+      "hint": "Lets users reset their own passwords without help-desk involvement",
+      "domainHint": 1
+    },
+    {
+      "id": "az104-ac-006",
+      "certId": "az-104",
+      "acronym": "CA",
+      "expansion": "Conditional Access",
+      "hint": "If-then access policies: if these signals, then require MFA, require compliance, or block",
+      "domainHint": 1
+    },
+    {
+      "id": "az104-ac-007",
+      "certId": "az-104",
+      "acronym": "B2B",
+      "expansion": "Business-to-business",
+      "hint": "Guest collaboration: invite users from partner organizations into your tenant",
+      "domainHint": 1
+    },
+    {
+      "id": "az104-ac-008",
+      "certId": "az-104",
+      "acronym": "B2C",
+      "expansion": "Business-to-consumer",
+      "hint": "Customer-facing identity for external apps (now part of Microsoft Entra External ID)",
+      "domainHint": 1
+    }
+  ]
+}

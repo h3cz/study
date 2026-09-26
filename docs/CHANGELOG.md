@@ -2,6 +2,16 @@
 
 Short product log for the study app, public starter, and class-lab materials.
 
+## 2026-09-25 - Azure Administrator practice
+
+- Added 160 original AZ-104 MCQs, 60 flashcards, 8 matching drills and 40 acronym/term drills.
+- Reviewed the original 123 MCQs and all supporting material against Microsoft documentation; corrected answers, assumptions and explanations.
+- Added 37 scenarios covering missing or thin objectives, including Bicep, SSPR, Azure Files, routing and Azure Monitor Agent.
+- Updated domain weights and taxonomy for the April 2026 outline; labeled supplemental identity content.
+- Added a dismissible dashboard announcement linking to the release notes.
+- Bumped the public starter content version to refresh existing local banks without resetting learning progress.
+- Full issue-by-ID report, source evidence and complete replacement files: [AZ-104 review](az104-review/REPORT.md).
+
 ## 2026-07-03 - Class share pass
 
 ### The lab is easier to share from a phone
