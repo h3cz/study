@@ -1,6 +1,6 @@
 import type { Acronym, Flashcard, PerfQuestion, Question } from "@/lib/db";
 
-// Original practice content. Reviewed 2026-09-25; evidence and full issue log: docs/az104-review/REPORT.md.
+// Original practice content. Reviewed 2026-09-26; audit: docs/az104-review/WORKSTREAM-1.md.
 
 export const AZ104_D5_QUESTIONS: Question[] = [
   {
@@ -32,7 +32,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D is the native metrics store for the signal. C can contain CPU samples if guest collection is configured, but is not the native platform metric store. A provides resource diagnostic events. B records management operations, such as resource creation, rather than the CPU time series.",
-    "difficulty": 1
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics"
+    ]
   },
   {
     "id": "az104-5-5.1-002",
@@ -63,7 +66,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A stores Azure Monitor log tables and supports KQL across ingested VM, platform and application data. B identifies metric series rather than log tables. C contains notification/automation destinations. D is a storage log container, not a Log Analytics query store. Modern workspace-based Application Insights stores its telemetry in a Log Analytics workspace.",
-    "difficulty": 1
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview"
+    ]
   },
   {
     "id": "az104-5-5.1-003",
@@ -94,7 +100,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C provides log analysis, storage and streaming destinations. A substitutes a backup vault for a storage destination. B substitutes a viewer and Service Bus for supported routing destinations. D substitutes an alert action group for the event stream destination. Select supported categories; not every metric is exportable, and partner destinations may also be supported.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings"
+    ]
   },
   {
     "id": "az104-5-5.1-004",
@@ -125,7 +134,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D is correct: the filter selects Windows failed-logon event 4625 and summarize count() groups its rows by Account. A is wrong because the query neither sorts nor lists all events. B describes successful-logon event 4624. C would require selecting the earliest timestamped record per account, such as arg_min(TimeGenerated, *), not count().",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators"
+    ]
   },
   {
     "id": "az104-5-5.1-005",
@@ -156,7 +168,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B filters the VM, time range and total Processor counter before averaging into hourly bins. C blends other machines and counters. D counts samples instead of averaging CPU and has no 24-hour filter. A selects older data and mixes counters. The scenario assumes these Windows Perf counters are collected.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators"
+    ]
   },
   {
     "id": "az104-5-5.1-006",
@@ -187,7 +202,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D keeps recent data interactive and older data in long-term retention, accessible using search jobs. A deletes data too early. B retains the year interactively, contrary to the lower-cost design for infrequent historical access. C stops new data collection rather than retaining it. Retention settings do not recover data already purged.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-retention-configure"
+    ]
   },
   {
     "id": "az104-5-5.1-007",
@@ -218,7 +236,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B appends the new calculated column while retaining existing columns. C selects/projects columns, so unlisted existing columns are lost. D aggregates rows rather than preserving each record. A matches tables and is unnecessary for a calculation on each row.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/kusto/query/extend-operator"
+    ]
   },
   {
     "id": "az104-5-5.2-001",
@@ -249,7 +270,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D evaluates the native CPU metric using the requested aggregation/window and an appropriate evaluation frequency. A would require suitable ingested log data, excluded by the scenario. B monitors management events. C detects supported application anomalies rather than the specified VM metric threshold.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types"
+    ]
   },
   {
     "id": "az104-5-5.2-002",
@@ -280,7 +304,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D is the log search alert Mute actions setting: it delays subsequent actions for the configured interval. A changes monitored scope. B violates the fixed evaluation interval. C adds receivers. This is not a universal option for every alert type, and distinct split-by dimension combinations can create distinct alert instances.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-log-alert-rule"
+    ]
   },
   {
     "id": "az104-5-5.2-003",
@@ -311,7 +338,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D includes both requested notification channels and the direct runbook action. A suppresses actions rather than running remediation. B misses the required channels and includes a diagnostic setting, which routes telemetry. C only places a call and cannot satisfy the other two requirements.",
-    "difficulty": 1
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups"
+    ]
   },
   {
     "id": "az104-5-5.2-004",
@@ -342,7 +372,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "IP flow verify simulates a packet (source/destination IP, port, protocol) against the VM's effective NSG rules and reports allow or deny — exactly the tool for this check. Packet capture is wrong because it records actual traffic for deep inspection, not a quick allow/deny simulation. Connection troubleshoot is wrong because it tests end-to-end connectivity (VM to VM/endpoint) with hop-by-hop diagnostics rather than simulating a single packet against rules. Topology is wrong because it only visualizes resource relationships in a VNet.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/network-watcher/ip-flow-verify-overview"
+    ]
   },
   {
     "id": "az104-5-5.2-005",
@@ -373,7 +406,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D captures packet data from the supported VM for inspection, subject to filters and capture limits. Encrypted application content remains encrypted. A records flow metadata, not application packet payloads. B lists effective rules without traffic content. C evaluates whether a hypothetical flow is allowed rather than recording real traffic.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/network-watcher/packet-capture-overview"
+    ]
   },
   {
     "id": "az104-5-5.2-006",
@@ -404,7 +440,11 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C exposes the relevant dimension on the per-IP alert while matching the frequency/window. D cannot evaluate this KQL pattern as a native platform metric. A monitors management events. B reverses the timing and a static rule name cannot supply dynamic IP values. Modern common-schema log alerts do not embed query result rows; retrieve linked results separately if needed.",
-    "difficulty": 4
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-common-schema",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-log-alert-rule"
+    ]
   },
   {
     "id": "az104-5-5.3-001",
@@ -435,7 +475,11 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C hosts Azure VM Backup policies and vault recovery points. D stores logs. A is a real vault type for different supported workloads, such as Azure Disk Backup, not the specified full Azure VM backup policy. B is not how vault-based VM Backup stores its managed recovery points.",
-    "difficulty": 1
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault",
+      "https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction"
+    ]
   },
   {
     "id": "az104-5-5.3-002",
@@ -466,7 +510,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "Grandfather-father-son (GFS) retention is the scheme combining daily, weekly, monthly (and optionally yearly) retention tiers — exactly what the policy describes. Incremental snapshot chaining is wrong because it describes how backup data is stored efficiently, not the retention schedule. Soft delete is wrong because it is a safety feature that retains deleted backup data for a grace period to guard against accidental or malicious deletion. Continuous replication is wrong because it describes Azure Site Recovery, not backup retention.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction"
+    ]
   },
   {
     "id": "az104-5-5.3-003",
@@ -497,7 +544,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C uses the configured retention. Fourteen days is the default, not a fixed duration; supported settings range from 14 to 180 days. D ignores soft-delete protection. A confuses recovery of backup data with automatically restoring a VM. B incorrectly treats deleting one item as pausing the shared backup policy.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-azure-enhanced-soft-delete-about"
+    ]
   },
   {
     "id": "az104-5-5.3-004",
@@ -528,7 +578,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D backs up supported Windows files, folders and system state to a Recovery Services vault without requiring System Center. A protects Azure VMs, not this physical on-premises server. B performs disaster-recovery replication/failover rather than the requested file backup. C collects telemetry; it is not a backup agent.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-support-matrix-mars-agent"
+    ]
   },
   {
     "id": "az104-5-5.3-005",
@@ -559,7 +612,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C uses Site Recovery replication plus a recovery plan to sequence VM groups and supported automation. D supplies recovery points rather than ongoing DR replication and ordered failover. A supports migration assessment/moves, not this steady-state DR workflow. B supplies local failure-domain distribution, not a second-region replica.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/site-recovery/recovery-plan-overview"
+    ]
   },
   {
     "id": "az104-5-5.3-006",
@@ -590,7 +646,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D creates test VMs from recovery points for the isolated drill while production and replication continue. A performs the real production recovery operation. B removes protection rather than testing it. C returns production to its original site after actual failover; it is not an isolated drill. Clean up test failover resources after validation.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill"
+    ]
   },
   {
     "id": "az104-5-5.1-008",
@@ -621,7 +680,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C correlates matching keys, for example an inner join using $left.UserId == $right.EmployeeId. D appends rows and can handle different schemas, but does not match keys. A adds computed columns to existing rows. B aggregates rows. Real employee numbers would need an identity mapping before joining to Entra object IDs.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/kusto/query/join-operator"
+    ]
   },
   {
     "id": "az104-5-5.3-007",
@@ -652,7 +714,10 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "RPO (Recovery Point Objective) is the maximum tolerable data loss expressed as time, and RTO (Recovery Time Objective) is the maximum tolerable downtime — exactly the two numbers requested. SLA/SLO is wrong because those describe service-level commitments and targets, not data-loss/downtime tolerances. MTTR/MTBF is wrong because those are reliability metrics (mean time to repair / between failures), not DR objectives. GFS and soft delete are wrong because they are backup retention and protection features, not DR objectives.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview"
+    ]
   },
   {
     "id": "az104-5-5.1-101",
@@ -683,7 +748,223 @@ export const AZ104_D5_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B connects guest collection, selection and destination. A routes supported platform telemetry but does not install guest event collection. C lacks collection instructions. D never applies the rule to the intended VM. Platform CPU metrics appearing does not prove guest logs are configured.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/vm/data-collection"
+    ]
+  },
+  {
+    "id": "az104-5-5.1-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:5",
+    "objectiveId": "az-104:obj:5.1",
+    "caseStudyId": "az104-case-morrow",
+    "stem": "Which query meets the reporting requirement without mixing machines or unrelated counters?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Perf | where TimeGenerated > ago(24h) | summarize avg(CounterValue) by bin(TimeGenerated, 1h)",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Perf | where TimeGenerated < ago(24h) and ObjectName == \"Processor\" and CounterName == \"% Processor Time\" and InstanceName == \"_Total\" | summarize avg(CounterValue) by Computer, bin(TimeGenerated, 1h)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Perf | where TimeGenerated > ago(24h) and ObjectName == \"Processor\" and CounterName == \"% Processor Time\" and InstanceName == \"_Total\" | summarize avg(CounterValue) by Computer, bin(TimeGenerated, 1h)",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Perf | where TimeGenerated > ago(24h) and InstanceName == \"_Total\" | summarize count() by Computer, bin(TimeGenerated, 1h)",
+        "correct": false
+      }
+    ],
+    "explanation": "C is correct: it keeps the recent window, selects the exact total-CPU counter and averages separately by computer and hour. A mixes counters and VMs. B reverses the time comparison and selects older data. D counts rows instead of averaging CPU and does not fully constrain the counter. The matching agent/DCR configuration is already in place, so no new collection pipeline is needed.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators"
+    ]
+  },
+  {
+    "id": "az104-5-5.2-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:5",
+    "objectiveId": "az-104:obj:5.2",
+    "caseStudyId": "az104-case-morrow",
+    "stem": "Which maintenance configuration preserves the alert record while suppressing only the planned notifications?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Disable the CPU alert rules for the whole weekend.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Delete the action group and recreate it on Monday.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Increase each alert’s threshold permanently so maintenance never triggers it.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use a scoped alert processing rule that suppresses actions on the recurring Sunday 02:00–03:00 UTC schedule.",
+        "correct": true
+      }
+    ],
+    "explanation": "D is correct: an alert processing rule can remove action groups during a scheduled window while alert rules continue evaluating and creating alerts. A removes alert evaluation and exceeds the window. B affects all users of that action group and extends the outage. C changes detection outside maintenance and loses useful alerts. Scope the processing rule to the intended CPU alerts or resources.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-processing-rules"
+    ]
+  },
+  {
+    "id": "az104-5-5.2-302",
+    "certId": "az-104",
+    "domainId": "az-104:domain:5",
+    "objectiveId": "az-104:obj:5.2",
+    "caseStudyId": "az104-case-morrow",
+    "stem": "Which signal and rule should the team use for the on-call CPU requirement outside maintenance?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "A metric alert using each VM’s platform Percentage CPU, with the on-call action group.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "A log alert using Perf, with the same action group, because guest ingestion cannot affect log alerts.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "An Activity log alert searching for CPU percentages.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "A diagnostic setting to a storage account without an alert rule.",
+        "correct": false
+      }
+    ],
+    "explanation": "A is correct: the native platform metric avoids dependency on guest performance-log ingestion and can trigger the action group. B uses exactly the guest-log pipeline the requirement excludes. C uses control-plane events rather than numerical CPU samples. D routes data but does not evaluate a condition or notify. The scheduled processing rule controls notifications during maintenance separately.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types"
+    ]
+  },
+  {
+    "id": "az104-5-5.3-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:5",
+    "objectiveId": "az-104:obj:5.3",
+    "caseStudyId": "az104-case-morrow",
+    "stem": "The file is on a disk supported by Azure VM file recovery. Which recovery approach best preserves today’s unrelated VM changes?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Replace the VM’s disks with yesterday’s recovery point.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Use File Recovery for yesterday’s point, mount the recovery volumes on a supported machine, and copy back only the needed file.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Run a production Site Recovery failover solely to recover the file.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Undelete the VM backup item even though it has not been deleted.",
+        "correct": false
+      }
+    ],
+    "explanation": "B is correct: file recovery exposes files from the selected recovery point for targeted copying, leaving unrelated current data intact. A rolls back a much larger unit and can discard today’s changes. C changes the running recovery location and is not a targeted historical-file restore. D applies to deleted backup items, which the scenario does not contain. Follow the file-recovery support and secure unmount instructions.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms"
+    ]
+  },
+  {
+    "id": "az104-5-5.3-302",
+    "certId": "az-104",
+    "domainId": "az-104:domain:5",
+    "objectiveId": "az-104:obj:5.3",
+    "caseStudyId": "az104-case-morrow",
+    "stem": "Which rehearsal plan satisfies both production constraints?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Run production failover into the live production VNet, then immediately delete the recovered VMs.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Stop replication, restore the latest backup over production, and restart replication after validation.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Run Site Recovery test failover into an isolated test VNet, validate the recovered application, then clean up test failover.",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Commit a production failover and use DNS changes to keep users on the old VMs.",
+        "correct": false
+      }
+    ],
+    "explanation": "C is correct: test failover validates recovery in a separate network while production and replication continue; cleanup removes the test resources afterward. A and D initiate production recovery operations and create traffic or state risks outside the requested drill. B explicitly interrupts replication and overwrites production. Isolation also prevents duplicate machine identities or test traffic from interfering with live systems.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill"
+    ]
+  },
+  {
+    "id": "az104-5-5.2-401",
+    "certId": "az-104",
+    "domainId": "az-104:domain:5",
+    "objectiveId": "az-104:obj:5.2",
+    "caseStudyId": "az104-case-ember",
+    "stem": "Which monitoring design can notify the team about the specified deletion event?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "A Percentage CPU metric alert scoped only to the storage account.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "A blob lifecycle rule that emails after an account disappears.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "A guest Perf-table query on the VM worker, without collecting control-plane events.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "An Activity log alert at subscription scope filtered to the target storage-account delete operation/resource, with an email action group.",
+        "correct": true
+      }
+    ],
+    "explanation": "D is correct: Resource Manager deletion is a control-plane Activity log event; a subscription-scoped rule can match the target resource and notify through an action group even after resource deletion. A uses an unrelated metric rather than the management event. B confuses blob lifecycle actions with account monitoring and email delivery. C observes guest performance, not subscription control-plane operations.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups"
+    ]
   }
 ];
 
@@ -819,7 +1100,84 @@ export const AZ104_D5_PERF_QUESTIONS: PerfQuestion[] = [
       }
     ],
     "explanation": "IP flow verify simulates a packet against effective NSG rules (allow/deny) without sending real traffic. Packet capture records real packets including payloads for deep inspection. Connection troubleshoot checks connectivity between a source and destination and reports where it breaks. Effective security rules shows the merged allow/deny rules from all NSGs applied to a NIC or subnet. Topology draws the VNet's resources and their relationships.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-overview",
+      "https://learn.microsoft.com/en-us/azure/network-watcher/ip-flow-verify-overview",
+      "https://learn.microsoft.com/en-us/azure/network-watcher/packet-capture-overview"
+    ]
+  },
+  {
+    "id": "az104-pbq-5-101",
+    "certId": "az-104",
+    "domainId": "az-104:domain:5",
+    "objectiveId": "az-104:obj:5.2",
+    "type": "drag-match",
+    "prompt": "Match each operations request to the Azure Monitor or Network Watcher capability designed for that evidence or action.",
+    "leftLabel": "Operations request",
+    "rightLabel": "Capability",
+    "pairs": [
+      {
+        "left": "Check whether effective NSG rules allow a specified VM flow",
+        "right": "Network Watcher IP flow verify"
+      },
+      {
+        "left": "Continuously measure reachability and latency between configured endpoints",
+        "right": "Network Watcher Connection monitor"
+      },
+      {
+        "left": "Retain alert creation while suppressing action groups during a scheduled maintenance window",
+        "right": "Azure Monitor alert processing rule"
+      },
+      {
+        "left": "Collect selected guest Windows events into a workspace with the current VM agent model",
+        "right": "Azure Monitor Agent plus an associated data collection rule"
+      }
+    ],
+    "explanation": "IP flow verify evaluates security rules for a specific flow; it is not continuous availability monitoring. Connection monitor performs recurring endpoint checks. An alert processing rule changes notification handling without disabling the originating alert rule. Guest Windows events require the agent and an associated DCR selecting the events and destination, rather than merely enabling native platform metrics.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/network-watcher/ip-flow-verify-overview",
+      "https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-processing-rules",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/vm/data-collection"
+    ]
+  },
+  {
+    "id": "az104-pbq-5-102",
+    "certId": "az-104",
+    "domainId": "az-104:domain:5",
+    "objectiveId": "az-104:obj:5.3",
+    "type": "drag-match",
+    "prompt": "Match each recovery task to the most direct supported operation or vault type. Needed recovery points and workload prerequisites are already available.",
+    "leftLabel": "Recovery task",
+    "rightLabel": "Choice",
+    "pairs": [
+      {
+        "left": "Protect Azure VMs with Azure VM Backup and long-term retention",
+        "right": "Recovery Services vault"
+      },
+      {
+        "left": "Configure Azure Disk Backup for a supported managed disk",
+        "right": "Backup vault"
+      },
+      {
+        "left": "Recover one file from an Azure VM recovery point without reverting its other current files",
+        "right": "Azure VM Backup File Recovery"
+      },
+      {
+        "left": "Rehearse Azure-to-Azure replicated VM recovery without production cutover",
+        "right": "Site Recovery test failover into an isolated test VNet"
+      }
+    ],
+    "explanation": "Azure VM Backup uses a Recovery Services vault, while Azure Disk Backup uses a Backup vault; they are distinct resources with different supported workloads. File Recovery exposes a supported VM recovery point for selective copying. Site Recovery test failover validates replicated VMs in a separate network while production replication continues, followed by test cleanup. Whole-VM restore or production failover would be broader operations than the last two requirements.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault",
+      "https://learn.microsoft.com/en-us/azure/backup/disk-backup-overview",
+      "https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms",
+      "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill"
+    ]
   }
 ];
 

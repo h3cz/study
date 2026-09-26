@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@/lib/analytics";
 import { createClient } from "@/lib/supabase/client";
 import { db } from "@/lib/db";
 import type {
@@ -78,6 +79,7 @@ export async function flush(): Promise<string | undefined> {
       ) {
         return "signed_out";
       }
+      if (item.retries === 0) void track("sync_failed", { surface: "queue" });
       await incrementRetries(item.id!, item.retries);
     }
   }

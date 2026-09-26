@@ -1,7 +1,7 @@
-// SecPlus Quest Service Worker
+// hecz / study Service Worker
 // Caches the app shell and today's session data for offline use.
 
-const CACHE_NAME = "secplus-quest-v1";
+const CACHE_NAME = "hecz-study-v2";
 
 const APP_SHELL = [
   "/",
@@ -9,8 +9,8 @@ const APP_SHELL = [
   "/flashcards",
   "/library",
   "/manifest.webmanifest",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
+  "/brand/icon-192.png",
+  "/brand/icon-512.png",
 ];
 
 self.addEventListener("install", (event) => {
@@ -98,14 +98,14 @@ self.addEventListener("push", (event) => {
   } catch {
     payload = {};
   }
-  const title = payload.title || "SecPlus Quest";
+  const title = payload.title || "hecz / study";
   const body = payload.body || "Time to study.";
   const url = payload.url || "/";
   event.waitUntil(
     self.registration.showNotification(title, {
       body,
-      icon: "/icons/icon-192.png",
-      badge: "/icons/icon-192.png",
+      icon: "/brand/icon-192.png",
+      badge: "/brand/icon-192.png",
       data: { url },
     })
   );

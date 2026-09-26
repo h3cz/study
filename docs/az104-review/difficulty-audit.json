@@ -1,0 +1,1979 @@
+{
+  "reviewedAt": "2026-09-26",
+  "baseline": "b64aa15",
+  "calibration": {
+    "1": "Pure recall",
+    "2": "Simple application",
+    "3": "Multi-concept reasoning",
+    "4": "Tricky scenario with close distractors",
+    "5": "Exam-hardest"
+  },
+  "questions": [
+    {
+      "id": "az104-1-1.1-001",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply the external-identity model to an invited partner.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/external-id/what-is-b2b"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-002",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recognize the bulk-create operation; no interacting constraints.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-003",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select a group type from collaboration requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/fundamentals/concept-learn-about-groups"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-004",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Evaluate a two-clause rule against supplied attributes.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-005",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine dynamic membership processing and the sole license assignment.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership",
+        "https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing"
+      ]
+    },
+    {
+      "id": "az104-1-1.2-006",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall the two Conditional Access policy building blocks.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies"
+      ]
+    },
+    {
+      "id": "az104-1-1.2-007",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply an explicitly scoped client-app condition.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication"
+      ]
+    },
+    {
+      "id": "az104-1-1.2-008",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply one location exclusion to one MFA policy.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-assignment-network"
+      ]
+    },
+    {
+      "id": "az104-1-1.2-009",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Identify a listed phishing-resistant method.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths"
+      ]
+    },
+    {
+      "id": "az104-1-1.2-010",
+      "previous": 4,
+      "difficulty": 3,
+      "changed": true,
+      "reason": "Combine per-user enforcement, a policy exclusion and session state.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-userstates",
+        "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies"
+      ]
+    },
+    {
+      "id": "az104-1-1.3-011",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply eligibility versus activation with other grants excluded.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-activate-your-roles"
+      ]
+    },
+    {
+      "id": "az104-1-1.3-012",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply the explicitly requested four-hour activation duration.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-configure-role-settings"
+      ]
+    },
+    {
+      "id": "az104-1-1.3-013",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select membership reviews from recurring review requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview"
+      ]
+    },
+    {
+      "id": "az104-1-1.3-014",
+      "previous": 4,
+      "difficulty": 3,
+      "changed": true,
+      "reason": "Distinguish user risk from sign-in risk and map two responses.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies"
+      ]
+    },
+    {
+      "id": "az104-1-1.3-015",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Identify registration as the stated missing remediation prerequisite.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies"
+      ]
+    },
+    {
+      "id": "az104-1-1.4-016",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select a role combining resource management and no delegation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles"
+      ]
+    },
+    {
+      "id": "az104-1-1.4-017",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply additive RBAC at nested scopes with blockers excluded.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview"
+      ]
+    },
+    {
+      "id": "az104-1-1.4-018",
+      "previous": 4,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply the deny-over-allow rule; exclusions are already resolved.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/deny-assignments"
+      ]
+    },
+    {
+      "id": "az104-1-1.4-019",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select one management-plane permission with limited scope of operations.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles"
+      ]
+    },
+    {
+      "id": "az104-1-1.4-020",
+      "previous": 3,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recognize a built-in role definition; escalation is explicitly excluded.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-021",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Choose an enforcing policy effect for new deployments.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-deny"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-022",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply an inherited ReadOnly lock to a management operation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-023",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply noninheritance of tags and select a copying policy.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-024",
+      "previous": 4,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select the shared parent scope for three subscriptions.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/governance/management-groups/overview"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-101",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply Selected SSPR to a pilot group.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-102",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select password writeback for an explicitly hybrid reset.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sspr-writeback"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-103",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Compare registered methods with the stated reset requirement.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-104",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "The missing property is named directly in the stem.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/fundamentals/license-users-groups"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-105",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Evaluate surviving direct licensing after group membership changes.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing"
+      ]
+    },
+    {
+      "id": "az104-1-1.4-101",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Choose the narrowest scope containing all requested VMs.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview"
+      ]
+    },
+    {
+      "id": "az104-1-1.4-102",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Distinguish directory administration from resource authorization.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-101",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select remediation for existing noncompliant resources.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-102",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recognize the initiative definition.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-103",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply alert-only budget behavior with automation excluded.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-104",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Map right-sizing recommendations to Advisor.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-105",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Distinguish resource-group metadata location from resource region.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-106",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine changed resource IDs, direct roles and inherited target roles.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-107",
+      "previous": 4,
+      "difficulty": 3,
+      "changed": true,
+      "reason": "Reason about identity-dependent access across directory transfer.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/transfer-subscription"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-108",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Distinguish operation verb, management plane and ReadOnly semantics.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-001",
+      "previous": 1,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select an account type supporting four requested services.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-002",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Match premium block-blob and hierarchical-namespace requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-003",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select geographic replication while excluding read access and zones.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-004",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select pre-failover secondary reads given accepted replication lag.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-005",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply the account-type redundancy support restriction.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-006",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine zonal protection, geographic replication and secondary reads.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy"
+      ]
+    },
+    {
+      "id": "az104-2-2.2-001",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Balance retention duration, online access and capacity pricing.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.2-002",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recognize supported rehydration methods and asynchronous behavior.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/archive-rehydrate-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.2-003",
+      "previous": 3,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "The lifecycle property explicitly names the comparison timestamp.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-policy-structure"
+      ]
+    },
+    {
+      "id": "az104-2-2.2-004",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Construct the container-qualified literal prefix.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-policy-structure"
+      ]
+    },
+    {
+      "id": "az104-2-2.2-005",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select overwrite protection with prerequisites already supplied.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.2-006",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Distinguish deleted-container recovery from blob-level protection.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-container-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.3-001",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine time-limited delegation and independent revocation requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview",
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet"
+      ]
+    },
+    {
+      "id": "az104-2-2.3-002",
+      "previous": 3,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recognize the definition of a user delegation SAS.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-user-delegation-sas-create-dotnet"
+      ]
+    },
+    {
+      "id": "az104-2-2.3-003",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply staged key rotation to an explicitly unused second key.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage"
+      ]
+    },
+    {
+      "id": "az104-2-2.3-004",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select a private IP endpoint from a direct network requirement.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints"
+      ]
+    },
+    {
+      "id": "az104-2-2.3-005",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine service-endpoint configuration with storage firewall authorization.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security"
+      ]
+    },
+    {
+      "id": "az104-2-2.3-006",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recognize supported Entra blob data authorization.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory"
+      ]
+    },
+    {
+      "id": "az104-2-2.4-001",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Choose copy direction and recursive flag.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-upload"
+      ]
+    },
+    {
+      "id": "az104-2-2.4-002",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Choose synchronization with destination deletion.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-synchronize"
+      ]
+    },
+    {
+      "id": "az104-2-2.4-003",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Choose supported unattended authentication.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-authorize-azure-active-directory",
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.4-004",
+      "previous": 1,
+      "difficulty": 1,
+      "changed": false,
+      "reason": "Identify the graphical desktop storage tool.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer"
+      ]
+    },
+    {
+      "id": "az104-2-2.4-005",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Match local placeholders and on-demand recall to cloud tiering.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-cloud-tiering-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.4-006",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Choose the sync-group topology matching the branches.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-planning"
+      ]
+    },
+    {
+      "id": "az104-2-2.5-101",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine successful authentication, share RBAC and permissive file ACLs.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-assign-share-level-permissions",
+        "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.5-102",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Evaluate interacting share permissions and restrictive file ACLs.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.5-103",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select single-file recovery from an existing snapshot.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-101",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall default at-rest encryption.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-102",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine source change feed, bilateral versioning and a replication policy.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.5-104",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply share soft delete within its configured retention.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-enable-soft-delete"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-001",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Map the memory-to-CPU requirement to a VM family.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-002",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall behavior when burst credits are exhausted.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/b-series-cpu-credit-model"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-003",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply deallocation when the desired size is unavailable on current hardware.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/resize-vm"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-004",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall temporary-disk durability.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-005",
+      "previous": 4,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Compare one supplied IOPS threshold with disk capabilities.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-006",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Choose an extension for one-time imperative installation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-007",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply an explicitly selected Spot eviction policy.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/spot-vms"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-008",
+      "previous": 4,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select dedicated physical hosts from isolation requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts"
+      ]
+    },
+    {
+      "id": "az104-3-3.2-001",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall the purpose of update domains.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview"
+      ]
+    },
+    {
+      "id": "az104-3-3.2-002",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine backend zonal distribution, surviving dependencies and frontend resilience.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-availability-zones"
+      ]
+    },
+    {
+      "id": "az104-3-3.2-003",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select orchestration mode from VM resource-model requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-orchestration-modes"
+      ]
+    },
+    {
+      "id": "az104-3-3.2-004",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Identify metric-based autoscale from explicit CPU rules.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-overview"
+      ]
+    },
+    {
+      "id": "az104-3-3.2-005",
+      "previous": 3,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall the Default scale-in ordering; no actual candidate set is evaluated.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy"
+      ]
+    },
+    {
+      "id": "az104-3-3.2-006",
+      "previous": 5,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Recognize documented automatic upgrade rollback; distractors do not require close reasoning.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade"
+      ]
+    },
+    {
+      "id": "az104-3-3.2-007",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall the two-instance availability-set condition.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview"
+      ]
+    },
+    {
+      "id": "az104-3-3.2-008",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall the definition of an availability zone.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview"
+      ]
+    },
+    {
+      "id": "az104-3-3.3-001",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select the restart policy from exit-handling requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-restart-policy"
+      ]
+    },
+    {
+      "id": "az104-3-3.3-002",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall container-group sharing semantics.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups"
+      ]
+    },
+    {
+      "id": "az104-3-3.3-003",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply multiple revisions to a supplied traffic split.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/container-apps/revisions"
+      ]
+    },
+    {
+      "id": "az104-3-3.3-004",
+      "previous": 5,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Choose event-driven queue scaling; this is not hardest-level reasoning.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/container-apps/scale-app"
+      ]
+    },
+    {
+      "id": "az104-3-3.3-005",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall the ACR SKU offering geo-replication.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-skus"
+      ]
+    },
+    {
+      "id": "az104-3-3.3-006",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select the shared Container Apps environment boundary.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/container-apps/environment"
+      ]
+    },
+    {
+      "id": "az104-3-3.3-007",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Map two resource requests to the correct configuration fields.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-001",
+      "previous": 1,
+      "difficulty": 1,
+      "changed": false,
+      "reason": "Recognize vertical scaling terminology.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-002",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply scale-out support restrictions to a Free plan.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-003",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select a slot swap for a warmed deployment.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-004",
+      "previous": 4,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply a sticky connection-string setting to preserve slot identity.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-005",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select the minimum tier supporting the two supplied capabilities.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-006",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Choose custom rather than automatic backup from explicit requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/manage-backup"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-007",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select the single-tenant App Service environment.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/environment/overview"
+      ]
+    },
+    {
+      "id": "az104-3-3.5-101",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply explicit parameter precedence over a default.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters"
+      ]
+    },
+    {
+      "id": "az104-3-3.5-102",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Match resource-group deployment scope and CLI verb.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli"
+      ]
+    },
+    {
+      "id": "az104-3-3.5-103",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select a nonmutating deployment preview.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if"
+      ]
+    },
+    {
+      "id": "az104-3-3.5-104",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Choose decompilation and required review rather than reverse conversion.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile"
+      ]
+    },
+    {
+      "id": "az104-3-3.5-105",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Interpret one symbolic resource reference as an implicit dependency.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-101",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Match host encryption to cache and temporary-disk requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-portal"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-102",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Distinguish regional relocation from logical resource-group movement.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/resource-mover/overview"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-103",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply guest filesystem expansion after the Azure disk resize.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-101",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine DNS routing and separate ownership verification records.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-001",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Choose a subnet size and four independent segments.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-002",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Calculate 32 addresses minus five Azure reservations.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-003",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply the gateway subnet naming and sizing requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-004",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Reserve a specified private address in the Azure NIC configuration.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/private-ip-addresses"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-005",
+      "previous": 4,
+      "difficulty": 3,
+      "changed": true,
+      "reason": "Combine private endpoint reachability, DNS and public-access shutdown.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-sql/database/private-endpoint-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-006",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply the delegated App Service integration-subnet restriction.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration"
+      ]
+    },
+    {
+      "id": "az104-4-4.2-001",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply nontransitive peering to three VNets.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.2-002",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Map complementary gateway-transit settings to the correct peering directions.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit"
+      ]
+    },
+    {
+      "id": "az104-4-4.2-003",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Diagnose the explicitly overlapping address spaces.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.2-004",
+      "previous": 3,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall a SKU throughput benchmark and generation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/vpn-gateway/about-gateway-skus"
+      ]
+    },
+    {
+      "id": "az104-4-4.2-005",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Match three connection types to their endpoints.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/vpn-gateway/design"
+      ]
+    },
+    {
+      "id": "az104-4-4.2-006",
+      "previous": 4,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select Global Reach for circuit-to-circuit site connectivity.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-global-reach"
+      ]
+    },
+    {
+      "id": "az104-4-4.3-001",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Evaluate CIDR membership before NSG priority.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.3-002",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall built-in NSG rules.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.3-003",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine separate subnet and NIC rule evaluations.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-group-how-it-works"
+      ]
+    },
+    {
+      "id": "az104-4-4.3-004",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select ASGs for role-based VM membership in security rules.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups"
+      ]
+    },
+    {
+      "id": "az104-4-4.3-005",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Map three traffic needs and order firewall rule collections.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/firewall/rule-processing"
+      ]
+    },
+    {
+      "id": "az104-4-4.3-006",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select portal-based VM administration without public VM ports.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/bastion/bastion-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-001",
+      "previous": 3,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall Standard Load Balancer capabilities.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-002",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine private exposure, health probes and client filtering.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview",
+        "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-003",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Distinguish balancing from per-instance forwarding in one design.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/load-balancer/inbound-nat-rules"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-004",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select subnet outbound SNAT for a predictable shared address.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-005",
+      "previous": 4,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Match regional Layer 7 and WAF requirements to one service.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/application-gateway/overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-006",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Separate peering connectivity from private-zone visibility and registration.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-101",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply longest-prefix selection to two routes.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-102",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine Azure NIC forwarding and guest routing requirements.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-network-interface"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-103",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall the compatible Standard public IP SKU.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-101",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Apply authoritative DNS delegation at the registrar.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/dns/dns-delegate-domain-azure-dns"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-102",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recognize a hostname alias record.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/dns/dns-zones-records"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-103",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine probe origin, NSG matching and precedence.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+        "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-001",
+      "previous": 1,
+      "difficulty": 1,
+      "changed": false,
+      "reason": "Identify a numerical time-series signal.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-002",
+      "previous": 1,
+      "difficulty": 1,
+      "changed": false,
+      "reason": "Identify the KQL log collection destination.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-003",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Map three diagnostic destinations to analysis, retention and streaming.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-004",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Interpret filtering and aggregation in a short query.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-005",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine time range, host, counter selection and hourly aggregation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-006",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Separate interactive and total retention under cost constraints.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-retention-configure"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-007",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recognize the add-column operator.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/kusto/query/extend-operator"
+      ]
+    },
+    {
+      "id": "az104-5-5.2-001",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select an alert from the available platform signal.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types"
+      ]
+    },
+    {
+      "id": "az104-5-5.2-002",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply action muting without changing evaluation frequency.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-log-alert-rule"
+      ]
+    },
+    {
+      "id": "az104-5-5.2-003",
+      "previous": 1,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Map three required responses to action-group capabilities.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups"
+      ]
+    },
+    {
+      "id": "az104-5-5.2-004",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select effective-rule evaluation for a specific test flow.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/network-watcher/ip-flow-verify-overview"
+      ]
+    },
+    {
+      "id": "az104-5-5.2-005",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select packet-level evidence rather than aggregate flow information.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/network-watcher/packet-capture-overview"
+      ]
+    },
+    {
+      "id": "az104-5-5.2-006",
+      "previous": 4,
+      "difficulty": 3,
+      "changed": true,
+      "reason": "Combine evaluation interval, lookback, dimensions and webhook schema.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-common-schema",
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-log-alert-rule"
+      ]
+    },
+    {
+      "id": "az104-5-5.3-001",
+      "previous": 1,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select the vault type for Azure VM protection and retention.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault",
+        "https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction"
+      ]
+    },
+    {
+      "id": "az104-5-5.3-002",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recognize the named multilevel retention scheme.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction"
+      ]
+    },
+    {
+      "id": "az104-5-5.3-003",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Apply the explicitly configured soft-delete retention.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/backup/backup-azure-enhanced-soft-delete-about"
+      ]
+    },
+    {
+      "id": "az104-5-5.3-004",
+      "previous": 2,
+      "difficulty": 2,
+      "changed": false,
+      "reason": "Select MARS for the specified physical Windows server.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/backup/backup-support-matrix-mars-agent"
+      ]
+    },
+    {
+      "id": "az104-5-5.3-005",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine cross-region replication and ordered tier recovery.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/site-recovery/recovery-plan-overview"
+      ]
+    },
+    {
+      "id": "az104-5-5.3-006",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Select an isolated nonproduction DR test.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-008",
+      "previous": 3,
+      "difficulty": 2,
+      "changed": true,
+      "reason": "Match equality-based cross-table correlation to join.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/kusto/query/join-operator"
+      ]
+    },
+    {
+      "id": "az104-5-5.3-007",
+      "previous": 2,
+      "difficulty": 1,
+      "changed": true,
+      "reason": "Recall the meanings of RPO and RTO.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-101",
+      "previous": 3,
+      "difficulty": 3,
+      "changed": false,
+      "reason": "Combine guest agent, DCR data selection, association and destination.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/vm/data-collection"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine management-group membership, inheritance and enforcing versus auditing effects.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/governance/management-groups/overview",
+        "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-deny"
+      ]
+    },
+    {
+      "id": "az104-1-1.4-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine additive scopes, lock removal and Contributor exclusions.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles",
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-302",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Combine lock semantics, existing-resource remediation and noninherited tags across close partial solutions.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources",
+        "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources",
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources"
+      ]
+    },
+    {
+      "id": "az104-1-1.1-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine group-rule Boolean logic, guest attributes and group-based licensing.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership",
+        "https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing"
+      ]
+    },
+    {
+      "id": "az104-1-1.5-303",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Diagnose an operation using inherited locks, HTTP semantics and already sufficient RBAC.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources",
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine redundancy, read availability, access latency and tier compatibility.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy",
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview"
+      ]
+    },
+    {
+      "id": "az104-2-2.2-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine the scenario namespace and exact lifecycle timestamp semantics.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-policy-structure"
+      ]
+    },
+    {
+      "id": "az104-2-2.3-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine resource scope, time-limited data access and allowed signing credentials.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview",
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-user-delegation-sas-create-dotnet"
+      ]
+    },
+    {
+      "id": "az104-2-2.3-302",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine DNS evidence, private network exposure and independent data authorization.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints",
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory"
+      ]
+    },
+    {
+      "id": "az104-2-2.1-302",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Distinguish two replication mechanisms and combine their actual prerequisites with selected-object scope.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview",
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-301",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Combine slot-specific settings, nonswapped identities and pre-swap validation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+      ]
+    },
+    {
+      "id": "az104-3-3.2-301",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Combine candidate exclusion, creation-age ordering and aggregate autoscale behavior.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy",
+        "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-instance-protection"
+      ]
+    },
+    {
+      "id": "az104-3-3.5-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Interpret parameter precedence and resource references together.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters",
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-302",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Track three independently behaving resources through a slot swap.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+      ]
+    },
+    {
+      "id": "az104-3-3.5-302",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine deployment scope, parameter fidelity and a nonmutating review requirement.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if",
+        "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli"
+      ]
+    },
+    {
+      "id": "az104-4-4.2-301",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Combine directional gateway transit and explicitly nontransitive peering under a no-NVA constraint.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit",
+        "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Distinguish established IP reachability from per-VNet private DNS visibility.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links",
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints"
+      ]
+    },
+    {
+      "id": "az104-4-4.3-301",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Combine probe source, two NSGs, rule precedence and least exposure.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+        "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-group-how-it-works"
+      ]
+    },
+    {
+      "id": "az104-4-4.4-302",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine traffic direction, shared egress identity and private NIC constraints.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-overview"
+      ]
+    },
+    {
+      "id": "az104-4-4.1-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Interpret CIDR overlap in a hybrid topology and separate transit from translation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/vpn-gateway/nat-overview",
+        "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit",
+        "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview"
+      ]
+    },
+    {
+      "id": "az104-5-5.1-301",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Evaluate four close query plans against signal identity, time direction and grouping granularity.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators"
+      ]
+    },
+    {
+      "id": "az104-5-5.2-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Separate alert generation from scheduled notification handling.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-processing-rules"
+      ]
+    },
+    {
+      "id": "az104-5-5.2-302",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Select the independent signal pipeline while keeping notification handling separate.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics",
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types"
+      ]
+    },
+    {
+      "id": "az104-5-5.3-301",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Choose recovery granularity from overwrite timing, available backup and continuity constraints.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms"
+      ]
+    },
+    {
+      "id": "az104-5-5.3-302",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Combine nondisruptive recovery testing, isolation and cleanup.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill"
+      ]
+    },
+    {
+      "id": "az104-1-1.4-401",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Combine deployment delegation limits, managed identities and management/data-plane role separation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles",
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory"
+      ]
+    },
+    {
+      "id": "az104-2-2.3-401",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Combine slot-specific network paths, DNS and identity authorization before removing fallback access.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints",
+        "https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration",
+        "https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory"
+      ]
+    },
+    {
+      "id": "az104-3-3.4-401",
+      "previous": null,
+      "difficulty": 4,
+      "changed": false,
+      "new": true,
+      "reason": "Resolve interacting inbound/outbound networking, DNS and swap behavior across close incomplete designs.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration",
+        "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots",
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints"
+      ]
+    },
+    {
+      "id": "az104-3-3.1-401",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Separate managed-disk capacity and guest filesystem state from unrelated PaaS components.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk"
+      ]
+    },
+    {
+      "id": "az104-5-5.2-401",
+      "previous": null,
+      "difficulty": 3,
+      "changed": false,
+      "new": true,
+      "reason": "Choose a durable monitoring scope and correct signal/action path for a destructive management event.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log",
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types",
+        "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups"
+      ]
+    }
+  ]
+}

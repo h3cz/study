@@ -1,6 +1,6 @@
 import type { Acronym, Flashcard, PerfQuestion, Question } from "@/lib/db";
 
-// Original practice content. Reviewed 2026-09-25; evidence and full issue log: docs/az104-review/REPORT.md.
+// Original practice content. Reviewed 2026-09-26; audit: docs/az104-review/WORKSTREAM-1.md.
 
 export const AZ104_D1_QUESTIONS: Question[] = [
   {
@@ -32,7 +32,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B is correct for these invited external guests: their external identity provider or email passcode authenticates them; the resource tenant does not issue their password. C is wrong because invitation does not require directory synchronization. D is wrong because guests can join security groups. A is wrong because accepting a guest invitation does not automatically change UserType to Member. UserType alone does not identify the authentication provider.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/external-id/what-is-b2b"
+    ]
   },
   {
     "id": "az104-1-1.1-002",
@@ -63,7 +66,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B creates cloud users from the downloaded CSV template, which includes name, UPN, initial password, and block-sign-in fields. Validate the file and inspect job results for row failures. C adds existing users to a group. D invites external collaborators. A exports existing users rather than creating them.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add"
+    ]
   },
   {
     "id": "az104-1-1.1-003",
@@ -94,7 +100,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C provides the Microsoft 365 collaboration membership and group mailbox/calendar; a Team can be created using that group. D is for access control and has no collaboration mailbox. A is available in Exchange Online but provides mail distribution plus security membership, not the Microsoft 365 collaboration workspace. B contains devices rather than project users. Entra role assignments require a specifically role-assignable group.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/fundamentals/concept-learn-about-groups"
+    ]
   },
   {
     "id": "az104-1-1.1-004",
@@ -125,7 +134,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D is correct because both user attributes match the enabled rule. Membership processing is asynchronous, so it need not appear immediately. A is wrong because rules are reevaluated after relevant changes. B is wrong because this group has no per-member approval workflow. C is wrong because department is a supported string property.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership"
+    ]
   },
   {
     "id": "az104-1-1.1-005",
@@ -156,7 +168,11 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is correct: Maria no longer matches this group, so its E5 assignment is removed. B is wrong because group-based assignments follow membership. C is wrong because leaving a group does not create a direct assignment. D is wrong because the dynamic rule processes the change automatically. An independent direct or other-group assignment could retain E5, but the scenario excludes those.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership",
+      "https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing"
+    ]
   },
   {
     "id": "az104-1-1.2-006",
@@ -187,7 +203,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D names the two policy sections: assignments select users, resources and applicable conditions; access controls specify grant requirements, blocking, and session behavior. A lists inputs within assignments. B lists only two assignment categories. C omits user/resource assignments and grant controls, so neither is the complete pair.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies"
+    ]
   },
   {
     "id": "az104-1-1.2-007",
@@ -218,7 +237,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C follows the selected legacy client-app condition. Protocols such as IMAP can also use OAuth, so this is not a blanket protocol ban. D is wrong because browser sign-ins do not match that condition. A is wrong because these legacy requests cannot satisfy an interactive MFA challenge. B is wrong because no network restriction is configured. Other policies may still affect modern clients.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication"
+    ]
   },
   {
     "id": "az104-1-1.2-008",
@@ -249,7 +271,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A describes this policy only: the excluded network does not match its assignments. Other policies or per-user MFA can still require MFA, and an existing claim can satisfy a requirement without another prompt. B is wrong because exclusion does not block. C is wrong because each policy must reference a location. D is wrong because named IP locations support both IPv4 and IPv6.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-assignment-network"
+    ]
   },
   {
     "id": "az104-1-1.2-009",
@@ -280,7 +305,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C uses origin-bound public-key credentials and is included in phishing-resistant MFA strength. D and A can be redirected or relayed and do not satisfy that strength. B provides two factors, but a one-time code can be relayed by a phishing site; MFA is not automatically phishing-resistant.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths"
+    ]
   },
   {
     "id": "az104-1-1.2-010",
@@ -311,7 +339,11 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct under the stated fresh-session assumption: excluding a user from this Conditional Access policy does not remove independent per-user MFA enforcement. D incorrectly treats exclusion as a global bypass. A invents a block that was not configured. B is wrong because creating a Conditional Access policy does not change per-user MFA state automatically.",
-    "difficulty": 4
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-userstates",
+      "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies"
+    ]
   },
   {
     "id": "az104-1-1.3-011",
@@ -342,7 +374,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is correct: eligibility permits requesting activation but does not itself grant Contributor access. B confuses eligibility with active access; active assignments can be time-bound or permanent. C requires a separate approver designation. D is wrong because activation follows configured requirements and has an expiry; eligibility does not authorize permanent self-assignment.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-activate-your-roles"
+    ]
   },
   {
     "id": "az104-1-1.3-012",
@@ -373,7 +408,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct because the approved four-hour activation runs from 9:00 AM to 1:00 PM. A shorter request would expire earlier. D ignores the expiry. A is wrong because each request is subject to the configured approval requirement. B is wrong because justification does not replace the MFA requirement; a valid existing MFA claim may satisfy it.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-configure-role-settings"
+    ]
   },
   {
     "id": "az104-1-1.3-013",
@@ -404,7 +442,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C supports recurring group membership reviews, automatic application of results, and a configured decision for unanswered reviews. Removing this group membership removes the stated access path. D grants temporary privileged access rather than reviewing this group. A responds to risk detections. B controls session behavior rather than recurring membership attestation.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview"
+    ]
   },
   {
     "id": "az104-1-1.3-014",
@@ -435,7 +476,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D distinguishes attempt risk from account-compromise risk. A is wrong because user-risk Conditional Access can enforce controls. B confuses user risk with sign-in risk. C is wrong because sign-in risk does not inherently reset every password; policy scope and grant controls determine the response. Use Conditional Access rather than designing new legacy ID Protection risk policies.",
-    "difficulty": 4
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies"
+    ]
   },
   {
     "id": "az104-1-1.3-015",
@@ -466,7 +510,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A supplies the authentication and password-reset prerequisites for self-remediation. B blocks the user without enabling password recovery. C does not remediate the compromised password. D removes enforcement rather than making secure self-remediation work.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies"
+    ]
   },
   {
     "id": "az104-1-1.4-016",
@@ -497,7 +544,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A manages resources but cannot assign Azure RBAC roles. B also permits access management, exceeding the requirement. C cannot create or change the VMs. D manages access assignments rather than VM resources. Contributor excludes specific privileged operations; it does not exclude every Microsoft.Authorization operation.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles"
+    ]
   },
   {
     "id": "az104-1-1.4-017",
@@ -528,7 +578,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is correct: the resource-group Contributor grant includes those VM management operations, and the inherited Reader grant does not subtract them. B incorrectly treats a higher-scope allow as a restriction. C incorrectly cancels grants. D incorrectly relies on assignment order. Effective allow permissions are additive; separate enforcement such as deny assignments can still block an operation.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview"
+    ]
   },
   {
     "id": "az104-1-1.4-018",
@@ -559,7 +612,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct for this direct delete: the applicable deny blocks it despite Owner. D incorrectly treats Owner as a bypass. A invents a waiting period. B incorrectly limits denies to lower roles. Deny scope and excluded principals matter; changing the protecting stack is a different operation.",
-    "difficulty": 4
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/deny-assignments"
+    ]
   },
   {
     "id": "az104-1-1.4-019",
@@ -590,7 +646,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct: the restart operation is a control-plane action with its own operation string, and granting exactly that string gives least privilege. D is wrong because the wildcard grants every VM operation — create, delete, resize, and more. A is wrong because the write operation permits creating and updating VMs. B is wrong because DataActions cover data-plane operations (like reading blob data); restart is a control-plane action and belongs in Actions.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles"
+    ]
   },
   {
     "id": "az104-1-1.4-020",
@@ -621,7 +680,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A grants access-management permissions and resource read access, not general workload management. B includes general resource management. C manages workloads but cannot assign roles. D is a security read role. An unrestricted access administrator can assign a more powerful role, so this alone is not an anti-escalation boundary.",
-    "difficulty": 3
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles"
+    ]
   },
   {
     "id": "az104-1-1.5-021",
@@ -652,7 +714,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B is the direct effect for rejecting a VM request whose SKU is outside the allowed list. C records noncompliance without blocking. D adds properties and can reject conflicting values, but is not the intended allowed-SKU validation effect. A checks/deploys related configuration after resource provisioning; existing resources need a remediation task and suitable permissions.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-deny"
+    ]
   },
   {
     "id": "az104-1-1.5-022",
@@ -683,7 +748,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is correct: restarting through Azure Resource Manager is a POST action blocked by ReadOnly. B wrongly exempts power actions. C is wrong because applying the lock does not stop a running VM. D reverses the lock behavior: CanNotDelete permits restart. A control-plane lock does not prevent a guest administrator from changing files or rebooting inside the OS.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources"
+    ]
   },
   {
     "id": "az104-1-1.5-023",
@@ -714,7 +782,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is correct: tags on a resource group describe that group. A Modify policy can copy them to supported resources; existing resources require remediation. B is wrong because supported resources, resource groups, and subscriptions can be tagged. C invents a five-tag limit. D invents automatic propagation; waiting does not create inheritance. Management groups do not support tags.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources"
+    ]
   },
   {
     "id": "az104-1-1.5-024",
@@ -745,7 +816,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C scopes one inherited policy assignment to the three subscriptions in a dedicated management group. D would require three assignments. A affects all 20 subscriptions and violates the requested scope. B is wrong because management groups contain subscriptions and other management groups, not resource groups directly.",
-    "difficulty": 4
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/governance/management-groups/overview"
+    ]
   },
   {
     "id": "az104-1-1.1-101",
@@ -776,7 +850,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C enables SSPR for the intended pilot group. B expands the rollout to everyone. D configures available methods but does not enable the reset feature. A requires stronger sign-in authentication without enabling password self-service. Ensure pilot users register the required reset methods.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr"
+    ]
   },
   {
     "id": "az104-1-1.1-102",
@@ -807,7 +884,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A carries a supported SSPR reset to AD DS and respects the applicable on-premises policy. C synchronizes password hashes toward the cloud. D does not write changes to AD DS. B validates sign-ins against AD DS but does not by itself implement password-reset writeback.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sspr-writeback"
+    ]
   },
   {
     "id": "az104-1-1.1-103",
@@ -838,7 +918,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A satisfies the required number of verification methods. B does not add a verification method. C can require authentication but does not supply missing registration. D changes session reauthentication timing rather than registering the missing recovery method.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr"
+    ]
   },
   {
     "id": "az104-1-1.1-104",
@@ -869,7 +952,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D is the licensing location property. A is descriptive workplace information. B identifies an organizational department. C is a friendly name. Those descriptive fields do not replace Usage location for service availability and license assignment.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/fundamentals/license-users-groups"
+    ]
   },
   {
     "id": "az104-1-1.1-105",
@@ -900,7 +986,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A accounts for two independent assignment paths. D and B incorrectly remove the direct assignment. C incorrectly preserves the departed group's assignment after successful processing. To remove the product entirely, remove all valid assignment sources.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing"
+    ]
   },
   {
     "id": "az104-1-1.4-101",
@@ -931,7 +1020,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B contains every required VM and confines inherited access to that resource group. D and A grant at broader scopes than necessary. C covers only one VM and cannot supply access to every other VM in the group. The assigned role must include the needed management operations.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview"
+    ]
   },
   {
     "id": "az104-1-1.4-102",
@@ -962,7 +1054,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C separates directory roles from Azure resource roles. A invents automatic Owner access. B invents an OS-specific exception. D is too broad: an authorized Global Administrator can use the documented elevate-access workflow and then arrange suitable access.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles"
+    ]
   },
   {
     "id": "az104-1-1.5-101",
@@ -993,7 +1088,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D requests changes to existing noncompliant resources using the assignment identity. C confuses compliance evaluation with remediation. A only observes noncompliance. B grants read access and does not apply tag changes.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources"
+    ]
   },
   {
     "id": "az104-1-1.5-102",
@@ -1024,7 +1122,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C groups policy definitions and can be assigned as one initiative. D prevents certain management operations. A grants permissions. B defines alert notification and automation actions. None of those three groups policy definitions.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure"
+    ]
   },
   {
     "id": "az104-1-1.5-103",
@@ -1055,7 +1156,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B describes a budget notification. D and A would require separate controls or automation; a budget does not inherently stop consumption. C requires a policy assignment that the scenario does not include. Cost data and notifications are not instantaneous spending caps.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets"
+    ]
   },
   {
     "id": "az104-1-1.5-104",
@@ -1086,7 +1190,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B supplies workload-aware recommendations based on usage and configuration. C tracks spending against thresholds but does not itself recommend VM right-sizing. D reports compliance with assigned rules. A evaluates configured metric conditions; it does not supply Advisor cost recommendations. Evaluate any recommendation against workload requirements.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations"
+    ]
   },
   {
     "id": "az104-1-1.5-105",
@@ -1117,7 +1224,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A separates management scope from geographic deployment. D and B incorrectly make a resource-group move a regional migration. C is wrong because a resource group can contain resources in different regions. A supported move can change the resource ID and inherited permissions without changing its physical region.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription"
+    ]
   },
   {
     "id": "az104-1-1.5-106",
@@ -1148,7 +1258,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A addresses the changed resource ID and target inheritance. C incorrectly assumes direct assignments move automatically. D changes metadata rather than permissions. B incorrectly preserves inheritance from a group that no longer contains the resource.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription"
+    ]
   },
   {
     "id": "az104-1-1.5-107",
@@ -1179,7 +1292,10 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C requires an inventory and a target-directory access plan. B incorrectly preserves tenant-bound authorization. D does not address identities or role assignments. A overlooks managed-identity and identity-dependent-service changes that directory transfer requires.",
-    "difficulty": 4
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/transfer-subscription"
+    ]
   },
   {
     "id": "az104-1-1.5-108",
@@ -1210,7 +1326,228 @@ export const AZ104_D1_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D distinguishes management operations from friendly task names. A wrongly extends management locks to all data-plane reads. B confuses a lock with RBAC assignment deletion. C invents a lock prerequisite; CanNotDelete is not required to list keys.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources"
+    ]
+  },
+  {
+    "id": "az104-1-1.5-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:1",
+    "objectiveId": "az-104:obj:1.5",
+    "caseStudyId": "az104-case-alder",
+    "stem": "Leadership wants one additional policy assignment that rejects deployments outside eastus and westus2 in the three delivery subscriptions, while leaving Labs unrestricted. Which plan meets both the scope and enforcement requirements?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Assign an allowed-locations policy with Deny at Delivery.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Assign the same Deny policy at the tenant root management group.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Assign an allowed-locations policy with Audit at Delivery.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Assign the Deny policy only at rg-field.",
+        "correct": false
+      }
+    ],
+    "explanation": "A is correct: Delivery contains exactly the three target subscriptions, and Deny enforces allowed locations on applicable deployments. B also constrains Labs because the root covers it. C identifies violations but does not reject deployments. D covers only the production resource group, leaving Test and Development unprotected. The location list must be configured in the policy assignment.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/governance/management-groups/overview",
+      "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-deny"
+    ]
+  },
+  {
+    "id": "az104-1-1.4-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:1",
+    "objectiveId": "az-104:obj:1.4",
+    "caseStudyId": "az104-case-alder",
+    "stem": "After an authorized administrator removes the rg-field lock, Nia can resize its VM but cannot grant a new technician Contributor on that resource group. Which explanation accounts for both results?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Subscription Reader overrides resource-group Contributor for role assignments but not for VM operations.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Her resource-group Contributor grant permits VM management; it does not grant role-assignment writes.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Removing the lock grants Nia Owner until the lock is restored.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Role assignments require a separate Microsoft Entra Global Administrator role, regardless of Azure RBAC.",
+        "correct": false
+      }
+    ],
+    "explanation": "B is correct: the resource-group grant supplies VM management permissions, while Contributor excludes access delegation. A is wrong because Reader does not subtract permissions from Contributor. C is wrong because removing a lock changes an operation restriction, not role assignments. D confuses directory roles with Azure RBAC; an appropriately scoped access-management role can delegate without Global Administrator.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles",
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources"
+    ]
+  },
+  {
+    "id": "az104-1-1.5-302",
+    "certId": "az-104",
+    "domainId": "az-104:domain:1",
+    "objectiveId": "az-104:obj:1.5",
+    "caseStudyId": "az104-case-alder",
+    "stem": "The team wants to repair missing CostCenter tags on existing resources while retaining deletion protection and allowing routine VM management afterward. Which change set fits?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Keep ReadOnly and wait for the next compliance scan to rewrite tags.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Replace ReadOnly with CanNotDelete and change Modify to Audit.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Have an authorized operator replace ReadOnly with CanNotDelete, then run a remediation task for the existing Modify assignment.",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Delete the Modify assignment and retag only rg-field.",
+        "correct": false
+      }
+    ],
+    "explanation": "C is correct: ReadOnly blocks management updates, CanNotDelete retains deletion protection while permitting updates, and remediation applies the authorized Modify policy to existing resources. A leaves both the lock barrier and the missing remediation unresolved. B permits updates but Audit cannot repair tags. D removes the mechanism and resource-group tags do not automatically propagate to child resources.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources",
+      "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources",
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources"
+    ]
+  },
+  {
+    "id": "az104-1-1.1-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:1",
+    "objectiveId": "az-104:obj:1.1",
+    "caseStudyId": "az104-case-alder",
+    "stem": "The dynamic group must retain automated membership but stop licensing the consulting staff. Which rule change meets the requirement without excluding internal field staff?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Use only user.userType -eq \"Member\".",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Use (user.department -eq \"Field\") -or (user.userType -eq \"Member\").",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Keep the rule and manually remove each consulting user from the dynamic group.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use (user.department -eq \"Field\") -and (user.userType -eq \"Member\").",
+        "correct": true
+      }
+    ],
+    "explanation": "D is correct: both the Field department and Member type must match; after processing, nonmatching guests lose this group assignment. A includes internal users outside Field. B includes every Field guest and every Member because it uses OR. C does not fix rule-based membership; dynamic membership is controlled by the rule. This answer concerns this group license, not any independent assignment.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership",
+      "https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing"
+    ]
+  },
+  {
+    "id": "az104-1-1.5-303",
+    "certId": "az-104",
+    "domainId": "az-104:domain:1",
+    "objectiveId": "az-104:obj:1.5",
+    "caseStudyId": "az104-case-alder",
+    "stem": "Before the lock is changed, Nia can view the storage account but its List keys operation fails. Which diagnosis and remedy addresses the documented restriction without granting broader RBAC access?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "ReadOnly blocks the management-plane POST used by List keys; an authorized lock administrator must adjust the lock.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Reader at Production prevents key access; grant Nia Contributor at Production.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "A missing CostCenter tag prevents all reads; reassign the license group first.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "The resource-group lock blocks only data-plane downloads; enable anonymous blob access.",
+        "correct": false
+      }
+    ],
+    "explanation": "A is correct: Contributor already supplies the underlying management permission, but the inherited ReadOnly lock blocks POST operations such as List keys. B misreads additive roles and broadens access unnecessarily. C ties unrelated tagging and licensing facts to authorization. D reverses control-plane and data-plane behavior and exposes data without addressing the lock.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources",
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview"
+    ]
+  },
+  {
+    "id": "az104-1-1.4-401",
+    "certId": "az-104",
+    "domainId": "az-104:domain:1",
+    "objectiveId": "az-104:obj:1.4",
+    "caseStudyId": "az104-case-ember",
+    "stem": "The deployment identity creates the resources but cannot grant the slot identities blob-read access. Which division of duties satisfies the access constraint?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Give the deployment identity Owner permanently and distribute key1 to both slots.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Use its Contributor role to assign Reader on rg-maps; Reader includes blob content reads.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Assign Microsoft Entra User Administrator to the deployment identity instead of Azure RBAC.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Keep resource deployment under Contributor and have the access administrator assign Storage Blob Data Reader to each slot identity at the required container scope.",
+        "correct": true
+      }
+    ],
+    "explanation": "D is correct: Contributor manages resources but does not delegate roles; the separate administrator can grant narrowly scoped blob data access to each identity. A violates the key prohibition and unnecessarily broadens standing access. B assumes both role-assignment permission and data permissions that those roles do not provide. C substitutes a directory role for Azure resource and storage data authorization.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles",
+      "https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory"
+    ]
   }
 ];
 
@@ -1350,7 +1687,15 @@ export const AZ104_D1_PERF_QUESTIONS: PerfQuestion[] = [
       }
     ],
     "explanation": "Conditional Access enforces access requirements; PIM supports temporary role activation; access reviews attest continued access; Identity Protection supplies risk detections; SSPR enables password self-service; named locations describe networks or countries for policy conditions.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies",
+      "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-activate-your-roles",
+      "https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview",
+      "https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies",
+      "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr",
+      "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-assignment-network"
+    ]
   },
   {
     "id": "az104-pbq-1-002",
@@ -1384,7 +1729,79 @@ export const AZ104_D1_PERF_QUESTIONS: PerfQuestion[] = [
       }
     ],
     "explanation": "Audit records noncompliance; Deny blocks matching requests; Append adds properties and can deny conflicting values (Modify is preferred for tags); DeployIfNotExists deploys related configuration with suitable identity permissions and needs a remediation task for existing resources; Disabled skips evaluation.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-basics"
+    ]
+  },
+  {
+    "id": "az104-pbq-1-101",
+    "certId": "az-104",
+    "domainId": "az-104:domain:1",
+    "objectiveId": "az-104:obj:1.4",
+    "type": "drag-match",
+    "prompt": "Assign the narrowest matching role from this set to each job. Consider permissions granted by the role itself, not additional roles its holder might delegate. Apply each role at the minimum resource scope required.",
+    "leftLabel": "Job",
+    "rightLabel": "Built-in role",
+    "pairs": [
+      {
+        "left": "Inspect resource configuration without changing it or reading blob payloads",
+        "right": "Reader"
+      },
+      {
+        "left": "Manage VMs and disks, without assigning Azure roles",
+        "right": "Virtual Machine Contributor"
+      },
+      {
+        "left": "Download blobs using Entra authorization without uploading or deleting them",
+        "right": "Storage Blob Data Reader"
+      },
+      {
+        "left": "Manage Azure role assignments without general VM or storage-account administration",
+        "right": "Role Based Access Control Administrator"
+      }
+    ],
+    "explanation": "Reader supplies control-plane visibility, not blob DataActions. Virtual Machine Contributor supplies VM management but not access delegation. Storage Blob Data Reader supplies read access to blob data, not resource administration. Role Based Access Control Administrator supplies Azure role-assignment administration; its holder could grant additional access, so the prompt compares the direct role permissions only. VM Contributor does not automatically grant every networking or guest-login permission.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles"
+    ]
+  },
+  {
+    "id": "az104-pbq-1-102",
+    "certId": "az-104",
+    "domainId": "az-104:domain:1",
+    "objectiveId": "az-104:obj:1.5",
+    "type": "drag-match",
+    "prompt": "A finance platform needs four different governance outcomes. Match each requirement to the control that implements it; no custom automation is present.",
+    "leftLabel": "Requirement",
+    "rightLabel": "Control",
+    "pairs": [
+      {
+        "left": "Reject new resources in unapproved regions",
+        "right": "Azure Policy assignment with Deny"
+      },
+      {
+        "left": "Repair missing tags on already deployed supported resources",
+        "right": "Modify policy with authorized identity and remediation task"
+      },
+      {
+        "left": "Prevent Resource Manager deletion while allowing configuration updates",
+        "right": "CanNotDelete resource lock"
+      },
+      {
+        "left": "Email finance at a spending threshold without automatically shutting down VMs",
+        "right": "Cost Management budget alert"
+      }
+    ],
+    "explanation": "Deny blocks applicable noncompliant deployment requests. Modify plus remediation repairs existing resources rather than merely reporting their state. CanNotDelete protects management-plane deletion but still permits updates; it is not protection against all data-plane deletion. A budget alert notifies at the configured threshold; absent separate automation it does not stop resources. These controls complement rather than substitute for RBAC.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-deny",
+      "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources",
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources",
+      "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets"
+    ]
   }
 ];
 

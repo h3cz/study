@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadError } from "@/components/LoadError";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { seedDb, db } from "@/lib/db";
@@ -72,6 +73,8 @@ const ratingNumeric: Record<FSRSRating, number> = {
 
 export default function FlashcardsPage() {
   const [phase, setPhase] = useState<Phase>("loading");
+  const [loadError, setLoadError] = useState(false);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const [queue, setQueue] = useState<Flashcard[]>([]);
   // Active cert resolved from user state on mount; falls back to the default
   // until state loads so the initial render is safe.
@@ -91,7 +94,10 @@ export default function FlashcardsPage() {
   const autoplayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    let active = true;
     async function load() {
+      setLoadError(false);
+      setPhase("loading");
       await seedDb();
       // Resolve the active cert first so the due-card query targets it.
       const state = await db.userState.get(1);
@@ -109,14 +115,15 @@ export default function FlashcardsPage() {
         setAudioVoiceURI(state.audioVoiceURI);
       }
     }
-    load();
+    void load().catch(() => { if (active) setLoadError(true); });
 
     // Stop speech on unmount
     return () => {
+      active = false;
       stopSpeaking();
       if (autoplayTimerRef.current) clearTimeout(autoplayTimerRef.current);
     };
-  }, []);
+  }, [loadAttempt]);
 
   // ── Auto-play: when phase flips to "front", read the front ─────────────────
   useEffect(() => {
@@ -242,6 +249,8 @@ export default function FlashcardsPage() {
       setPhase("front");
     }
   }
+
+  if (loadError) return <LoadError retry={() => setLoadAttempt(n => n + 1)} />;
 
   if (phase === "loading") {
     return (

@@ -14,6 +14,20 @@ export type ChangeEntry = {
 
 export const changelogEntries: ChangeEntry[] = [
   {
+    id: "az-104-cases",
+    date: "2026-09-26",
+    label: "Azure case studies and polish",
+    title: "Work through a company’s Azure requirements",
+    summary: "The public bank now includes 190 original questions, with 30 connected questions across six case studies, 60 flashcards, 20 matching drills and 40 term drills.",
+    items: [
+      { title: "Six original case studies", body: "Practice identity, storage, compute, networking, monitoring and a mixed Azure deployment. The shared scenario stays available alongside every question." },
+      { title: "Twelve additional matching drills", body: "Match redundancy and RBAC to requirements, work through VPN and scale-in runbooks, and choose recovery and monitoring tools." },
+      { title: "Clearer difficulty and evidence", body: "Every AZ-104 question has been re-rated against a consistent five-level scale. Microsoft Learn evidence is linked beneath question and matching-drill explanations." },
+      { title: "A more readable study desk", body: "Find search on mobile, see practice modes for your certification, read clearer secondary text and use recovery actions when loading fails." },
+      { title: "Optional usage analytics", body: "Analytics stay off until you allow them, and can be switched off from Privacy. Answers, scores, typed search text and session recordings are excluded." },
+    ],
+  },
+  {
     id: "az-104",
     date: "2026-09-25",
     label: "Azure Administrator",

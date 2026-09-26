@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, Suspense } from "react";
+import { AnswerSources, CaseStudyContext, QuestionText } from "@/components/QuestionContent";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { buildDailyQuiz, type QuizMode } from "@/lib/quiz";
@@ -20,6 +21,10 @@ import RemediationLink from "@/components/RemediationLink";
 import { EmptyState } from "@/components/icons/EmptyState";
 import { DEFAULT_CERT_ID, getActiveCertId } from "@/lib/certs";
 import { GuestRunSavePrompt } from "@/components/GuestRunSavePrompt";
+import { getCaseStudy } from "@/content/az104-case-studies";
+import { fullQuestionStem } from "@/lib/question-context";
+import { track } from "@/lib/analytics";
+import { LoadError } from "@/components/LoadError";
 
 type Phase = "loading" | "question" | "confidence" | "revealed" | "flag-review" | "done" | "no-video-questions" | "qid-not-found" | "fsrs-empty";
 
@@ -33,6 +38,8 @@ function QuizInner() {
   const searchParams = useSearchParams();
   const [phase, setPhase] = useState<Phase>("loading");
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [loadError, setLoadError] = useState(false);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   // Active cert resolved from user state on mount; drives all content queries +
   // scoring. Falls back to the default until state loads so the first render
   // (before the load effect resolves) never crashes.
@@ -84,7 +91,7 @@ function QuizInner() {
       setQuizSpeaking(false);
       return;
     }
-    const text = buildQuestionSpeech(current.stem, current.choices);
+    const text = buildQuestionSpeech(fullQuestionStem(current), current.choices);
     setQuizSpeaking(true);
     speak(text, {
       rate: audioRate,
@@ -141,6 +148,7 @@ function QuizInner() {
     if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
     persistTimerRef.current = setTimeout(() => {
       const record: InProgressQuiz = {
+        caseStudyId: searchParams.get("caseStudy") ?? undefined,
         id: "current",
         kind: mode as InProgressQuiz["kind"],
         certId: certId,
@@ -164,6 +172,8 @@ function QuizInner() {
     const videoId = searchParams.get("videoId");
     const objectiveId = searchParams.get("objective");
     const qid = searchParams.get("qid");
+    const caseStudyId = searchParams.get("caseStudy");
+    const caseStudy = getCaseStudy(caseStudyId ?? undefined);
     const domainParam = searchParams.get("domain");
     const domainNumber = domainParam ? parseInt(domainParam, 10) : undefined;
     let mode: QuizMode =
@@ -173,6 +183,15 @@ function QuizInner() {
       modeParam === "weak-domain" ? "weak-domain" :
       "daily";
     async function load() {
+      setLoadError(false);
+      setChosen(null);
+      setIndex(0);
+      setAnswers({});
+      setFlagged(new Set());
+      setConfidences({});
+      setAnswerRecords([]);
+      setPhase("loading");
+      if (caseStudyId && !caseStudy) { setPhase("qid-not-found"); return; }
       setQuizSize(qid ? 1 : size);
       setQuizMode(mode);
       await seedDb();
@@ -180,8 +199,9 @@ function QuizInner() {
       const state = await db.userState.get(1);
       // Resolve the active cert so every content query + scoring call below
       // targets the cert the user selected, not a hardcoded Security+.
-      const activeCertId = getActiveCertId(state);
+      const activeCertId = caseStudy?.certId ?? getActiveCertId(state);
       setCertId(activeCertId);
+      if (caseStudy && state?.activeCertId !== activeCertId) await db.userState.update(1, { activeCertId });
 
       // Final-week gate: only allow if examDate is within 7 days
       if (mode === "final-week") {
@@ -233,7 +253,7 @@ function QuizInner() {
           // user switched from Security+ to Network+). Never restore another
           // cert's questions — drop it and start fresh for the active cert.
           await db.inProgressQuizzes.delete("current");
-        } else if (inProgress.kind === mode && !videoId) {
+        } else if (inProgress.kind === mode && !videoId && inProgress.caseStudyId === (caseStudyId ?? undefined)) {
           // Restore state from saved quiz
           const allQuestions = await db.questions
             .where("id")
@@ -250,12 +270,36 @@ function QuizInner() {
             setQuizSize(orderedQuestions.length);
             setIndex(inProgress.currentIndex);
             setAnswers(inProgress.answers as Record<string, string>);
+            setConfidences(inProgress.confidences ?? {});
+            // Older resume records do not store timing; restore the known answer
+            // and confidence without inventing time spent on earlier questions.
+            setAnswerRecords(orderedQuestions.flatMap(question => {
+              const picked = inProgress.answers[question.id];
+              return picked ? [{ questionId: question.id, picked,
+                correct: question.choices.some(choice => choice.key === picked && choice.correct),
+                confidence: inProgress.confidences?.[question.id] }] : [];
+            }));
             setFlagged(new Set(inProgress.flagged ?? []));
             questionStartRef.current = new Date().getTime();
             setPhase("question");
             return;
           }
         }
+      }
+
+      if (caseStudy) {
+        const records = await db.questions.bulkGet(caseStudy.questionIds);
+        const qs = records.filter((q): q is Question => !!q && q.certId === activeCertId && q.caseStudyId === caseStudy.id);
+        if (qs.length !== caseStudy.questionIds.length) throw new Error("Incomplete case study content");
+        quizStartedAtRef.current = new Date().toISOString();
+        setQuestions(qs);
+        setQuizSize(qs.length);
+        setIndex(0);
+        setAnswers({});
+        setAnswerRecords([]);
+        questionStartRef.current = Date.now();
+        setPhase("question");
+        return;
       }
 
       const qs = await buildDailyQuiz(
@@ -280,9 +324,17 @@ function QuizInner() {
       questionStartRef.current = new Date().getTime();
       setPhase("question");
     }
-    const timer = setTimeout(() => void load(), 0);
-    return () => clearTimeout(timer);
-  }, [searchParams]);
+    let active = true;
+    const timer = setTimeout(() => { void load().catch(() => { if (active) setLoadError(true); }); }, 0);
+    return () => { active = false; clearTimeout(timer); };
+  }, [searchParams, loadAttempt]);
+
+  const trackedStart = useRef<string | null>(null);
+  useEffect(() => {
+    if (phase !== "question" || !questions.length || trackedStart.current === quizStartedAtRef.current) return;
+    trackedStart.current = quizStartedAtRef.current;
+    void track("study_session_started", { cert_id: certId, mode: searchParams.get("caseStudy") ? "case-study" : quizMode });
+  }, [phase, questions.length, certId, quizMode, searchParams]);
 
   const current = questions[index];
   const currentId = current?.id;
@@ -389,6 +441,7 @@ function QuizInner() {
 
   async function finishQuiz(finalAnswers: Record<string, string>) {
     // Quiz complete — remove in-progress record
+    if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
     db.inProgressQuizzes.delete("current").catch(() => {});
     let correct = 0;
     for (const q of questions) {
@@ -485,8 +538,12 @@ function QuizInner() {
       }).catch(() => {});
     }).catch(() => {});
 
+    try { localStorage.setItem("study.completedSession", "1"); } catch { /* Optional install milestone. */ }
+    void track("study_session_completed", { cert_id: certId, mode: searchParams.get("caseStudy") ? "case-study" : quizMode });
     setPhase("done");
   }
+
+  if (loadError) return <LoadError retry={() => { void track("retry_requested", { surface: "quiz" }); setLoadAttempt(n => n + 1); }} />;
 
   if (phase === "loading") {
     return (
@@ -1041,7 +1098,8 @@ function QuizInner() {
         )}
 
         {/* Stem */}
-        <p
+        <CaseStudyContext question={current} />
+<p
           style={{
             fontSize: "17px",
             lineHeight: 1.55,
@@ -1050,7 +1108,7 @@ function QuizInner() {
             fontFamily: "var(--font-sans)",
           }}
         >
-          {current.stem}
+          <QuestionText text={current.stem} />
         </p>
 
         {/* Choices */}
@@ -1111,7 +1169,7 @@ function QuizInner() {
                 <span className="font-mono font-semibold mr-2" style={{ color: "var(--fg-muted)" }}>
                   {choice.key}.
                 </span>
-                <span style={{ flex: 1 }}>{choice.text}</span>
+                <span style={{ flex: 1 }}><QuestionText text={choice.text} /></span>
                 {phase === "question" && (
                   <span
                     className="font-mono ml-3 hidden lg:inline-block"
@@ -1281,6 +1339,7 @@ function QuizInner() {
               {chosen === correctChoice?.key ? "Correct" : "Incorrect"}
             </p>
             <p>{current.explanation}</p>
+<AnswerSources urls={current.sourceUrls} />
             {/* Time tracking line */}
             {currentQuestionMs !== null && (
               <p

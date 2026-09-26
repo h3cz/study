@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { CaseStudyContext, QuestionText } from "@/components/QuestionContent";
 import { useRouter } from "next/navigation";
 import { seedDb, db } from "@/lib/db";
 import { buildMockExam, examRawToScale, isPbqArrangementCorrect } from "@/lib/exam";
@@ -592,7 +593,8 @@ export default function ExamRunPage() {
             </div>
 
             {/* Stem */}
-            <p
+            <CaseStudyContext question={currentItem.q} />
+<p
               style={{
                 fontSize: "17px",
                 lineHeight: 1.55,
@@ -601,7 +603,7 @@ export default function ExamRunPage() {
                 fontFamily: "var(--font-sans)",
               }}
             >
-              {currentItem.q.stem}
+              <QuestionText text={currentItem.q.stem} />
             </p>
 
             {/* Choices — no feedback during exam */}
@@ -626,7 +628,7 @@ export default function ExamRunPage() {
                     <span className="font-mono font-semibold mr-2" style={{ color: "var(--fg-muted)" }}>
                       {choice.key}.
                     </span>
-                    {choice.text}
+                    <QuestionText text={choice.text} />
                   </button>
                 );
               })}

@@ -2,6 +2,16 @@
 
 Short product log for the study app, public starter, and class-lab materials.
 
+## 2026-09-26 - Azure case studies and study polish
+
+- Added six original case studies with 30 connected questions and 12 more matching drills across all five domains: 190 MCQs and 20 drills total.
+- Re-rated all 160 existing MCQs; documented 86 changes with individual reasons and added Microsoft Learn evidence to every MCQ and matching drill.
+- Kept shared scenarios available in practice, review, exams and read-aloud; added case-specific resume and a practice discovery page.
+- Added consent-gated PostHog events, sanitized route views, privacy controls and setup documentation; project configuration is required to activate collection.
+- Improved mobile search, keyboard focus, contrast, bookmark feedback, loading recovery, installation timing, theme metadata and missing-page navigation.
+- Updated the announcement and local content version while preserving study progress.
+- Details: [workstream report](az104-review/WORKSTREAM-1.md) and [analytics setup](ANALYTICS.md).
+
 ## 2026-09-25 - Azure Administrator practice
 
 - Added 160 original AZ-104 MCQs, 60 flashcards, 8 matching drills and 40 acronym/term drills.

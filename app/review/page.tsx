@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnswerSources, CaseStudyContext, QuestionText } from "@/components/QuestionContent";
 import Link from "next/link";
 import { seedDb, db } from "@/lib/db";
 import { getWrongAnswers } from "@/lib/wrong-answers";
@@ -430,7 +431,8 @@ export default function ReviewPage() {
         </div>
 
         {/* Stem */}
-        <p
+        <CaseStudyContext question={current.question} />
+<p
           style={{
             fontSize: "17px",
             lineHeight: 1.55,
@@ -439,7 +441,7 @@ export default function ReviewPage() {
             fontFamily: "var(--font-sans)",
           }}
         >
-          {current.question.stem}
+          <QuestionText text={current.question.stem} />
         </p>
 
         {/* Choices */}
@@ -501,7 +503,7 @@ export default function ReviewPage() {
                 <span className="font-mono font-semibold mr-2" style={{ color: "var(--fg-muted)" }}>
                   {choice.key}.
                 </span>
-                {choice.text}
+                <QuestionText text={choice.text} />
               </button>
             );
           })}
@@ -582,6 +584,7 @@ export default function ReviewPage() {
                 {chosen === correctChoice?.key ? "Correct" : "Incorrect"}
               </p>
               <p>{current.question.explanation}</p>
+<AnswerSources urls={current.question.sourceUrls} />
             </div>
             {wrongExplanations && Object.keys(wrongExplanations).length > 0 && (
               <details className="mt-4 group">

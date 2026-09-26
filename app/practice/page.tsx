@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { db, seedDb } from "@/lib/db";
+import { getActiveCertId } from "@/lib/certs";
 import { createClient } from "@/lib/supabase/client";
 import { NewBanner, NewPill } from "@/components/NewBanner";
 
@@ -17,9 +19,9 @@ type Mode = {
 const MODES: Mode[] = [
   { href: "/timeline", label: "Exam Readiness", desc: "Your week-by-week plan from the exam date.", glyph: "◷", group: "start" },
   { href: "/quiz", label: "Daily Quiz", desc: "Adaptive questions tuned to your weak objectives.", glyph: "?", group: "start" },
-  { href: "/flashcards", label: "Flashcards", desc: "Spaced-repetition cards (FSRS). Review what's due.", glyph: "▦", group: "start" },
-  { href: "/exam", label: "Mock Exam", desc: "Full timed exam simulation with a predicted score.", glyph: "⏱", group: "review" },
-  { href: "/pbq", label: "PBQs", desc: "Performance-based questions — the hands-on ones.", glyph: "⌘", group: "focus" },
+  { href: "/flashcards", label: "Flashcards", desc: "Review what is due and strengthen recall.", glyph: "▦", group: "start" },
+  { href: "/exam", label: "Mock Exam", desc: "Timed practice with a breakdown of your results.", glyph: "⏱", group: "review" },
+  { href: "/pbq", label: "PBQs", desc: "Scenario matching and procedure-order exercises.", glyph: "⌘", group: "focus" },
   // Focused topic trainers — reference + matching drill + quiz, one topic at a time.
   { href: "/osi", label: "OSI Layers", desc: "Master the 7-layer model — reference, matching drill, and quiz.", glyph: "☰", group: "focus", isNew: true },
   { href: "/ports", label: "Ports & Protocols", desc: "Drill the must-know ports and secure-vs-insecure swaps.", glyph: "⊞", group: "focus", isNew: true },
@@ -115,6 +117,8 @@ function ModeCard({ mode }: { mode: Mode }) {
 
 export default function PracticePage() {
   const [voiceAllowed, setVoiceAllowed] = useState(false);
+  const [certId, setCertId] = useState<string | null>(null);
+  useEffect(() => { void seedDb().then(() => db.userState.get(1)).then(state => setCertId(getActiveCertId(state))).catch(() => {}); }, []);
 
   useEffect(() => {
     // Mirror the NavBar probe: only check voice access for signed-in users,
@@ -129,7 +133,10 @@ export default function PracticePage() {
     });
   }, []);
 
-  const modes = voiceAllowed ? [...MODES, VOICE_MODE] : MODES;
+  const focusedTrainers = new Set(["/osi", "/ports", "/controls", "/crypto", "/attacks"]);
+  const relevantModes = MODES.filter(mode => !focusedTrainers.has(mode.href) || certId === "secplus-sy0-701");
+  if (certId === "az-104") relevantModes.push({ href: "/case-studies", label: "Azure Case Studies", desc: "Six original company scenarios, five connected questions each.", glyph: "▤", group: "focus", isNew: true });
+  const modes = voiceAllowed ? [...relevantModes, VOICE_MODE] : relevantModes;
 
   return (
     <div style={{ maxWidth: 640, margin: "0 auto", padding: "24px 16px 80px" }}>
@@ -145,9 +152,9 @@ export default function PracticePage() {
         </p>
       </div>
 
-      <NewBanner featureId="trainers-v1" href="/osi">
+      {certId === "secplus-sy0-701" && <NewBanner featureId="trainers-v1" href="/osi">
         New focused trainers — drill one Sec+ topic at a time
-      </NewBanner>
+      </NewBanner>}
 
       <div
         style={{

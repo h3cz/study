@@ -15,7 +15,7 @@ test("AZ-104 announcement, selection and all content modes work on mobile", asyn
   await expect(announcement).toBeVisible();
   await page.screenshot({ path: "test-results/az104-announcement-mobile.png" });
   await announcement.click();
-  await expect(page.locator("#az-104")).toContainText("160 original questions");
+  await expect(page.locator("#az-104-cases")).toContainText("190 original questions");
   await page.goto("/settings");
   await page.getByRole("menuitemradio", { name: /AZ-104/ }).click();
   await expect(page.locator(".hero-grid")).toBeVisible();
@@ -35,7 +35,7 @@ test("AZ-104 announcement, selection and all content modes work on mobile", asyn
       }));
     } finally { database.close(); }
   });
-  expect(counts).toEqual([160, 60, 8, 40]);
+  expect(counts).toEqual([190, 60, 20, 40]);
   // Exercise the real IndexedDB upgrade path with existing study progress.
   const preserved = await page.evaluate(async () => {
     const request = indexedDB.open("SecPlusQuestDB");
@@ -84,7 +84,7 @@ test("AZ-104 announcement, selection and all content modes work on mobile", asyn
     database.close();
     return { xp: state.xp, reps: card.fsrsReps, due: card.fsrsDue, counts };
   }, preserved);
-  expect(restored).toEqual({ xp: 123, reps: 7, due: preserved.due, counts: [160, 60, 8, 40] });
+  expect(restored).toEqual({ xp: 123, reps: 7, due: preserved.due, counts: [190, 60, 20, 40] });
   await page.getByRole("button", { name: "Dismiss announcement", exact: true }).click();
   await page.reload();
   await expect(announcement).toHaveCount(0);

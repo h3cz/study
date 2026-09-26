@@ -1,3 +1,4 @@
+import { fullQuestionStem } from "@/lib/question-context";
 // Server-safe cert objective tree, derived from the canonical content bundle
 // (content/seed.ts). This keeps the question bank as the single source of truth
 // while giving server routes a Dexie-free way to resolve objective codes, domain
@@ -71,7 +72,7 @@ function buildIndex(certId: string): CertIndex {
     questionById.set(q.id, {
       objectiveId: q.objectiveId,
       code: meta?.code ?? "",
-      stem: q.stem,
+      stem: fullQuestionStem(q),
       correctKey: correct?.key ?? null,
     });
   }
@@ -207,7 +208,7 @@ export function questionsForObjective(
   return shuffled.slice(0, count).map((q) => ({
     id: q.id,
     objectiveId: q.objectiveId,
-    stem: q.stem,
+    stem: fullQuestionStem(q),
     choices: q.choices.map((c) => ({ key: c.key, text: c.text })),
     // NOTE: `correct` and `explanation` are deliberately omitted here.
   }));

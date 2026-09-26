@@ -1,0 +1,1087 @@
+[
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations",
+    "status": 200,
+    "title": "Optimize virtual machine (VM) or virtual machine scale set (VMSS) spend by resizing or shutting down underutilized instances - Azure Advisor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.492Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain",
+    "status": 200,
+    "title": "Set Up an Existing Custom Domain Name for Your App - Azure App Service | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.673Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings",
+    "status": 200,
+    "title": "Secure Your Domain with TLS/SSL - Azure App Service | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.376Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots",
+    "status": 200,
+    "title": "Set Up Staging Environments - Azure App Service | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.297Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/app-service/environment/overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/app-service/environment/overview",
+    "status": 200,
+    "title": "App Service Environment Overview - Azure App Service Environment | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.478Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/app-service/manage-backup",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/app-service/manage-backup",
+    "status": 200,
+    "title": "Back Up an App - Azure App Service | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.540Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up",
+    "status": 200,
+    "title": "Scale Up Features and Capacities - Azure App Service | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.392Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans",
+    "status": 200,
+    "title": "Azure App Service Plans - Azure App Service | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.302Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration",
+    "status": 200,
+    "title": "Integrate your app with an Azure virtual network - Azure App Service | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.596Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/application-gateway/overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/application-gateway/overview",
+    "status": 200,
+    "title": "What is Azure Application Gateway | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.254Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups",
+    "status": 200,
+    "title": "Create and manage action groups in Azure Monitor - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.806Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-common-schema",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-common-schema",
+    "status": 200,
+    "title": "Common alert schema for Azure Monitor alerts - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.085Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-log-alert-rule",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-log-alert-rule",
+    "status": 200,
+    "title": "Create Azure Monitor log search alert rules - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.695Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-processing-rules",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-processing-rules",
+    "status": 200,
+    "title": "Alert processing rules for Azure Monitor alerts - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.297Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types",
+    "status": 200,
+    "title": "Types of Azure Monitor alerts - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.765Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-overview",
+    "status": 200,
+    "title": "Autoscale in Azure Monitor - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.916Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/activity-log",
+    "status": 200,
+    "title": "Activity Log in Azure Monitor - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.532Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/diagnostic-settings",
+    "status": 200,
+    "title": "Diagnostic Settings in Azure Monitor - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.701Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-retention-configure",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-retention-configure",
+    "status": 200,
+    "title": "Manage Data Retention in a Log Analytics Workspace - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.698Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview",
+    "status": 200,
+    "title": "Log Analytics workspace overview - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.492Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics",
+    "status": 200,
+    "title": "Metrics in Azure Monitor - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.678Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/vm/data-collection",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-monitor/vm/data-collection",
+    "status": 200,
+    "title": "Collect log data from virtual machines with Azure Monitor - Azure Monitor | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.085Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile",
+    "status": 200,
+    "title": "Decompile a JSON Azure Resource Manager template to Bicep - Azure Resource Manager | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.640Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli",
+    "status": 200,
+    "title": "Deploy Bicep files with the Azure CLI - Azure Resource Manager | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.495Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if",
+    "status": 200,
+    "title": "Bicep What-If: Preview Changes Before Deployment - Azure Resource Manager | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.579Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters",
+    "status": 200,
+    "title": "Parameters in Bicep files - Azure Resource Manager | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.392Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies",
+    "status": 200,
+    "title": "Set resource dependencies in Bicep - Azure Resource Manager | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.590Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources",
+    "status": 200,
+    "title": "Lock your Azure resources to protect your infrastructure - Azure Resource Manager | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.186Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription",
+    "status": 200,
+    "title": "Move Azure resources to a new resource group or subscription - Azure Resource Manager | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.480Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources",
+    "status": 200,
+    "title": "Use tags to organize your Azure resources and management hierarchy - Azure Resource Manager | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.529Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/azure-sql/database/private-endpoint-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/azure-sql/database/private-endpoint-overview?view=azuresql",
+    "status": 200,
+    "title": "Azure Private Link - Azure SQL Database &amp; Azure Synapse Analytics | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.831Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms",
+    "status": 200,
+    "title": "Restore VMs by using the Azure portal using Azure Backup - Azure Backup | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.146Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/backup/backup-azure-enhanced-soft-delete-about",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/backup/secure-by-default",
+    "status": 200,
+    "title": "Secure by Default with Soft Delete for Azure Backup - Azure Backup | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.101Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction",
+    "status": 200,
+    "title": "About Azure VM backup - Azure Backup | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.838Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault",
+    "status": 200,
+    "title": "Create and Configure Recovery Services Vaults - Azure Backup | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.958Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/backup/backup-support-matrix-mars-agent",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/backup/backup-support-matrix-mars-agent",
+    "status": 200,
+    "title": "Support matrix for the MARS agent - Azure Backup | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.919Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/backup/disk-backup-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/backup/disk-backup-overview",
+    "status": 200,
+    "title": "Overview of Azure Disk Backup - Azure Backup | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.196Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/bastion/bastion-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/bastion/bastion-overview",
+    "status": 200,
+    "title": "What is Azure Bastion? | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.311Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/container-apps/environment",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/container-apps/environment",
+    "status": 200,
+    "title": "Azure Container Apps environments | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.940Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/container-apps/revisions",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/container-apps/revisions",
+    "status": 200,
+    "title": "Update and deploy changes in Azure Container Apps | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.158Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/container-apps/scale-app",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/container-apps/scale-app",
+    "status": 200,
+    "title": "Scaling in Azure Container Apps | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.298Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups",
+    "status": 200,
+    "title": "Introduction to container groups - Azure Container Instances | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.106Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-restart-policy",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-restart-policy",
+    "status": 200,
+    "title": "Restart policy for run-once tasks - Azure Container Instances | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.248Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-skus",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-skus",
+    "status": 200,
+    "title": "Azure Container Registry SKU Features and Limits - Azure Container Registry | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.179Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets",
+    "status": 200,
+    "title": "Tutorial - Create and manage budgets - Microsoft Cost Management | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.562Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/dns/dns-delegate-domain-azure-dns",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/dns/dns-delegate-domain-azure-dns",
+    "status": 200,
+    "title": "Tutorial: Host your domain in Azure DNS | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.361Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/dns/dns-zones-records",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/dns/dns-zones-records",
+    "status": 200,
+    "title": "DNS Zones and Records Overview | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.334Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links",
+    "status": 200,
+    "title": "What is a virtual network link subresource of Azure DNS private zones | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.269Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-circuit-peerings",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-circuit-peerings",
+    "status": 200,
+    "title": "Azure ExpressRoute: circuits and peering | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.625Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-global-reach",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-global-reach",
+    "status": 200,
+    "title": "About Azure ExpressRoute Global Reach | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.899Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/firewall/rule-processing",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/firewall/rule-processing",
+    "status": 200,
+    "title": "Azure Firewall rule processing logic | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.999Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview",
+    "status": 200,
+    "title": "Azure Front Door Overview | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.571Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/governance/management-groups/overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/governance/management-groups/overview",
+    "status": 200,
+    "title": "Organize your resources with management groups - Azure Governance - Azure governance | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.369Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-basics",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-basics",
+    "status": 200,
+    "title": "Azure Policy definitions effect basics - Azure Policy | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.987Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-deny",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-deny",
+    "status": 200,
+    "title": "Azure Policy definitions deny effect - Azure Policy | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.178Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure",
+    "status": 200,
+    "title": "Details of the initiative definition structure - Azure Policy | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.583Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources",
+    "status": 200,
+    "title": "Remediate non-compliant resources - Azure Policy | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.420Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/load-balancer/inbound-nat-rules",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/load-balancer/inbound-nat-rules",
+    "status": 200,
+    "title": "Inbound NAT rules - Azure Load Balancer | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.179Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+    "status": 200,
+    "title": "Azure Load Balancer health probes | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.157Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview",
+    "status": 200,
+    "title": "What is Azure Load Balancer? - Azure Load Balancer | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.192Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-availability-zones",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/reliability/reliability-load-balancer",
+    "status": 200,
+    "title": "Reliability in Azure Load Balancer | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.922Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-overview",
+    "status": 200,
+    "title": "What Is Azure NAT Gateway? | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.272Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview",
+    "status": 200,
+    "title": "Connection Monitor Overview - Azure Network Watcher | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.183Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/network-watcher/ip-flow-verify-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/network-watcher/ip-flow-verify-overview",
+    "status": 200,
+    "title": "IP Flow Verify Overview - Azure Network Watcher | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.769Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-overview",
+    "status": 200,
+    "title": "Azure Network Watcher Overview | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.197Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/network-watcher/packet-capture-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/network-watcher/packet-capture-overview",
+    "status": 200,
+    "title": "Packet Capture Overview - Azure Network Watcher | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.763Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview",
+    "status": 200,
+    "title": "What are Azure Availability Zones? | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.065Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/resource-mover/overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/resource-mover/overview",
+    "status": 200,
+    "title": "What is Azure Resource Mover? | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.599Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles",
+    "status": 200,
+    "title": "Azure built-in roles - Azure RBAC | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.094Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles",
+    "status": 200,
+    "title": "Azure custom roles - Azure RBAC | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.120Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/deny-assignments",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/role-based-access-control/deny-assignments",
+    "status": 200,
+    "title": "List Azure deny assignments - Azure RBAC | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.106Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+    "status": 200,
+    "title": "What is Azure role-based access control (Azure RBAC)? | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.198Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles",
+    "status": 200,
+    "title": "Azure roles, Microsoft Entra roles, and classic subscription administrator roles | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.336Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview",
+    "status": 200,
+    "title": "Understand scope for Azure RBAC | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.392Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/transfer-subscription",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/role-based-access-control/transfer-subscription",
+    "status": 200,
+    "title": "Transfer an Azure subscription to a different Microsoft Entra directory | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.515Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill",
+    "status": 200,
+    "title": "Tutorial to run an Azure VM disaster recovery drill with Azure Site Recovery - Azure Site Recovery | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.023Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/site-recovery/recovery-plan-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/site-recovery/recovery-plan-overview",
+    "status": 200,
+    "title": "About recovery plans in Azure Site Recovery - Azure Site Recovery | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.987Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview",
+    "status": 200,
+    "title": "About Azure Site Recovery - Azure Site Recovery | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.106Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview",
+    "status": 200,
+    "title": "Access tiers for blob data - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.711Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/archive-rehydrate-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/blobs/archive-rehydrate-overview",
+    "status": 200,
+    "title": "Blob rehydration from the archive tier | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.678Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory",
+    "status": 200,
+    "title": "Authorize Blob Access with Microsoft Entra ID - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.722Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-policy-structure",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-policy-structure",
+    "status": 200,
+    "title": "Azure Blob Storage lifecycle management policy structure - Azure Blob Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.748Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview",
+    "status": 200,
+    "title": "Object replication overview - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.601Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-container-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-container-overview",
+    "status": 200,
+    "title": "Soft delete for containers - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.924Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-user-delegation-sas-create-dotnet",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-user-delegation-sas-create-dotnet",
+    "status": 200,
+    "title": "Create a user delegation SAS for Azure Blob, Azure Files, and Azure Queue with .NET - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.302Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview",
+    "status": 200,
+    "title": "Blob Versioning in Azure Storage - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.765Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage",
+    "status": 200,
+    "title": "Manage account access keys - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.910Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview",
+    "status": 200,
+    "title": "Storage Account Overview - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.601Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security",
+    "status": 200,
+    "title": "Azure Storage firewall rules and network access | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.086Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints",
+    "status": 200,
+    "title": "Use private endpoints - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.118Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy",
+    "status": 200,
+    "title": "Data redundancy - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.628Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview",
+    "status": 200,
+    "title": "Grant limited access to data with shared access signatures (SAS) - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.832Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption",
+    "status": 200,
+    "title": "Azure Storage encryption for data at rest | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.527Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet",
+    "status": 200,
+    "title": "Create a stored access policy with .NET - Azure Storage | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.092Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-authorize-azure-active-directory",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-authorize-user-identity",
+    "status": 200,
+    "title": "Authorize access for AzCopy with a user identity | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.674Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-synchronize",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-synchronize",
+    "status": 200,
+    "title": "Synchronize with Azure Blob storage by using AzCopy v10 | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.422Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-upload",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-upload",
+    "status": 200,
+    "title": "Upload files to Azure Blob storage by using AzCopy v10 | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.066Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-cloud-tiering-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-cloud-tiering-overview",
+    "status": 200,
+    "title": "Understand Azure File Sync Cloud Tiering | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.198Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-planning",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-planning",
+    "status": 200,
+    "title": "Plan an Azure File Sync deployment | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.316Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview",
+    "status": 200,
+    "title": "Overview - Azure Files Identity-Based Authentication | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.437Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-enable-soft-delete",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion",
+    "status": 200,
+    "title": "Azure File Share Soft Delete | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.189Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-assign-share-level-permissions",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-assign-share-level-permissions",
+    "status": 200,
+    "title": "Assign Share-Level Permissions for Azure Files | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.463Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files",
+    "status": 200,
+    "title": "Use Azure Files Share Snapshots | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.524Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer",
+    "status": 200,
+    "title": "Get started with Storage Explorer | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.155Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-overview",
+    "status": 200,
+    "title": "Azure Traffic Manager overview | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.434Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade",
+    "status": 200,
+    "title": "Automatic OS image upgrades with Azure Virtual Machine Scale Sets - Azure Virtual Machine Scale Sets | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.110Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-instance-protection",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-instance-protection",
+    "status": 200,
+    "title": "Instance Protection for Azure Virtual Machine Scale Set instances - Azure Virtual Machine Scale Sets | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.724Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-orchestration-modes",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-orchestration-modes",
+    "status": 200,
+    "title": "Orchestration modes for Virtual Machine Scale Sets in Azure - Azure Virtual Machine Scale Sets | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.835Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy",
+    "status": 200,
+    "title": "Use scale-in policies with Azure Virtual Machine Scale Sets - Azure Virtual Machine Scale Sets | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.901Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview",
+    "status": 200,
+    "title": "Availability sets overview - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.812Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts",
+    "status": 200,
+    "title": "Overview of Azure Dedicated Hosts for virtual machines - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.759Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-portal",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-portal",
+    "status": 200,
+    "title": "Enable end-to-end encryption using encryption at host - Azure portal - managed disks - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.568Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types",
+    "status": 200,
+    "title": "Select a disk type for Azure IaaS VMs - managed disks - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.733Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows",
+    "status": 200,
+    "title": "Azure Custom Script Extension for Windows - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.967Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/overview",
+    "status": 200,
+    "title": "Overview of virtual machines in Azure - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.712Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/b-series-cpu-credit-model",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/b-series-cpu-credit-model",
+    "status": 200,
+    "title": "B Series CPU Credit Model - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.680Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview",
+    "status": 200,
+    "title": "Virtual machine sizes overview - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.562Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/resize-vm",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/resize-vm",
+    "status": 200,
+    "title": "Resize a virtual machine - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.671Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/spot-vms",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/spot-vms",
+    "status": 200,
+    "title": "About Azure Spot Virtual Machines - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:08.754Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/expand-disks",
+    "status": 200,
+    "title": "Expand Virtual Hard Disks Attached to a Windows VM in Azure - Azure Virtual Machines | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.895Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups",
+    "status": 200,
+    "title": "Azure Application Security Groups Overview | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.229Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/private-ip-addresses",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/private-ip-addresses",
+    "status": 200,
+    "title": "Private IP addresses in Azure | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.737Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses",
+    "status": 200,
+    "title": "Public IP addresses in Azure - Azure Virtual Network | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.452Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-group-how-it-works",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-group-how-it-works",
+    "status": 200,
+    "title": "How Network Security Groups Filter Network Traffic in Azure | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.113Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview",
+    "status": 200,
+    "title": "Azure network security groups overview | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.226Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-network-interface",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-network-interface",
+    "status": 200,
+    "title": "Create, Change, or Delete Azure Network Interfaces | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.289Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview",
+    "status": 200,
+    "title": "Azure Virtual Network Peering | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.856Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq",
+    "status": 200,
+    "title": "Azure Virtual Network FAQ | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.663Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview",
+    "status": 200,
+    "title": "Azure virtual network traffic routing | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.403Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/vpn-gateway/about-gateway-skus",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/vpn-gateway/about-gateway-skus",
+    "status": 200,
+    "title": "About gateway SKUs | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.990Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/vpn-gateway/design",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/vpn-gateway/design",
+    "status": 200,
+    "title": "Azure VPN Gateway topologies and design | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.076Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/vpn-gateway/nat-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/vpn-gateway/nat-overview",
+    "status": 200,
+    "title": "About NAT (Network Address Translation) on VPN Gateway - Azure VPN Gateway | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.342Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal",
+    "status": 200,
+    "title": "Tutorial – Create &amp; manage a VPN gateway – Azure portal - Azure VPN Gateway | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.762Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-site-to-site-portal",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-site-to-site-portal",
+    "status": 200,
+    "title": "Tutorial - Create S2S VPN connection between on-premises network and Azure virtual network: Azure portal - Azure VPN Gateway | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:10.453Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit",
+    "status": 200,
+    "title": "Configure VPN gateway transit for virtual network peering - Azure VPN Gateway | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:09.824Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/external-id/what-is-b2b",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/external-id/what-is-b2b",
+    "status": 200,
+    "title": "What is Microsoft Entra B2B collaboration? - Microsoft Entra External ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.024Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-group-licenses?view=o365-worldwide&preserve-view=true",
+    "status": 200,
+    "title": "Assign or unassign licenses to a group in the Microsoft 365 admin center - Microsoft 365 admin | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:06.830Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/fundamentals/concept-learn-about-groups",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/fundamentals/concept-learn-about-groups",
+    "status": 200,
+    "title": "Learn About Groups, Group Membership, and Access - Microsoft Entra | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:06.839Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/fundamentals/license-users-groups",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users?view=o365-worldwide&preserve-view=true",
+    "status": 200,
+    "title": "Assign or unassign licenses for users in the Microsoft 365 admin center - Microsoft 365 admin | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.392Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview",
+    "status": 200,
+    "title": "What are access reviews? - Microsoft Entra - Microsoft Entra ID Governance | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:06.983Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-activate-your-roles",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-activate-your-roles",
+    "status": 200,
+    "title": "Activate Azure resource roles in PIM - Microsoft Entra ID Governance | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:06.935Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-configure-role-settings",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-configure-role-settings",
+    "status": 200,
+    "title": "Configure Azure resource role settings in PIM - Microsoft Entra ID Governance | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.022Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies",
+    "status": 200,
+    "title": "Risk policies - Microsoft Entra ID Protection | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.054Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths",
+    "status": 200,
+    "title": "Overview of Conditional Access Authentication Strengths - Microsoft Entra ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:06.929Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sspr-writeback",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sspr-writeback",
+    "status": 200,
+    "title": "On-premises password writeback with self-service password reset - Microsoft Entra ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.313Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-userstates",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-userstates",
+    "status": 200,
+    "title": "Enable per-user multifactor authentication - Microsoft Entra ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.294Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr",
+    "status": 200,
+    "title": "Enable Microsoft Entra self-service password reset - Microsoft Entra ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.230Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-assignment-network",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-assignment-network",
+    "status": 200,
+    "title": "Conditional Access Policy: Using Network Signals - Microsoft Entra ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:06.874Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies",
+    "status": 200,
+    "title": "Build Conditional Access policies in Microsoft Entra - Microsoft Entra ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:07.450Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication",
+    "status": 200,
+    "title": "Block legacy authentication with Conditional Access - Microsoft Entra ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:06.851Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership",
+    "status": 200,
+    "title": "Manage rules for dynamic membership groups in Microsoft Entra ID - Microsoft Entra ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:06.870Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add",
+    "status": 200,
+    "title": "Bulk create users in the Azure portal - Microsoft Entra ID | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:06.859Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/extend-operator",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/kusto/query/extend-operator?view=microsoft-fabric",
+    "status": 200,
+    "title": "extend operator - Kusto | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.026Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/join-operator",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/kusto/query/join-operator?view=microsoft-fabric",
+    "status": 200,
+    "title": "join operator - Kusto | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.086Z"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators",
+    "resolvedUrl": "https://learn.microsoft.com/en-us/kusto/query/tutorials/learn-common-operators?view=microsoft-fabric",
+    "status": 200,
+    "title": "Tutorial: Learn Common Kusto Query Language Operators - Kusto | Microsoft Learn",
+    "checkedAt": "2026-09-26T23:24:11.100Z"
+  }
+]

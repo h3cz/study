@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnswerSources } from "@/components/QuestionContent";
 import type { PerfQuestion } from "@/lib/db";
 import { useKeyboardShortcuts } from "@/lib/useKeyboardShortcuts";
 
@@ -512,6 +513,7 @@ export default function DragMatch({ question, mode = "practice", onSubmit, value
             }}
           >
             {explanation}
+<AnswerSources urls={question.sourceUrls} />
           </div>
         </div>
       )}

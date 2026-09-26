@@ -28,9 +28,11 @@ Your real learning bank should be yours.
 
 ## Azure Administrator (AZ-104)
 
-The original Azure bank includes 160 questions, 60 flashcards, 8 matching exercises, and 40 acronym/term drills. Select AZ-104 in the certification switcher. The [2026-09-25 audit](docs/az104-review/REPORT.md) records source evidence, complete corrections, supplemental topics and remaining coverage gaps. These are practice exercises, not Microsoft exam questions or replicas of its labs.
+The original Azure bank includes 190 questions, 60 flashcards, 20 matching exercises, and 40 acronym/term drills. Six fictional case studies contribute 30 connected questions. Select AZ-104 in the certification switcher or open `/case-studies`. Every MCQ and matching drill links to Microsoft Learn after answering. These are practice exercises, not Microsoft exam questions or replicas of its labs.
 
-To reproduce the editorial update, run `node scripts/review-az104.mjs`, then `node scripts/report-az104.mjs`. Run the pre-commit checks before shipping; bump the content version when changing a deployed bank.
+The [initial audit](docs/az104-review/REPORT.md) records the September 25 corrections and coverage gaps; the [expansion and difficulty audit](docs/az104-review/WORKSTREAM-1.md) lists all 86 changed ratings and the new exercises. The earlier `review-az104.mjs` and `report-az104.mjs` scripts reproduce the historical first release and must not be rerun over the expanded bank. Edit the current TypeScript content, update the audit ledger, and run the pre-commit checks; bump the content version when changing a deployed bank.
+
+Optional, consent-based PostHog setup and the event inventory are documented in [Analytics](docs/ANALYTICS.md).
 
 ## Bring Your Own Bank
 

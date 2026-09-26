@@ -1367,9 +1367,9 @@ export default function Dashboard() {
         </section>
       )}
 
-      <NewBanner featureId="az104-bank-2026-09" href="/changelog#az-104">
-        <strong>New: Azure Administrator (AZ-104).</strong> 160 practice questions,
-        60 flashcards and 8 matching drills. Explore what’s included.
+      <NewBanner featureId="az104-cases-2026-09" href="/changelog#az-104-cases">
+        <strong>New: Azure Administrator (AZ-104).</strong> 190 practice questions,
+        six case studies, 60 flashcards and 20 matching drills. Explore what’s included.
       </NewBanner>
 
       <DashboardLabCard />
@@ -1916,7 +1916,9 @@ export default function Dashboard() {
                 minutesAgo < 1 ? "just now" : minutesAgo === 1 ? "1 min ago" : `${minutesAgo} min ago`;
               return (
                 <Link
-                  href={`/quiz?mode=${inProgressQuiz.mode ?? inProgressQuiz.kind}`}
+                  href={inProgressQuiz.caseStudyId
+                    ? `/quiz?caseStudy=${encodeURIComponent(inProgressQuiz.caseStudyId)}`
+                    : `/quiz?mode=${inProgressQuiz.mode ?? inProgressQuiz.kind}`}
                   className="flex items-center justify-between px-4 py-3 transition-colors cursor-pointer"
                   style={{
                     background: "rgba(245,166,35,0.06)",

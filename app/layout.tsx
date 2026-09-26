@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import { ThemeChrome } from "@/components/ThemeChrome";
+import { AnalyticsConsent } from "@/components/AnalyticsConsent";
 import { NavBar } from "@/components/NavBar";
 import { CommandPalette } from "@/components/CommandPalette";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
@@ -78,11 +80,14 @@ export default function RootLayout({
     >
       <body className="antialiased bg-background text-foreground min-h-screen">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <a className="skip-link" href="#main-content">Skip to content</a>
           <InAppBrowserBanner />
           <NavBar />
           <CommandPalette />
-          <main className="max-w-2xl lg:max-w-4xl mx-auto px-4 py-6 lg:py-8 main-content-pb">{children}</main>
+          <main id="main-content" tabIndex={-1} className="max-w-2xl lg:max-w-4xl mx-auto px-4 py-6 lg:py-8 main-content-pb">{children}</main>
           <MobileBottomNav />
+          <ThemeChrome />
+          <AnalyticsConsent />
           <InstallPrompt />
           <footer
             style={{
@@ -116,6 +121,9 @@ export default function RootLayout({
               >
                 Credits &amp; sources
               </a>
+              {" · "}<a href="/privacy">Privacy</a>
+              {" · "}<a href="/changelog">What’s new</a>
+              {" · "}<a href="/help">Help</a>
             </div>
           </footer>
         </ThemeProvider>

@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@/lib/analytics";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -194,6 +195,7 @@ export default function OnboardingPage() {
   }
 
   async function saveAndFinish(goCalibrate: boolean) {
+    void track("onboarding_step_completed", { step: 4 });
     await saveSetup();
     // Hard-navigate (not router.push) so the persistent NavBar — and its
     // CertSwitcher, which reads activeCertId once on mount — re-reads the cert
@@ -292,7 +294,7 @@ export default function OnboardingPage() {
                 marginBottom: "10px",
               }}
             >
-              Free CompTIA exam prep
+              Free Azure and CompTIA exam prep
             </p>
             <h1
               className="font-display"
@@ -347,7 +349,7 @@ export default function OnboardingPage() {
             </div>
             <div style={{ display: "flex", gap: "10px", marginTop: "24px" }}>
               <button
-                onClick={() => setStep(2)}
+                onClick={() => { void track("onboarding_step_completed", { step: 1 }); setStep(2); }}
                 style={{
                   flex: 1,
                   height: "44px",
@@ -442,7 +444,7 @@ export default function OnboardingPage() {
                 ← Back
               </button>
               <button
-                onClick={() => setStep(3)}
+                onClick={() => { void track("onboarding_step_completed", { step: 2 }); setStep(3); }}
                 style={{
                   flex: 1,
                   height: "44px",
@@ -570,7 +572,7 @@ export default function OnboardingPage() {
                 ← Back
               </button>
               <button
-                onClick={() => setStep(4)}
+                onClick={() => { void track("onboarding_step_completed", { step: 3 }); setStep(4); }}
                 style={{
                   flex: 1,
                   height: "44px",
