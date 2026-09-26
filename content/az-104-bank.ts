@@ -5,6 +5,10 @@
 //
 // The bank is authored in per-domain part files under ./parts and combined
 // here so content/seed.ts can wire it in as a single import.
+// Reviewed against Microsoft Learn on 2026-09-25. Full issue log, evidence,
+// coverage limitations and paste-ready replacements: docs/az104-review/REPORT.md.
+// 160 MCQs, 60 flashcards, 8 matching drills, 40 acronym/term drills.
+// Matching drills are learning exercises, not a reproduction of Azure exam labs.
 
 import type { Acronym, Flashcard, PerfQuestion, Question } from "@/lib/db";
 

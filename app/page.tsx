@@ -45,6 +45,7 @@ import type { Achievement } from "@/lib/rewards";
 import { getCert, getActiveCertId } from "@/lib/certs";
 import { isBankImportEnabled } from "@/lib/feature-flags";
 import { changelogEntries } from "@/lib/changelog";
+import { NewBanner } from "@/components/NewBanner";
 
 // Resolved per-load from userState.activeCertId; falls back to DEFAULT_CERT_ID.
 // Only Security+ is live today, so this is secplus everywhere — behavior identical.
@@ -656,11 +657,10 @@ function DashboardLabCard() {
               marginBottom: "6px",
             }}
           >
-            Study Lab, class sharing, and public starter updates
+            {latest?.title ?? "Study Lab and class sharing"}
           </h2>
           <p style={{ fontSize: "13px", color: "var(--fg-muted)", lineHeight: 1.55, maxWidth: "680px" }}>
-            The lab hub now gives classmates a forkable starter, QR share path, class pack, decks, and a small demo-bank
-            workflow without exposing the production question bank.
+            {latest?.summary ?? "Explore the Study Lab, class pack, and sharing tools."}
           </p>
           {latest && (
             <p className="font-mono" style={{ fontSize: "11px", color: "var(--fg-subtle)", marginTop: "8px" }}>
@@ -670,7 +670,7 @@ function DashboardLabCard() {
         </div>
         <div className="dashboard-lab-actions" style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
           <Link
-            href="/lab"
+            href={latest?.id === "az-104" ? "/settings" : "/lab"}
             style={{
               height: "40px",
               display: "inline-flex",
@@ -685,7 +685,7 @@ function DashboardLabCard() {
               whiteSpace: "nowrap",
             }}
           >
-            Open lab
+            {latest?.id === "az-104" ? "Choose AZ-104" : "Open lab"}
           </Link>
           <Link
             href="/changelog"
@@ -1366,6 +1366,11 @@ export default function Dashboard() {
           </div>
         </section>
       )}
+
+      <NewBanner featureId="az104-bank-2026-09" href="/changelog#az-104">
+        <strong>New: Azure Administrator (AZ-104).</strong> 160 practice questions,
+        60 flashcards and 8 matching drills. Explore what’s included.
+      </NewBanner>
 
       <DashboardLabCard />
 

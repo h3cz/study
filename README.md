@@ -12,7 +12,7 @@ Built with Next.js, React, TypeScript, IndexedDB, Supabase, FSRS, Vitest, and Pl
 
 Most cert study tools feel like static question banks. hecz / study is built around momentum: answer a few questions, learn what changed, recover weak spots, and get the next useful action without turning study into a spreadsheet.
 
-The public version is intentionally a starter kit. It ships the study engine, a tiny original demo bank, and docs for creating your own question bank from class notes, labs, official objectives, and resources you are allowed to use.
+The public version is intentionally a starter kit. It ships the study engine, a tiny original demo bank, a reviewed AZ-104 bank, and docs for creating your own question bank from class notes, labs, official objectives, and resources you are allowed to use.
 
 Your real learning bank should be yours.
 
@@ -25,6 +25,12 @@ Your real learning bank should be yours.
 - Local-first IndexedDB progress with optional Supabase auth and cloud sync.
 - 1v1 duels with agreed question count, timer settings, rules preview, and server-authoritative scoring.
 - HTTP study-agent surface for tools such as Cursor, OpenClaw, or personal scripts.
+
+## Azure Administrator (AZ-104)
+
+The original Azure bank includes 160 questions, 60 flashcards, 8 matching exercises, and 40 acronym/term drills. Select AZ-104 in the certification switcher. The [2026-09-25 audit](docs/az104-review/REPORT.md) records source evidence, complete corrections, supplemental topics and remaining coverage gaps. These are practice exercises, not Microsoft exam questions or replicas of its labs.
+
+To reproduce the editorial update, run `node scripts/review-az104.mjs`, then `node scripts/report-az104.mjs`. Run the pre-commit checks before shipping; bump the content version when changing a deployed bank.
 
 ## Bring Your Own Bank
 

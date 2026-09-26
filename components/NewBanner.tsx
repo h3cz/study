@@ -65,7 +65,8 @@ export function NewBanner({
           color: "var(--fg)",
           fontFamily: "var(--font-sans)",
           fontSize: 13.5,
-          paddingRight: 24,
+          paddingRight: 44,
+          minHeight: 44,
         }}
       >
         <span aria-hidden="true">🆕</span>
@@ -73,14 +74,15 @@ export function NewBanner({
         <span aria-hidden="true" style={{ color: "var(--accent)", fontWeight: 600, flexShrink: 0 }}>→</span>
       </Link>
       <button
+        type="button"
         onClick={dismiss}
         aria-label="Dismiss announcement"
         style={{
           position: "absolute",
           top: 6,
           right: 8,
-          width: 24,
-          height: 24,
+          width: 44,
+          height: 44,
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",

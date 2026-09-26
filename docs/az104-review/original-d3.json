@@ -1,0 +1,1172 @@
+{
+  "AZ104_D3_QUESTIONS": [
+    {
+      "id": "az104-3-3.1-001",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "stem": "You are deploying an Azure VM to host an in-memory caching layer. The workload needs a high memory-to-CPU ratio. Which VM series is designed for memory-optimized workloads?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "B-series",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "D-series",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "E-series",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "F-series",
+          "correct": false
+        }
+      ],
+      "explanation": "The E-series is Azure's memory-optimized family, built for workloads like databases, in-memory analytics, and caching that need lots of RAM per vCPU. B-series is burstable (credits-based, for variable dev/test loads), D-series is general-purpose with a balanced CPU-to-memory ratio, and F-series is compute-optimized with a high CPU-to-memory ratio — the opposite of what this workload needs.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.1-002",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "stem": "A B-series VM earns CPU credits while it runs below its baseline and spends them during bursts. What happens when the VM runs out of banked credits while under heavy load?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "The VM is throttled back to its baseline CPU performance",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "The VM is automatically evicted like a Spot VM",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Azure bills the overage at standard pay-as-you-go VM rates",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "The VM is deallocated until credits accumulate again",
+          "correct": false
+        }
+      ],
+      "explanation": "B-series VMs are credit-based: with no credits banked, the VM is capped at its baseline CPU level until it idles and earns credits again. Eviction only applies to Spot VMs (B is wrong), there is no automatic credit purchasing (C is wrong), and the VM is never stopped for being out of credits (D is wrong) — it just runs slower.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.1-003",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "stem": "You need to resize a running VM from Standard_D2s_v5 to Standard_E4s_v5, but the portal warns the new size is not available on the current hardware cluster. What must you do before resizing?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Restart the VM from inside the guest OS",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Stop (deallocate) the VM so it can be moved to new hardware",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Detach all data disks, resize, then reattach them",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Delete the VM and recreate it from the OS disk snapshot",
+          "correct": false
+        }
+      ],
+      "explanation": "A resize to a size on different physical hardware requires the VM to be deallocated (Stop in the portal releases the hardware lease); a guest-OS restart keeps the same host allocation. Data disks do not need detaching for a resize, and deleting the VM is unnecessary — deallocate, resize, start.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.1-004",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "stem": "Which statement about the Azure temporary disk (the D: drive on Windows, /dev/sdb on Linux) is TRUE?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "It is the best place to store application data because it is local SSD",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Its data persists across a reboot but is lost on redeploy, host move, or stop/deallocate",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "It is backed by Azure Storage and included in managed disk snapshots",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "It is encrypted with the same key as the OS disk and replicated to the paired region",
+          "correct": false
+        }
+      ],
+      "explanation": "The temporary disk is local, non-persistent storage on the host: it survives a guest reboot but is wiped on redeploy, migration to another host, or deallocation — so it is only for page files and scratch data. It is not a managed disk (no snapshots or replication), and anything irreplaceable stored there will be lost.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.1-005",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "stem": "A database VM needs a single data disk delivering well over 20,000 IOPS with sub-millisecond latency, and the IOPS must be adjustable independently of disk size. Which managed disk type meets these requirements?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Standard HDD",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Standard SSD",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Premium SSD",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Ultra Disk",
+          "correct": true
+        }
+      ],
+      "explanation": "Ultra Disk is the only managed disk with sub-millisecond latency, up to 160,000 IOPS, and independently configurable IOPS/throughput. Premium SSD tops out around 20,000 IOPS per disk with single-digit millisecond latency and ties IOPS to disk size tiers. Standard SSD (web servers, light dev) and Standard HDD (infrequent backup/archive) are far below this performance bar.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.1-006",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "stem": "Your ARM template deploys a VM, and every deployment must automatically run a PowerShell script that installs a monitoring agent and joins the machine to the domain. Which VM extension is designed for this post-deployment scripting?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Custom Script Extension",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Azure Desired State Configuration (DSC) extension",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Serial console access",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Availability set membership",
+          "correct": false
+        }
+      ],
+      "explanation": "The Custom Script Extension downloads and executes scripts on the VM — ideal for one-time post-deployment tasks like installing agents and domain joins, and it slots directly into ARM templates. The DSC extension enforces declarative desired state over time rather than running an imperative script once. Serial console is interactive troubleshooting, not automation, and availability sets handle fault/update domain placement, not configuration.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.1-007",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "stem": "You run a batch rendering job on Spot VMs with the eviction policy set to Deallocate. Azure needs the capacity back and issues an eviction notice. What happens to the VMs?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "They are deallocated (stopped without compute charges) and can be restarted later",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "They are permanently deleted along with their OS disks",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "They are live-migrated to another Azure region automatically",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "They keep running but are billed at regular pay-as-you-go rates",
+          "correct": false
+        }
+      ],
+      "explanation": "With the Deallocate eviction policy, evicted Spot VMs are stopped (no compute billing, disks retained) so the job can resume when capacity returns. The Delete policy is what permanently removes VMs. Azure never live-migrates Spot VMs to another region, and eviction does not convert them to pay-as-you-go pricing.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.1-008",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "stem": "A regulator requires that your VMs run on physical servers dedicated solely to your organization, with control over host-level maintenance windows. The compliance team rejects any multi-tenant hardware sharing. Which Azure option satisfies this?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Azure Dedicated Host",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Deploying the VMs across multiple availability zones",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Placing the VMs in an availability set with three fault domains",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Using a proximity placement group for the VMs",
+          "correct": false
+        }
+      ],
+      "explanation": "Azure Dedicated Host gives you the entire physical server — single-tenant hardware plus control over maintenance timing — which is exactly what the compliance requirement demands. Availability zones and availability sets protect against failures, not tenancy. Proximity placement groups reduce network latency between VMs but say nothing about who shares the host.",
+      "difficulty": 4
+    },
+    {
+      "id": "az104-3-3.2-001",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "stem": "An availability set is configured with 3 fault domains and 20 update domains. During a planned host OS patching event, what do the update domains guarantee?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "VMs in different update domains are never rebooted at the same time",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "VMs survive the loss of an entire datacenter rack",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "VMs are automatically replicated to another Azure region",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "At least one VM keeps running in every fault domain",
+          "correct": false
+        }
+      ],
+      "explanation": "Update domains exist for planned maintenance: Azure patches one update domain at a time, so VMs spread across 20 UDs are never rebooted simultaneously. Rack-level failure protection is the job of fault domains, not update domains. Availability sets provide no cross-region replication, and fault domains (not UDs) address unplanned hardware failures.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.2-002",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "stem": "You deploy application VMs across zones 1, 2, and 3 of a region, fronted by a load balancer. The requirement is that a full zone outage must not take the application offline and no manual failover may be needed. Which design meets this?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Zonal deployment pinned to zone 1 with a standby in zone 2",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Zone-redundant frontend with backend VMs spread across all three zones",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "A single availability set inside one zone",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "All VMs in one zone behind a regional load balancer",
+          "correct": false
+        }
+      ],
+      "explanation": "Zone-redundant deployment spreads instances across zones with the platform handling failover automatically — a zone loss leaves the other zones serving traffic. A zonal deployment pinned to one zone is a single point of failure (and 'standby in zone 2' still needs manual or scripted failover). An availability set protects within a datacenter, not across zones, and putting everything in one zone behind a regional LB does nothing when that zone fails.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.2-003",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "stem": "You need a scale set where each VM gets its own identity, can be managed and addressed individually, and the set can mix different VM sizes. Which Virtual Machine Scale Set orchestration mode supports this?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Flexible orchestration mode",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Uniform orchestration mode",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "An availability set with autoscale enabled",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "A proximity placement group",
+          "correct": false
+        }
+      ],
+      "explanation": "Flexible orchestration treats each VM as an individually manageable instance with its own identity and allows mixed sizes — ideal for heterogeneous fleets. Uniform orchestration uses identical instances from a single VM profile, so per-VM individuality and mixed sizes are not possible. Availability sets do not autoscale at all, and proximity placement groups only control physical proximity for latency, not fleet management.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.2-004",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "stem": "A VMSS autoscale profile adds two instances when average CPU exceeds 70% for 10 minutes, and removes one when it drops below 30% for 15 minutes. What kind of scaling is this?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Metric-based autoscale rules",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Schedule-based autoscaling",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Manual scaling",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Availability-zone failover",
+          "correct": false
+        }
+      ],
+      "explanation": "These are metric-based autoscale rules: thresholds on a performance metric (CPU) with durations trigger scale-out and scale-in. Schedule-based scaling triggers on time of day, not metrics. Manual scaling means an administrator changes the instance count directly. Zone failover is a resilience concept, not a scaling mechanism.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.2-005",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "stem": "A VMSS scales in from 10 instances to 6 during a quiet period. With the default scale-in policy, which instances are terminated first?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "The newest instances, balancing deletions across zones and fault domains",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "The oldest instances, since they have served the longest",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "The instances with the highest current CPU utilization",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Random instances, with no balancing across fault domains",
+          "correct": false
+        }
+      ],
+      "explanation": "The default scale-in policy removes the newest VMs first while keeping deletions balanced across zones and fault domains, preserving the long-running, warmed-up instances. It does not target the oldest instances, it does not consider per-VM CPU, and it is not random — balance across failure domains is maintained deliberately.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.2-006",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "stem": "You enable automatic OS image upgrades on a uniform VMSS and configure an application health probe. A new platform image starts rolling out but the health probe begins failing on upgraded instances. What does automatic OS upgrade do that a manual rolling upgrade would not?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "It automatically rolls back the upgrade when health probes fail",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "It upgrades every instance simultaneously for maximum speed",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "It requires you to approve each batch before it proceeds",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "It skips the health probe and upgrades on a fixed schedule",
+          "correct": false
+        }
+      ],
+      "explanation": "Automatic OS upgrades are platform-driven and health-aware: with an application health probe configured, failed upgrades trigger an automatic rollback to the previous image — a manual rolling upgrade leaves that decision to you. Automatic upgrades never blast all instances at once (they roll in batches), they do not wait for per-batch approval, and the health probe is central to the feature, not skipped.",
+      "difficulty": 5
+    },
+    {
+      "id": "az104-3-3.2-007",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "stem": "What is the minimum number of virtual machines in an availability set required to qualify for the 99.95% Azure SLA for VMs?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "1",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "2",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "3",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "4",
+          "correct": false
+        }
+      ],
+      "explanation": "The 99.95% SLA applies when two or more VMs are deployed in the same availability set (or across zones) — a single VM only qualifies for the 99.9% SLA. Three or four VMs add resilience but are not the SLA minimum.",
+      "difficulty": 1
+    },
+    {
+      "id": "az104-3-3.2-008",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "stem": "Which statement correctly describes an Azure availability zone?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "One or more datacenters with independent power, cooling, and networking within a region",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "A synonym for an Azure region",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "A single rack of servers inside a datacenter",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "A logical grouping identical to a fault domain",
+          "correct": false
+        }
+      ],
+      "explanation": "Each availability zone is a physically separate set of datacenters in a region with independent power, cooling, and networking, so a zone-level failure does not take the others down. A region contains zones (not the reverse), a rack is far smaller than a zone, and fault domains are a within-datacenter concept used by availability sets.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.3-001",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "stem": "You deploy an Azure Container Instances container that runs a one-time database migration. It must never restart after it exits, even if it exits with an error code. Which restart policy should you set on the container group?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Always",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "OnFailure",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Never",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Manual",
+          "correct": false
+        }
+      ],
+      "explanation": "Never means the container runs exactly once and is not restarted on any exit — correct for one-time tasks. Always (the default) restarts on every exit and suits long-running services. OnFailure restarts only on non-zero exits, which would retry a failed migration you explicitly do not want retried. There is no Manual restart policy in ACI.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.3-002",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "stem": "Which statement about an ACI container group is TRUE?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Its containers are scheduled on the same host and share a lifecycle, local network, and storage volumes",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Each container gets its own public IP address and DNS name",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Its containers scale independently of one another",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Its containers can be spread across multiple Azure regions",
+          "correct": false
+        }
+      ],
+      "explanation": "A container group is the unit of deployment in ACI: co-scheduled containers on one host sharing lifecycle, localhost networking, and volumes — like a pod. The group gets one IP/DNS, not one per container. Containers scale as a group, never independently, and a group lives in a single region.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.3-003",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "stem": "You deploy a new revision of an Azure Container App and want 90% of traffic on the current revision and 10% on the new revision for canary validation. What makes this possible?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Keeping multiple active revisions and splitting ingress traffic between them",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Setting the app to single-revision mode",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Disabling ingress and exposing the new revision directly",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Creating a second Container Apps environment",
+          "correct": false
+        }
+      ],
+      "explanation": "Container Apps supports multiple active revisions with weighted traffic splitting at the ingress — the textbook canary pattern. Single-revision mode deactivates old revisions, so splitting is impossible. Disabling ingress removes external traffic entirely, and a second environment is for isolation boundaries, not traffic weighting.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.3-004",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "stem": "A Container App processes messages from a Service Bus queue. It must scale to zero replicas when the queue is empty and spin up automatically as messages arrive. Which capability enables this event-driven scaling?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "KEDA scalers",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "A CPU-utilization autoscale rule with a minimum of one replica",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "An ACI restart policy of OnFailure",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Manual replica count changes via the Azure CLI",
+          "correct": false
+        }
+      ],
+      "explanation": "KEDA (Kubernetes Event-Driven Autoscaling) is built into Container Apps and scales on event sources like queue length — including scale-to-zero when idle. A CPU rule with min replicas of one can never reach zero and reacts to CPU, not queue depth. ACI restart policies govern restarts, not scaling, and manual CLI changes are not automatic.",
+      "difficulty": 5
+    },
+    {
+      "id": "az104-3-3.3-005",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "stem": "Your team needs container images in Azure Container Registry replicated automatically to a secondary region for disaster recovery. Which ACR SKU is required?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Basic",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Standard",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Premium",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Free",
+          "correct": false
+        }
+      ],
+      "explanation": "Geo-replication is a Premium-only ACR feature (along with private endpoints, content trust, and higher throughput). Basic and Standard support webhooks, Tasks, and private registries but no cross-region replication. There is no Free ACR SKU.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.3-006",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "stem": "Multiple Container Apps need to share a virtual network, internal DNS, and centralized logging, with a secure boundary around the group. What should you deploy them into?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "A Container Apps environment",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "An ACI container group",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "An Azure Container Registry",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "A Log Analytics workspace alone",
+          "correct": false
+        }
+      ],
+      "explanation": "The Container Apps environment is the secure boundary that provides VNet integration, internal networking, and shared logging for the apps inside it. A container group is an ACI concept, not a Container Apps boundary. ACR stores images; it does not host apps. A Log Analytics workspace collects logs but provides no network boundary or hosting.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.3-007",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "stem": "An ACI container must be guaranteed exactly 2 vCPU and 4 GiB of memory, and you want per-second billing for the time it runs. How do you achieve this?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Specify CPU and memory requests in the container group definition",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Deploy it to an App Service plan with 2 cores",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Add it to a VMSS and set the instance size",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Choose a Kubernetes node pool with 2 vCPU nodes",
+          "correct": false
+        }
+      ],
+      "explanation": "ACI allocates resources per container from the container group definition — you declare vCPU and memory directly, and billing is per second of allocation. App Service plans size web apps, not containers. A VMSS sizes VMs, not container allocations. Node pools are an AKS concept; ACI is serverless with no nodes to manage.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.4-001",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "stem": "You move an App Service plan from the B1 tier to the P1v3 tier to get more CPU and memory per instance. What is this change called?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Scale up",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Scale out",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Autoscale",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Slot swap",
+          "correct": false
+        }
+      ],
+      "explanation": "Scale up means moving to a bigger pricing tier (more CPU/RAM per instance). Scale out means adding more instances of the same size. Autoscale changes instance count automatically based on rules, and a slot swap exchanges staging and production code — neither changes the tier size.",
+      "difficulty": 1
+    },
+    {
+      "id": "az104-3-3.4-002",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "stem": "Your web app runs on the Free tier of an App Service plan and traffic is growing. You want to scale out to three instances. What is the problem with this plan?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Free and Shared tiers do not support scale-out; you must move to Basic or higher",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Scale-out requires an App Service Environment on every tier",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Three instances are only possible with deployment slots",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Scale-out is automatic on Free tier and cannot be set manually",
+          "correct": false
+        }
+      ],
+      "explanation": "Free and Shared tiers are single-instance only — scale-out (manual or autoscale) requires Basic tier or higher. An ASE is only needed for the Isolated tier, not for ordinary scale-out. Deployment slots are a separate feature for staging code, and Free tier has no autoscale at all.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.4-003",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "stem": "You deploy a new build to a staging slot, run smoke tests against its URL, then promote it to production with zero downtime. Which App Service feature performs the promotion?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Swapping the staging and production slots",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Scaling out the production slot",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Restoring the app from a backup snapshot",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Rebinding the custom TLS certificate",
+          "correct": false
+        }
+      ],
+      "explanation": "A slot swap exchanges the staging and production slots after warming up the staging code, giving a zero-downtime release with instant rollback. Scaling out adds capacity but does not move code. Backup restore recovers old state rather than promoting new code. TLS rebinding only affects certificates, not deployments.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-3-3.4-004",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "stem": "Your app has staging and production slots. The staging slot uses a test database connection string, and that setting must keep pointing at the test database even after a swap. How do you configure this?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Mark the connection string as a deployment slot (sticky) setting",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Perform the swap with preview enabled",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Store the connection string in the production slot only",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Delete the staging slot immediately after each swap",
+          "correct": false
+        }
+      ],
+      "explanation": "Marking a setting as slot-specific ('sticky') pins it to the slot so it does not travel during a swap — staging keeps its test database string. Swap-with-preview only lets you validate warmed-up staging before completing the swap; it does not change which settings move. Putting the string only in production leaves staging without it, and deleting the slot is destructive and unnecessary.",
+      "difficulty": 4
+    },
+    {
+      "id": "az104-3-3.4-005",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "stem": "You need to bind a custom domain to a web app and secure it with an SNI-based TLS certificate. What is the minimum App Service plan tier that supports both?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Free",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Shared",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Basic",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Standard",
+          "correct": false
+        }
+      ],
+      "explanation": "Basic is the minimum tier for custom domains together with SNI TLS bindings — Free supports no custom domains at all, and Shared supports custom domains but not custom TLS certificate bindings. Standard adds features like backups and autoscale but is not the minimum for this requirement.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.4-006",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "stem": "You want scheduled automated backups of an App Service web app, including its files and database connection strings. Which plan tiers support App Service backup?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Free and Shared",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Basic",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Standard and higher",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Only the Isolated tier",
+          "correct": false
+        }
+      ],
+      "explanation": "App Service backup requires Standard tier or higher (Standard, Premium, Isolated). Free, Shared, and Basic do not include the backup feature at all. Isolated supports it, but it is not the only tier that does.",
+      "difficulty": 3
+    },
+    {
+      "id": "az104-3-3.4-007",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "stem": "Security policy requires your web apps to run on dedicated, single-tenant compute inside your own virtual network, isolated from other customers' App Service front ends. Which Azure resource provides this environment?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "App Service Environment (ASE)",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "A Premium v3 App Service plan",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "VNet integration on a Standard plan",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "A Private Endpoint on the web app",
+          "correct": false
+        }
+      ],
+      "explanation": "An App Service Environment is a single-tenant deployment of App Service directly in your VNet — dedicated compute and front ends, which is what the Isolated tier runs on. Premium v3 is still multi-tenant compute. VNet integration gives a Standard app outbound access into your VNet but the app still runs on shared infrastructure. A Private Endpoint secures inbound traffic only; it does not isolate the compute.",
+      "difficulty": 2
+    }
+  ],
+  "AZ104_D3_FLASHCARDS": [
+    {
+      "id": "az104-fc-3-001",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "front": "What do fault domains and update domains in an availability set each protect against?",
+      "back": "Fault domains: unplanned hardware failures (rack, power). Update domains: planned maintenance — Azure reboots one UD at a time. Up to 20 update domains on managed disks."
+    },
+    {
+      "id": "az104-fc-3-002",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "front": "Scale up vs. scale out in App Service — what is the difference?",
+      "back": "Scale up = bigger pricing tier (more CPU/RAM per instance). Scale out = more instances of the same size, manual or via autoscale rules."
+    },
+    {
+      "id": "az104-fc-3-003",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "front": "Which managed disk type gives sub-millisecond latency and independently tunable IOPS above 20,000?",
+      "back": "Ultra Disk. Premium SSD covers most production needs; Standard SSD/HDD are for dev/test and infrequent access."
+    },
+    {
+      "id": "az104-fc-3-004",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "front": "What is safe to store on the Azure temporary disk (D:)?",
+      "back": "Only page files and scratch data. It survives a reboot but is wiped on redeploy, host move, stop/deallocate, or resize. Never application data."
+    },
+    {
+      "id": "az104-fc-3-005",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "front": "What is an ACI container group?",
+      "back": "One or more containers deployed as a unit: co-scheduled on the same host, sharing a lifecycle, local network, and storage volumes."
+    },
+    {
+      "id": "az104-fc-3-006",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "front": "Name the three ACI restart policies and when to use each.",
+      "back": "Always (default) — long-running services. Never — one-time tasks like migrations. OnFailure — batch jobs that should retry only on errors."
+    },
+    {
+      "id": "az104-fc-3-007",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.3",
+      "front": "What does KEDA provide for Azure Container Apps?",
+      "back": "Kubernetes Event-Driven Autoscaling: scales replicas on events (queue length, HTTP traffic, timers) and can scale all the way to zero."
+    },
+    {
+      "id": "az104-fc-3-008",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "front": "What happens during an App Service deployment slot swap?",
+      "back": "Staging is warmed up, then staging and production swap — zero-downtime release with instant rollback. Swap-with-preview adds a validation step first."
+    },
+    {
+      "id": "az104-fc-3-009",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "front": "When must you deallocate (not just stop) a VM before resizing it?",
+      "back": "When the new size requires different underlying hardware. Deallocate releases the host lease so Azure can place the VM on new hardware."
+    },
+    {
+      "id": "az104-fc-3-010",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "front": "How do Azure Spot VM evictions work?",
+      "back": "Azure reclaims spare capacity with 30 seconds notice. Eviction policy Deallocate stops the VM (restartable, disks kept); Delete removes it permanently."
+    },
+    {
+      "id": "az104-fc-3-011",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "front": "Zonal vs. zone-redundant deployment — what is the difference?",
+      "back": "Zonal: you pin resources to one zone and manage failover yourself. Zone-redundant: the platform spreads resources across zones and fails over automatically."
+    },
+    {
+      "id": "az104-fc-3-012",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.4",
+      "front": "What are sticky (slot-specific) app settings in App Service?",
+      "back": "Settings marked 'deployment slot setting' stay with their slot during swaps — e.g., staging keeps its own test database connection string."
+    }
+  ],
+  "AZ104_D3_PERF_QUESTIONS": [
+    {
+      "id": "az104-pbq-3-001",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.1",
+      "type": "drag-match",
+      "prompt": "Match each Azure VM series to the workload it is designed for.",
+      "leftLabel": "VM series",
+      "rightLabel": "Best-fit workload",
+      "pairs": [
+        {
+          "left": "B-series",
+          "right": "Burstable dev/test workloads with variable CPU that earn credits when idle"
+        },
+        {
+          "left": "D-series",
+          "right": "General-purpose VMs with a balanced CPU-to-memory ratio"
+        },
+        {
+          "left": "E-series",
+          "right": "Memory-optimized workloads such as databases and in-memory caches"
+        },
+        {
+          "left": "F-series",
+          "right": "Compute-optimized workloads needing a high CPU-to-memory ratio"
+        },
+        {
+          "left": "N-series",
+          "right": "GPU-accelerated workloads such as ML training and rendering"
+        }
+      ],
+      "explanation": "B = burstable credits for spiky low-utilization loads. D = the balanced general-purpose default. E = memory-heavy (databases, caches). F = CPU-heavy batch and web front ends. N = GPUs for AI/ML and graphics rendering.",
+      "difficulty": 2
+    },
+    {
+      "id": "az104-pbq-3-002",
+      "certId": "az-104",
+      "domainId": "az-104:domain:3",
+      "objectiveId": "az-104:obj:3.2",
+      "type": "drag-match",
+      "prompt": "Match each Azure compute option to the scenario it fits best.",
+      "leftLabel": "Compute option",
+      "rightLabel": "Scenario",
+      "pairs": [
+        {
+          "left": "Azure Virtual Machines",
+          "right": "Full OS control for lift-and-shift apps needing custom drivers or domain join"
+        },
+        {
+          "left": "Virtual Machine Scale Sets",
+          "right": "A fleet of identical VMs that autoscale on metrics for a stateless web tier"
+        },
+        {
+          "left": "Azure Container Instances",
+          "right": "Run a containerized task quickly with no servers or orchestrator to manage"
+        },
+        {
+          "left": "Azure Container Apps",
+          "right": "Microservices with HTTP ingress, revisions, and event-driven KEDA scaling"
+        },
+        {
+          "left": "Azure App Service",
+          "right": "Managed web apps with deployment slots for zero-downtime releases"
+        },
+        {
+          "left": "Azure Dedicated Host",
+          "right": "Compliance requirement for single-tenant physical servers"
+        }
+      ],
+      "explanation": "VMs = maximum control of the OS. VMSS = identical, autoscaling VM fleets. ACI = simplest serverless containers for quick tasks. Container Apps = microservices with revisions and KEDA. App Service = managed web hosting with slots. Dedicated Host = whole physical server for compliance.",
+      "difficulty": 3
+    }
+  ],
+  "AZ104_D3_ACRONYMS": [
+    {
+      "id": "az104-ac-017",
+      "certId": "az-104",
+      "acronym": "VMSS",
+      "expansion": "Virtual Machine Scale Set",
+      "hint": "A fleet of identical, load-balanced VMs that autoscale on metric-based rules",
+      "domainHint": 3
+    },
+    {
+      "id": "az104-ac-018",
+      "certId": "az-104",
+      "acronym": "ACI",
+      "expansion": "Azure Container Instances",
+      "hint": "Serverless containers billed per second; deployed as container groups with Always/Never/OnFailure restart policies",
+      "domainHint": 3
+    },
+    {
+      "id": "az104-ac-019",
+      "certId": "az-104",
+      "acronym": "ACA",
+      "expansion": "Azure Container Apps",
+      "hint": "Managed microservices platform with environments, revisions, ingress, and KEDA event-driven scaling to zero",
+      "domainHint": 3
+    },
+    {
+      "id": "az104-ac-020",
+      "certId": "az-104",
+      "acronym": "ACR",
+      "expansion": "Azure Container Registry",
+      "hint": "Private Docker image registry; geo-replication and private endpoints require the Premium SKU",
+      "domainHint": 3
+    },
+    {
+      "id": "az104-ac-021",
+      "certId": "az-104",
+      "acronym": "ASE",
+      "expansion": "App Service Environment",
+      "hint": "Single-tenant App Service deployed in your VNet; what the Isolated tier runs on",
+      "domainHint": 3
+    },
+    {
+      "id": "az104-ac-022",
+      "certId": "az-104",
+      "acronym": "SKU",
+      "expansion": "Stock Keeping Unit",
+      "hint": "The pricing/size tier of an Azure resource — e.g., App Service plan tiers or ACR Basic/Standard/Premium",
+      "domainHint": 3
+    },
+    {
+      "id": "az104-ac-023",
+      "certId": "az-104",
+      "acronym": "DSC",
+      "expansion": "Desired State Configuration",
+      "hint": "Declarative configuration management delivered to VMs via the DSC extension to enforce desired state",
+      "domainHint": 3
+    },
+    {
+      "id": "az104-ac-024",
+      "certId": "az-104",
+      "acronym": "KEDA",
+      "expansion": "Kubernetes Event-Driven Autoscaling",
+      "hint": "Scales Container Apps on events like queue length — including scale-to-zero when idle",
+      "domainHint": 3
+    }
+  ]
+}
