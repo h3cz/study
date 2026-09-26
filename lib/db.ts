@@ -52,6 +52,10 @@ export interface Question {
   choices: Choice[];
   explanation: string;
   difficulty: Difficulty;
+  /** Original shared scenario; content lives in content/az104-case-studies.ts. */
+  caseStudyId?: string;
+  /** Primary documentation supporting the answer, displayed after answering. */
+  sourceUrls?: string[];
   videoSource?: VideoSource;
 }
 
@@ -113,6 +117,7 @@ export interface PerfQuestion {
   pairs: { left: string; right: string }[];
   explanation: string;
   difficulty: Difficulty;
+  sourceUrls?: string[];
 }
 
 export interface ReviewRecord {
@@ -189,6 +194,7 @@ export interface ReportedQuestion {
 }
 
 export interface InProgressQuiz {
+  caseStudyId?: string;
   id: "current"; // singleton — only one in-progress quiz at a time
   kind: "daily" | "fsrs" | "review" | "final-week" | "calibration";
   certId: string;

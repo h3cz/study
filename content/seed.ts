@@ -18,7 +18,7 @@ import {
   AZ104_QUESTIONS,
 } from "./az-104-bank";
 
-export const CONTENT_VERSION = 2;
+export const CONTENT_VERSION = 3;
 
 const certifications: Certification[] = liveCerts().map((cert) => ({
   id: cert.id,

@@ -7,7 +7,8 @@
 // here so content/seed.ts can wire it in as a single import.
 // Reviewed against Microsoft Learn on 2026-09-25. Full issue log, evidence,
 // coverage limitations and paste-ready replacements: docs/az104-review/REPORT.md.
-// 160 MCQs, 60 flashcards, 8 matching drills, 40 acronym/term drills.
+// 190 MCQs (including 30 questions in six case studies), 60 flashcards,
+// 20 matching drills, 40 acronym/term drills. Difficulty audit: WORKSTREAM-1.md.
 // Matching drills are learning exercises, not a reproduction of Azure exam labs.
 
 import type { Acronym, Flashcard, PerfQuestion, Question } from "@/lib/db";

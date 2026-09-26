@@ -2,11 +2,12 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { liveQuery } from "dexie";
 import { db } from "@/lib/db";
 import { liveCerts, getCert, getActiveCertId, type CertMeta } from "@/lib/certs";
 
 /**
- * CertSwitcher — the single, app-wide control for picking the active CompTIA
+ * CertSwitcher — the single, app-wide control for picking the active
  * certification. Shows the current cert compactly (mono version code + short
  * name) with a dropdown affordance; clicking opens a popover listing every live
  * cert. Selecting writes userState.activeCertId (merged, never clobbering other
@@ -175,18 +176,13 @@ function CertBar() {
   }, []);
 
   useEffect(() => {
-    let alive = true;
-    db.userState
-      .get(1)
-      .then((s) => {
-        if (alive) setActiveId(getActiveCertId(s ?? undefined));
-      })
-      .catch(() => {
-        if (alive) setActiveId(getActiveCertId());
-      });
-    return () => {
-      alive = false;
-    };
+    // A deep-linked Azure case can change the active cert without remounting
+    // the shared navigation. Keep its label in sync with the persisted state.
+    const subscription = liveQuery(() => db.userState.get(1)).subscribe({
+      next: state => setActiveId(getActiveCertId(state)),
+      error: () => setActiveId(getActiveCertId()),
+    });
+    return () => subscription.unsubscribe();
   }, []);
 
   const close = useCallback(() => setOpen(false), []);

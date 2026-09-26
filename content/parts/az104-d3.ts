@@ -1,6 +1,6 @@
 import type { Acronym, Flashcard, PerfQuestion, Question } from "@/lib/db";
 
-// Original practice content. Reviewed 2026-09-25; evidence and full issue log: docs/az104-review/REPORT.md.
+// Original practice content. Reviewed 2026-09-26; audit: docs/az104-review/WORKSTREAM-1.md.
 
 export const AZ104_D3_QUESTIONS: Question[] = [
   {
@@ -32,7 +32,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "The E-series is Azure's memory-optimized family, built for workloads like databases, in-memory analytics, and caching that need lots of RAM per vCPU. B-series is burstable (credits-based, for variable dev/test loads), D-series is general-purpose with a balanced CPU-to-memory ratio, and F-series is compute-optimized with a high CPU-to-memory ratio — the opposite of what this workload needs.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview"
+    ]
   },
   {
     "id": "az104-3-3.1-002",
@@ -63,7 +66,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B-series VMs are credit-based: with no credits banked, the VM is capped at its baseline CPU level until it idles and earns credits again. Eviction only applies to Spot VMs (A is wrong), there is no automatic credit purchasing (B is wrong), and the VM is never stopped for being out of credits (C is wrong) — it just runs slower.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/b-series-cpu-credit-model"
+    ]
   },
   {
     "id": "az104-3-3.1-003",
@@ -94,7 +100,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A resize to a size on different physical hardware requires the VM to be deallocated (Stop in the portal releases the hardware lease); a guest-OS restart keeps the same host allocation. Data disks do not need detaching for a resize, and deleting the VM is unnecessary — deallocate, resize, start.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/resize-vm"
+    ]
   },
   {
     "id": "az104-3-3.1-004",
@@ -125,7 +134,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct: temporary storage is not a durable data disk, although a successful standard restart normally preserves it. B mistakes local performance for durability. D incorrectly treats it as a managed disk covered by managed-disk snapshots. A incorrectly promises geo-replication; encryption depends on VM generation and configuration. Store recoverable scratch data there.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types"
+    ]
   },
   {
     "id": "az104-3-3.1-005",
@@ -156,7 +168,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B supports provisioned IOPS above 80,000, including this requirement. C and D have much lower per-disk performance limits. A offers independently adjustable performance and submillisecond latency but tops out at 80,000 IOPS per disk. The VM and disk capacity must also support the requested performance.",
-    "difficulty": 4
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types"
+    ]
   },
   {
     "id": "az104-3-3.1-006",
@@ -187,7 +202,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D downloads and executes the supplied script. To deliberately rerun it later, change the configuration or force-update tag; unchanged deployments do not rerun it automatically. A collects monitoring data. B configures antimalware protection. C supports network diagnostics. None of those three is the general-purpose script runner.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows"
+    ]
   },
   {
     "id": "az104-3-3.1-007",
@@ -218,7 +236,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "With the Deallocate eviction policy, evicted Spot VMs are stopped (no compute billing, disks retained) so the job can resume when capacity returns. The Delete policy is what permanently removes VMs. Azure never live-migrates Spot VMs to another region, and eviction does not convert them to pay-as-you-go pricing.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/spot-vms"
+    ]
   },
   {
     "id": "az104-3-3.1-008",
@@ -249,7 +270,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "Azure Dedicated Host gives you the entire physical server — single-tenant hardware plus control over maintenance timing — which is exactly what the compliance requirement demands. Availability zones and availability sets protect against failures, not tenancy. Proximity placement groups reduce network latency between VMs but say nothing about who shares the host.",
-    "difficulty": 4
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts"
+    ]
   },
   {
     "id": "az104-3-3.2-001",
@@ -280,7 +304,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A describes the planned-maintenance sequencing that update domains provide. B describes protection from hardware failures, associated with fault domains. C is not a capability of an availability set. D is not guaranteed by update domains; VM placement and application redundancy still matter. Unrelated failures can occur during maintenance.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview"
+    ]
   },
   {
     "id": "az104-3-3.2-002",
@@ -311,7 +338,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D combines a zone-redundant frontend with healthy backends spread across zones; probes remove unhealthy backends from new-flow selection. C requires a separate standby promotion/routing design. A protects a smaller failure scope. B loses all backends in a zone outage. This routing does not itself replicate application state or guarantee uninterrupted existing connections.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-availability-zones"
+    ]
   },
   {
     "id": "az104-3-3.2-003",
@@ -342,7 +372,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A uses standard Azure VM resources with individual lifecycle management and supports mixed sizes subject to placement constraints. B uses scale-set VM child resources and its VMSS APIs; it is not true that Uniform instances cannot be individually addressed. C does not provide autoscale. D controls proximity rather than orchestration.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-orchestration-modes"
+    ]
   },
   {
     "id": "az104-3-3.2-004",
@@ -373,7 +406,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "These are metric-based autoscale rules: thresholds on a performance metric (CPU) with durations trigger scale-out and scale-in. Schedule-based scaling triggers on time of day, not metrics. Manual scaling means an administrator changes the instance count directly. Zone failover is a resilience concept, not a scaling mechanism.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-overview"
+    ]
   },
   {
     "id": "az104-3-3.2-005",
@@ -404,7 +440,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B is the documented Default order. Protected instances are excluded from automatic scale-in. C corresponds to an age-based OldestVM policy, not Default. D incorrectly uses CPU to select the individual removal candidate. A ignores placement balancing. NewestVM is a separate policy; creation time and instance ID are not interchangeable.",
-    "difficulty": 3
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy"
+    ]
   },
   {
     "id": "az104-3-3.2-006",
@@ -435,7 +474,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C describes the automatic OS-upgrade rollback safeguard. D contradicts rolling batches. A invents a per-batch approval requirement. B ignores required health evaluation. A manual trigger of an OS image upgrade does not provide this automatic rollback capability; do not generalize that to every VMSS update mechanism.",
-    "difficulty": 5
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade"
+    ]
   },
   {
     "id": "az104-3-3.2-007",
@@ -466,7 +508,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is the minimum: two or more VMs in the same availability set qualify for the applicable 99.95% VM connectivity SLA. B does not meet the multiple-VM requirement. D and A exceed the minimum. Multi-zone deployments and single-VM disk configurations have separate SLA terms; this answer is not a blanket SLA for every VM design.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview"
+    ]
   },
   {
     "id": "az104-3-3.2-008",
@@ -497,7 +542,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "Each availability zone is a physically separate set of datacenters in a region with independent power, cooling, and networking, so a zone-level failure does not take the others down. A region contains zones (not the reverse), a rack is far smaller than a zone, and fault domains are a within-datacenter concept used by availability sets.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview"
+    ]
   },
   {
     "id": "az104-3-3.3-001",
@@ -528,7 +576,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B stops the container when its process exits, including a nonzero exit, without automatically restarting it. D restarts after any exit. A restarts after failure. C is not an ACI restart-policy value. Never does not guarantee exactly-once processing against manual restarts, redeployments, or application retries.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-restart-policy"
+    ]
   },
   {
     "id": "az104-3-3.3-002",
@@ -559,7 +610,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct: containers are co-scheduled and share a lifecycle and local network, with volumes available for configured mounts. D assigns an IP to each container, whereas network exposure is at group level. A incorrectly assumes independent group-member scaling. B places one group across regions, which is unsupported.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups"
+    ]
   },
   {
     "id": "az104-3-3.3-003",
@@ -590,7 +644,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "Container Apps supports multiple active revisions with weighted traffic splitting at the ingress — the textbook canary pattern. Single-revision mode deactivates old revisions, so splitting is impossible. Disabling ingress removes external traffic entirely, and a second environment is for isolation boundaries, not traffic weighting.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/container-apps/revisions"
+    ]
   },
   {
     "id": "az104-3-3.3-004",
@@ -621,7 +678,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "KEDA (Kubernetes Event-Driven Autoscaling) is built into Container Apps and scales on event sources like queue length — including scale-to-zero when idle. A CPU rule with min replicas of one can never reach zero and reacts to CPU, not queue depth. ACI restart policies govern restarts, not scaling, and manual CLI changes are not automatic.",
-    "difficulty": 5
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/container-apps/scale-app"
+    ]
   },
   {
     "id": "az104-3-3.3-005",
@@ -652,7 +712,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is required for ACR geo-replication. C and D do not provide this feature. B changes repository organization but does not add Premium capabilities. Geo-replication must still be configured for the desired supported regions.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-skus"
+    ]
   },
   {
     "id": "az104-3-3.3-006",
@@ -683,7 +746,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "The Container Apps environment is the secure boundary that provides VNet integration, internal networking, and shared logging for the apps inside it. A container group is an ACI concept, not a Container Apps boundary. ACR stores images; it does not host apps. A Log Analytics workspace collects logs but provides no network boundary or hosting.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/container-apps/environment"
+    ]
   },
   {
     "id": "az104-3-3.3-007",
@@ -714,7 +780,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B is the resource-request configuration ACI uses to allocate resources, subject to service limits and capacity. C names an image version, not an allocation. D passes data to the process but does not reserve resources. A controls restart behavior. Requests describe allocation rather than an application's exact consumption; limits can further constrain usage.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups"
+    ]
   },
   {
     "id": "az104-3-3.4-001",
@@ -745,7 +814,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "Scale up means moving to a bigger pricing tier (more CPU/RAM per instance). Scale out means adding more instances of the same size. Autoscale changes instance count automatically based on rules, and a slot swap exchanges staging and production code — neither changes the tier size.",
-    "difficulty": 1
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up"
+    ]
   },
   {
     "id": "az104-3-3.4-002",
@@ -776,7 +848,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct for manual scale-out: Free/Shared do not support multiple instances, while Basic supports up to three. Azure Monitor rule-based autoscale requires Standard or higher. D incorrectly requires an ASE. A confuses deployment slots with worker instances. B invents Free-tier autoscaling.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans"
+    ]
   },
   {
     "id": "az104-3-3.4-003",
@@ -807,7 +882,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D swaps slot routing after warm-up to promote the deployment with minimal disruption. A adds instances but does not promote staging code. B restores a backup rather than staging. C changes TLS bindings. Swapping back can reverse the code deployment, but does not undo database migrations or guarantee preserved application sessions.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+    ]
   },
   {
     "id": "az104-3-3.4-004",
@@ -838,7 +916,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "Marking a setting as slot-specific ('sticky') pins it to the slot so it does not travel during a swap — staging keeps its test database string. Swap-with-preview only lets you validate warmed-up staging before completing the swap; it does not change which settings move. Putting the string only in production leaves staging without it, and deleting the slot is destructive and unnecessary.",
-    "difficulty": 4
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+    ]
   },
   {
     "id": "az104-3-3.4-005",
@@ -869,7 +950,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "Basic is the lowest listed tier that supports both custom domains and SNI-based TLS certificate bindings. Free lacks custom domains. Shared supports custom domains but not custom TLS certificate bindings. Standard adds capabilities such as deployment slots and metric-based autoscale, but is not the minimum tier for this requirement.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings"
+    ]
   },
   {
     "id": "az104-3-3.4-006",
@@ -900,7 +984,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B supports scheduled custom backups with a configured storage destination and retention. A provides platform-managed backups but does not expose the requested schedule/retention controls. C deploys code and is not a backup mechanism; Free also lacks slots. D is wrong because supported multitenant Basic, Standard and Premium plans also offer backups.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/manage-backup"
+    ]
   },
   {
     "id": "az104-3-3.4-007",
@@ -931,7 +1018,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B provides a single-tenant App Service environment in the customer VNet, including isolated hosting infrastructure. C already provides dedicated workers for its plan but still uses the shared multitenant App Service environment/frontends. D supplies outbound VNet connectivity without creating an ASE. A supplies private inbound connectivity without isolating the hosting environment.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/environment/overview"
+    ]
   },
   {
     "id": "az104-3-3.5-101",
@@ -962,7 +1052,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A overrides the default with the supplied value. D reverses parameter precedence. B is not a Bicep location expression. C is not the value of resourceGroup().location. Defaults are used when the caller does not supply that parameter.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters"
+    ]
   },
   {
     "id": "az104-3-3.5-102",
@@ -993,7 +1086,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A submits a resource-group deployment. D compiles Bicep to JSON without deploying resources. B reads group metadata. C submits at subscription scope, which does not match this file's stated scope.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli"
+    ]
   },
   {
     "id": "az104-3-3.5-103",
@@ -1024,7 +1120,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D previews expected changes for a supported group deployment; review the output and its documented limitations. A applies a deployment. B deletes the group. C converts ARM JSON to Bicep and does not preview live changes.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if"
+    ]
   },
   {
     "id": "az104-3-3.5-104",
@@ -1055,7 +1154,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is best-effort ARM JSON to Bicep conversion and still needs review. B leaves JSON syntax unchanged. D uses the opposite compilation direction. A previews deployment changes rather than generating Bicep source.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile"
+    ]
   },
   {
     "id": "az104-3-3.5-105",
@@ -1086,7 +1188,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D follows Bicep's dependency inference from a resource reference. A is a separate DNS configuration. B requires a protection mechanism not declared here. C is unnecessary because the declarative reference supplies the dependency. Use explicit dependsOn only when needed.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies"
+    ]
   },
   {
     "id": "az104-3-3.1-101",
@@ -1117,7 +1222,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B covers supported host caches and temporary storage paths. C protects application transport. D is a separate storage-key configuration that does not alone enable the requested VM host protection. A controls management operations rather than encryption.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-portal"
+    ]
   },
   {
     "id": "az104-3-3.1-102",
@@ -1148,7 +1256,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C handles regional relocation and associated dependencies using a supported workflow. D and A only change organization or metadata. B does not move the VM's compute and disks. Check support, quotas, networking and post-move validation.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/resource-mover/overview"
+    ]
   },
   {
     "id": "az104-3-3.1-103",
@@ -1179,7 +1290,10 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D exposes the expanded capacity to the guest volume. A repeats the completed platform operation but leaves the partition unchanged. B controls caching. C changes compute size. Verify filesystem support and backups before extending.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk"
+    ]
   },
   {
     "id": "az104-3-3.4-101",
@@ -1210,7 +1324,260 @@ export const AZ104_D3_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B provides the subdomain mapping and domain-verification value requested by App Service. C configures mail rather than web routing/ownership. D is reverse DNS rather than the required forward mapping. A is not DNS. Add the validated hostname in App Service and configure TLS separately.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain"
+    ]
+  },
+  {
+    "id": "az104-3-3.4-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.4",
+    "caseStudyId": "az104-case-crestline",
+    "stem": "Which release preparation satisfies staging validation and database isolation?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Unmark OrdersDb as a slot setting, then swap before testing staging.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Grant blob access only to the production identity and rely on the swap to move that identity into staging.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Mark OrdersDb as a deployment-slot setting in both slots and grant staging’s identity the required scoped blob role before validation.",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Put OrdersProd in both slots and remove staging’s managed identity.",
+        "correct": false
+      }
+    ],
+    "explanation": "C is correct: sticky connection strings remain with their slots, and the staging identity needs its own authorization for pre-swap testing. A risks exchanging database settings and skips validation. B fails because managed identities are not swapped between slots and staging needs access before the swap. D destroys the required database isolation.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+    ]
+  },
+  {
+    "id": "az104-3-3.2-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.2",
+    "caseStudyId": "az104-case-crestline",
+    "stem": "Which scale-set changes meet the worker retirement requirement?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Set OldestVM and protect worker-9 only from accidental resource-group deletion.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Set Default and assume the highest instance ID is always the newest creation time.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Set NewestVM and leave worker-9 unprotected because its CPU is high.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Set NewestVM and enable protectFromScaleIn on worker-9 before allowing the scale-in.",
+        "correct": true
+      }
+    ],
+    "explanation": "D is correct: NewestVM selects by creation age in this nonzonal set, while scale-in protection removes worker-9 from automatic scale-in candidates. A selects the wrong age policy and deletion protection is not the stated instance protection. B confuses instance-ID ordering with creation age and does not protect the job. C relies on CPU to select individual victims; the scale-in policy does not preserve a busy instance for that reason.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy",
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-instance-protection"
+    ]
+  },
+  {
+    "id": "az104-3-3.5-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.5",
+    "caseStudyId": "az104-case-crestline",
+    "stem": "The Bicep file deploys the plan and app together. Which statement correctly predicts the supplied location and resource ordering?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "The explicit westus3 value wins, and plan.id establishes an implicit dependency from the app to the plan.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "The resource-group location always wins, but the symbolic reference still orders the resources.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "westus3 wins, but the app may be deployed before the plan because only explicit dependsOn creates dependencies.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "The default location wins, and a slot swap creates the required deployment dependency.",
+        "correct": false
+      }
+    ],
+    "explanation": "A is correct: an explicit parameter value overrides its default, and referencing plan.id creates an implicit dependency. B applies the default despite a supplied value. C ignores symbolic dependencies. D is wrong on both parameter precedence and deployment ordering; a runtime slot swap is unrelated. The answer describes Bicep evaluation, not whether a particular region has quota for the requested resources.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters",
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies"
+    ]
+  },
+  {
+    "id": "az104-3-3.4-302",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.4",
+    "caseStudyId": "az104-case-crestline",
+    "stem": "After successful testing and a swap, which expected state should the release checklist verify?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "The former staging code serves production, OrdersProd remains in production, and production retains its original system-assigned identity.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "OrdersTest follows the code to production, while production retains its identity.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "OrdersProd remains in production, but the staging system-assigned identity moves with the code.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Both database connection strings are deleted automatically and both identities are recreated.",
+        "correct": false
+      }
+    ],
+    "explanation": "A is correct: application content swaps, sticky connection strings remain with their slots, and managed identities are not swapped. B treats a sticky setting as swappable. C treats a nonswapped identity as application content. D invents destructive behavior that a slot swap does not perform. Validate these separately because a successful content swap alone does not prove correct data access.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots"
+    ]
+  },
+  {
+    "id": "az104-3-3.5-302",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.5",
+    "caseStudyId": "az104-case-crestline",
+    "stem": "Before approving the changed template, reviewers want the expected Azure resource changes without altering the existing plan, app or workers. Which step produces the right evidence?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Run az bicep build and treat successful compilation as a complete Azure change preview.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Run az deployment group create, then inspect the Activity log.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Run az deployment sub what-if for the resource-group-scoped file without changing its scope.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Run az deployment group what-if with the target resource group, template and the same explicit parameter values intended for deployment.",
+        "correct": true
+      }
+    ],
+    "explanation": "D is correct: group-scoped what-if previews the intended deployment using its actual scope and inputs. A checks compilation but does not compare against existing Azure resources. B applies changes before review. C uses the wrong deployment scope for this file. What-if predictions should still be reviewed for documented limitations; they are not a guarantee that later deployment will succeed.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if",
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli"
+    ]
+  },
+  {
+    "id": "az104-3-3.4-401",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.4",
+    "caseStudyId": "az104-case-ember",
+    "stem": "Which deployment change set prepares both slots without sending staging tests to MapsProd?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Configure only production VNet integration and let the swap carry it to staging; leave MapsDb swappable.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Configure supported regional VNet integration for each slot, link the blob private DNS zone to VNet-Apps, and mark MapsDb as a slot setting with the appropriate value in each slot.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Create an inbound private endpoint on the web app only; this also provides outbound access to blobs and makes connection strings sticky.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Link the private zone to VNet-Apps, leave both slots without integration, and place MapsProd in both connection strings.",
+        "correct": false
+      }
+    ],
+    "explanation": "B is correct: both slots need an outbound path to the VNet, the VNet needs the private-zone link, and sticky connection strings preserve database isolation. A relies on nonswapped networking and allows database values to move. C confuses inbound private access to App Service with outbound VNet integration and does not configure slot settings. D supplies DNS visibility to the VNet but no app path and violates staging isolation.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration",
+      "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots",
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints"
+    ]
+  },
+  {
+    "id": "az104-3-3.1-401",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.1",
+    "caseStudyId": "az104-case-ember",
+    "stem": "The VM worker’s disk expansion is a separate maintenance task. Which next step resolves its capacity symptom without changing the web app’s authorization or networking?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Increase the storage-account quota backing blob maps.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Swap the App Service slots so the new disk size becomes active.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Inspect and extend the supported guest partition/filesystem into the newly available disk space.",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Grant the worker’s identity Storage Blob Data Contributor on MapsProd.",
+        "correct": false
+      }
+    ],
+    "explanation": "C is correct: expanding the managed disk exposes capacity to the VM, but its guest partition/filesystem must also use that space. A changes a different storage service. B acts on a separate compute platform. D changes blob authorization rather than the guest volume. Inspect the guest layout and supported filesystem procedure instead of blindly repeating the Azure resize.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/expand-os-disk"
+    ]
   }
 ];
 
@@ -1346,7 +1713,10 @@ export const AZ104_D3_PERF_QUESTIONS: PerfQuestion[] = [
       }
     ],
     "explanation": "B = burstable credits for spiky low-utilization loads. D = the balanced general-purpose default. E = memory-heavy (databases, caches). F = CPU-heavy batch and web front ends. N = GPUs for AI/ML and graphics rendering.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview"
+    ]
   },
   {
     "id": "az104-pbq-3-002",
@@ -1384,7 +1754,122 @@ export const AZ104_D3_PERF_QUESTIONS: PerfQuestion[] = [
       }
     ],
     "explanation": "VMs provide guest OS control. VMSS manages VM fleets with Uniform or Flexible orchestration. ACI runs container groups. Container Apps adds revisions, ingress and event-driven scaling. App Service hosts web apps with supported deployment-slot workflows. Dedicated Host supplies dedicated physical host capacity.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/overview",
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-orchestration-modes",
+      "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups",
+      "https://learn.microsoft.com/en-us/azure/container-apps/scale-app",
+      "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots",
+      "https://learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts"
+    ]
+  },
+  {
+    "id": "az104-pbq-3-101",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.2",
+    "type": "drag-match",
+    "prompt": "Order this team’s VMSS change runbook by matching each numbered stage to an action. Autoscale is disabled. The runbook requires protecting worker-9 before editing the scale-in policy, and verifying both settings before enabling scale-in. These gates define the order; Azure does not impose a universal order between independent configuration writes.",
+    "leftLabel": "Stage",
+    "rightLabel": "Action",
+    "pairs": [
+      {
+        "left": "1 — preserve the running critical job",
+        "right": "Enable protectFromScaleIn on worker-9"
+      },
+      {
+        "left": "2 — choose retirement order for eligible workers",
+        "right": "Set the scale set’s scale-in policy to NewestVM"
+      },
+      {
+        "left": "3 — check readiness before automation resumes",
+        "right": "Read back instance protection and scale-in policy; confirm other eligible capacity remains"
+      },
+      {
+        "left": "4 — permit the tested automation",
+        "right": "Enable the intended autoscale profile with reviewed minimum capacity and scale-in rule"
+      }
+    ],
+    "explanation": "Protect the critical instance before the runbook permits policy changes. NewestVM orders eligible instances by creation time after any applicable zone balancing; it does not override instance protection. Read back both settings before enabling the scale-in rule, and ensure the desired capacity can be met without deleting protected workers. Enabling autoscale first could trigger deletion before protection is established. Protection does not prevent an authorized manual deletion.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy",
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-instance-protection",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-overview"
+    ]
+  },
+  {
+    "id": "az104-pbq-3-102",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.3",
+    "type": "drag-match",
+    "prompt": "Match each application requirement to the service that directly supplies the requested execution or image-management capability.",
+    "leftLabel": "Requirement",
+    "rightLabel": "Service",
+    "pairs": [
+      {
+        "left": "Run one short-lived container group with explicit CPU/memory and no restart after exit",
+        "right": "Azure Container Instances"
+      },
+      {
+        "left": "Run HTTP container revisions with weighted traffic and event-driven replica scaling",
+        "right": "Azure Container Apps"
+      },
+      {
+        "left": "Host a web app using deployment slots on a managed App Service plan",
+        "right": "Azure App Service"
+      },
+      {
+        "left": "Store private container images and geo-replicate the registry with the required SKU",
+        "right": "Azure Container Registry Premium"
+      }
+    ],
+    "explanation": "ACI supplies container groups and a Never restart policy for the one-off task. Container Apps combines revisions, ingress traffic splitting and event-based scaling. App Service supplies web-app slots on supported plans. ACR Premium stores and geo-replicates images; it does not execute the application. Selecting a registry alone therefore cannot replace an application hosting service.",
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-restart-policy",
+      "https://learn.microsoft.com/en-us/azure/container-apps/revisions",
+      "https://learn.microsoft.com/en-us/azure/container-apps/scale-app",
+      "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots",
+      "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-skus"
+    ]
+  },
+  {
+    "id": "az104-pbq-3-103",
+    "certId": "az-104",
+    "domainId": "az-104:domain:3",
+    "objectiveId": "az-104:obj:3.5",
+    "type": "drag-match",
+    "prompt": "A release engineer has a reviewed Bicep file and its intended parameter values. Match each operation to its distinct purpose; compilation and preview must not be described as successful deployment.",
+    "leftLabel": "Purpose",
+    "rightLabel": "Azure CLI operation",
+    "pairs": [
+      {
+        "left": "Compile Bicep to an ARM JSON template locally",
+        "right": "az bicep build --file main.bicep"
+      },
+      {
+        "left": "Create a Bicep starting point from an existing ARM JSON template",
+        "right": "az bicep decompile --file template.json"
+      },
+      {
+        "left": "Preview resource-group changes using the intended deployment inputs",
+        "right": "az deployment group what-if --resource-group rg-release --template-file main.bicep --parameters @main.parameters.json"
+      },
+      {
+        "left": "Apply the reviewed resource-group deployment",
+        "right": "az deployment group create --resource-group rg-release --template-file main.bicep --parameters @main.parameters.json"
+      }
+    ],
+    "explanation": "Build compiles Bicep to JSON and does not deploy resources. Decompile converts in the other direction but generated Bicep must be reviewed and fixed when needed. What-if compares the proposed deployment with Azure state without applying it, subject to documented preview limitations. Group create executes the deployment at resource-group scope; it is not a dry run. Preview and deployment should use the same reviewed parameters.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile",
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if",
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli"
+    ]
   }
 ];
 

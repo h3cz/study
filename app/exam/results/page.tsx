@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, Suspense } from "react";
+import { AnswerSources, CaseStudyContext, QuestionText } from "@/components/QuestionContent";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { db } from "@/lib/db";
@@ -418,8 +419,9 @@ function ResultsInner() {
                     borderTop: "1px solid var(--border)",
                   }}
                 >
-                  <p style={{ fontSize: "14px", color: "var(--fg)", fontFamily: "var(--font-sans)", marginBottom: "12px", lineHeight: 1.5 }}>
-                    {item.mcqData.stem}
+                  <CaseStudyContext question={item.mcqData} />
+<p style={{ fontSize: "14px", color: "var(--fg)", fontFamily: "var(--font-sans)", marginBottom: "12px", lineHeight: 1.5 }}>
+                    <QuestionText text={item.mcqData.stem} />
                   </p>
                   <div className="space-y-1 mb-3">
                     {item.mcqData.choices.map((c) => {
@@ -439,7 +441,7 @@ function ResultsInner() {
                           }}
                         >
                           <span className="font-mono font-semibold mr-2">{c.key}.</span>
-                          {c.text}
+                          <QuestionText text={c.text} />
                           {isCorrect && <span className="ml-2 font-mono" style={{ fontSize: "10px", opacity: 0.7 }}>✓ correct</span>}
                           {isPicked && !isCorrect && <span className="ml-2 font-mono" style={{ fontSize: "10px", opacity: 0.7 }}>✗ your answer</span>}
                         </div>
@@ -458,6 +460,7 @@ function ResultsInner() {
                     }}
                   >
                     {item.mcqData.explanation}
+<AnswerSources urls={item.mcqData.sourceUrls} />
                   </div>
                   {!item.correct && distractorMap[item.qId] && Object.keys(distractorMap[item.qId]).length > 0 && (
                     <details className="mt-4 group">
@@ -543,6 +546,7 @@ function ResultsInner() {
                     }}
                   >
                     {item.pbqData.explanation}
+<AnswerSources urls={item.pbqData.sourceUrls} />
                   </div>
                 </div>
               )}

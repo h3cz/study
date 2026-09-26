@@ -3,6 +3,10 @@ import { AZ104_ACRONYMS, AZ104_FLASHCARDS, AZ104_PERF_QUESTIONS, AZ104_QUESTIONS
 import { SEED_DATA, CONTENT_VERSION, perfQuestions } from "@/content/seed";
 import { newCertAcronyms } from "@/content/acronyms-newcerts";
 import { getCert } from "@/lib/certs";
+import { AZ104_CASE_STUDIES } from "@/content/az104-case-studies";
+import audit from "@/docs/az104-review/difficulty-audit.json";
+import sourceChecks from "@/docs/az104-review/source-link-check.json";
+import { fullQuestionStem } from "@/lib/question-context";
 
 describe("AZ-104 publishable content contract", () => {
   const cert = getCert("az-104");
@@ -58,10 +62,10 @@ describe("AZ-104 publishable content contract", () => {
     expect(AZ104_QUESTIONS.find(q => q.id === "az104-1-1.5-105")?.explanation).toContain("A supported move can change the resource ID");
   });
   it("wires all content modes into reseeding and matches the announced counts", () => {
-    expect(CONTENT_VERSION).toBeGreaterThan(1);
-    expect(AZ104_QUESTIONS).toHaveLength(160);
+    expect(CONTENT_VERSION).toBeGreaterThan(2);
+    expect(AZ104_QUESTIONS).toHaveLength(190);
     expect(AZ104_FLASHCARDS).toHaveLength(60);
-    expect(AZ104_PERF_QUESTIONS).toHaveLength(8);
+    expect(AZ104_PERF_QUESTIONS).toHaveLength(20);
     expect(AZ104_ACRONYMS).toHaveLength(40);
     for (const q of AZ104_QUESTIONS) expect(SEED_DATA.questions).toContainEqual(q);
     for (const q of AZ104_FLASHCARDS) expect(SEED_DATA.flashcards).toContainEqual(q);
@@ -70,5 +74,46 @@ describe("AZ-104 publishable content contract", () => {
     expect(cert.scoreMin).toBe(1);
     expect(cert.passingScore).toBe(700);
     expect(cert.scoreMax).toBe(1000);
+  });
+  it("provides six complete original case groups with usable standalone context", () => {
+    expect(AZ104_CASE_STUDIES).toHaveLength(6);
+    const ids = AZ104_CASE_STUDIES.flatMap(study => study.questionIds);
+    expect(new Set(ids).size).toBe(30);
+    for (const study of AZ104_CASE_STUDIES) {
+      expect(study.questionIds.length).toBeGreaterThanOrEqual(4);
+      expect(study.questionIds.length).toBeLessThanOrEqual(6);
+      expect(study.scenario.length).toBeGreaterThan(300);
+      for (const id of study.questionIds) {
+        const question = AZ104_QUESTIONS.find(q => q.id === id)!;
+        expect(question?.caseStudyId, id).toBe(study.id);
+        expect(fullQuestionStem(question), id).toContain(study.scenario);
+      }
+    }
+    expect(AZ104_QUESTIONS.filter(q => q.caseStudyId).map(q => q.id).sort()).toEqual(ids.sort());
+  });
+  it("records a rationale for every rating and preserves every baseline question", () => {
+    expect(audit.questions).toHaveLength(AZ104_QUESTIONS.length);
+    expect(new Set(audit.questions.map(row => row.id)).size).toBe(audit.questions.length);
+    expect(audit.questions.filter(row => row.previous !== null)).toHaveLength(160);
+    expect(audit.questions.filter(row => row.changed)).toHaveLength(86);
+    for (const q of AZ104_QUESTIONS) {
+      const row = audit.questions.find(row => row.id === q.id);
+      expect(row?.difficulty, q.id).toBe(q.difficulty);
+      expect(row?.reason.length, q.id).toBeGreaterThan(20);
+      expect(row?.sourceUrls, q.id).toEqual(q.sourceUrls);
+    }
+  });
+  it("has checked Microsoft Learn evidence for every MCQ and matching drill", () => {
+    for (const q of [...AZ104_QUESTIONS, ...AZ104_PERF_QUESTIONS]) {
+      expect(q.sourceUrls?.length, q.id).toBeGreaterThan(0);
+      for (const url of q.sourceUrls ?? []) {
+        expect(new URL(url).hostname).toBe("learn.microsoft.com");
+        expect(new URL(url).protocol).toBe("https:");
+        expect(sourceChecks.find(check => check.url === url)?.status, url).toBe(200);
+      }
+    }
+    const added = AZ104_PERF_QUESTIONS.filter(q => /-10[1-3]$/.test(q.id));
+    expect(added).toHaveLength(12);
+    expect(new Set(added.map(q => q.domainId)).size).toBe(5);
   });
 });

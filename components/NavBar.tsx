@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@/lib/analytics";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CertSwitcher } from "@/components/CertSwitcher";
@@ -18,7 +19,7 @@ const SECTIONS: Section[] = [
   {
     href: "/practice",
     label: "Practice",
-    match: (p) => inSection(p, ["/practice", "/quiz", "/flashcards", "/exam", "/pbq", "/osi", "/ports", "/controls", "/crypto", "/attacks", "/drill", "/review", "/voice", "/import"]),
+    match: (p) => inSection(p, ["/practice", "/case-studies", "/timeline", "/notebook", "/quiz", "/flashcards", "/exam", "/pbq", "/osi", "/ports", "/controls", "/crypto", "/attacks", "/drill", "/review", "/voice", "/import"]),
   },
   { href: "/library", label: "Library", match: (p) => inSection(p, ["/library"]), tour: "nav-library" },
   {
@@ -74,6 +75,7 @@ export function NavBar() {
               <Link
                 key={s.href}
                 href={s.href}
+                onClick={() => void track("nav_item_clicked", { destination: s.href, surface: "desktop_nav" })}
                 className="nav-tab"
                 data-active={active}
                 aria-current={active ? "page" : undefined}
@@ -89,12 +91,12 @@ export function NavBar() {
         <div className="shrink-0 flex items-center gap-2 ml-auto">
           <button
             type="button"
-            className="nav-cmdk hidden md:inline-flex"
+            className="nav-cmdk inline-flex"
             onClick={openCommandPalette}
             aria-label="Open command palette"
           >
             <span>Search</span>
-            <kbd>⌘K</kbd>
+            <kbd className="hidden md:inline">Ctrl/⌘ K</kbd>
           </button>
           <CertSwitcher />
           <AccountMenu />

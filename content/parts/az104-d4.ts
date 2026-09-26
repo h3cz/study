@@ -1,6 +1,6 @@
 import type { Acronym, Flashcard, PerfQuestion, Question } from "@/lib/db";
 
-// Original practice content. Reviewed 2026-09-25; evidence and full issue log: docs/az104-review/REPORT.md.
+// Original practice content. Reviewed 2026-09-26; audit: docs/az104-review/WORKSTREAM-1.md.
 
 export const AZ104_D4_QUESTIONS: Question[] = [
   {
@@ -32,7 +32,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct: a /24 subnet has 256 addresses, minus 5 Azure-reserved addresses leaves 251 usable hosts, which satisfies the 200-host requirement with room to grow. B loses: a /26 has 64 addresses (59 usable), far short of 200. D loses: a single /22 cannot be split into four functional segments without further subnetting, so it fails the segmentation requirement. A loses: a /28 has 16 addresses (11 usable), far short of 200.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq"
+    ]
   },
   {
     "id": "az104-4-4.1-002",
@@ -63,7 +66,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D is correct: a /27 subnet contains 32 addresses total. Azure reserves the first four and the last one of every subnet (network ID, default gateway, DNS mappings, and broadcast), leaving 32 − 5 = 27 usable addresses. B loses: 32 is the total count before reservations. C loses: it subtracts only the network ID, ignoring the other four reserved addresses. A loses: 30 would be correct only if Azure reserved just two addresses, which it does not.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq"
+    ]
   },
   {
     "id": "az104-4-4.1-003",
@@ -94,7 +100,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D uses the required GatewaySubnet name and a /27 range; use /27 or a larger address block for non-Basic gateway SKUs. C has the wrong name. A is too small for this SKU. B has an arbitrary name and an NSG; NSGs on GatewaySubnet are unsupported and can disrupt gateway traffic. Basic has different legacy sizing considerations.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal"
+    ]
   },
   {
     "id": "az104-4-4.1-004",
@@ -125,7 +134,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C explicitly allocates the chosen private address through Azure IP management. A does not reserve it in Azure and risks connectivity problems. B lets Azure choose, so it does not guarantee that specific address. D concerns public addressing. Dynamic ARM private addresses are normally retained through stop/deallocate while the NIC IP configuration remains.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/private-ip-addresses"
+    ]
   },
   {
     "id": "az104-4-4.1-005",
@@ -156,7 +168,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D combines private connectivity, name resolution and the separate public-access control. C uses the SQL public endpoint over the Azure backbone and cannot meet disabled public-network access. A names an App Service outbound integration feature rather than the SQL Database private endpoint configuration. B filters VM egress but does not disable the SQL server's public endpoint.",
-    "difficulty": 4
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/azure-sql/database/private-endpoint-overview"
+    ]
   },
   {
     "id": "az104-4-4.1-006",
@@ -187,7 +202,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D requires the Microsoft.Web/serverFarms delegation and excludes unrelated resources such as VM NICs. Supported App Service plans may share an integration subnet under the documented limits. A incorrectly permits VM NICs in it. B uses the gateway-only subnet name. C confuses outbound VNet integration with a service endpoint.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration"
+    ]
   },
   {
     "id": "az104-4-4.2-001",
@@ -218,7 +236,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A adds direct peering between the two VNets. C assumes transit that peering alone does not provide. D permits already-forwarded traffic but creates no router. B points at an unstated gateway and omits the required transit design. In other architectures, a properly configured routing appliance or supported gateway topology can provide transit.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview"
+    ]
   },
   {
     "id": "az104-4-4.2-002",
@@ -249,7 +270,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D is correct: gateway transit is a two-sided setting — the hub peering must allow gateway transit, and the spoke peering must opt in with 'use remote gateways'. C loses: 'use remote gateways' is set on the spoke side (the VNet without the gateway), and the hub side still needs 'allow gateway transit'. A loses: 'allow gateway transit' on the spoke side does nothing since the spoke has no gateway to share. B loses: the whole point of gateway transit is to avoid deploying a gateway per spoke.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit"
+    ]
   },
   {
     "id": "az104-4-4.2-003",
@@ -280,7 +304,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is correct: peered VNets must have non-overlapping address spaces — Azure cannot route between two VNets that both claim 10.1.0.0/16. D loses: global VNet peering supports peering across regions. B loses: peering works without any gateway. C loses: peered VNets can live in different resource groups, subscriptions, and tenants.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview"
+    ]
   },
   {
     "id": "az104-4-4.2-004",
@@ -311,7 +338,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is listed at a 10 Gbps aggregate benchmark and supports availability-zone deployment and active-active configuration. C is listed at 1 Gbps. D is listed at 2.5 Gbps. B is listed at 5 Gbps. Actual throughput depends on traffic mix, algorithms and tunnel configuration.",
-    "difficulty": 3
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/about-gateway-skus"
+    ]
   },
   {
     "id": "az104-4-4.2-005",
@@ -342,7 +372,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B is correct: Site-to-Site connects an on-premises network (branch office VPN device) to Azure over IPsec/IKE; Point-to-Site connects individual clients (laptops) via VPN client; VNet-to-VNet connects two Azure VNets through their gateways. A loses: it swaps the first two — a branch office uses Site-to-Site, not Point-to-Site. C loses: every mapping is wrong. D loses: ExpressRoute is a private circuit, not a VPN connection type, and VNet-to-VNet is for VNet pairs, not laptops.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/design"
+    ]
   },
   {
     "id": "az104-4-4.2-006",
@@ -373,7 +406,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B is correct: ExpressRoute Global Reach links two ExpressRoute circuits so on-premises networks behind each circuit can talk to each other across Microsoft's backbone. A loses: Microsoft peering provides access to Microsoft 365/Dynamics public services, not site-to-site connectivity between circuits. C loses: private peering connects one on-premises site to its Azure VNets; it does not bridge two circuits. D loses: VPN connection types apply to VPN gateways, not to joining ExpressRoute circuits.",
-    "difficulty": 4
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-global-reach"
+    ]
   },
   {
     "id": "az104-4-4.3-001",
@@ -404,7 +440,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is correct: 10.0.0.0/24 covers 10.0.0.0 through 10.0.0.255, excluding 10.0.1.5. Rule1 is skipped and Rule2 denies. D has incorrect subnet math. B ignores matching conditions. C invents deny-always-wins behavior; NSGs use the first matching rule in ascending priority order.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview"
+    ]
   },
   {
     "id": "az104-4-4.3-002",
@@ -435,7 +474,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B lists the default service-tag allow rules followed by DenyAll rules. A wrongly allows arbitrary inbound traffic. C ignores default allows. D invents an inbound HTTPS rule. NSGs filter traffic; routing, public access and an explicit outbound connectivity method may still be needed even when an NSG allows a flow.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview"
+    ]
   },
   {
     "id": "az104-4-4.3-003",
@@ -466,7 +508,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A is correct for a new flow: inbound traffic passes the subnet NSG and then the NIC NSG, and both must allow it. C wrongly gives subnet rules precedence. D wrongly treats either allow as sufficient. B wrongly discards the subnet NSG. Each NSG still uses its own first-match priority evaluation; rules are not merged into one priority list.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-group-how-it-works"
+    ]
   },
   {
     "id": "az104-4-4.3-004",
@@ -497,7 +542,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D lets rules reference logical groups of NICs; maintain membership as servers change. C works only by editing address lists as membership changes, contrary to the goal. A cannot create custom service tags named for server roles. B configures firewall application traffic, not reusable ASG membership in NSGs.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups"
+    ]
   },
   {
     "id": "az104-4-4.3-005",
@@ -528,7 +576,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct: Azure Firewall processes DNAT rules first (inbound port forwarding), then network rules (IP/protocol/port filtering like the 1433 rule), then application rules (FQDN-based filtering like *.contoso.com). B loses: the order is reversed — application rules are evaluated last, not first. D loses: DNAT is evaluated before network rules, not after. A loses: DNAT, network, and application rules are separate rule types and cannot be merged into one network rule.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/firewall/rule-processing"
+    ]
   },
   {
     "id": "az104-4-4.3-006",
@@ -559,7 +610,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct: Azure Bastion provides RDP/SSH access to VMs directly in the portal over TLS/HTTPS with no public IP needed on the VMs. D loses: a VPN gives network connectivity but still requires RDP/SSH clients and network paths — it doesn't provide portal-based TLS console access. A loses: DNAT rules would publish RDP/SSH to the internet, exactly what the policy forbids. B loses: this still exposes the ports publicly (even if IP-restricted) and requires the VM to have a public IP.",
-    "difficulty": 2
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/bastion/bastion-overview"
+    ]
   },
   {
     "id": "az104-4-4.4-001",
@@ -590,7 +644,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A provides those capabilities in their supported public/internal configurations. D is retired and did not provide them. B serves network-appliance chaining, not this general load-balancing feature set. C cannot attach a Basic public IP to a Standard load balancer. Do not assume HA ports and public outbound rules belong on the same frontend.",
-    "difficulty": 3
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview"
+    ]
   },
   {
     "id": "az104-4-4.4-002",
@@ -621,7 +678,11 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A supplies private addressing, backend health detection and the required access restrictions. D and C still expose a public frontend. B cannot detect the described backend failure. A private frontend is reachable over connected private networks according to routing and security rules; it does not itself authorize only specific peers.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview",
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview"
+    ]
   },
   {
     "id": "az104-4-4.4-003",
@@ -652,7 +713,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct: load-balancing rules distribute traffic across the backend pool (the three web VMs), while inbound NAT rules forward a specific frontend port to one specific backend VM (admin RDP to VM #2). B loses: a load-balancing rule for 3389 would spray RDP across all three VMs instead of targeting VM #2. D loses: it reverses the two — 443 needs distribution, 3389 needs targeting. A loses: an HA ports rule distributes all traffic across the pool; it cannot pin traffic to a single VM.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/inbound-nat-rules"
+    ]
   },
   {
     "id": "az104-4-4.4-004",
@@ -683,7 +747,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B provides explicit subnet outbound connectivity and a shared source IP with a larger dynamically allocated SNAT pool (64,512 ports per public IP for Standard NAT Gateway). Monitor connection/port limits; no finite pool guarantees unlimited connections. D violates the NIC constraint. A handles inbound mappings. C does not change the outbound SNAT allocation.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-overview"
+    ]
   },
   {
     "id": "az104-4-4.4-005",
@@ -714,7 +781,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B provides the regional Layer 7 reverse proxy with supported WAF functionality. C is a Layer 4 TCP/UDP load balancer and cannot inspect HTTP paths. D uses DNS to direct clients and does not terminate TLS. A performs outbound source NAT and provides neither inbound HTTP routing nor WAF.",
-    "difficulty": 4
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/application-gateway/overview"
+    ]
   },
   {
     "id": "az104-4-4.4-006",
@@ -745,7 +815,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C is correct under this DNS configuration: link C to the private zone for its Azure-provided DNS resolution. B wrongly assumes peering inherits DNS links. D confuses VM record registration with DNS resolution access. A incorrectly publishes the private zone. A separate custom resolver/forwarding design could provide another resolution path.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links"
+    ]
   },
   {
     "id": "az104-4-4.1-101",
@@ -776,7 +849,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B applies longest-prefix match. A incorrectly uses creation order. C assumes multipath distribution between different prefix lengths. D mistakes valid route-prefix overlap for invalid address-space overlap. Equal-prefix route source preferences are a separate decision.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview"
+    ]
   },
   {
     "id": "az104-4-4.1-102",
@@ -807,7 +883,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D supplies both forwarding layers. A permits packets but does not enable transit. B leaves the Azure NIC restriction in place. C leaves the guest unable to forward. Routing and NSG permission alone do not make a VM a router.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-network-interface"
+    ]
   },
   {
     "id": "az104-4-4.1-103",
@@ -838,7 +917,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "A matches the Standard public frontend requirement and static allocation. D uses the retired incompatible Basic public IP SKU. B creates a name record, not a frontend public IP. C describes private addressing, not the requested public frontend.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses"
+    ]
   },
   {
     "id": "az104-4-4.4-101",
@@ -869,7 +951,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "D delegates authority through the parent/registrar configuration. A is for private DNS VM registration. B changes VM traffic filtering, not public zone delegation. C changes resource organization. Creating a hosted zone alone does not update registrar delegation.",
-    "difficulty": 3
+    "difficulty": 2,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/dns/dns-delegate-domain-azure-dns"
+    ]
   },
   {
     "id": "az104-4-4.4-102",
@@ -900,7 +985,10 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "B aliases the subdomain to another hostname. D stores an IPv4 address. A stores an IPv6 address. C identifies mail exchangers. This question uses a subdomain; a zone apex has additional CNAME restrictions.",
-    "difficulty": 2
+    "difficulty": 1,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/dns/dns-zones-records"
+    ]
   },
   {
     "id": "az104-4-4.4-103",
@@ -931,7 +1019,191 @@ export const AZ104_D4_QUESTIONS: Question[] = [
       }
     ],
     "explanation": "C lets the probe reach the listener. D is never reached after the matching deny. A fails to fix the blocked health-check flow. B changes name resolution rather than filtering. Also verify the actual probe port and guest firewall.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview"
+    ]
+  },
+  {
+    "id": "az104-4-4.2-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:4",
+    "objectiveId": "az-104:obj:4.2",
+    "caseStudyId": "az104-case-tideglass",
+    "stem": "Which peering changes provide both requested network paths?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Enable Use remote gateways on Hub and rely on automatic transit from Web to Data.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Enable Allow gateway transit on Hub-to-Web and Use remote gateways on Web-to-Hub, and add direct Web–Data peering in both directions.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Enable Allow forwarded traffic on both existing peerings; this supplies both gateway sharing and transitive routing.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Deploy a Web VPN gateway and leave Web–Data connectivity unchanged.",
+        "correct": false
+      }
+    ],
+    "explanation": "B is correct: complementary hub/spoke gateway-transit settings expose the hub VPN gateway, while direct peering supplies the requested non-NVA path between spokes. A reverses the gateway settings and assumes transitive peering. C does not turn ordinary peerings into a routing appliance or configure remote-gateway use. D adds an unwanted gateway and still leaves the spoke-to-spoke path absent.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit",
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview"
+    ]
+  },
+  {
+    "id": "az104-4-4.4-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:4",
+    "objectiveId": "az-104:obj:4.4",
+    "caseStudyId": "az104-case-tideglass",
+    "stem": "After direct Web–Data peering works, Web still resolves the blob hostname publicly. Which DNS change meets the private-access requirement?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Enable auto-registration on the existing Data link only.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Create a public A record exposing the endpoint private IP to all internet resolvers.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Link the existing private zone to Web; the endpoint’s existing account record can then resolve there.",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Enable Microsoft.Storage service endpoints in Web and retain the disabled public endpoint.",
+        "correct": false
+      }
+    ],
+    "explanation": "C is correct: with Azure-provided DNS and no custom forwarder, Web needs visibility of the private zone through its own link. A affects VM record registration, not zone access for an unlinked VNet. B is not the intended private-zone design and exposes internal addressing. D uses the public service endpoint path and does not repair private DNS. Network peering and DNS-zone links solve separate requirements.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links",
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints"
+    ]
+  },
+  {
+    "id": "az104-4-4.3-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:4",
+    "objectiveId": "az-104:obj:4.3",
+    "caseStudyId": "az104-case-tideglass",
+    "stem": "The load balancer considers every backend unhealthy. Which minimum NSG change addresses the scenario evidence while keeping unrelated inbound traffic denied?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Add an AzureLoadBalancer-to-probe-port allow at subnet priority 300.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Allow Internet to every backend port at subnet priority 150.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Remove the NIC NSG because its allow rules override the subnet deny.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Allow the AzureLoadBalancer service tag to the TCP probe port at subnet priority 150.",
+        "correct": true
+      }
+    ],
+    "explanation": "D is correct: the health probe must pass both NSGs, and priority 150 matches before the subnet deny at 200. A is evaluated after the matching deny. B opens unrelated traffic and is broader than required. C misunderstands the requirement that both NSGs permit the flow; removing an already-permissive NIC NSG does not remove the subnet barrier.",
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-group-how-it-works"
+    ]
+  },
+  {
+    "id": "az104-4-4.4-302",
+    "certId": "az-104",
+    "domainId": "az-104:domain:4",
+    "objectiveId": "az-104:obj:4.4",
+    "caseStudyId": "az104-case-tideglass",
+    "stem": "Which outbound configuration meets Web’s address requirement without changing its private VM addressing?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Associate a NAT gateway with a Standard static public IP to the Web application subnet.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Add a public DNS A record for every private VM.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Create an inbound NAT rule on the internal load balancer.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Give each VM NIC its own Standard public IP.",
+        "correct": false
+      }
+    ],
+    "explanation": "A is correct: subnet NAT Gateway provides outbound SNAT through its assigned public IP while the VMs keep private NIC addresses. B only changes name resolution. C is an inbound per-instance mapping and an internal frontend is not a public outbound address. D violates the no-per-VM-public-IP constraint and does not provide the single shared address.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-overview"
+    ]
+  },
+  {
+    "id": "az104-4-4.1-301",
+    "certId": "az-104",
+    "domainId": "az-104:domain:4",
+    "objectiveId": "az-104:obj:4.1",
+    "caseStudyId": "az104-case-tideglass",
+    "stem": "A new on-premises branch proposes 10.61.8.0/24 behind the existing VPN. Web VMs must reach that branch as a distinct network. Which issue must be addressed in the design before assuming gateway transit will work?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Add a Web route for 10.61.8.0/24 with Virtual network as its next-hop type; the more-specific route sends it to the branch.",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "The branch overlaps Web’s 10.61.0.0/16; renumber the branch or design supported VPN NAT and routing deliberately.",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Reduce only the Web VM subnet’s address range while retaining the VNet address space; this removes the VNet overlap.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Use remote gateways automatically translates overlapping addresses.",
+        "correct": false
+      }
+    ],
+    "explanation": "B is correct: the branch prefix sits inside Web’s range, so this is an overlapping-address routing design, not simply another remote-gateway toggle. Renumbering avoids the conflict; supported VPN NAT requires explicit planning and configuration. A selects a local virtual-network next hop rather than the remote tunnel and supplies no translation. C leaves the overlapping VNet address space intact. D attributes automatic address translation to a peering option that does not supply it.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/nat-overview",
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit",
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview"
+    ]
   }
 ];
 
@@ -1071,7 +1343,15 @@ export const AZ104_D4_PERF_QUESTIONS: PerfQuestion[] = [
       }
     ],
     "explanation": "Application Gateway is the regional Layer 7 reverse proxy (path routing, TLS, WAF). Azure Load Balancer is the regional Layer 4 distributor. Traffic Manager routes globally at the DNS layer with methods like priority, weighted, and geographic. Azure Front Door is the global Layer 7 entry point with anycast and fast failover. Azure Firewall is the managed stateful network firewall. NAT Gateway provides scalable outbound SNAT for subnets.",
-    "difficulty": 4
+    "difficulty": 4,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/application-gateway/overview",
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview",
+      "https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-overview",
+      "https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview",
+      "https://learn.microsoft.com/en-us/azure/firewall/rule-processing",
+      "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-overview"
+    ]
   },
   {
     "id": "az104-pbq-4-002",
@@ -1109,7 +1389,82 @@ export const AZ104_D4_PERF_QUESTIONS: PerfQuestion[] = [
       }
     ],
     "explanation": "Site-to-Site connects a site VPN device; Point-to-Site connects individual VPN clients; VNet-to-VNet uses gateway tunnels. ExpressRoute private peering reaches VNets; Microsoft peering reaches supported Microsoft public endpoints with applicable requirements. Active-active provides two gateway instances; configure both tunnels so surviving connectivity can carry traffic after a failure.",
-    "difficulty": 3
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/design",
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/about-gateway-skus",
+      "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-circuit-peerings"
+    ]
+  },
+  {
+    "id": "az104-pbq-4-101",
+    "certId": "az-104",
+    "domainId": "az-104:domain:4",
+    "objectiveId": "az-104:obj:4.2",
+    "type": "drag-match",
+    "prompt": "Order this site-to-site VPN runbook. The nonoverlapping VNet, on-premises device and Azure local network gateway already exist. The runbook requires configuring the on-premises device with the deployed Azure gateway address before creating the Azure connection. No BGP or active-active mode is used.",
+    "leftLabel": "Stage",
+    "rightLabel": "Action",
+    "pairs": [
+      {
+        "left": "1 — prepare the Azure gateway address space",
+        "right": "Create an appropriately sized subnet named GatewaySubnet, without an NSG"
+      },
+      {
+        "left": "2 — obtain the Azure tunnel endpoint",
+        "right": "Deploy the route-based Azure VPN gateway with a supported public IP configuration"
+      },
+      {
+        "left": "3 — prepare the on-premises tunnel endpoint",
+        "right": "Configure the device using the Azure gateway public IP, agreed IPsec/IKE settings and shared key"
+      },
+      {
+        "left": "4 — establish and validate the link",
+        "right": "Create the site-to-site connection referencing both gateways with the same shared key, then check tunnel status and routed connectivity"
+      }
+    ],
+    "explanation": "The Azure VPN gateway needs GatewaySubnet before deployment. Its assigned public IP is then available for the on-premises device. Under this runbook, device configuration precedes the Azure connection; this is an operational gate, not a claim that Azure forbids creating a connection earlier. The shared key and compatible tunnel settings must agree at both ends. Finally verify both connection state and actual traffic rather than treating resource creation as proof of connectivity.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal",
+      "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-site-to-site-portal"
+    ]
+  },
+  {
+    "id": "az104-pbq-4-102",
+    "certId": "az-104",
+    "domainId": "az-104:domain:4",
+    "objectiveId": "az-104:obj:4.4",
+    "type": "drag-match",
+    "prompt": "Match each observed network symptom to the first targeted check. Assume the symptom statements are accurate and avoid broad access changes.",
+    "leftLabel": "Symptom",
+    "rightLabel": "Targeted check",
+    "pairs": [
+      {
+        "left": "A linked-VNet client resolves a blob endpoint privately, but a peered unlinked VNet resolves it publicly",
+        "right": "Check the private DNS zone link for the second client VNet"
+      },
+      {
+        "left": "A new RDP flow is allowed by the subnet NSG but denied by the NIC NSG",
+        "right": "Inspect and narrowly correct the NIC NSG’s matching rule"
+      },
+      {
+        "left": "An application is listening on its TCP probe port but the subnet blocks AzureLoadBalancer probes",
+        "right": "Permit the probe source and port before the matching subnet deny"
+      },
+      {
+        "left": "Private VMs need a single stable outbound public address and have no explicit egress method",
+        "right": "Associate a NAT gateway and public IP with the VM subnet"
+      }
+    ],
+    "explanation": "Peering does not automatically grant visibility of a private DNS zone when Azure-provided DNS is used. A new flow must pass both subnet and NIC NSGs. Load-balancer probes need a permitted path to their probe port, with the allow evaluated before a matching deny. NAT Gateway supplies explicit outbound SNAT without per-VM public IPs. DNS changes, role grants and broad Internet allows would not address these distinct causes.",
+    "difficulty": 3,
+    "sourceUrls": [
+      "https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links",
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-group-how-it-works",
+      "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview",
+      "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-overview"
+    ]
   }
 ];
 

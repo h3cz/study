@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { track } from "@/lib/analytics";
 import { useRouter } from "next/navigation";
 
 type Action = {
@@ -10,6 +11,7 @@ type Action = {
 };
 
 const ACTIONS: Action[] = [
+  { label: "Azure Case Studies", href: "/case-studies", keywords: ["azure", "az104", "scenario"] },
   { label: "Daily Quiz", href: "/quiz", keywords: ["practice", "questions", "weak"] },
   { label: "Review Misses", href: "/review", keywords: ["wrong", "missed", "mistakes"] },
   { label: "Error Notebook", href: "/notebook", keywords: ["mistakes", "overconfident", "weak", "analysis", "clusters"] },
@@ -48,6 +50,7 @@ export function CommandPalette() {
   const [query, setQuery] = useState("");
   const [highlight, setHighlight] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const filtered = useMemo(
     () => ACTIONS.filter((a) => matches(a, query)),
@@ -66,6 +69,7 @@ export function CommandPalette() {
 
   const run = useCallback(
     (action: Action) => {
+      void track("search_used", { destination: action.href });
       router.push(action.href);
       close();
     },
@@ -95,7 +99,10 @@ export function CommandPalette() {
 
   // Focus the input whenever the palette opens.
   useEffect(() => {
-    if (open) inputRef.current?.focus();
+    if (!open) return;
+    const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    inputRef.current?.focus();
+    return () => { previous?.focus(); };
   }, [open]);
 
   if (!open) return null;
@@ -105,6 +112,12 @@ export function CommandPalette() {
     filtered.length === 0 ? 0 : Math.min(highlight, filtered.length - 1);
 
   const onPanelKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Tab") {
+      // Combobox options are selected with arrows; keep keyboard focus in the dialog.
+      e.preventDefault();
+      inputRef.current?.focus();
+      return;
+    }
     if (e.key === "Escape") {
       e.preventDefault();
       close();
@@ -147,6 +160,7 @@ export function CommandPalette() {
       }}
     >
       <div
+        ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label="Command palette"
@@ -172,6 +186,11 @@ export function CommandPalette() {
               setHighlight(0);
             }}
             aria-label="Search commands"
+            role="combobox"
+            aria-expanded={open}
+            aria-controls="command-results"
+            aria-autocomplete="list"
+            aria-activedescendant={filtered.length ? `command-option-${activeIndex}` : undefined}
             placeholder="Jump to… or search"
             style={{
               width: "100%",
@@ -188,6 +207,8 @@ export function CommandPalette() {
         </div>
 
         <div
+          id="command-results"
+          aria-label="Commands"
           role="listbox"
           style={{
             maxHeight: "min(420px, 60vh)",
@@ -213,6 +234,8 @@ export function CommandPalette() {
                 <button
                   key={action.href}
                   role="option"
+                  id={`command-option-${i}`}
+                  tabIndex={-1}
                   aria-selected={active}
                   onMouseEnter={() => setHighlight(i)}
                   onClick={() => run(action)}

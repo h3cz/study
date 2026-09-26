@@ -25,7 +25,8 @@ function buildIndex(certId: string): CertQuestionIndex {
     if (q.certId !== certId) continue;
     const correct = q.choices.find((c) => c.correct);
     if (!correct) continue; // skip malformed questions
-    ids.push(q.id);
+    // Case scenarios need reading time and are reserved for untimed practice/exams.
+    if (!q.caseStudyId) ids.push(q.id);
     correctById.set(q.id, correct.key);
   }
   return { ids, correctById };

@@ -22,7 +22,7 @@ const tabs = [
   {
     href: "/practice",
     label: "Practice",
-    match: (p: string) => inSection(p, ["/practice", "/quiz", "/flashcards", "/exam", "/pbq", "/osi", "/ports", "/controls", "/crypto", "/attacks", "/drill", "/review", "/voice", "/import"]),
+    match: (p: string) => inSection(p, ["/practice", "/case-studies", "/timeline", "/notebook", "/quiz", "/flashcards", "/exam", "/pbq", "/osi", "/ports", "/controls", "/crypto", "/attacks", "/drill", "/review", "/voice", "/import"]),
     icon: (
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle cx="10" cy="10" r="7.5" stroke="currentColor" strokeWidth="1.5" />
@@ -68,7 +68,7 @@ const tabs = [
   },
 ];
 
-const SUPPRESSED_PATHS = ["/onboarding", "/login"];
+const SUPPRESSED_PATHS = ["/onboarding", "/login", "/exam/run"];
 
 export function MobileBottomNav() {
   const pathname = usePathname();
@@ -121,7 +121,7 @@ export function MobileBottomNav() {
             <span
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: "9px",
+                fontSize: "11px",
                 fontWeight: 500,
                 letterSpacing: "0.06em",
                 textTransform: "uppercase",

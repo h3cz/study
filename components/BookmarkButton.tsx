@@ -1,81 +1,38 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 import { enqueue } from "@/lib/sync/engine";
-
-interface BookmarkButtonProps {
-  questionId: string;
-  certId?: string;
-}
-
-export default function BookmarkButton({
-  questionId,
-  certId = "secplus-sy0-701",
-}: BookmarkButtonProps) {
-  const [bookmarked, setBookmarked] = useState(false);
-  const [loading, setLoading] = useState(true);
-
+export default function BookmarkButton({ questionId, certId = "secplus-sy0-701" }: { questionId: string; certId?: string }) {
+  const [bookmark, setBookmark] = useState<{ id: string; value: boolean } | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [status, setStatus] = useState<{ id: string; text: string } | null>(null);
+  const ready = bookmark?.id === questionId;
   useEffect(() => {
-    isBookmarked(questionId).then((v) => {
-      setBookmarked(v);
-      setLoading(false);
-    }).catch(() => setLoading(false));
+    let active = true;
+    void isBookmarked(questionId).then(value => { if (active) setBookmark({ id: questionId, value }); })
+      .catch(() => { if (active) setStatus({ id: questionId, text: "Bookmark unavailable. Reload to try again." }); });
+    return () => { active = false; };
   }, [questionId]);
-
-  async function handleToggle() {
-    // Optimistic update
-    const next = !bookmarked;
-    setBookmarked(next);
+  async function toggle() {
+    if (!ready || busy) return;
+    setBusy(true);
     try {
       const actual = await toggleBookmark(questionId, certId);
-      setBookmarked(actual);
-      if (actual) {
-        enqueue("insert_bookmark", {
-          user_id: "",
-          question_id: questionId,
-          cert_id: certId,
-          bookmarked_at: new Date().toISOString(),
-        }).catch(() => {});
-      } else {
-        enqueue("delete_bookmark", { question_id: questionId }).catch(() => {});
-      }
-    } catch {
-      // Revert on error
-      setBookmarked(!next);
-    }
+      setBookmark({ id: questionId, value: actual });
+      setStatus({ id: questionId, text: actual ? "Saved on this device." : "Removed on this device." });
+      try {
+        if (actual) await enqueue("insert_bookmark", { user_id: "", question_id: questionId, cert_id: certId, bookmarked_at: new Date().toISOString() });
+        else await enqueue("delete_bookmark", { question_id: questionId });
+      } catch { setStatus({ id: questionId, text: "Local change saved; cloud sync could not be queued." }); }
+    } catch { setStatus({ id: questionId, text: "Couldn’t save the bookmark. Try again." }); }
+    finally { setBusy(false); }
   }
-
-  if (loading) return null;
-
-  return (
-    <button
-      onClick={handleToggle}
-      aria-label={bookmarked ? "Remove bookmark" : "Bookmark this question"}
-      style={{
-        background: "none",
-        border: "none",
-        // Vertical padding gives a ~40px tappable height without changing the
-        // inline text look; negative margin keeps row spacing tight.
-        padding: "10px 4px",
-        margin: "-10px -4px",
-        minHeight: "40px",
-        fontSize: "12px",
-        color: bookmarked ? "var(--accent)" : "var(--fg-subtle, var(--fg-muted))",
-        fontFamily: "var(--font-mono)",
-        letterSpacing: "0.04em",
-        cursor: "pointer",
-        opacity: bookmarked ? 1 : 0.6,
-        transition: "opacity 150ms, color 150ms",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "4px",
-      }}
-      onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; }}
-      onMouseLeave={(e) => { e.currentTarget.style.opacity = bookmarked ? "1" : "0.6"; }}
-    >
-      <span style={{ fontSize: "13px", lineHeight: 1 }}>{bookmarked ? "★" : "☆"}</span>
-      {bookmarked ? "Bookmarked" : "Bookmark"}
+  return <span className="inline-flex flex-wrap items-center gap-2">
+    <button onClick={() => void toggle()} disabled={!ready || busy} aria-pressed={ready && bookmark.value}
+      aria-label={ready && bookmark.value ? "Remove bookmark" : "Bookmark this question"}
+      className="min-h-11 min-w-11 px-2 text-sm font-mono text-[var(--fg-muted)] disabled:opacity-60">
+      {ready && bookmark.value ? "★ Bookmarked" : "☆ Bookmark"}
     </button>
-  );
+    <span role="status" className="text-xs text-[var(--fg-muted)]">{status?.id === questionId ? status.text : ""}</span>
+  </span>;
 }
