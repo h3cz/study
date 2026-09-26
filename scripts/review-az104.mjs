@@ -48,4 +48,3 @@ for(let d=1;d<=5;d++){
 }
 fs.writeFileSync('docs/az104-review/changes.json',JSON.stringify({issues,references},null,2)+'\n');
 console.log(banks.map((b,i)=>({domain:i+1,mcqs:b[`AZ104_D${i+1}_QUESTIONS`].length})));
-

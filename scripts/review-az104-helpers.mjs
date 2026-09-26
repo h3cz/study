@@ -24,4 +24,3 @@ export function add(d, obj, serial, stem, answers, right, explanation, url, diff
   issues.push({id,issue:'Coverage gap: added an original scenario for an objective that was absent or thin.'});
   source(id,url);
 }
-

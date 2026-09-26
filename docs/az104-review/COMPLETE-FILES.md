@@ -10463,7 +10463,7 @@ fs.writeFileSync(`${root}/REPORT.md`, report);
 const files = JSON.parse(read(`${root}/replacement-files.json`));
 let full = '# Complete corrected files\n\nEach section contains the entire file, ready to replace the corresponding file in this checkout. This bundle is specific to this repository; do not replace production seed/cert files with public-starter versions.\n\n';
 for (const p of files) full += `## ${p}\n\n\`\`\`${p.endsWith('.mjs') ? 'js' : p.endsWith('.tsx') ? 'tsx' : 'ts'}\n${read(p)}\n\`\`\`\n\n`;
-fs.writeFileSync(`${root}/COMPLETE-FILES.md`, full);
+fs.writeFileSync(`${root}/COMPLETE-FILES.md`, full.trimEnd() + '\n');
 console.log(JSON.stringify({ changedObjects: changed.length, primarySourcedMCQs: 160, completeFiles: files.length }));
 
 ```
@@ -10828,7 +10828,6 @@ export function add(d, obj, serial, stem, answers, right, explanation, url, diff
   source(id,url);
 }
 
-
 ```
 
 ## scripts/review-az104-refinements.mjs
@@ -10915,7 +10914,6 @@ for(let d=1;d<=5;d++){
 }
 fs.writeFileSync('docs/az104-review/changes.json',JSON.stringify({issues,references},null,2)+'\n');
 console.log(banks.map((b,i)=>({domain:i+1,mcqs:b[`AZ104_D${i+1}_QUESTIONS`].length})));
-
 
 ```
 
@@ -11171,4 +11169,3 @@ describe("A+ Core 2 taxonomy (220-1102)", () => {
 });
 
 ```
-
