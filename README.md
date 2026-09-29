@@ -1,3 +1,7 @@
+> **Archived.** The live question bank moved to the private `h3cz/secplus-quest`
+> repo, which is what [study.hecz.dev](https://study.hecz.dev) deploys from.
+> This public copy is kept as-is for reference.
+
 # hecz / study
 
 ![hecz / study showcase](public/brand/study-showcase.gif)
